@@ -98,6 +98,7 @@ html {
 	font-size: 3rem;
 	color: var(--primary-color);
 	padding-left: 1rem;
+	margin-right: 1rem;
 }
 
 .content-shopping-cart {
@@ -161,6 +162,7 @@ html {
 	background-color: #fff;
 	height: 4.4rem;
 	overflow: hidden;
+	cursor: text;
 }
 
 .search-form input {
@@ -171,7 +173,7 @@ html {
 	font-size: 1.4rem;
 	padding: 0 2rem;
 	color: #777;
-	cursor: pointer;
+	cursor: text;
 }
 
 .search-form .btn-search {
@@ -187,4 +189,63 @@ html {
 .btn-search i {
 	font-size: 2rem;
 	color: #fff;
+}
+
+/*Banner*/
+
+.banner {
+
+	border-radius: 24px;
+
+	* {
+		border-radius: 24px;
+		
+	}
+	
+}
+
+.banner-img {
+	
+	height: 54vh;
+	
+}
+
+.container-features {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 3rem;
+	padding: 3rem 0;
+}
+
+.card-feature {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+
+	background-color: #fff;
+	border-radius: 1rem;
+	padding: 1.5rem 0;
+}
+
+.card-feature i {
+	font-size: 2.7rem;
+	color: var(--primary-color);
+}
+
+.feature-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.feature-content span {
+	font-weight: 700;
+	font-size: 1.2rem;
+	color: var(--dark-color);
+}
+
+.feature-content p {
+	color: #777;
+	font-weight: 500;
 }
