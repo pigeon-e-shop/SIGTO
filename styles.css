@@ -134,6 +134,8 @@ html {
 	font-weight: 600;
 	text-transform: uppercase;
 	position: relative;
+	transition: all 0.3s ease;
+
 }
 
 .menu a::after {
@@ -149,8 +151,22 @@ html {
 	transition: all 0.3s ease;
 }
 
+.dropdown-item:hover {
+
+	
+
+	color: var(--dark-color);
+	background-color: #a6a6a6;
+
+}
+
 .menu a:hover {
-	color: #fff;
+
+	color: var(--primary-color);
+	background-color: #1B3454;
+	padding: 5px;
+	border-radius: 3px;
+
 }
 
 .search-form {
@@ -214,7 +230,8 @@ html {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 3rem;
-	padding: 3rem 0;
+	padding: 2vh;
+	margin: 0;
 }
 
 .card-feature {
@@ -248,4 +265,14 @@ html {
 .feature-content p {
 	color: #777;
 	font-weight: 500;
+}
+
+@media only screen and (max-width: 1000) {
+
+	.banner-img {
+	
+		height: 24vh;
+		
+	}
+
 }
