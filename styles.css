@@ -164,7 +164,7 @@ html {
 
 	color: var(--primary-color);
 	background-color: #1B3454;
-	padding: 5px;
+	transform: scale(1.12);
 	border-radius: 3px;
 
 }
