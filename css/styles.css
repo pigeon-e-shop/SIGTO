@@ -24,10 +24,22 @@ html {
 /* ********************************** */
 /*             UTILIDADES             */
 /* ********************************** */
+
+.container-tarjetas {
+
+	max-width: 100%;
+
+}
+
 .container {
 	max-width: 120rem;
 	margin: 0 auto;
+
+	
+
 }
+
+
 
 .heading-1 {
 	text-align: center;
