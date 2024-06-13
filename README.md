@@ -11,8 +11,7 @@ Lautaro Fachinetti
 Santiago Vazquez
 |
 Niro Vazquez
-|
-Giovanni Zanini
+
 ### Us
 
 Santiago - Senior backend developer and english master
