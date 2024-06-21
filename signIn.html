@@ -24,11 +24,11 @@
             <br>
             <div>
               <label for="inputPassword4" class="form-label">Contraseña</label>
-              <input name="mostrarContra" type="checkbox" class="m-2"/>Mostrar contraseña
+              <input name="mostrarContra" type="checkbox" class="m-2" id="showPasswordCheckbox"/>Mostrar contraseña
               <input type="password" class="form-control" id="inputPassword4">
               <br>
               <input name="recuerdameSignIn" type="checkbox" class="m-2"/>Recuerdame
-            </div>
+          </div>
             <br>
             <div>
                 <label><a href="olvideContrasena.html" style="text-decoration: none;">¿Has olvidado tu contraseña?</a></label>
@@ -45,6 +45,17 @@
     </main>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+      document.getElementById('showPasswordCheckbox').addEventListener('change', function() {
+          var passwordField = document.getElementById('inputPassword4');
+          if (this.checked) {
+              passwordField.type = 'text';
+          } else {
+              passwordField.type = 'password';
+          }
+      });
+  </script>x
 </body>
 </html>
