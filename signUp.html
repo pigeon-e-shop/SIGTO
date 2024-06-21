@@ -31,38 +31,7 @@
               <label for="inputAddress2" class="form-label">Info</label>
               <input type="text" class="form-control" id="inputAddress2" placeholder="Apartamento, empresa, casa, etc...">
             </div>
-            <select id="departamento" class="form-select">
-                <option selected disabled>Elige un departamento</option>
-                <option value="Artigas">Artigas</option>
-                <option value="Canelones">Canelones</option>
-                <option value="Cerro Largo">Cerro Largo</option>
-                <option value="Colonia">Colonia</option>
-                <option value="Durazno">Durazno</option>
-                <option value="Flores">Flores</option>
-                <option value="Florida">Florida</option>
-                <option value="Lavalleja">Lavalleja</option>
-                <option value="Maldonado">Maldonado</option>
-                <option value="Montevideo">Montevideo</option>
-                <option value="Paysandú">Paysandú</option>
-                <option value="Río Negro">Río Negro</option>
-                <option value="Rivera">Rivera</option>
-                <option value="Rocha">Rocha</option>
-                <option value="Salto">Salto</option>
-                <option value="San José">San José</option>
-                <option value="Soriano">Soriano</option>
-                <option value="Tacuarembó">Tacuarembó</option>
-                <option value="Treinta y Tres">Treinta y Tres</option>
-            </select>
-            
-            <select id="ciudad" class="form-select" disabled>
-                <option selected disabled>Selecciona un departamento primero</option>
-            </select>
-            
-            </div>
-            <div class="col-md-3">
-              <label for="inputZip" class="form-label">Código Postal</label>
-              <input type="text" class="form-control" id="inputZip">
-            </div>
+
             <div class="col-12">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck">
@@ -89,48 +58,5 @@
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function(){
-            // Definir las ciudades por departamento
-            const ciudadesPorDepartamento = {
-                'Artigas': ['Artigas', 'Bella Unión', 'Tomás Gomensoro', 'Las Piedras'],
-                'Canelones': ['Canelones', 'Santa Lucía', 'Las Piedras', 'Pando', 'La Paz', 'Toledo'],
-                'Cerro Largo': ['Melo', 'Río Branco', 'Aceguá', 'Fraile Muerto', 'Arachania'],
-                'Colonia': ['Colonia del Sacramento', 'Carmelo', 'Juan Lacaze', 'Nueva Helvecia', 'Tarariras'],
-                'Durazno': ['Durazno', 'Sarandí del Yí', 'Carmen', 'Blanquillo', 'Sarandí Grande'],
-                'Flores': ['Trinidad', 'Tranqueras', 'Andresito', 'Sarandí Grande'],
-                'Florida': ['Florida', 'Cardal', '25 de Mayo', 'Independencia', 'Sarandí Grande'],
-                'Lavalleja': ['Minas', 'José Pedro Varela', 'José Batlle y Ordóñez', 'Mariscala', 'Solís de Mataojo'],
-                'Maldonado': ['Maldonado', 'Punta del Este', 'San Carlos', 'Piriápolis', 'Pan de Azúcar'],
-                'Montevideo': ['Montevideo','Santiago Vazquez'],
-                'Paysandú': ['Paysandú', 'Guichón', 'Quebracho', 'Tambores', 'Chacras de Paysandú'],
-                'Río Negro': ['Fray Bentos', 'Young', 'Nuevo Berlín', 'San Javier', 'Las Cañas'],
-                'Rivera': ['Rivera', 'Tranqueras', 'Vichadero', 'Lavalleja', 'Minas de Corrales'],
-                'Rocha': ['Rocha', 'Castillos', 'Chuy', 'La Paloma', 'Valizas'],
-                'Salto': ['Salto', 'Constitución', 'Mataojo', 'Rincón de Valentín', 'La Loma'],
-                'San José': ['San José de Mayo', 'Libertad', 'Rodríguez', 'Ecilda Paullier', 'Rafael Perazza'],
-                'Soriano': ['Mercedes', 'Dolores', 'Cardona', 'José Enrique Rodó', 'Santa Catalina'],
-                'Tacuarembó': ['Tacuarembó', 'Paso de los Toros', 'San Gregorio de Polanco', 'Ansina', 'Curtina'],
-                'Treinta y Tres': ['Treinta y Tres', 'Santa Clara de Olimar', 'Vergara', 'Valentines', 'General Enrique Martínez']
-            };
-            
-            // Función para actualizar las opciones de ciudad
-            function actualizarCiudades() {
-                const selectedDepartamento = $('#departamento').val();
-                const ciudades = ciudadesPorDepartamento[selectedDepartamento];
-                const ciudadSelect = $('#ciudad');
-                ciudadSelect.empty();
-                $.each(ciudades, function(index, value) {
-                    ciudadSelect.append($('<option>').text(value));
-                });
-                ciudadSelect.prop('disabled', false);
-            }
-            
-            // Escuchar cambios en el select de departamento
-            $('#departamento').change(function() {
-                actualizarCiudades();
-            });
-        });
-        </script>
 </body>
 </html>
