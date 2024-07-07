@@ -11,7 +11,8 @@ Lautaro Fachinetti
 Santiago Vazquez
 |
 Niro Vazquez
-
+|
+Giovanni Zanini
 ### Us
 
 Santiago - Senior backend developer and english master
@@ -25,5 +26,5 @@ The roles we choose were selected by making a SWOT analysis, trying to get the b
 
 ### Abstract
 
-This project called Pigeon e-Shop was made with the object of creating a new way of buying things online. Made by the four of us, Santiago Vazquez, Gaston Gonalez, Niro Vazquez and Lautaro Fachinetti, this project will lead the virtual market. 
+This project called Pigeon e-Shop was made with the object of creating a new way of buying things online. Made by the five of us, Santiago Vazquez, Gaston Gonalez, Giovanni Zanini, Niro Vazquez and Lautaro Fachinetti, this project will lead the virtual market. 
 

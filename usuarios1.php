@@ -12,8 +12,9 @@ $users = array(
 
 );
 
-function crearUsuario() {
-    
+function crearUsuario()
+{
+
     global $users;
 
     $userN = array(
@@ -26,56 +27,25 @@ function crearUsuario() {
 
 }
 
-function verUsuario() {
-    
+function verUsuario()
+{
+
     global $users;
 
     foreach ($users as $key => $value) {
-        
-        echo "
-        <table>
 
-            <tr>
-            
-                <td>
-                
-                "
-                .
-
-                $key
-                
-                .
-                "
-                
-                </td>
-                <td>
-                
-                "
-                .
-                $value
-                .
-                "
-                
-                </td>
-            </tr>
-
-        </table>
-        "
+        echo "<table><tr><td>".$key."</td><td>".$value."</td></tr></table>";
 
     }
 
 }
 
-function editarUsuario() {
-    
+function editarUsuario()
+{
+
 }
 
-function eliminarUsuario() {
-    
-}
-
-function tomarDatos() {
-    
-
+function eliminarUsuario()
+{
 
 }
