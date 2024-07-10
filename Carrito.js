@@ -17,6 +17,7 @@ let pantalonNikeBlack = new Articulos(1,"Pantalon Nike Guay", 1000, "guay");
 
 let zapasNikeMola = new Articulos(2,"Zapas Nike Molona", 1300, "Mola");
 
+
 function agregarArt (articulo) {
     articulos.push(articulo);
     cantArticulos++;
