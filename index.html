@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pigeon e-Shop</title>
+        <link rel="shortcut icon" href="img/logo.png" type="image/png" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+        <style>
+            * {
+                font-family: "Core Rhino 85";
+                color: #417a93;
+            }
+
+        </style>
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+
+    <body>
+        <header>
+            <div class="container-hero">
+                <div class="container hero">
+                    <div class="customer-support d-none d-sm-flex">
+                        <i class="fa-solid fa-headset"></i>
+                        <div class="content-customer-support">
+                            <span class="text" user-select="false">Soporte al cliente</span>
+                            <span class="number">2204 3983</span>
+                        </div>
+                    </div>
+
+                    <div class="container-logo">
+                        <h1 class="logo"><a href="/">Pigeon e-Shop</a></h1>
+                    </div>
+
+                    <div class="container-user">
+                        <div class="">
+                            <div class="dropdown">
+                                <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
+                                <div class="dropdown-menu col-md-6">
+                                    <a class="dropdown-item" href="SingIn_Up\signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="SingIn_Up\signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIVISOR VERTICAL -->
+                        <div class="vr"></div>
+                        <a href="Index\carrito.html">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <div class="content-shopping-cart">
+                        </a>
+                            <span class="text">Carrito</span>
+                            <span id="cantArticulos" class="number"> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-navbar p-2">
+                <nav class="navbar navbar-expand-md ">
+                    <button class="btn btn-search navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="btn btn-search navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdownCategorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Deportes</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Fútbol</a></li>
+                                            <li><a class="dropdown-item" href="#">Baloncesto</a></li>
+                                            <li><a class="dropdown-item" href="#">Béisbol</a></li>
+                                            <li><a class="dropdown-item" href="#">Tenis</a></li>
+                                            <li><a class="dropdown-item" href="#">Golf</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Tecnología</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Teléfonos</a></li>
+                                            <li><a class="dropdown-item" href="#">Computadoras</a></li>
+                                            <li><a class="dropdown-item" href="#">Tabletas</a></li>
+                                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                                            <li><a class="dropdown-item" href="#">Smart Home</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Hogar</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Cocina</a></li>
+                                            <li><a class="dropdown-item" href="#">Sala</a></li>
+                                            <li><a class="dropdown-item" href="#">Dormitorio</a></li>
+                                            <li><a class="dropdown-item" href="#">Baño</a></li>
+                                            <li><a class="dropdown-item" href="#">Jardín</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Cuidado Personal</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Belleza</a></li>
+                                            <li><a class="dropdown-item" href="#">Salud</a></li>
+                                            <li><a class="dropdown-item" href="#">Higiene</a></li>
+                                            <li><a class="dropdown-item" href="#">Fitness</a></li>
+                                            <li><a class="dropdown-item" href="#">Bienestar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Mascotas</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Perros</a></li>
+                                            <li><a class="dropdown-item" href="#">Gatos</a></li>
+                                            <li><a class="dropdown-item" href="#">Aves</a></li>
+                                            <li><a class="dropdown-item" href="#">Peces</a></li>
+                                            <li><a class="dropdown-item" href="#">Pequeños Mamíferos</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Moda</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Hombres</a></li>
+                                            <li><a class="dropdown-item" href="#">Mujeres</a></li>
+                                            <li><a class="dropdown-item" href="#">Niños</a></li>
+                                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                                            <li><a class="dropdown-item" href="#">Zapatos</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Ofertas del día</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cómo comprar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Index\servicioCliente.html ">Servicio al cliente</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <form class="search-form">
+                        <input type="search" class="" onkeyup="mostrarResultados()" placeholder="Buscar..." />
+                        <button class="btn-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </nav>
+            </div>
+        </header>
+        <div class="container-flex m-4 banner">
+            <div class="carousel slide" id="carousel1" data-bs-ride="carousel" data-interval="500">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="img/banner1.jpg" class="d-block w-100 banner-img" alt="Mas de 600 productos informaticos" draggable="false" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/banner3.jpg" class="d-block w-100 banner-img" alt="Miles de productos deportivos" draggable="false" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/banner2.jpg" class="d-block w-100 banner-img" alt="Mas de 1000 productos de belleza" draggable="false" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/banner4.jpg" class="d-block w-100 banner-img" alt="Todo para tu hogar en linea blanca" draggable="false" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="w-100 row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="card-feature col">
+                <i class="fa-solid fa-plane-up"></i>
+                <div class="feature-content">
+                    <span>Envío gratuito a nivel mundial</span>
+                    <p>En pedido superior a US$250</p>
+                </div>
+            </div>
+            <div class="card-feature col">
+                <i class="fa-solid fa-wallet"></i>
+                <div class="feature-content">
+                    <span>Reembolso en caso de fallas</span>
+                    <p>100% garantía de devolución de dinero</p>
+                </div>
+            </div>
+            <div class="card-feature col">
+                <i class="fa-solid fa-gift"></i>
+                <div class="feature-content">
+                    <span>Tarjetas de regalo</span>
+                    <p>Para tus seres queridos</p>
+                </div>
+            </div>
+            <div class="card-feature col">
+                <i class="fa-solid fa-headset"></i>
+                <div class="feature-content">
+                    <span>Servicio al cliente 24/7</span>
+                    <p>LLámenos 24/7 al 22043983</p>
+                </div>
+            </div>
+        </section>
+            <div class="container mt-4">
+                <h2>Productos Destacados</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="imagenesProductos\nike-vomero-17-black.JPG" class="card-img-top" alt="Producto 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Zapas molonas</h5>
+                                <p class="card-text">Zapas que molan.</p>
+                                <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(zapasNikeMola)">Agregar carrito</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="imagenesProductos\pantalon-nike-club-black.JPG" class="card-img-top" alt="Producto 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Pantalones Guay</h5>
+                                <p class="card-text">Guay.</p>
+                                <a href="Index\detalle_producto.html" class="btn btn-primary agregarArt" id="AgregarProducto2" >Agregar carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="" class="card-img-top" alt="Producto 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Producto 3</h5>
+                                <p class="card-text">Descripción breve del producto.</p>
+                               <a href="Index\detalle_producto.html" class="btn btn-primary">Ver Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <footer>
+           
+        </footer>
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
+        <script src="Carrito.js"></script>
+        <script type="text/javascript">
+            
+            $(document).ready(function () {
+                $("body").tooltip({ selector: "[data-bs-toggle=dropdown]" });
+                $("#dropdownCategorias").hover(
+                    function () {
+                        $("#dropdownCategorias").dropdown("toggle");
+                    },
+                    function () {
+                        $("#dropdownCategorias").dropdown("toggle");
+                    }
+                );
+            });
+
+        </script>
+    </body>
+</html>

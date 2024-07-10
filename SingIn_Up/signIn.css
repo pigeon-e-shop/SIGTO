@@ -1,0 +1,33 @@
+
+#form1 {
+    
+    text-align: start;
+    border: 1px solid black;
+    padding: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(198, 202, 224);
+    box-shadow: 1px 1px 1px blue;
+    
+    & * {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 109%;
+        margin: 5px;
+    }
+
+    & input.texto {
+
+        border: 1px solid rgb(170, 178, 221) ;
+        box-shadow: 1px 1px 1px rgb(127, 142, 225);
+
+    }
+
+    & .divMostrarContra {
+
+        align-items: end;
+        text-align: end;
+        align-self: end;
+        
+    }
+    
+}

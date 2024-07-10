@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Productos</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Zapas molonas</h2>
+                <p>$100</p>
+                <a href="javascript:void(0)" class="btn btn-primary" id="btnAddToCart1">Agregar carrito</a>
+            </div>
+            <div class="col-md-4">
+                <h2>Producto 2</h2>
+                <p>$200</p>
+                <a href="javascript:void(0)" class="btn btn-primary" id="btnAddToCart2">Agregar carrito</a>
+            </div>
+            <div class="col-md-4">
+                <h2>Producto 3</h2>
+                <p>$300</p>
+                <a href="javascript:void(0)" class="btn btn-primary" id="btnAddToCart3">Agregar carrito</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-cart" id="cart-container">
+        <h2>Carrito de Compras</h2>
+        <ul id="cart-items"></ul>
+        <p id="cart-total"></p>
+        <p id="cantArticulos"></p>
+        <button id="btnEmptyCart" class="btn btn-danger">Vaciar Carrito</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        // Array para almacenar los artículos del carrito
+        let cart = [];
+        let total = 0;
+
+        // Constructor de Artículo
+        function Articulo(nombre, precio) {
+            this.nombre = nombre;
+            this.precio = precio;
+            this.cantidad = 1;
+        }
+
+        // Función para agregar artículos al carrito
+        function addToCart(productName, productPrice) {
+            let articuloExistente = false;
+
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].nombre === productName) {
+                    cart[i].cantidad += 1;
+                    articuloExistente = true;
+                    break;
+                }
+            }
+
+            if (!articuloExistente) {
+                let articulo = new Articulo(productName, productPrice);
+                cart.push(articulo);
+            }
+
+            updateCart();
+        }
+
+        // Función para actualizar el carrito
+        function updateCart() {
+            $("#cart-items").empty();
+            total = 0;
+
+            for (let i = 0; i < cart.length; i++) {
+                let item = cart[i];
+                $("#cart-items").append(`<li>${item.nombre} - $${item.precio} x ${item.cantidad}
+                    <button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.nombre}')">Eliminar</button></li>`);
+                total += item.precio * item.cantidad;
+            }
+
+            $("#cart-total").html(`Total: $${total}`);
+            $("#cantArticulos").html(`Cantidad de artículos: ${cart.reduce((acc, item) => acc + item.cantidad, 0)}`);
+        }
+
+        // Función para eliminar artículos del carrito
+        function removeFromCart(productName) {
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].nombre === productName) {
+                    cart.splice(i, 1);
+                    break;
+                }
+            }
+            updateCart();
+        }
+
+        // Función para vaciar el carrito
+        function emptyCart() {
+            cart = [];
+            updateCart();
+        }
+
+        // Inicializar el carrito
+        updateCart();
+
+        // Asignar eventos a los botones
+        $("#btnAddToCart1").click(() => addToCart('Zapas molonas', 100));
+        $("#btnAddToCart2").click(() => addToCart('Producto 2', 200));
+        $("#btnAddToCart3").click(() => addToCart('Producto 3', 300));
+        $("#btnEmptyCart").click(emptyCart);
+    </script>
+</body>
+</html>
