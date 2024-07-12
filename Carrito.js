@@ -1,8 +1,6 @@
-
 let articulos = JSON.parse(localStorage.getItem('articulos')) || [];
-let cantArticulos = articulos.length;
+let cantArticulos = parseInt(localStorage.getItem('cantArticulos')) || articulos.length;
 $("#cantArticulos").html(cantArticulos);
-
 
 function Articulos(id, nombre, precio, descripcion) {
     this.id = id;
@@ -19,16 +17,18 @@ let zapasNikeMola = new Articulos(2, "Zapas Nike Molona", 1300, "Mola");
 
 function agregarArt(articulo) {
     articulos.push(articulo);
-    let cantArticulos = articulos.length;
+    cantArticulos = articulos.length;
     localStorage.setItem('articulos', JSON.stringify(articulos));
+    localStorage.setItem('cantArticulos', cantArticulos);
     $("#cantArticulos").html(cantArticulos);
-    console.log(articulos) 
+    console.log(articulos);
 }
 
 function eliminarTodosLosArticulos() {
     articulos = [];
     cantArticulos = 0;
     localStorage.setItem('articulos', JSON.stringify(articulos));
+    localStorage.setItem('cantArticulos', cantArticulos);
     $("#cantArticulos").html(cantArticulos);
 }
 
