@@ -1,24 +1,23 @@
-    let articleCount = 2; 
+    let contadorInicial = 2; 
 
-    $('#articleForm').on('submit', function(event) {
+    $('#formularioArticulos').on('submit', function(event) {
         event.preventDefault();
-
-        const titulo = $('#titulo').val().trim();
-        const descripcion = $('#descripcion').val().trim();
-        const precio = parseFloat($('#precio').val().trim());
-        const cantidad = parseInt($('#cantidad').val().trim());
+        const titulo = $('#titulo').val();
+        const descripcion = $('#descripcion').val();
+        const precio = Number($('#precio').val());
+        const cantidad = Number($('#cantidad').val());
 
         if (titulo.length === 0 || descripcion.length === 0 || isNaN(precio) || isNaN(cantidad)) {
             alert('Por favor, complete todos los campos correctamente.');
             return;
         }
-
+       
         const newRow = `
             <tr>
-                <td>${articleCount++}</td>
+                <td>${contadorInicial++}</td>
                 <td>${titulo}</td>
                 <td>${descripcion}</td>
-                <td>$${precio.toFixed(2)}</td>
+                <td>$${precio}</td>
                 <td>${cantidad}</td>
                 <td>
                     <button class="btn btn-primary btn-sm edit">Editar</button>
@@ -27,21 +26,21 @@
             </tr>
         `;
 
-        $('#articleTableBody').append(newRow);
-        $('#articleForm')[0].reset();
+        $('#tablaArticulos').append(newRow);
+        $('#formularioArticulos')[0].reset();
     });
 
-    $('#articleTableBody').on('click', '.delete', function() {
+    $('#tablaArticulos').on('click', '.delete', function() {
         $(this).closest('tr').remove();
     });
 
-    $('#articleTableBody').on('click', '.edit', function() {
+    $('#tablaArticulos').on('click', '.edit', function() {
         const row = $(this).closest('tr');
         const cells = row.children('td');
 
         $('#titulo').val(cells.eq(1).text());
         $('#descripcion').val(cells.eq(2).text());
-        $('#precio').val(parseFloat(cells.eq(3).text().replace('$', ''))); 
+        $('#precio').val(Number(cells.eq(3).text().replace('$', ''))); 
         $('#cantidad').val(cells.eq(4).text());
 
         row.remove();
