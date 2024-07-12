@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  website:
+    image: php:apache
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - 80
+      - 443
+  database:
+    image: mariadb
+    container_name: bd-P-e-Shop
+    environment:
+      MYSQL_ROOT_PASSWORD: nosotrosIsboNGGLS
+      MYSQL_DATABASE: bdPigeon-e-Shop
+      MYSQL_USER: pigeonSuperusuario
+      MYSQL_PASSWORD: nosotrosIsboNGGLS
+    ports:
+     - "3306:3306"
+     volumes:
+     - ptVolume: /var/lib/mysql
