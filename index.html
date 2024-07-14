@@ -12,7 +12,6 @@
                 font-family: "Core Rhino 85";
                 color: #417a93;
             }
-
         </style>
         <link rel="stylesheet" href="css/styles.css" />
     </head>
@@ -20,7 +19,7 @@
     <body>
         <header>
             <div class="container-hero">
-                <div class="container hero">
+                <div class="container wx-5 px-md-5 px-xs -0 container hero">
                     <div class="customer-support d-none d-sm-flex">
                         <i class="fa-solid fa-headset"></i>
                         <div class="content-customer-support">
@@ -43,90 +42,163 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- DIVISOR VERTICAL -->
                         <div class="vr"></div>
-                        <a href="Index\carrito.html">
-                        <i class="fa-solid fa-basket-shopping"></i>
                         <div class="content-shopping-cart">
-                        </a>
-                            <span class="text">Carrito</span>
-                            <span id="cantArticulos" class="number"> </span>
+                            <a href="Index\carrito.html">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                                <span class="text">Carrito</span>
+                                <span id="cantArticulos" class="number"> </span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="container-navbar p-2">
-                <nav class="navbar navbar-expand-md ">
-                    <button class="btn btn-search navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="btn btn-search navbar-toggler-icon"></span>
-                    </button>
+                <nav class="container navbar navbar-expand-md">
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdownCategorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                                <button class="nav-link dropdown-toggle d-none d-lg-block" id="dropdownCategorias" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</button>
+                                <button class="btn btn-search navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Deportes</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Fútbol</a></li>
-                                            <li><a class="dropdown-item" href="#">Baloncesto</a></li>
-                                            <li><a class="dropdown-item" href="#">Béisbol</a></li>
-                                            <li><a class="dropdown-item" href="#">Tenis</a></li>
-                                            <li><a class="dropdown-item" href="#">Golf</a></li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Electrónica</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Teléfonos móviles</a></li>
+                                            <li><a class="dropdown-item" href="#">Computadoras y Laptops</a></li>
+                                            <li><a class="dropdown-item" href="#">Televisores y Audio</a></li>
+                                            <li><a class="dropdown-item" href="#">Accesorios tecnológicos</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Tecnología</a>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Ropa y Moda</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Teléfonos</a></li>
-                                            <li><a class="dropdown-item" href="#">Computadoras</a></li>
-                                            <li><a class="dropdown-item" href="#">Tabletas</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
-                                            <li><a class="dropdown-item" href="#">Smart Home</a></li>
+                                            <li><a class="dropdown-item" href="#">Ropa de Hombre</a></li>
+                                            <li><a class="dropdown-item" href="#">Ropa de Mujer</a></li>
+                                            <li><a class="dropdown-item" href="#">Zapatos y Accesorios</a></li>
+                                            <li><a class="dropdown-item" href="#">Ropa para Niños</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Hogar</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Cocina</a></li>
-                                            <li><a class="dropdown-item" href="#">Sala</a></li>
-                                            <li><a class="dropdown-item" href="#">Dormitorio</a></li>
-                                            <li><a class="dropdown-item" href="#">Baño</a></li>
-                                            <li><a class="dropdown-item" href="#">Jardín</a></li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Hogar y Jardín</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Muebles</a></li>
+                                            <li><a class="dropdown-item" href="#">Decoración</a></li>
+                                            <li><a class="dropdown-item" href="#">Herramientas y Mejoras para el Hogar</a></li>
+                                            <li><a class="dropdown-item" href="#">Jardinería</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Cuidado Personal</a>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Salud y Belleza</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Belleza</a></li>
-                                            <li><a class="dropdown-item" href="#">Salud</a></li>
-                                            <li><a class="dropdown-item" href="#">Higiene</a></li>
-                                            <li><a class="dropdown-item" href="#">Fitness</a></li>
-                                            <li><a class="dropdown-item" href="#">Bienestar</a></li>
+                                            <li><a class="dropdown-item" href="#">Productos para el Cuidado de la Piel</a></li>
+                                            <li><a class="dropdown-item" href="#">Maquillaje</a></li>
+                                            <li><a class="dropdown-item" href="#">Productos para el Cuidado del Cabello</a></li>
+                                            <li><a class="dropdown-item" href="#">Suplementos y Vitaminas</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Mascotas</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Perros</a></li>
-                                            <li><a class="dropdown-item" href="#">Gatos</a></li>
-                                            <li><a class="dropdown-item" href="#">Aves</a></li>
-                                            <li><a class="dropdown-item" href="#">Peces</a></li>
-                                            <li><a class="dropdown-item" href="#">Pequeños Mamíferos</a></li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Deportes y Aire Libre</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Equipamiento Deportivo</a></li>
+                                            <li><a class="dropdown-item" href="#">Ropa Deportiva</a></li>
+                                            <li><a class="dropdown-item" href="#">Bicicletas y Patinetes</a></li>
+                                            <li><a class="dropdown-item" href="#">Camping y Senderismo</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Moda</a>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Juguetes y Juegos</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Hombres</a></li>
-                                            <li><a class="dropdown-item" href="#">Mujeres</a></li>
-                                            <li><a class="dropdown-item" href="#">Niños</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
-                                            <li><a class="dropdown-item" href="#">Zapatos</a></li>
+                                            <li><a class="dropdown-item" href="#">Juguetes para Niños</a></li>
+                                            <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
+                                            <li><a class="dropdown-item" href="#">Videojuegos y Consolas</a></li>
+                                            <li><a class="dropdown-item" href="#">Puzzles y Rompecabezas</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Automóviles y Motocicletas</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Accesorios para Automóviles</a></li>
+                                            <li><a class="dropdown-item" href="#">Accesorios para Motocicletas</a></li>
+                                            <li><a class="dropdown-item" href="#">Herramientas y Equipos</a></li>
+                                            <li><a class="dropdown-item" href="#">Neumáticos y Llantas</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Alimentos y Bebidas</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Comida Gourmet</a></li>
+                                            <li><a class="dropdown-item" href="#">Bebidas Alcohólicas</a></li>
+                                            <li><a class="dropdown-item" href="#">Alimentos Orgánicos</a></li>
+                                            <li><a class="dropdown-item" href="#">Snacks y Dulces</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Bebés y Niños</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Ropa de Bebé</a></li>
+                                            <li><a class="dropdown-item" href="#">Juguetes para Bebés</a></li>
+                                            <li><a class="dropdown-item" href="#">Productos para la Alimentación del Bebé</a></li>
+                                            <li><a class="dropdown-item" href="#">Mobiliario Infantil</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">Libros y Música</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Libros Físicos y E-Books</a></li>
+                                            <li><a class="dropdown-item" href="#">Música y CD's</a></li>
+                                            <li><a class="dropdown-item" href="#">Instrumentos Musicales</a></li>
+                                            <li><a class="dropdown-item" href="#">Audiolibros y Podcasts</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider" />
+                                            </li>
+                                            <li><a href="" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a href="" class="dropdown-item">Ver todos los articulos</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -149,25 +221,27 @@
                 </nav>
             </div>
         </header>
-        <div class="container-flex m-4 banner">
-            <div class="carousel slide" id="carousel1" data-bs-ride="carousel" data-interval="500">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/banner1.jpg" class="d-block w-100 banner-img" alt="Mas de 600 productos informaticos" draggable="false" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/banner3.jpg" class="d-block w-100 banner-img" alt="Miles de productos deportivos" draggable="false" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/banner2.jpg" class="d-block w-100 banner-img" alt="Mas de 1000 productos de belleza" draggable="false" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/banner4.jpg" class="d-block w-100 banner-img" alt="Todo para tu hogar en linea blanca" draggable="false" />
+        <section class="">
+            <div class="container-flex m-4 banner">
+                <div class="carousel slide" id="carousel1" data-bs-ride="carousel" data-interval="500">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="img/banner1.jpg" class="d-block w-100 banner-img" alt="Mas de 600 productos informaticos" draggable="false" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/banner3.jpg" class="d-block w-100 banner-img" alt="Miles de productos deportivos" draggable="false" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/banner2.jpg" class="d-block w-100 banner-img" alt="Mas de 1000 productos de belleza" draggable="false" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/banner4.jpg" class="d-block w-100 banner-img" alt="Todo para tu hogar en linea blanca" draggable="false" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <section class="w-100 row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        </section>
+        <section class="container w-100 row row-cols-1 row-cols-sm-2 row-cols-md-4">
             <div class="card-feature col">
                 <i class="fa-solid fa-plane-up"></i>
                 <div class="feature-content">
@@ -183,10 +257,10 @@
                 </div>
             </div>
             <div class="card-feature col">
-                <i class="fa-solid fa-gift"></i>
+                <i class="fa-solid fa-truck"></i>
                 <div class="feature-content">
-                    <span>Tarjetas de regalo</span>
-                    <p>Para tus seres queridos</p>
+                    <span>Diferentes tipos de envios</span>
+                    <p>Elige el tipo de envio que desees</p>
                 </div>
             </div>
             <div class="card-feature col">
@@ -197,55 +271,95 @@
                 </div>
             </div>
         </section>
-            <div class="container mt-4">
-                <h2>Productos Destacados</h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="imagenesProductos\nike-vomero-17-black.JPG" class="card-img-top" alt="Producto 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Zapas molonas</h5>
-                                <p class="card-text">Zapas que molan.</p>
-                                <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(zapasNikeMola)">Agregar carrito</a>
-                            </div>
+        <hr class="vr">
+        <div class="container mt-4">
+            <h2>Productos Destacados</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\nike-vomero-17-black.JPG" class="card-img-top" alt="Producto 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">Zapas molonas</h5>
+                            <p class="card-text">Zapas que molan.</p>
+                            <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(zapasNikeMola)">Agregar carrito</a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="imagenesProductos\pantalon-nike-club-black.JPG" class="card-img-top" alt="Producto 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Pantalones Guay</h5>
-                                <p class="card-text">Guay.</p>
-                                <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(pantalonNikeBlack)">Agregar carrito</a>
-                            </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\pantalon-nike-club-black.JPG" class="card-img-top" alt="Producto 2" />
+                        <div class="card-body">
+                            <h5 class="card-title">Pantalones Guay</h5>
+                            <p class="card-text">Guay.</p>
+                            <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(pantalonNikeBlack)">Agregar carrito</a>
                         </div>
                     </div>
-                    
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="Producto 3">
-                            <div class="card-body">
-                                <h5 class="card-title">eliminar articulos</h5>
-                                <p class="card-text">Descripción breve del producto.</p>
-                               <a class="btn btn-primary" onclick="eliminarTodosLosArticulos()" >Eliminar Carrito</a>
-                            </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="" class="card-img-top" alt="Producto 3" />
+                        <div class="card-body">
+                            <h5 class="card-title">eliminar articulos</h5>
+                            <p class="card-text">Descripción breve del producto.</p>
+                            <a class="btn btn-primary" onclick="eliminarTodosLosArticulos()">Eliminar Carrito</a>
                         </div>
                     </div>
                 </div>
             </div>
-        
-        <footer>
-           
+        </div>
+        <hr class="vr">
+
+        <footer class="container-flex m-0 p-5" id="footer">
+            <p>Pigeon e-Shop todos los derechos reservados. </p>
         </footer>
         <script src="js/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
         <script src="Carrito.js"></script>
         <script type="text/javascript">
-            
-            
+            $("#cantArticulos").html(cantArticulos);
 
+            $(document).ready(function () {
+                $("#dropdownCategorias").hover(
+                    function () {
+                        $(this).addClass("show");
+                        $(this).find(".dropdown-menu").addClass("show");
+                    },
+                    function () {
+                        $(this).removeClass("show");
+                        $(this).find(".dropdown-menu").removeClass("show");
+                    }
+                );
+
+                $(".dropdown-submenu").on({
+                    mouseenter: function () {
+                        $(this).find(".dropdown-menu").addClass("show");
+                        $(this).children(".dropdown-item").addClass("show");
+                    },
+                    mouseleave: function () {
+                        $(this).find(".dropdown-menu").removeClass("show");
+                        $(this).children(".dropdown-item").removeClass("show");
+                    },
+                });
+
+                $(".dropdown-submenu .dropdown-menu").on("mouseleave", function () {
+                    $(this).removeClass("show");
+                    $(this).parent(".dropdown-submenu").children(".dropdown-item").removeClass("show");
+                });
+
+                $(".dropdown-submenu").hover(
+                    function () {
+                        $(this).find(".dropdown-menu").addClass("show");
+                        $(this).children(".dropdown-item").addClass("show");
+                    },
+                    function () {
+                        $(this).find(".dropdown-menu").removeClass("show");
+                        $(this).children(".dropdown-item").removeClass("show");
+                    }
+                );
+            });
         </script>
     </body>
 </html>

@@ -48,6 +48,7 @@ function renderizarArticulos() {
     });
 
     cartTotal.text(total.toFixed(2));
+    carritoColor()
 }
 
 function eliminarArticulo(index) {
@@ -57,6 +58,22 @@ function eliminarArticulo(index) {
     localStorage.setItem('cantArticulos', cantArticulos);
     $("#cantArticulos").html(cantArticulos);
     renderizarArticulos();
+}
+
+function carritoColor() {
+                
+    const valor = $("#cantArticulos").html();
+
+    if(valor == "0") {
+        
+        $("#cantArticulos").css("color","red");
+        
+    } else {
+        
+        $("#cantArticulos").css("color","green");
+        
+    }
+
 }
 
 $(document).ready(function() {

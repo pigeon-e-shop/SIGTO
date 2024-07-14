@@ -109,6 +109,12 @@ html {
 .content-shopping-cart {
   display: flex;
   flex-direction: column;
+  & * {
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 650;
+    font-size: 17px;
+  }
 }
 
 /* ************* NAVBAR ************* */
@@ -264,6 +270,20 @@ html {
   min-width: 220px;
 }
 
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+
 .tooltip-inner {
   font-size: 1.2rem;
 }
@@ -273,6 +293,16 @@ html {
   padding: 10px;
   margin: 10px;
   border-radius: 8px;
+}
+
+#footer {
+
+  background-color: #1b3454;
+
+  & p {
+    color: #a6a6a6;
+  }
+
 }
 
 @media only screen and (max-width: 1000px) {
