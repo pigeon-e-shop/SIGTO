@@ -12,7 +12,6 @@
                 font-family: "Core Rhino 85";
                 color: #417a93;
             }
-
         </style>
         <link rel="stylesheet" href="css/styles.css" />
     </head>
@@ -55,20 +54,19 @@
                     </div>
                 </div>
             </div>
-
             <div class="container-navbar p-2">
-                <nav class="navbar navbar-expand-md ">
-                    <button class="btn btn-search navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="btn btn-search navbar-toggler-icon"></span>
+                <nav class="navbar navbar-expand-md">
+                    <button class="btn btn-search navbar-toggler" type="button" data-bs-toggle="dropdown" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation" data-bs-auto-close="true">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdownCategorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownCategorias" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
-                                    <li class="dropdown-submenu">
+                                    <li class="dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Deportes</a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu dropdown-menu-end">
                                             <li><a class="dropdown-item" href="#">Fútbol</a></li>
                                             <li><a class="dropdown-item" href="#">Baloncesto</a></li>
                                             <li><a class="dropdown-item" href="#">Béisbol</a></li>
@@ -76,7 +74,7 @@
                                             <li><a class="dropdown-item" href="#">Golf</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
+                                    <li class="dropend dropdown-submenu ">
                                         <a class="dropdown-item dropdown-toggle" href="#">Tecnología</a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="#">Teléfonos</a></li>
@@ -86,9 +84,9 @@
                                             <li><a class="dropdown-item" href="#">Smart Home</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
+                                    <li class="dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Hogar</a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu dropdown-menu-end">
                                             <li><a class="dropdown-item" href="#">Cocina</a></li>
                                             <li><a class="dropdown-item" href="#">Sala</a></li>
                                             <li><a class="dropdown-item" href="#">Dormitorio</a></li>
@@ -96,36 +94,7 @@
                                             <li><a class="dropdown-item" href="#">Jardín</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Cuidado Personal</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Belleza</a></li>
-                                            <li><a class="dropdown-item" href="#">Salud</a></li>
-                                            <li><a class="dropdown-item" href="#">Higiene</a></li>
-                                            <li><a class="dropdown-item" href="#">Fitness</a></li>
-                                            <li><a class="dropdown-item" href="#">Bienestar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Mascotas</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Perros</a></li>
-                                            <li><a class="dropdown-item" href="#">Gatos</a></li>
-                                            <li><a class="dropdown-item" href="#">Aves</a></li>
-                                            <li><a class="dropdown-item" href="#">Peces</a></li>
-                                            <li><a class="dropdown-item" href="#">Pequeños Mamíferos</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Moda</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Hombres</a></li>
-                                            <li><a class="dropdown-item" href="#">Mujeres</a></li>
-                                            <li><a class="dropdown-item" href="#">Niños</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
-                                            <li><a class="dropdown-item" href="#">Zapatos</a></li>
-                                        </ul>
-                                    </li>
+                                    <!-- Agrega más elementos de submenú según sea necesario -->
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -140,7 +109,7 @@
                         </ul>
                     </div>
                     <form class="search-form">
-                        <input type="search" class="" onkeyup="mostrarResultados()" placeholder="Buscar..." />
+                        <input type="search" class="" onkeyup="" placeholder="Buscar..." />
                         <button class="btn-search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -202,7 +171,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="img/producto1.jpg" class="card-img-top" alt="Producto 1">
+                            <img src="img/producto1.jpg" class="card-img-top" alt="Producto 1" />
                             <div class="card-body">
                                 <h5 class="card-title">Producto 1</h5>
                                 <p class="card-text">Descripción breve del producto.</p>
@@ -210,10 +179,10 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="img/producto2.jpg" class="card-img-top" alt="Producto 1">
+                            <img src="img/producto2.jpg" class="card-img-top" alt="Producto 1" />
                             <div class="card-body">
                                 <h5 class="card-title">Producto 1</h5>
                                 <p class="card-text">Descripción breve del producto.</p>
@@ -221,10 +190,10 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-md-4">
                         <div class="card">
-                            <img src="img/producto3.jpg" class="card-img-top" alt="Producto 1">
+                            <img src="img/producto3.jpg" class="card-img-top" alt="Producto 1" />
                             <div class="card-body">
                                 <h5 class="card-title">Producto 1</h5>
                                 <p class="card-text">Descripción breve del producto.</p>
@@ -232,7 +201,6 @@
                             </div>
                         </div>
                     </div>
-        
                 </div>
             </div>
         </section>
@@ -240,22 +208,51 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
         <script type="text/javascript">
-            
             let cantArticulos = 12;
             $("#cantArticulos").html(`${cantArticulos}`);
 
             $(document).ready(function () {
-                $("body").tooltip({ selector: "[data-bs-toggle=dropdown]" });
+                // Mostrar el dropdown al hacer hover sobre #dropdownCategorias
                 $("#dropdownCategorias").hover(
                     function () {
-                        $("#dropdownCategorias").dropdown("toggle");
+                        $(this).addClass("show"); // Mostrar el dropdown
+                        $(this).find(".dropdown-menu").addClass("show"); // Mostrar el menú del dropdown
                     },
                     function () {
-                        $("#dropdownCategorias").dropdown("toggle");
+                        $(this).removeClass("show"); // Ocultar el dropdown cuando se quita el hover
+                        $(this).find(".dropdown-menu").removeClass("show"); // Ocultar el menú del dropdown
+                    }
+                );
+
+                // Evitar que el dropdown se cierre al hacer hover dentro del menú del dropdown
+                $(".dropdown-submenu").on({
+                    mouseenter: function () {
+                        $(this).find(".dropdown-menu").addClass("show"); // Mostrar el menú del dropdown interno
+                        $(this).children(".dropdown-item").addClass("show"); // Marcar el item padre como activo
+                    },
+                    mouseleave: function () {
+                        $(this).find(".dropdown-menu").removeClass("show"); // Ocultar el menú del dropdown interno
+                        $(this).children(".dropdown-item").removeClass("show"); // Quitar la marca de activo al item padre
+                    },
+                });
+
+                // Evitar que se cierre el dropdown cuando se hace hover en los elementos dentro del menú del dropdown
+                $(".dropdown-submenu .dropdown-menu").on("mouseleave", function () {
+                    $(this).removeClass("show"); // Ocultar el menú del dropdown interno
+                    $(this).parent(".dropdown-submenu").children(".dropdown-item").removeClass("show"); // Quitar la marca de activo al item padre
+                });
+
+                $(".dropdown-submenu").hover(
+                    function () {
+                        $(this).find(".dropdown-menu").addClass("show");
+                        $(this).children(".dropdown-item").addClass("show");
+                    },
+                    function () {
+                        $(this).find(".dropdown-menu").removeClass("show");
+                        $(this).children(".dropdown-item").removeClass("show");
                     }
                 );
             });
-
         </script>
     </body>
 </html>
