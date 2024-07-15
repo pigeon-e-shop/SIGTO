@@ -1,5 +1,5 @@
 let articulos = JSON.parse(localStorage.getItem('articulos')) || [];
-let cantArticulos = parseInt(localStorage.getItem('cantArticulos')) || articulos.length;
+let cantArticulos = Number(localStorage.getItem('cantArticulos')) || articulos.length;
 $("#cantArticulos").html(cantArticulos);
 
 function Articulos(id, nombre, precio, descripcion) {
@@ -9,8 +9,8 @@ function Articulos(id, nombre, precio, descripcion) {
     this.descripcion = descripcion;
 }
 
-let pantalonNikeBlack = new Articulos(1, "Pantalon Nike Guay", 1000, "Guay");
-let zapasNikeMola = new Articulos(2, "Zapas Nike Molona", 1300, "Mola");
+let pantalonNikeBlack = new Articulos(1, "Pantalon Nike Guay", 1000.50, "Guay");
+let zapasNikeMola = new Articulos(2, "Zapas Nike Molona", 1300.99, "Mola");
 
 function agregarArt(articulo) {
     articulos.push(articulo);
@@ -34,7 +34,7 @@ function renderizarArticulos() {
     const cartItemsList = $("#cartItemsList");
     const cartTotal = $("#cartTotal");
     let total = 0;
-    cartItemsList.empty(); // Limpiar la lista de artículos
+    cartItemsList.empty();
 
     articulos.forEach((articulo, index) => {
         const item = `
@@ -48,11 +48,10 @@ function renderizarArticulos() {
     });
 
     cartTotal.text(total.toFixed(2));
-    carritoColor()
 }
 
 function eliminarArticulo(index) {
-    articulos.splice(index, 1); // Eliminar el artículo en la posición especificada
+    articulos.splice(index, 1);
     cantArticulos = articulos.length;
     localStorage.setItem('articulos', JSON.stringify(articulos));
     localStorage.setItem('cantArticulos', cantArticulos);
@@ -60,27 +59,10 @@ function eliminarArticulo(index) {
     renderizarArticulos();
 }
 
-function carritoColor() {
-                
-    const valor = $("#cantArticulos").html();
-
-    if(valor == "0") {
-        
-        $("#cantArticulos").css("color","red");
-        
-    } else {
-        
-        $("#cantArticulos").css("color","green");
-        
-    }
-
-}
-
 $(document).ready(function() {
-    renderizarArticulos();
+    renderizarArticulos(); 
     $(".clear-cart").click(eliminarTodosLosArticulos);
 });
 
-// Agregar eventos a los botones
 $("#addPantalon").click(() => agregarArt(pantalonNikeBlack));
 $("#addZapas").click(() => agregarArt(zapasNikeMola));
