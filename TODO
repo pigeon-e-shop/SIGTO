@@ -1,0 +1,16 @@
+Hacer un carrusel de archivos
+
+Terminar de hacer la pagina responsive
+    Arreglar menu categorias para dispositivios moviles
+    Imagenes responsive
+    navbar responsive
+    header responsive
+
+Arreglar CSS
+    separar el CSS en diferentes archivos para cada elemento. por ejemplo, header.css
+    
+Al hacer click en la imagen de los productos abrir un visualizador de imagen
+
+Terminar footer
+
+Que los baners sean botones que te lleven a ver lo que dice cada imagen, ejemplo: imagen mas de 600 productos informaticos te lleva a ver productos informaticos
