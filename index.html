@@ -12,7 +12,13 @@
                 font-family: "Core Rhino 85";
                 color: #417a93;
             }
+            #precio{
+                color: #417a93;
+                font-weight: bold;
+                font-size: 24px;
+            }
         </style>
+        
         <link rel="stylesheet" href="css/styles.css" />
     </head>
 
@@ -273,14 +279,15 @@
         </section>
         <hr class="vr">
         <div class="container mt-4">
-            <h2>Productos Destacados</h2>
+            <h2>Productos Recomendados</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="imagenesProductos\nike-vomero-17-black.JPG" class="card-img-top" alt="Producto 1" />
+                        <img src="imagenesProductos\nike-vomero-17-black.JPG" width="300" height="400" class="card-img-top" alt="Producto 1" />
                         <div class="card-body">
                             <h5 class="card-title">Zapas molonas</h5>
-                            <p class="card-text">Zapas que molan.</p>
+                            <p class="card-text">Mola.</p>
+                            <p class="card-text" id="precio">USD $79.99</p>
                             <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(zapasNikeMola)">Agregar carrito</a>
                         </div>
                     </div>
@@ -288,10 +295,11 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="imagenesProductos\pantalon-nike-club-black.JPG" class="card-img-top" alt="Producto 2" />
+                        <img src="imagenesProductos\pantalon-nike-club-black.JPG" width="300" height="400" class="card-img-top" alt="Producto 2" />
                         <div class="card-body">
                             <h5 class="card-title">Pantalones Guay</h5>
                             <p class="card-text">Guay.</p>
+                            <p class="card-text" id="precio">USD $25.50</p>
                             <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(pantalonNikeBlack)">Agregar carrito</a>
                         </div>
                     </div>
@@ -299,11 +307,97 @@
 
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="" class="card-img-top" alt="Producto 3" />
+                        <img src="imagenesProductos\camisetaPumaGris.jpg" width="300" height="400" class="card-img-top" alt="Producto 3" />
                         <div class="card-body">
                             <h5 class="card-title">eliminar articulos</h5>
-                            <p class="card-text">Descripción breve del producto.</p>
-                            <a class="btn btn-primary" onclick="eliminarTodosLosArticulos()">Eliminar Carrito</a>
+                            <p class="card-text">100% Gris</p>
+                            <p class="card-text" id="precio">USD $39.99</p>
+                            <a class="btn btn-primary" onclick="agregarArt(camisetaPumaGris)">Agregar carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="vr">
+        <hr class="vr">
+        <div class="container mt-4">
+            <h2>Productos Mas Vendidos</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\mandoPs5.jpg" width="300" height="400" class="card-img-top" alt="Producto 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">Mando Ps5</h5>
+                            <p class="card-text">A jugar sin descanso.</p>
+                            <p class="card-text" id="precio">USD $79.99</p>
+                            <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(mandoPs5)">Agregar carrito</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\googlePlayCard50.jpg" width="300" height="400" class="card-img-top" alt="Producto 2" />
+                        <div class="card-body">
+                            <h5 class="card-title">Tarjeta Google Play 50 dolares</h5>
+                            <p class="card-text">50 dolar pal free.</p>
+                            <p class="card-text" id="precio">USD $50</p>
+                            <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(googleCard50)">Agregar carrito</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\usbmemory.jpg" width="300" height="400" class="card-img-top" alt="Producto 3" />
+                        <div class="card-body">
+                            <h5 class="card-title">Memoria Usb 30 Gb</h5>
+                            <p class="card-text">Lo justo y necesario</p>
+                            <p class="card-text" id="precio">USD $9.99</p>
+                            <a class="btn btn-primary" onclick="agregarArt(usbMemory30)">Agregar carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="vr">
+
+        <hr class="vr">
+        <div class="container mt-4">
+            <h2>Productos De Moda</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\lapizLabialRojo.jpg" width="300" height="400" class="card-img-top" alt="Producto 1" />
+                        <div class="card-body">
+                            <h5 class="card-title">Lapiz labial Rojo</h5>
+                            <p class="card-text">Rojo.</p>
+                            <p class="card-text" id="precio">USD $19.99</p>
+                            <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(lapizLabialRojo)">Agregar carrito</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\rimel.jpg" width="300" height="400" class="card-img-top" alt="Producto 2" />
+                        <div class="card-body">
+                            <h5 class="card-title">Rimel</h5>
+                            <p class="card-text">Pestañas increibles.</p>
+                            <p class="card-text" id="precio">USD $39.99</p>
+                            <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(rimel)">Agregar carrito</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagenesProductos\lapizLabialAzul.jpg" width="300" height="400" class="card-img-top" alt="Producto 3" />
+                        <div class="card-body">
+                            <h5 class="card-title">Lapiz labial Azul</h5>
+                            <p class="card-text">Azul</p>
+                            <p class="card-text" id="precio">USD $19.99</p>
+                            <a class="btn btn-primary" onclick="agregarArt(lapizLabialAzul)">Agregar carrito</a>
                         </div>
                     </div>
                 </div>
@@ -317,7 +411,7 @@
         <script src="js/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
-        <script src="js/Carrito.js"></script>
+        <script src="Index/Carrito.js"></script>
         <script type="text/javascript">
             $("#cantArticulos").html(cantArticulos);
 

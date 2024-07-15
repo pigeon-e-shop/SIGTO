@@ -1,0 +1,58 @@
+* {
+    font-family: "Core Rhino 85";
+    color: #417A93;
+}
+
+.container-cart {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-total {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.articuloTexto{
+    font-size: 150%;
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
+.articuloImagen{
+    background-color: white;
+    transition: 300ms;
+    &:hover{
+        transform: translateX(100px) scale(2.5);
+        border: 1px solid black;
+        box-shadow: 2px 2px 3.5px black;
+    }
+}
+
