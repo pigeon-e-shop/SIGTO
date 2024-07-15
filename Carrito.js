@@ -60,7 +60,7 @@ function eliminarArticulo(index) {
 }
 
 $(document).ready(function() {
-    renderizarArticulos();
+    renderizarArticulos(); 
     $(".clear-cart").click(eliminarTodosLosArticulos);
 });
 
