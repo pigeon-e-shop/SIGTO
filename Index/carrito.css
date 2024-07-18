@@ -41,8 +41,10 @@
 
 .articuloTexto{
     font-size: 150%;
+    transition: 150ms;
     &:hover{
-        transform: scale(1.2);
+        transform: scale(1.02);
+        text-decoration: underline solid black;
     }
 }
 
