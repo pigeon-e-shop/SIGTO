@@ -1,29 +1,26 @@
 # SIGTO
 
-### Pigeon e-Shop
+# Pigeon e-Shop![Logo](https://github.com/pigeon-e-shop/SIGTO/blob/1394efe3c9072c5eb2fb63378eb67bd38a21d7df/img/logo.png?raw=true)
 
-Proyecto 2024 
+## Autores
 
-Gaston Gonzalez
-|
-Lautaro Fachinetti
-|
-Santiago Vazquez
-|
-Niro Vazquez
+- [@Pigeon e-Shop](https://github.com/pigeon-e-shop)
+- Coordinador [@NiroVazquezIsbo](https://github.com/NiroVazquezIsbo)
+- Subcoordinador [@santivazquezuy](https://github.com/Heikki-dotcom)
+- [@LauTax12](https://github.com/LauTax12)
+- [@gonzalezGaston](https://github.com/gonzalezGaston)
+- [@giovazuy](https://github.com/giovazuy)
+## Paleta de colores
 
-### Us
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Color principal |  #1B3454 |
+| Color secundario |  #417A93 |
+| Color teciario |  #FFDE59 |
+| Color alternativo |  #A3D6D2 |
 
-Santiago - Senior backend developer and english master
-Niro - Senior frontend developer and marketing
-Gaston - Junior backend developer and economist
-Lautaro - Junior frontend developer and HR
 
-We made this group like this because we have known each other since 2021, we have always had a good relationship and we feel comfortable being around and working together.
+## Licencia
 
-The roles we choose were selected by making a SWOT analysis, trying to get the best of us and our interests. 
-
-### Abstract
-
-This project called Pigeon e-Shop was made with the object of creating a new way of buying things online. Made by the four of us, Santiago Vazquez, Gaston Gonalez, Niro Vazquez and Lautaro Fachinetti, this project will lead the virtual market. 
+[MIT](https://github.com/pigeon-e-shop/SIGTO/blob/1394efe3c9072c5eb2fb63378eb67bd38a21d7df/LICENSE)
 
