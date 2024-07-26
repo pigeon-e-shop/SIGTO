@@ -1,13 +1,13 @@
 let imagenes = {
     1 : "../imagenesProductos/pantalon-nike-club-black.JPG",
     2 : "../imagenesProductos/nike-vomero-17-black.JPG",
-    3 : "../imagenesProductos/camisetaPumaGris.JPG",
+    3 : "../imagenesProductos/camisetaPumaGris.jpg",
     4 : "../imagenesProductos/mandoPs5.jpg",
-    5 : "../imagenesProductos/googlePlayCard50.JPG",
-    6 : "../imagenesProductos/usbMemory.JPG",
-    7 : "../imagenesProductos/lapizLabialRojo.JPG",
-    8 : "../imagenesProductos/rimel.JPG",
-    9 : "../imagenesProductos/lapizLabialAzul.JPG"
+    5 : "../imagenesProductos/googlePlayCard50.jpg",
+    6 : "../imagenesProductos/usbMemory.jpg",
+    7 : "../imagenesProductos/lapizLabialRojo.jpg",
+    8 : "../imagenesProductos/rimel.jpg",
+    9 : "../imagenesProductos/lapizLabialAzul.jpg"
 }
 let articulos = JSON.parse(localStorage.getItem('articulos')) || [];
 let cantArticulos = Number(localStorage.getItem('cantArticulos')) || articulos.length;

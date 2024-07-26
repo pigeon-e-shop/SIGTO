@@ -145,6 +145,10 @@ html {
 }
 
 .banner-img {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width: 100%;
   height: 54vh;
 }
 
@@ -240,11 +244,24 @@ html {
   }
 }
 
-@media only screen and (max-width: 500) {
+@media only screen and (max-width: 500px) {
   .container-hero * {
 	font-size: 1vw;
     transform: scale(0.4);
 	font-size: x-small;
 	filter: grayscale(50);
   }
+
+  .banner-img {
+
+    & * {
+
+      border-radius:5px;
+
+    }
+
+    height: 20px;
+    border-radius:5px;
+  }
+  
 }
