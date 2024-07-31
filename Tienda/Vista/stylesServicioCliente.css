@@ -1,0 +1,13 @@
+main * {
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-size: 110%;
+
+    & input,textarea {
+
+        box-shadow: 1px 1px 1px 0.1px  black;
+
+    }
+
+}
