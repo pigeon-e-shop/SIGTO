@@ -1,0 +1,9 @@
+#usuarioMain * {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    & #offcanvas {
+        font-weight: 700;
+    }
+
+}
