@@ -8,6 +8,8 @@ services:
     ports:
       - 80
       - 443
+    depends_on: 
+      - database
   database:
     image: mariadb
     container_name: bd-P-e-Shop
@@ -17,6 +19,6 @@ services:
       MYSQL_USER: pigeonSuperusuario
       MYSQL_PASSWORD: nosotrosIsboNGGLS
     ports:
-     - "3306:3306"
+     - "33060:3306"
      volumes:
      - ptVolume: /var/lib/mysql
