@@ -1,13 +1,13 @@
 let imagenes = {
-    1 : "../../Assets/pantalon-nike-club-black.JPG",
-    2 : "../../Assets/nike-vomero-17-black.JPG",
-    3 : "../../Assets/camisetaPumaGris.jpg",
-    4 : "../../Assets/mandoPs5.jpg",
-    5 : "../../Assets/googlePlayCard50.jpg",
-    6 : "../../Assets/usbMemory.jpg",
-    7 : "../../Assets/lapizLabialRojo.jpg",
-    8 : "../../Assets/rimel.jpg",
-    9 : "../../Assets/lapizLabialAzul.jpg"
+    1 : "http://localhost/SIGTO/assets/img/products/pantalon-nike-club-black.JPG",
+    2 : "http://localhost/SIGTO/assets/img/products/nike-vomero-17-black.JPG",
+    3 : "http://localhost/SIGTO/assets/img/products/camisetaPumaGris.jpg",
+    4 : "http://localhost/SIGTO/assets/img/products/mandoPs5.jpg",
+    5 : "http://localhost/SIGTO/assets/img/products/googlePlayCard50.jpg",
+    6 : "http://localhost/SIGTO/assets/img/products/usbMemory.jpg",
+    7 : "http://localhost/SIGTO/assets/img/products/lapizLabialRojo.jpg",
+    8 : "http://localhost/SIGTO/assets/img/products/rimel.jpg",
+    9 : "http://localhost/SIGTO/assets/img/products/lapizLabialAzul.jpg"
 }
 let articulos = JSON.parse(localStorage.getItem('articulos')) || [];
 let cantArticulos = Number(localStorage.getItem('cantArticulos')) || articulos.length;

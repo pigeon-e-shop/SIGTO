@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <style>
+            form {
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header></header>
+        <main class="container-flex p-2 m-3">
+            <section id="create">
+                <form action="http://localhost/SIGTO/model/connection.php?modo=create" method="post">
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">eMail</label>
+                        <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="example@example.com" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="usernameInput" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="usernameInput" id="usernameInput" placeholder="username" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="numeroInput" class="form-label">celular</label>
+                        <input type="number" class="form-control" name="numeroInput" id="numeroInput" aria-describedby="numeroHelp" placeholder="099099099" />
+                        <small id="numeroHelp" class="form-text text-muted">Revise que sea correcto</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">contrasena</label>
+                        <input type="password" class="form-control" name="passwordInput" id="passwordInput" placeholder="contrasena..." />
+                    </div>
+                    <input type="submit" value="Registrarse" class="btn btn-primary" />
+                </form>
+            </section>
+            <hr />
+            <form action="" method="post">
+                <div class="mb-3">
+                    <label for="tablaInput" class="form-label">Nombre Tabla</label>
+                    <input type="text" class="form-control" name="tablaInput" id="tablaInput" placeholder="..." />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+            </form>
+            <hr />
+            <form action="" method="post">
+                <div class="mb-3">
+                    <label for="idInput" class="form-label">ID</label>
+                    <input type="number" class="form-control" name="idInput" id="idInput" placeholder="user ID" />
+                </div>
+                <hr />
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">eMail</label>
+                    <input type="email" class="form-control" name="emailInput" id="emailInput" placeholder="example@example.com" />
+                </div>
+                <div class="mb-3">
+                    <label for="usernameInput" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="usernameInput" id="usernameInput" placeholder="username" />
+                </div>
+                <div class="mb-3">
+                    <label for="numeroInput" class="form-label">celular</label>
+                    <input type="number" class="form-control" name="numeroInput" id="numeroInput" aria-describedby="numeroHelp" placeholder="099099099" />
+                    <small id="numeroHelp" class="form-text text-muted">Revise que sea correcto</small>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordInput" class="form-label">contrasena</label>
+                    <input type="password" class="form-control" name="passwordInput" id="passwordInput" placeholder="contrasena..." />
+                </div>
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
+            </form>
+            <hr />
+            <form action="http://localhost/SIGTO/model/connection.php?modo=delete" method="post">
+                <div class="mb-3">
+                    <label for="idInputDelete" class="form-label">ID</label>
+                    <input type="number" class="form-control" name="idInputDelete" id="idInputDelete" placeholder="user ID" />
+                </div>
+                <button type="submit" id="btnDelete" class="btn btn-primary">Eliminar</button>
+            </form>
+        </main>
+        <footer class="container-flex m-5">
+            Create - Read - Update - Delete | Made by Pigeon e-Shop
+        </footer>
+        <script src="jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <script>
+            $("#btnDelete").click(tomarDatos);
+
+            function tomarDatos() {
+                let response = confirm("seguro que quiere borrar?");
+                if (response) {
+                    console.log("borrar user")
+                } else {
+                    console.log("no borrar");
+                    
+                }
+            }
+        </script>
+    </body>
+</html>
