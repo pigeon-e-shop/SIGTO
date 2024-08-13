@@ -7,7 +7,7 @@ use PDOException;
 
 class Connection
 {
-    private $servername = "192.168.1.14";
+    private $servername = "192.168.1.9";
     private $username = "root";
     private $password = "pigeon888";
     private $dbname = "pigeonDB";
