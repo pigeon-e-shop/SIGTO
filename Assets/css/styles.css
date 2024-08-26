@@ -236,6 +236,21 @@ html {
     font-size: 20px;
 }
 
+#resultados {
+
+        position: absolute; /* Absolute positioning to overlay it */
+        top: 100%; /* Position it right below the search form */
+        float: right;
+        margin-left: auto; 
+        margin-right: 0;
+        width: max-content; /* Make sure it spans the full width of the parent */
+        background-color: white; /* Background color to ensure readability */
+        border: 1px solid #ccc; /* Border to make it visually distinct */
+        z-index: 1000; /* Ensure it is above other elements */
+        max-height: 300px; /* Optional: set a max height */
+        overflow-y: auto; /* Add scroll if the content exceeds max height */
+}
+
 @media only screen and (max-width: 1000px) {
     .banner * {
         height: fit-content;
