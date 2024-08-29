@@ -1,9 +1,0 @@
-{
-    "autoload": {
-        "psr-4": {
-            "SIGTO\\Controller\\": "controller/",
-            "SIGTO\\Model\\": "model/",
-            "SIGTO\\View\\": "view/"
-        }
-    }
-}

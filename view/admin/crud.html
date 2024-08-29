@@ -6,13 +6,58 @@
     <title>C.R.U.D. - SIGTO - Administradores</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../../assets/css/admin.css'>
-    <script src='../../assets/js/crudAdmin.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    
 </head>
 <body>
-    <header>
-        <select name="" id="tablas">
-
-        </select>
+    <header class="container">
+        <div class="m-3">
+            <select name="tablas" id="tablas">
+                <option value="">Selecciona una tabla</option>
+            </select>
+            <select name="columnas" id="columnas">
+                <option value="">Selecciona una columna</option>
+            </select>
+            <div class="container mt-1">
+                <label for="inputFiltro">Filtro:</label>
+                <input id="inputFiltro" type="text">
+            </div>
+        </div>
     </header>
+    <main class="container-flex m-1 w-90">
+        <table id="datos" class="container-flex w-100 table table-hover">
+                     
+        </table>
+    </main>
+    <footer class="container" id="footer">
+        <div id="agregacion" class="m-3">
+            <p id="nombreTabla"></p>
+            <input type="nombre">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+    </footer>
+    <!-- Modal para agregar datos -->
+<div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDataModalLabel">Agregar Datos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addDataForm">
+            <!-- Aquí se agregarán los campos del formulario dinámicamente -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" form="addDataForm" class="btn btn-primary">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script src="../../assets/js/jquery-3.7.1.min.js"></script>
+    <script src='../../assets/js/crudAdmin.js'></script>
 </body>
 </html>

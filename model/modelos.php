@@ -1,52 +1,162 @@
 <?php
 
-namespace SIGTO\Model;
+require_once('../Config/Database.php');
 
-require_once('connection.php');
+class Read
+{
+    private $conn;
 
-function getConnection(){
-    $connection = new Connection();  // Crea una instancia de la clase Connection
-    $conn = $connection->connection();  // Llama al método connection() de la instancia
-    return $conn;  // Devuelve la conexión
+    public function __construct()
+    {
+        $connection = new Connection();
+        $this->conn = $connection->connection();
+    }
+
+    public function getTables()
+    {
+        if ($this->conn) {
+            $stmt = $this->conn->query("SHOW TABLES");
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        } else {
+            return [];
+        }
+    }
+
+    public function getColumns($table)
+    {
+        $stmt = $this->conn->prepare("SHOW COLUMNS FROM `{$table}`");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+    }
+
+    public function getData($table, $column)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM `{$table}`");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDataFilter($table, $column, $filter)
+    {
+        $sql = "SELECT * FROM `{$table}` WHERE `{$column}` LIKE :filter";
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindValue(':filter', "%{$filter}%", PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getEnumValues($table, $column)
+    {
+        $stmt = $this->conn->prepare("SHOW COLUMNS FROM `{$table}` LIKE '{$column}'");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $type = $result['Type'];
+            preg_match_all("/'([^']*)'/", $type, $matches);
+            return $matches[1];
+        }
+
+        return [];
+    }
+
+    public function getTableFields($table) {
+        // Escapar el nombre de la tabla correctamente
+        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table); // Asegúrate de que solo contenga caracteres válidos
+        $sql = "DESCRIBE " . $table;
+        $stmt = $this->conn->query($sql);
+        $fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(function ($field) {
+            return [
+                'name' => $field['Field'],
+                'auto_increment' => isset($field['Extra']) && $field['Extra'] === 'auto_increment',
+                'data_type' => $field['Type']
+            ];
+        }, $fields);
+    }
+
 }
 
+class Create
+{
+    private $conn;
 
-class Create {
+    public function __construct()
+    {
+        $connection = new Connection();
+        $this->conn = $connection->connection();
+    }
 
-    private $conn = getConnection();
+    public function insertData($table, $data) {
+        // Generar la consulta SQL para insertar los datos
+        $columns = implode(',', array_keys($data));
+        $placeholders = implode(',', array_fill(0, count($data), '?'));
+        
+        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        $stmt = $this->conn->prepare($sql);
+    
+        return $stmt->execute(array_values($data));
+    }
+    
+}
 
-    private function __construct($conn) {
-        $this->conn = $conn;
+class Update
+{
+    private $conn;
+
+    public function __construct()
+    {
+        $connection = new Connection();
+        $this->conn = $connection->connection();
+    }
+
+    function updateDataArticulos($datos, $tabla, $id)
+    {
+        if (!isset($datos['idArticulo'])) {
+            throw new Exception("ID Artículo no proporcionado");
+        }
+
+        $data = [
+            'nombre' => $datos['nombre'],
+            'precio' => $datos['precio'],
+            'descripcion' => $datos['descripcion'],
+            'rutaImagen' => $datos['rutaImagen'],
+            'categoria' => $datos['categoria'],
+            'descuento' => $datos['descuento'],
+            'empresa' => $datos['empresa'],
+            'stock' => $datos['stock'],
+            'codigoBarra' => $datos['codigoBarra'],
+            'idArticulo' => $id
+        ];
+
+        $sql = "UPDATE $tabla 
+                SET nombre=:nombre, 
+                    precio=:precio, 
+                    descripcion=:descripcion, 
+                    rutaImagen=:rutaImagen, 
+                    categoria=:categoria, 
+                    descuento=:descuento, 
+                    empresa=:empresa, 
+                    stock=:stock, 
+                    codigoBarra=:codigoBarra 
+                WHERE idArticulo=:idArticulo";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($data);
     }
 }
 
-class Read {
-    private $conn = getConnection();
-    private $tabla = $_POST['tabla'] ?? 'articulo';
-    private function __construct($tabla) {
-        $this->tabla = $tabla;
-    }
+class Delete
+{
+    private $conn;
 
-    // esta funcion retorna toda la informacion de la tabla articulos.
-    function read_articulo() {}
-
-    // esta funcion retorna la info de la tabla articulos para imprimir nombre, precio, descripcion e imagen.
-    function read_articulo_detalle() {}
- 
-}
-
-class Update {
-    private $conn = getConnection();
-
-    private function __construct($conn) {
-        $this->conn = $conn;
-    }
-}
-
-class Delete {
-    private $conn = getConnection();
-
-    private function __construct($conn) {
-        $this->conn = $conn;
+    public function __construct()
+    {
+        $connection = new Connection();
+        $this->conn = $connection->connection();
     }
 }
