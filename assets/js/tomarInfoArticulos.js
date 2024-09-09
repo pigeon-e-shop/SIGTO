@@ -7,6 +7,7 @@ let ajaxConn = () => {
     $.ajax({
         url: url, 
         dataType: "JSON",
+        type: 'GET',
         data: {mode: 'readDetalle'},
         success: function (response) {
             console.log(response);

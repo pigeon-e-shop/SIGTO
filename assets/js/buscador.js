@@ -5,7 +5,7 @@ $(document).ready(function () {
 	// elimina los `hijos` del elemento resultados
     $("#resultados").empty();
 	// funcion que lee el evento `keyup` del elemento input con nombre buscador
-    $('input[name="buscador"]').on("keyup", function () {
+    $('input[name="query"]').on("keyup", function () {
 		// hace visible el elemento resultados
         $("#resultados").css("display", "block");
 		// toma el id 

@@ -17,97 +17,103 @@ $update = new Update();
 $create = new Create();
 $delete = new Delete();
 
+// Initialize data array
+$data = [];
+
 switch ($action) {
     case 'getTables':
-        $tables = $read->getTables();
-        echo json_encode($tables);
+        $data = $read->getTables(); // Assuming this returns an array
         break;
 
     case 'getColumns':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
-        $columns = $read->getColumns($table);
-        echo json_encode($columns);
+        $data = $read->getColumns($table); // Assuming this returns an array
         break;
 
     case 'getData':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
         $column = isset($_GET['column']) ? $_GET['column'] : (isset($_POST['column']) ? $_POST['column'] : '');
-        $data = $read->getData($table, $column);
-        echo json_encode($data);
+        $data = $read->getData($table, $column); // Assuming this returns an array
         break;
 
     case 'getDataFilter':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
         $column = isset($_GET['column']) ? $_GET['column'] : (isset($_POST['column']) ? $_POST['column'] : '');
         $filter = isset($_GET['filter']) ? $_GET['filter'] : (isset($_POST['filter']) ? $_POST['filter'] : '');
-        $data = $read->getDataFilter($table, $column, $filter);
-        echo json_encode($data);
+        $data = $read->getDataFilter($table, $column, $filter); // Assuming this returns an array
         break;
 
-        case 'updateData':
-            $data = isset($_POST['data']) ? json_decode($_POST['data'], true) : [];
-            $table = isset($_POST['table']) ? $_POST['table'] : '';
-            $id = isset($_POST['id']) ? $_POST['id'] : '';
-            $columns = isset($_POST['columns']) ? $_POST['columns'] : [];
+    case 'updateData':
+        $dataPost = isset($_POST['data']) ? $_POST['data'] : [];
+        $table = isset($_POST['table']) ? $_POST['table'] : '';
+        $id = isset($_POST['id']) ? $_POST['id'] : '';
 
-            switch ($table) {
-                case 'usuarios':
-                    $result = $update->updateUsuario(
-                        $id,
-                        $data['apellido'],
-                        $data['nombre'],
-                        $data['calle'],
-                        $data['email'],
-                        $data['contraseña'],
-                        $data['Npuerta'],
-                        $data['telefono']
-                    );
-                    break;
-        
-                case 'articulo':
-                    $result = $update->updateArticulo(
-                        $id,
-                        $data['nombre'],
-                        $data['precio'],
-                        $data['descripcion'],
-                        $data['rutaImagen'],
-                        $data['categoria'],
-                        $data['descuento'],
-                        $data['empresa'],
-                        $data['stock'],
-                        $data['codigoBarra']
-                    );
-                    break;
-        
-                case 'empresa':
-                    $result = $update->updateEmpresa(
-                        $id,
-                        $data['email'],
-                        $data['nombre'],
-                        $data['categoria'],
-                        $data['RUT'],
-                        $data['telefono']
-                    );
-                    break;
-                
-                default:
-                    $result = false;
-                    break;
-            }
-        
-            if ($result) {
-                echo json_encode(['success' => true]);
-            } else {
-                echo json_encode(['success' => false, 'error' => 'No se pudo actualizar']);
-            }
+        if (empty($table) || empty($id) || empty($dataPost)) {
+            $data = ['error' => 'Datos incompletos'];
             break;
-        
+        }
+
+        switch ($table) {
+            case 'usuarios':
+                $result = $update->updateUsuario(
+                    $id,
+                    $dataPost['apellido'] ?? null,
+                    $dataPost['nombre'] ?? null,
+                    $dataPost['calle'] ?? null,
+                    $dataPost['email'] ?? null,
+                    $dataPost['contraseña'] ?? null,
+                    $dataPost['Npuerta'] ?? null,
+                    $dataPost['telefono'] ?? null
+                );
+                break;
+
+            case 'articulo':
+                if (empty($dataPost['nombre'])) {
+                    $data = ['error' => 'El nombre es requerido'];
+                    break;
+                }
+                $result = $update->updateArticulo(
+                    $id,
+                    $dataPost['nombre'],
+                    $dataPost['precio'] ?? null,
+                    $dataPost['descripcion'] ?? null,
+                    $dataPost['rutaImagen'] ?? null,
+                    $dataPost['categoria'] ?? null,
+                    $dataPost['descuento'] ?? null,
+                    $dataPost['empresa'] ?? null,
+                    $dataPost['stock'] ?? null,
+                    $dataPost['codigoBarra'] ?? null
+                );
+                break;
+
+            case 'empresa':
+                $result = $update->updateEmpresa(
+                    $id,
+                    $dataPost['email'] ?? null,
+                    $dataPost['nombre'] ?? null,
+                    $dataPost['categoria'] ?? null,
+                    $dataPost['RUT'] ?? null,
+                    $dataPost['telefono'] ?? null
+                );
+                break;
+
+            default:
+                $data = ['error' => 'Acción no válida'];
+                break;
+        }
+
+        if (isset($result) && $result) {
+            $data = [];
+        } else {
+            $data = ['error' => 'No se pudo actualizar'];
+        }
+        break;
 
     case 'insertData':
         $table = isset($_POST['table']) ? $_POST['table'] : '';
-        parse_str($_POST['data'], $data);
-        //$result = $create->insertData($table, $data);
-        echo json_encode(['success' => $result]);
+        parse_str($_POST['data'], $dataPost);
+        // $result = $create->insertData($table, $dataPost); // Uncomment and ensure this line is correct
+        $data = ['error' => 'Método no implementado']; // Temporary placeholder
         break;
 
     case 'deleteData':
@@ -115,13 +121,15 @@ switch ($action) {
         $id = isset($_POST['id']) ? $_POST['id'] : '';
         if ($table && $id) {
             $delete->delete($table, $id);
-            echo json_encode(['success' => true]);
+            $data = []; // No data returned on success
         } else {
-            echo json_encode(['error' => 'Datos incompletos']);
+            $data = ['error' => 'Datos incompletos'];
         }
         break;
 
     default:
-        echo json_encode(['error' => 'Acción no válida']);
+        $data = ['error' => 'Acción no válida'];
         break;
 }
+
+echo json_encode($data);

@@ -23,21 +23,28 @@ class Update {
 		] );
 	}
 	public function updateArticulo($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $codigoBarra) {
-		$query = "UPDATE articulo SET nombre=?, precio=?, descripcion=?, rutaImagen=?, categoria=?, descuento=?, empresa=?, stock=?, codigoBarra=? WHERE id=?";
-		$stmt = $this->conn->prepare ( $query );
-		return $stmt->execute ( [
-				$nombre,
-				$precio,
-				$descripcion,
-				$rutaImagen,
-				$categoria,
-				$descuento,
-				$empresa,
-				$stock,
-				$codigoBarra,
-				$id
-		] );
+		$query = "UPDATE articulo SET nombre=?, precio=?, descripcion=?, rutaImagen=?, categoria=?, descuento=?, empresa=?, stock=?, codigoBarra=? WHERE idArticulo=?";
+		$stmt = $this->conn->prepare($query);
+	
+		if (!$stmt->execute([
+			$nombre,
+			$precio,
+			$descripcion,
+			$rutaImagen,
+			$categoria,
+			$descuento,
+			$empresa,
+			$stock,
+			$codigoBarra,
+			$id
+		])) {
+			error_log("Update failed: " . implode(", ", $stmt->errorInfo()));
+			return false;
+		}
+	
+		return true;
 	}
+	
 	public function updateEmpresa($id, $email, $nombre, $categoria, $RUT, $telefono) {
 		$query = "UPDATE empresa SET email=?, nombre=?, categoria=?, RUT=?, telefono=? WHERE id=?";
 		$stmt = $this->conn->prepare ( $query );

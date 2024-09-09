@@ -35,17 +35,17 @@ $(document).ready(function () {
         async mostrarArticulosEnIndex() {
             const $carouselInner = $("#articulosCarrusel .carousel-inner");
             $carouselInner.html(""); // Vaciar contenido existente
-        
+
             try {
                 const articulos = await this.cargarArticulos(); // Espera la resolución de la promesa
-        
+
                 console.log("Artículos cargados:", articulos);
-        
+
                 // Verifica que articulos sea un array antes de iterar
                 if (Array.isArray(articulos) && articulos.length > 0) {
                     let slideHTML = "";
                     let isActive = true;
-        
+
                     articulos.forEach((articulo, index) => {
                         if (index % 3 === 0) { // Empieza una nueva slide cada 3 artículos
                             if (slideHTML) {
@@ -58,7 +58,7 @@ $(document).ready(function () {
                                 isActive = false;
                             }
                         }
-        
+
                         // Añade el artículo a la slide actual
                         slideHTML += `
                             <div class="col-md-4">
@@ -74,7 +74,7 @@ $(document).ready(function () {
                             </div>
                         `;
                     });
-        
+
                     // Añadir la última slide
                     if (slideHTML) {
                         $carouselInner.append(`<div class="carousel-item">
@@ -83,7 +83,7 @@ $(document).ready(function () {
                             </div>
                         </div>`);
                     }
-        
+
                 } else {
                     console.warn("No se encontraron artículos.");
                     $("#articulosCarrusel").html("<p>No se encontraron artículos.</p>");
@@ -93,8 +93,8 @@ $(document).ready(function () {
                 $("#articulosCarrusel").html("<p>Hubo un error al cargar los artículos.</p>");
             }
         }
-        
-        
+
+
 
         agregarArt(articulo) {
             this.articulos.push(articulo);
@@ -145,39 +145,28 @@ $(document).ready(function () {
         }
     }
 
-    // Define the URL and retornarDatos function
-    
-
     let retornarDatos = () => {
         return new Promise((resolve, reject) => {
-            let modo = "readDetalle";
-            let url = `http://localhost/index.controller.php`;
+            let url = `http://localhost/controller/index.controller.php`;
             $.ajax({
-                url: url,
-                contentType: "application/json",
-                type: "GET",
-                data: {mode: modo},
+                url: url, 
+                dataType: "JSON",
+                type: 'GET',
+                data: { mode: 'readDetalle' },
                 success: function (response) {
-                    try {
-                        const parsedResponse = (response);
-                        if (Array.isArray(parsedResponse)) {
-                            resolve(parsedResponse); // Resuelve la promesa con los datos
-                        } else {
-                            console.log("La respuesta no es un array JSON válido");
-                            resolve([]); // Resuelve la promesa con un array vacío si la respuesta no es válida
-                        }
-                    } catch (error) {
-                        console.error("Error al analizar la respuesta JSON:", error);
-                        resolve([]); // Resuelve con un array vacío en caso de error de análisis
+                    if (response && Array.isArray(response)) {
+                        resolve(response);
+                    } else {
+                        reject("La respuesta no es un array JSON válido");
                     }
                 },
                 error: function (error) {
-                    console.error("Error en la solicitud AJAX:", error);
-                    reject(error); // Rechaza la promesa en caso de error
+                    reject("Error en la solicitud AJAX: " + error.statusText);
                 }
             });
         });
     };
+    
 
     $(document).ready(async function () {
         window.articulos = new Articulos(); // Guarda la instancia en el objeto global para acceder desde eventos
