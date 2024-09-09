@@ -1,63 +1,164 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>C.R.U.D. - SIGTO - Administradores</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../../assets/css/admin.css'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    
-</head>
-<body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backoffice Tienda Online</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  </head>
+  <body>
     <header class="container">
-        <div class="m-3">
-            <select name="tablas" id="tablas">
-                <option value="">Selecciona una tabla</option>
-            </select>
-            <select name="columnas" id="columnas">
-                <option value="">Selecciona una columna</option>
-            </select>
-            <div class="container mt-1">
-                <label for="inputFiltro">Filtro:</label>
-                <input id="inputFiltro" type="text">
-            </div>
-        </div>
+      <select id="tableSelector">
+        <option value="">Selecciona una tabla</option>
+      </select>
+      <select id="columnSelector">
+        <option value="">Selecciona una columna</option>
+      </select>
+      <input type="text" id="filterInput" placeholder="Filtrar datos" />
     </header>
-    <main class="container-flex m-1 w-90">
-        <table id="datos" class="container-flex w-100 table table-hover">
-                     
-        </table>
+    <main class="container mt-5">
+      <table id="dataTable" class="table table-hover">
+        <tbody></tbody>
+      </table>
     </main>
-    <footer class="container" id="footer">
-        <div id="agregacion" class="m-3">
-            <p id="nombreTabla"></p>
-            <input type="nombre">
-            <button type="submit" class="btn btn-primary">Agregar</button>
-        </div>
-    </footer>
-    <!-- Modal para agregar datos -->
-<div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addDataModalLabel">Agregar Datos</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="addDataForm">
-            <!-- Aquí se agregarán los campos del formulario dinámicamente -->
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" form="addDataForm" class="btn btn-primary">Agregar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-    <script src="../../assets/js/jquery-3.7.1.min.js"></script>
-    <script src='../../assets/js/crudAdmin.js'></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function () {
+        // Cargar tablas al iniciar
+        $.ajax({
+          url: "http://localhost/controller/crud.controller.php",
+          type: "GET",
+          data: {
+            action: "getTables",
+          },
+          success: function (data) {
+            data.forEach(function (table) {
+              $("#tableSelector").append('<option value="' + table + '">' + table + "</option>");
+            });
+          },
+          error: function (xhr, status, error) {
+            console.error("Error en la solicitud:", status, error);
+          },
+        });
+
+        // Cargar columnas al seleccionar tabla
+        $("#tableSelector").change(function () {
+          var table = $(this).val();
+          $("#columnSelector").empty().append('<option value="">Selecciona una columna</option>');
+          if (table) {
+            $.get("http://localhost/controller/crud.controller.php?action=getColumns&table=" + table, function (data) {
+              data.forEach(function (column) {
+                $("#columnSelector").append('<option value="' + column + '">' + column + "</option>");
+              });
+            });
+          }
+        });
+
+        // Cargar datos al seleccionar tabla y columna
+        $("#tableSelector, #columnSelector").change(function () {
+          var table = $("#tableSelector").val();
+          var column = $("#columnSelector").val();
+          var filter = $("#filterInput").val();
+
+          if (table) {
+            var url = column ? "http://localhost/controller/crud.controller.php?action=getDataFilter&table=" + table + "&column=" + column + "&filter=" + filter : "http://localhost/controller/crud.controller.php?action=getData&table=" + table;
+
+            $.get(url, function (data) {
+              var rows = "";
+              data.forEach(function (item) {
+                var row = "<tr>";
+                for (var key in item) {
+                  if (item.hasOwnProperty(key) && key !== "idArticulo") {
+                    row += "<td>" + item[key] + "</td>";
+                  }
+                }
+                row += '<td><button class="editBtn btn" data-id="' + item.idArticulo + '">Editar</button> <button class="deleteBtn btn" data-id="' + item.idArticulo + '">Eliminar</button><button class="btn">Cancelar</button></td></tr>';
+                rows += row;
+              });
+              $("#dataTable tbody").html(rows);
+            });
+          }
+        });
+
+        // Filtrar datos
+        $("#filterInput").keyup(function () {
+          $("#tableSelector").trigger("change");
+        });
+
+        // Editar
+        $("#dataTable").on("click", ".editBtn", function () {
+          var id = $(this).data("id");
+          var row = $(this).closest("tr");
+          row
+            .find("td")
+            .not(":last-child")
+            .each(function () {
+              var text = $(this).text();
+              $(this).html('<input type="text" value="' + text + '">');
+            });
+          $(this).text("Actualizar").removeClass("editBtn").addClass("updateBtn").data("id", id);
+        });
+
+        // Actualizar
+        $("#dataTable").on("click", ".updateBtn", function () {
+          var id = $(this).data("id");
+          var row = $(this).closest("tr");
+          var data = {};
+          row
+            .find("td")
+            .not(":last-child")
+            .each(function () {
+              var input = $(this).find("input");
+              if (input.length) {
+                data[input.closest("td").index()] = input.val(); // Usa el índice de la columna para mapear los valores
+              }
+            });
+          $.post(
+            "http://localhost/controller/crud.controller.php?action=updateData",
+            {
+              table: $("#tableSelector").val(),
+              data: data,
+              id: id,
+            },
+            function (response) {
+              if (response.success) {
+                alert("Datos actualizados");
+                $("#tableSelector").trigger("change");
+              } else {
+                alert("Error al actualizar");
+              }
+            }
+          );
+        });
+
+        // Eliminar
+        $("#dataTable").on("click", ".deleteBtn", function () {
+          if (pregunta()) {
+            var id = $(this).data("id");
+            $.post(
+              "http://localhost/controller/crud.controller.php?action=deleteData",
+              {
+                table: $("#tableSelector").val(),
+                id: id,
+              },
+              function (response) {
+                if (response.success) {
+                  alert("Datos eliminados");
+                  $("#tableSelector").trigger("change");
+                } else {
+                  alert("Error al eliminar");
+                }
+              }
+            );
+          }
+        });
+      });
+
+      function pregunta() {
+        return confirm("Seguro que quiere borrar esta fila?");
+      }
+    </script>
+  </body>
 </html>

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pigeon e-Shop</title>
-        <link rel="shortcut icon" href="Assets/icono.png" type="image/png" />
+        <link rel="shortcut icon" href="assets/img/logo.png" type="image/png" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
         <style>
             * {
@@ -13,9 +13,9 @@
                 color: #417a93;
             }
         </style>
-        <link rel="stylesheet" href="Assets/css/styles.css" />
-        <link rel="stylesheet" href="Assets/css/header.css" />
-        <link rel="stylesheet" href="Assets/css/footer.css" />
+        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="assets/css/header.css" />
+        <link rel="stylesheet" href="assets/css/footer.css" />
     </head>
 
     <body>
@@ -68,12 +68,12 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
                                     <li class="dropdown dropend dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Electrónica</a>
+                                        <a class="dropdown-item dropdown-toggle" href="view/tienda/articulos.html?query=electronica">Electrónica</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Teléfonos móviles</a></li>
-                                            <li><a class="dropdown-item" href="#">Computadoras y Laptops</a></li>
-                                            <li><a class="dropdown-item" href="#">Televisores y Audio</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios tecnológicos</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=telefonos_moviles">Teléfonos móviles</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=computadoras_y_laptops">Computadoras y Laptops</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=televisores_y_audio">Televisores y Audio</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=accesorios_tecnologicos">Accesorios tecnológicos</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -305,18 +305,11 @@
             <p>© 2024 Pigeon e-Shop. Todos los derechos reservados.</p>
         </footer>
         <script src="assets/js/jquery-3.7.1.min.js"></script>
-        <script type="module" src="assets\js\tomarInfoArticulos.js"></script>
+        <script type="module" src="assets/js/tomarInfoArticulos.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
         <script type="module" src="assets/js/Carrito.js"></script>
         <script src="assets/js/index.js"></script>
         <script src="assets/js/buscador.js"></script>
-        <script type="" src="">
-            $(document).ready(async function () {
-                let art = new Articulos();
-                await art.cargarArticulos();
-                art.mostrarArticulosEnIndex();
-            });
-        </script>
     </body>
 </html>
