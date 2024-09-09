@@ -1,0 +1,19 @@
+#img404 {
+    border: 1px solid black;
+}
+
+#text404 {
+    font-size: large;
+
+    & .boton {
+        text-decoration: none;
+        color: #417a93;
+        transition: 0.5s;
+
+        &:hover {
+            color: #1b3454;
+        }
+
+    }
+
+}

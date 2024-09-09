@@ -1,0 +1,11 @@
+{
+  "name": "sigto",
+  "version": "1.0.0",
+  "description": "SIGTO 2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pigeon",
+  "license": "ISC"
+}

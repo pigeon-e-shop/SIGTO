@@ -19,6 +19,6 @@ services:
       MYSQL_USER: pigeonSuperusuario
       MYSQL_PASSWORD: nosotrosIsboNGGLS
     ports:
-     - "33060:3306"
-     volumes:
-     - ptVolume: /var/lib/mysql
+      - "33060:3306"
+    volumes:
+      - ptVolume: /var/lib/mysql

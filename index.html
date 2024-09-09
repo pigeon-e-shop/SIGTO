@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pigeon e-Shop</title>
-        <link rel="shortcut icon" href="../../Assets/icono.png" type="image/png" />
+        <link rel="shortcut icon" href="assets/img/logo.png" type="image/png" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
         <style>
             * {
@@ -13,9 +13,9 @@
                 color: #417a93;
             }
         </style>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="header.css">
-        <link rel="stylesheet" href="footer.css">
+        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="assets/css/header.css" />
+        <link rel="stylesheet" href="assets/css/footer.css" />
     </head>
 
     <body>
@@ -39,15 +39,15 @@
                             <div class="dropdown">
                                 <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
                                 <div class="dropdown-menu col-md-6">
-                                    <a class="dropdown-item" href="signIn.html">Inicia sesion ahora</a>
-                                    <a class="dropdown-item" href="signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                    <a class="dropdown-item" href="view/tienda/signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
                                 </div>
                             </div>
                         </div>
                         <!-- DIVISOR VERTICAL -->
                         <div class="vr"></div>
                         <div class="content-shopping-cart d-inline">
-                            <a href="carrito.html">
+                            <a href="view/tienda/carrito.html">
                                 <i class="fa-solid fa-basket-shopping"></i>
                                 <span class="text d-none d-sm-inline d-xs-inline">Carrito</span>
                                 <span id="cantArticulos" class="number"> </span>
@@ -68,12 +68,12 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
                                     <li class="dropdown dropend dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Electrónica</a>
+                                        <a class="dropdown-item dropdown-toggle" href="view/tienda/articulos.html?query=electronica">Electrónica</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Teléfonos móviles</a></li>
-                                            <li><a class="dropdown-item" href="#">Computadoras y Laptops</a></li>
-                                            <li><a class="dropdown-item" href="#">Televisores y Audio</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios tecnológicos</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=telefonos_moviles">Teléfonos móviles</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=computadoras_y_laptops">Computadoras y Laptops</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=televisores_y_audio">Televisores y Audio</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?query=accesorios_tecnologicos">Accesorios tecnológicos</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -127,7 +127,7 @@
                                             <li><a class="dropdown-item" href="#">Bicicletas y Patinetes</a></li>
                                             <li><a class="dropdown-item" href="#">Camping y Senderismo</a></li>
                                             <li>
-                                                <hr class="dropdown-divider">
+                                                <hr class="dropdown-divider" />
                                             </li>
                                             <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
@@ -140,7 +140,7 @@
                                             <li><a class="dropdown-item" href="#">Videojuegos y Consolas</a></li>
                                             <li><a class="dropdown-item" href="#">Puzzles y Rompecabezas</a></li>
                                             <li>
-                                                <hr class="dropdown-divider">
+                                                <hr class="dropdown-divider" />
                                             </li>
                                             <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
@@ -166,7 +166,7 @@
                                             <li><a class="dropdown-item" href="#">Alimentos Orgánicos</a></li>
                                             <li><a class="dropdown-item" href="#">Snacks y Dulces</a></li>
                                             <li>
-                                                <hr class="dropdown-divider">
+                                                <hr class="dropdown-divider" />
                                             </li>
                                             <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
@@ -179,7 +179,7 @@
                                             <li><a class="dropdown-item" href="#">Productos para la Alimentación del Bebé</a></li>
                                             <li><a class="dropdown-item" href="#">Mobiliario Infantil</a></li>
                                             <li>
-                                                <hr class="dropdown-divider">
+                                                <hr class="dropdown-divider" />
                                             </li>
                                             <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
@@ -192,34 +192,37 @@
                                             <li><a class="dropdown-item" href="#">Instrumentos Musicales</a></li>
                                             <li><a class="dropdown-item" href="#">Audiolibros y Podcasts</a></li>
                                             <li>
-                                                <hr class="dropdown-divider">
+                                                <hr class="dropdown-divider" />
                                             </li>
                                             <li><a href="" class="dropdown-item">Ver todo</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <hr class="dropdown-divider">
+                                        <hr class="dropdown-divider" />
                                     </li>
-                                    <li><a href="" class="dropdown-item">Ver todos los articulos</a></li>
+                                    <li><a href="view/tienda/articulos.html" class="dropdown-item">Ver todos los articulos</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Ofertas del día</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="comoComprar.html">Cómo comprar</a>
+                                <a class="nav-link" href="view/tienda/comoComprar.html">Cómo comprar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="servicioCliente.html">Servicio al cliente</a>
+                                <a class="nav-link" href="/view/tienda/servicioCliente.html">Servicio al cliente</a>
                             </li>
                         </ul>
                     </div>
-                    <form class="search-form">
-                        <input type="search" class="" onkeyup="mostrarResultados()" placeholder="Buscar..." />
-                        <button class="btn-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
+                    <div class="navbar-item">
+                        <form action="/view/tienda/articulos.html?query=" method="GET" class="search-form">
+                            <input type="search" name="query" placeholder="Buscar..." autocomplete="off" required>
+                            <button class="btn-search" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                        <div id="resultados" class="flex-end"></div>
+                    </div>
                 </nav>
             </div>
         </header>
@@ -228,16 +231,16 @@
                 <div class="carousel slide" id="carousel1" data-bs-ride="carousel" data-interval="500">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="../../Assets/banner1.jpg" class="d-block w-100 h-100 banner-img" alt="Mas de 600 productos informaticos" draggable="false" />
+                            <img src="assets/img/banners/banner1.jpg" class="d-block w-100 h-100 banner-img" alt="Mas de 600 productos informaticos" draggable="false" />
                         </div>
                         <div class="carousel-item">
-                            <img src="../../Assets/banner3.jpg" class="d-block w-100 h-100 banner-img" alt="Miles de productos deportivos" draggable="false" />
+                            <img src="assets/img/banners/banner3.jpg" class="d-block w-100 h-100 banner-img" alt="Miles de productos deportivos" draggable="false" />
                         </div>
                         <div class="carousel-item">
-                            <img src="../../Assets/banner2.jpg" class="d-block w-100 h-100 banner-img" alt="Mas de 1000 productos de belleza" draggable="false" />
+                            <img src="assets/img/banners/banner2.jpg" class="d-block w-100 h-100 banner-img" alt="Mas de 1000 productos de belleza" draggable="false" />
                         </div>
                         <div class="carousel-item">
-                            <img src="../../Assets/banner4.jpg" class="d-block w-100 h-100 banner-img" alt="Todo para tu hogar en linea blanca" draggable="false" />
+                            <img src="assets/img/banners/banner4.jpg" class="d-block w-100 h-100 banner-img" alt="Todo para tu hogar en linea blanca" draggable="false" />
                         </div>
                     </div>
                 </div>
@@ -273,141 +276,40 @@
                 </div>
             </div>
         </section>
-        <hr class="vr">
-        <div class="container mt-4">
-            <h2>Productos Recomendados</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/nike-vomero-17-black.JPG" width="300" height="400" class="card-img-top" alt="Producto 1" />
-                        <div class="card-body">
-                            <h5 class="card-title">Zapatillas Deportivas Nike</h5>
-                            <p class="card-text">Vomero 17</p>
-                            <p class="card-text" id="precio">USD $79.99</p>
-                            <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(zapasNikeMola)">Agregar carrito</a>
-                        </div>
-                    </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <main id="articulos" class="m-5">
+            <div id="articulosCarrusel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner container">
+                    <!-- Las slides se insertarán aquí dinámicamente -->
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/pantalon-nike-club-black.JPG" width="300" height="400" class="card-img-top" alt="Producto 2" />
-                        <div class="card-body">
-                            <h5 class="card-title">Pantalones Nike Club Black</h5>
-                            <p class="card-text">Deportivo</p>
-                            <p class="card-text" id="precio">USD $25.50</p>
-                            <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(pantalonNikeBlack)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/camisetaPumaGris.jpg" width="300" height="400" class="card-img-top" alt="Producto 3" />
-                        <div class="card-body">
-                            <h5 class="card-title">Camiseta Gris Puma Lisa Deportiva</h5>
-                            <p class="card-text">Para tus actividades deportivas 100% algodon</p>
-                            <p class="card-text" id="precio">USD $39.99</p>
-                            <a class="btn btn-primary" onclick="agregarArt(camisetaPumaGris)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#articulosCarrusel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#articulosCarrusel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        </div>
-        <hr class="vr">
-        <hr class="vr">
-        <div class="container mt-4">
-            <h2>Productos Mas Vendidos</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/mandoPs5.jpg" width="300" height="400" class="card-img-top" alt="Producto 1" />
-                        <div class="card-body">
-                            <h5 class="card-title">Mando Ps5</h5>
-                            <p class="card-text">A jugar sin descanso.</p>
-                            <p class="card-text" id="precio">USD $79.99</p>
-                            <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(mandoPs5)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/googlePlayCard50.jpg" width="300" height="400" class="card-img-top" alt="Producto 2" />
-                        <div class="card-body">
-                            <h5 class="card-title">Tarjeta Google Play 50 dolares</h5>
-                            <p class="card-text">50 dolar pal free.</p>
-                            <p class="card-text" id="precio">USD $50</p>
-                            <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(googleCard50)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/usbMemory.jpg" width="300" height="400" class="card-img-top" alt="Producto 3" />
-                        <div class="card-body">
-                            <h5 class="card-title">Memoria Usb 30 Gb</h5>
-                            <p class="card-text">Lo justo y necesario</p>
-                            <p class="card-text" id="precio">USD $9.99</p>
-                            <a class="btn btn-primary" onclick="agregarArt(usbMemory30)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr class="vr">
-
-        <hr class="vr">
-        <div class="container mt-4">
-            <h2>Productos De Moda</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/lapizLabialRojo.jpg" width="300" height="400" class="card-img-top" alt="Producto 1" />
-                        <div class="card-body">
-                            <h5 class="card-title">Lapiz labial Rojo</h5>
-                            <p class="card-text">Rojo.</p>
-                            <p class="card-text" id="precio">USD $19.99</p>
-                            <a class="btn btn-primary agregarArt" id="AgregarProducto1" onclick="agregarArt(lapizLabialRojo)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/rimel.jpg" width="300" height="400" class="card-img-top" alt="Producto 2" />
-                        <div class="card-body">
-                            <h5 class="card-title">Rimel</h5>
-                            <p class="card-text">Pestañas increibles.</p>
-                            <p class="card-text" id="precio">USD $39.99</p>
-                            <a class="btn btn-primary agregarArt" id="AgregarProducto2" onclick="agregarArt(rimel)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="../../Assets/lapizLabialAzul.jpg" width="300" height="400" class="card-img-top" alt="Producto 3" />
-                        <div class="card-body">
-                            <h5 class="card-title">Lapiz labial Azul</h5>
-                            <p class="card-text">Azul</p>
-                            <p class="card-text" id="precio">USD $19.99</p>
-                            <a class="btn btn-primary" onclick="agregarArt(lapizLabialAzul)">Agregar carrito</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr class="vr">
+            
+        </main>
+        <hr class="vr" />
 
         <footer class="footer">
             <p>© 2024 Pigeon e-Shop. Todos los derechos reservados.</p>
         </footer>
-        <script src="../../Assets/jquery-3.7.1.min.js"></script>
+        <script src="assets/js/jquery-3.7.1.min.js"></script>
+        <!-- <script type="module" src="assets/js/tomarInfoArticulos.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
-        <script src="Carrito.js"></script>
-        <script src="index.js"></script>
+        <script type="module" src="assets/js/Carrito.js"></script>
+        <script src="assets/js/index.js"></script>
+        <script src="assets/js/buscador.js"></script>
     </body>
 </html>
