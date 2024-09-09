@@ -16,7 +16,7 @@ $(document).ready(function () {
                 response.forEach(element => {
                     // Concatenar el HTML para cada artículo
                     content += `
-                    <a href="detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2">
+                    <a class="articuloLista" href="detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2">
                     <div class="row">
                         <div class="col">
                             <img src="${element.rutaImagen}" alt="${element.nombre}" height="120px">
@@ -28,6 +28,7 @@ $(document).ready(function () {
                         </div>
                     </div>
                     </a>
+                    <hr>
                     `;
                 });
             } else {

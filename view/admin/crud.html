@@ -17,8 +17,8 @@
       </select>
       <input type="text" id="filterInput" placeholder="Filtrar datos" />
     </header>
-    <main class="container mt-5">
-      <table id="dataTable" class="table table-hover">
+    <main class="container-flex mt-5">
+      <table id="dataTable" class="table table-hover table-sm">
         <tbody></tbody>
       </table>
     </main>
@@ -30,9 +30,7 @@
         $.ajax({
           url: "http://localhost/controller/crud.controller.php",
           type: "GET",
-          data: {
-            action: "getTables",
-          },
+          data: { action: "getTables" },
           success: function (data) {
             data.forEach(function (table) {
               $("#tableSelector").append('<option value="' + table + '">' + table + "</option>");
@@ -48,10 +46,18 @@
           var table = $(this).val();
           $("#columnSelector").empty().append('<option value="">Selecciona una columna</option>');
           if (table) {
-            $.get("http://localhost/controller/crud.controller.php?action=getColumns&table=" + table, function (data) {
-              data.forEach(function (column) {
-                $("#columnSelector").append('<option value="' + column + '">' + column + "</option>");
-              });
+            $.ajax({
+              url: "http://localhost/controller/crud.controller.php",
+              type: "GET",
+              data: { action: "getColumns", table: table },
+              success: function (data) {
+                data.forEach(function (column) {
+                  $("#columnSelector").append('<option value="' + column + '">' + column + "</option>");
+                });
+              },
+              error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+              },
             });
           }
         });
@@ -65,19 +71,26 @@
           if (table) {
             var url = column ? "http://localhost/controller/crud.controller.php?action=getDataFilter&table=" + table + "&column=" + column + "&filter=" + filter : "http://localhost/controller/crud.controller.php?action=getData&table=" + table;
 
-            $.get(url, function (data) {
-              var rows = "";
-              data.forEach(function (item) {
-                var row = "<tr>";
-                for (var key in item) {
-                  if (item.hasOwnProperty(key) && key !== "idArticulo") {
-                    row += "<td>" + item[key] + "</td>";
+            $.ajax({
+              url: url,
+              type: "GET",
+              success: function (data) {
+                var rows = "";
+                data.forEach(function (item) {
+                  var row = "<tr>";
+                  for (var key in item) {
+                    if (item.hasOwnProperty(key) && key !== "idArticulo") {
+                      row += "<td>" + item[key] + "</td>";
+                    }
                   }
-                }
-                row += '<td><button class="editBtn btn" data-id="' + item.idArticulo + '">Editar</button> <button class="deleteBtn btn" data-id="' + item.idArticulo + '">Eliminar</button><button class="btn">Cancelar</button></td></tr>';
-                rows += row;
-              });
-              $("#dataTable tbody").html(rows);
+                  row += '<td><button class="editBtn btn btn-sm" data-id="' + item.idArticulo + '">Editar</button> <button class="deleteBtn btn btn-sm" data-id="' + item.idArticulo + '">Eliminar</button></td></tr>';
+                  rows += row;
+                });
+                $("#dataTable tbody").html(rows);
+              },
+              error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+              },
             });
           }
         });
@@ -98,7 +111,8 @@
               var text = $(this).text();
               $(this).html('<input type="text" value="' + text + '">');
             });
-          $(this).text("Actualizar").removeClass("editBtn").addClass("updateBtn").data("id", id);
+          $(this).replaceWith('<button class="updateBtn btn btn-sm" data-id="' + id + '">Actualizar</button>');
+          row.find(".deleteBtn").replaceWith('<button class="cancelBtn btn btn-sm" data-id="' + id + '">Cancelar</button>');
         });
 
         // Actualizar
@@ -109,55 +123,71 @@
           row
             .find("td")
             .not(":last-child")
-            .each(function () {
+            .each(function (index) {
               var input = $(this).find("input");
               if (input.length) {
-                data[input.closest("td").index()] = input.val(); // Usa el índice de la columna para mapear los valores
+                data[$(this).index()] = input.val(); // Usa el índice de la columna para mapear los valores
               }
             });
-          $.post(
-            "http://localhost/controller/crud.controller.php?action=updateData",
-            {
+
+          $.ajax({
+            url: "http://localhost/controller/crud.controller.php",
+            type: "POST",
+            data: {
+              action: "updateData",
               table: $("#tableSelector").val(),
               data: data,
               id: id,
             },
-            function (response) {
+            success: function (response) {
               if (response.success) {
                 alert("Datos actualizados");
                 $("#tableSelector").trigger("change");
               } else {
                 alert("Error al actualizar");
               }
-            }
-          );
+            },
+            error: function (xhr, status, error) {
+              console.error("Error en la solicitud:", status, error);
+            },
+          });
+        });
+
+        // Cancelar
+        $("#dataTable").on("click", ".cancelBtn", function () {
+          location.reload();
         });
 
         // Eliminar
         $("#dataTable").on("click", ".deleteBtn", function () {
           if (pregunta()) {
             var id = $(this).data("id");
-            $.post(
-              "http://localhost/controller/crud.controller.php?action=deleteData",
-              {
+            $.ajax({
+              url: "http://localhost/controller/crud.controller.php",
+              type: "POST",
+              data: {
+                action: "deleteData",
                 table: $("#tableSelector").val(),
                 id: id,
               },
-              function (response) {
+              success: function (response) {
                 if (response.success) {
                   alert("Datos eliminados");
                   $("#tableSelector").trigger("change");
                 } else {
                   alert("Error al eliminar");
                 }
-              }
-            );
+              },
+              error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+              },
+            });
           }
         });
       });
 
       function pregunta() {
-        return confirm("Seguro que quiere borrar esta fila?");
+        return confirm("¿Seguro que quiere borrar esta fila?");
       }
     </script>
   </body>

@@ -10,6 +10,10 @@ try {
             echo json_encode($read->read_articulo_detalle());
             break;
 
+        case 'exclusivo2':
+            echo json_encode($read->read_articulo_detalle_exclusivo($_GET['id']));
+            break;
+
         default:
             echo json_encode(["error" => "Invalid mode"]);
             break;
