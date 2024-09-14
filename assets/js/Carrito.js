@@ -61,15 +61,17 @@ $(document).ready(function () {
 
                         // Añade el artículo a la slide actual
                         slideHTML += `
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <img src="${articulo.rutaImagen}" width="300" height="400" class="card-img-top" alt="${articulo.nombre}" />
-                                    <div class="card-body">
+                        <div class="col-md-4">
+                        <div class="card">
+                        <a href="http://localhost/view/tienda/detalle_producto.html?id=${articulo.idArticulo}&modo=exclusivo2"
+                        <img src="${articulo.rutaImagen}" width="300" height="400" class="card-img-top" alt="${articulo.nombre}" />
+                        <div class="card-body">
                                         <h5 class="card-title">${articulo.nombre}</h5>
                                         <p class="card-text">${articulo.descripcion}</p>
                                         <p class="card-text">USD $${articulo.precio}</p>
-                                        <a class="btn btn-primary agregarArt" onclick="articulos.agregarArt(new Articulo(${articulo.id}, '${articulo.nombre}', ${articulo.precio}, '${articulo.descripcion}', '${articulo.rutaImagen}'))">Agregar carrito</a>
+                                        <a class="btn btn-primary agregarArt" id="agregarArtIndex">Agregar carrito</a>
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                         `;
@@ -149,7 +151,7 @@ $(document).ready(function () {
         return new Promise((resolve, reject) => {
             let url = `http://localhost/controller/index.controller.php`;
             $.ajax({
-                url: url, 
+                url: url,
                 dataType: "JSON",
                 type: 'GET',
                 data: { mode: 'readDetalle' },
@@ -166,7 +168,7 @@ $(document).ready(function () {
             });
         });
     };
-    
+
 
     $(document).ready(async function () {
         window.articulos = new Articulos(); // Guarda la instancia en el objeto global para acceder desde eventos

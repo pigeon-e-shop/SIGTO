@@ -27,20 +27,32 @@ switch ($action) {
 
     case 'getColumns':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
-        $data = $read->getColumns($table); // Assuming this returns an array
+        if ($table) {
+            $data = $read->getColumns($table); // Assuming this returns an array
+        } else {
+            $data = ['error' => 'Nombre de tabla no proporcionado'];
+        }
         break;
 
     case 'getData':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
         $column = isset($_GET['column']) ? $_GET['column'] : (isset($_POST['column']) ? $_POST['column'] : '');
-        $data = $read->getData($table, $column); // Assuming this returns an array
+        if ($table) {
+            $data = $read->getData($table, $column); // Assuming this returns an array
+        } else {
+            $data = ['error' => 'Nombre de tabla no proporcionado'];
+        }
         break;
 
     case 'getDataFilter':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
         $column = isset($_GET['column']) ? $_GET['column'] : (isset($_POST['column']) ? $_POST['column'] : '');
         $filter = isset($_GET['filter']) ? $_GET['filter'] : (isset($_POST['filter']) ? $_POST['filter'] : '');
-        $data = $read->getDataFilter($table, $column, $filter); // Assuming this returns an array
+        if ($table) {
+            $data = $read->getDataFilter($table, $column, $filter); // Assuming this returns an array
+        } else {
+            $data = ['error' => 'Nombre de tabla no proporcionado'];
+        }
         break;
 
     case 'updateData':
@@ -112,8 +124,15 @@ switch ($action) {
     case 'insertData':
         $table = isset($_POST['table']) ? $_POST['table'] : '';
         parse_str($_POST['data'], $dataPost);
-        // $result = $create->insertData($table, $dataPost); // Uncomment and ensure this line is correct
-        $data = ['error' => 'Método no implementado']; // Temporary placeholder
+        switch ($table) {
+            case 'value':
+                # code...
+                break;
+            
+            default:
+                # code...
+                break;
+        }
         break;
 
     case 'deleteData':
@@ -121,9 +140,18 @@ switch ($action) {
         $id = isset($_POST['id']) ? $_POST['id'] : '';
         if ($table && $id) {
             $delete->delete($table, $id);
-            $data = []; // No data returned on success
+            $data = [];
         } else {
             $data = ['error' => 'Datos incompletos'];
+        }
+        break;
+
+    case 'getColumnsWithTypes':
+        $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
+        if ($table) {
+            $data = $read->getColumnsWithTypes($table); 
+        } else {
+            $data = ['error' => 'Nombre de tabla no proporcionado'];
         }
         break;
 

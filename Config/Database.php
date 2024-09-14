@@ -25,8 +25,3 @@ class Connection
         }
     }
 }
-
-if ($_GET['prueba'] == true) {
-    $conn = new Connection;
-    $conn->connection();
-}

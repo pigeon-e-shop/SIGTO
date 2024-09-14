@@ -9,7 +9,9 @@
   </head>
   <body>
     <header class="container">
-      <select id="tableSelector">
+      <h4>CRUD - Pigeon e-Shop</h4>
+      <br />
+      <select id="tableSelector" class="tableSelector">
         <option value="">Selecciona una tabla</option>
       </select>
       <select id="columnSelector">
@@ -18,22 +20,33 @@
       <input type="text" id="filterInput" placeholder="Filtrar datos" />
     </header>
     <main class="container-flex mt-5">
-      <table id="dataTable" class="table table-hover table-sm">
+      <table id="dataTable" class="table table-sm table-hover">
         <tbody></tbody>
       </table>
     </main>
+    <footer class="container">
+      <hr />
+      <section>
+        <h4>Crear</h4>
+        <h6>Elija una tabla</h6>
+        <select id="tableSelector2" class="tableSelector">
+          <option value="">Selecciona una tabla</option>
+        </select>
+      </section>
+      <section id="createFormSection">
+      </section>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function () {
-        // Cargar tablas al iniciar
         $.ajax({
           url: "http://localhost/controller/crud.controller.php",
           type: "GET",
           data: { action: "getTables" },
           success: function (data) {
             data.forEach(function (table) {
-              $("#tableSelector").append('<option value="' + table + '">' + table + "</option>");
+              $(".tableSelector").append('<option value="' + table + '">' + table + "</option>");
             });
           },
           error: function (xhr, status, error) {
@@ -41,10 +54,10 @@
           },
         });
 
-        // Cargar columnas al seleccionar tabla
         $("#tableSelector").change(function () {
           var table = $(this).val();
           $("#columnSelector").empty().append('<option value="">Selecciona una columna</option>');
+          $("#filterInput").val(""); 
           if (table) {
             $.ajax({
               url: "http://localhost/controller/crud.controller.php",
@@ -54,6 +67,7 @@
                 data.forEach(function (column) {
                   $("#columnSelector").append('<option value="' + column + '">' + column + "</option>");
                 });
+                $("#filterInput").trigger("change");
               },
               error: function (xhr, status, error) {
                 console.error("Error en la solicitud:", status, error);
@@ -62,8 +76,7 @@
           }
         });
 
-        // Cargar datos al seleccionar tabla y columna
-        $("#tableSelector, #columnSelector").change(function () {
+        $("#filterInput").change(function () {
           var table = $("#tableSelector").val();
           var column = $("#columnSelector").val();
           var filter = $("#filterInput").val();
@@ -95,12 +108,6 @@
           }
         });
 
-        // Filtrar datos
-        $("#filterInput").keyup(function () {
-          $("#tableSelector").trigger("change");
-        });
-
-        // Editar
         $("#dataTable").on("click", ".editBtn", function () {
           var id = $(this).data("id");
           var row = $(this).closest("tr");
@@ -115,7 +122,6 @@
           row.find(".deleteBtn").replaceWith('<button class="cancelBtn btn btn-sm" data-id="' + id + '">Cancelar</button>');
         });
 
-        // Actualizar
         $("#dataTable").on("click", ".updateBtn", function () {
           var id = $(this).data("id");
           var row = $(this).closest("tr");
@@ -126,9 +132,11 @@
             .each(function (index) {
               var input = $(this).find("input");
               if (input.length) {
-                data[$(this).index()] = input.val(); // Usa el índice de la columna para mapear los valores
+                data[$(this).index()] = input.val();
               }
             });
+
+          console.log(data);
 
           $.ajax({
             url: "http://localhost/controller/crud.controller.php",
@@ -140,12 +148,8 @@
               id: id,
             },
             success: function (response) {
-              if (response.success) {
-                alert("Datos actualizados");
-                $("#tableSelector").trigger("change");
-              } else {
-                alert("Error al actualizar");
-              }
+              alert("Datos actualizados");
+              $("#tableSelector").trigger("change");
             },
             error: function (xhr, status, error) {
               console.error("Error en la solicitud:", status, error);
@@ -153,14 +157,12 @@
           });
         });
 
-        // Cancelar
         $("#dataTable").on("click", ".cancelBtn", function () {
-          location.reload();
+          $("#tableSelector").trigger("change");
         });
 
-        // Eliminar
         $("#dataTable").on("click", ".deleteBtn", function () {
-          if (pregunta()) {
+          if (confirm("¿Seguro que quiere borrar esta fila?")) {
             var id = $(this).data("id");
             $.ajax({
               url: "http://localhost/controller/crud.controller.php",
@@ -171,12 +173,8 @@
                 id: id,
               },
               success: function (response) {
-                if (response.success) {
-                  alert("Datos eliminados");
-                  $("#tableSelector").trigger("change");
-                } else {
-                  alert("Error al eliminar");
-                }
+                alert("Datos eliminados");
+                $("#tableSelector").trigger("change");
               },
               error: function (xhr, status, error) {
                 console.error("Error en la solicitud:", status, error);
@@ -184,11 +182,80 @@
             });
           }
         });
-      });
 
-      function pregunta() {
-        return confirm("¿Seguro que quiere borrar esta fila?");
-      }
+        $("#tableSelector2").change(function () {
+          var table = $(this).val();
+          $("#createFormSection").empty();
+          if (table) {
+            $.ajax({
+              url: "http://localhost/controller/crud.controller.php",
+              type: "GET",
+              data: { action: "getColumnsWithTypes", table: table },
+              success: function (data) {
+                var formHtml = '<form id="createForm">';
+                data.forEach(function (column) {
+                  var fieldHtml = '<div class="mb-3">';
+                  var columnName = column.field;
+                  if (column.extra && column.extra.includes("auto_increment")) {
+                    return;
+                  }
+
+                  switch (true) {
+                    case column.type.startsWith("enum"):
+                      fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                      fieldHtml += '<select id="' + columnName + '" name="' + columnName + '" class="form-select">';
+                      if (column.enum_values && column.enum_values.length > 0) {
+                        column.enum_values.forEach(function (value) {
+                          fieldHtml += '<option value="' + value + '">' + value + "</option>";
+                        });
+                      }
+                      fieldHtml += "</select>";
+                      break;
+                    case column.type.startsWith("int"):
+                    case column.type.startsWith("float"):
+                      fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                      fieldHtml += '<input type="number" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                      break;
+                    case column.type.startsWith("varchar"):
+                    default:
+                      fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                      fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                      break;
+                  }
+                  fieldHtml += "</div>";
+                  formHtml += fieldHtml;
+                });
+                formHtml += '<button type="submit" class="btn btn-primary">Crear</button></form>';
+                $("#createFormSection").html(formHtml);
+              },
+              error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+              },
+            });
+          }
+        });
+
+        $("#createFormSection").on("submit", "#createForm", function (e) {
+          e.preventDefault();
+          var formData = $(this).serialize();
+          $.ajax({
+            url: "http://localhost/controller/crud.controller.php",
+            type: "POST",
+            data: {
+              action: "createData",
+              table: $("#tableSelector2").val(),
+              data: formData,
+            },
+            success: function (response) {
+              alert("Registro creado");
+              $("#tableSelector2").trigger("change");
+            },
+            error: function (xhr, status, error) {
+              console.error("Error en la solicitud:", status, error);
+            },
+          });
+        });
+      });
     </script>
   </body>
 </html>

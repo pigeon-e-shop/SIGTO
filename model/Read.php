@@ -128,5 +128,51 @@ class Read {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function checkLogIn($username, $password) {
+        $stmt = $this->conn->prepare("SELECT id, contraseña FROM usuarios WHERE email=:username");
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user && password_verify($password, $user['contraseña'])) {
+            return $user['id'];
+        } else {
+            return false;
+        }
+    }
+    public function getColumnsWithTypes($table) {
+        $sql = "SHOW COLUMNS FROM $table";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $result = [];
+        foreach ($columns as $column) {
+            $field = $column['Field'];
+            $type = $column['Type'];
+            $null = $column['Null'];
+            $key = $column['Key'];
+            $default = $column['Default'];
+            $extra = $column['Extra'];
+
+            $columnType = [
+                'field' => $field,
+                'type' => $type,
+                'null' => $null,
+                'key' => $key,
+                'default' => $default,
+                'extra' => $extra
+            ];
+
+            // Detecta si es un ENUM y obtiene los valores
+            if (preg_match("/^enum\((.*)\)$/", $type, $matches)) {
+                $enumValues = str_getcsv($matches[1], ',', "'");
+                $columnType['enum_values'] = $enumValues;
+            }
+
+            $result[] = $columnType;
+        }
+        return $result;
+    }
 }
 ?>

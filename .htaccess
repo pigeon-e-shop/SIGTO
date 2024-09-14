@@ -11,14 +11,14 @@ Header set Access-Control-Allow-Headers "Origin, Content-Type, X-Auth-Token"
 </IfModule>
 
 # Custom 404 Error Page
-ErrorDocument 404 http://localhost/view/error.html
+ErrorDocument 404 /view/error.html
 
 # Custom 500 Error Page
-ErrorDocument 500 http://localhost/view/error.html
+ErrorDocument 500 /view/error.html
 
 # Custom 403 Error Page (Forbidden)
-ErrorDocument 403 http://localhost/view/error.html
+ErrorDocument 403 /view/error.html
 
 # Custom 401 Error Page (Unauthorized)
-ErrorDocument 401 http://localhost/view/error.html
+ErrorDocument 401 /view/error.html
 

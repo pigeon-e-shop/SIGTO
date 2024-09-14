@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 @font-face {
     font-family: "Core Rhino 85";
     src: url(../../assets/core-rhino-85-black.otf);
@@ -207,7 +208,7 @@ html {
     margin-top: -1px;
 }
 
-.dropdown-submenu:hover > .dropdown-menu {
+.dropdown-submenu:hover>.dropdown-menu {
     display: block;
 }
 
@@ -238,17 +239,27 @@ html {
 
 #resultados {
 
-        position: absolute; /* Absolute positioning to overlay it */
-        top: 100%; /* Position it right below the search form */
-        float: right;
-        margin-left: auto; 
-        margin-right: 0;
-        width: max-content; /* Make sure it spans the full width of the parent */
-        background-color: white; /* Background color to ensure readability */
-        border: 1px solid #ccc; /* Border to make it visually distinct */
-        z-index: 1000; /* Ensure it is above other elements */
-        max-height: 300px; /* Optional: set a max height */
-        overflow-y: auto; /* Add scroll if the content exceeds max height */
+    position: absolute;
+    top: 100%;
+    float: right;
+    margin-left: auto;
+    margin-right: 0;
+    width: max-content;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#itemsIndex {
+
+    height: 627.167px;
+    display: block;
+
+    & img {
+        object-fit: contain;
+    }
 }
 
 @media only screen and (max-width: 1000px) {
