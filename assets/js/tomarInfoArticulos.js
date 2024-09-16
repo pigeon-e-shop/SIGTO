@@ -1,7 +1,7 @@
 let idArticulo = 57; // Cambia este valor por el ID que deseas buscar
 let modo = "read";
 let tabla = "articulo";
-let url = `http://localhost/controller/index.controller.php`;
+let url = `../../controller/index.controller.php`;
 
 let ajaxConn = () => {
     $.ajax({

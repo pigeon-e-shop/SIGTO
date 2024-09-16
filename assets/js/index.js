@@ -73,7 +73,7 @@ $(document).ready(function () {
                 console.log('Error checking cookies:', xhr, status, error);
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost/controller/login.controller.php",
+                    url: "../../controller/login.controller.php",
                     data: { mode: 'setCookies', username: '', password: '' },
                     dataType: "JSON",
                     success: function (response) {

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let url = `http://localhost/controller/index.controller.php`;
+    let url = `../../controller/index.controller.php`;
 
     $.ajax({
         type: "GET",

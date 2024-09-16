@@ -1,0 +1,39 @@
+<!-- LOGIN -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Crud</title>
+</head>
+<body>
+    <main>
+        <form>
+            
+        </form>
+    </main>
+    <script src="../../assets/js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let user = prompt("USUARIO: ");
+            let pass = prompt("CONTRASENA: ");
+            $.ajax({
+                type: "POST",
+                url: "/controller/login.controller.php",
+                data: {
+                    mode: 'logInAdmin',
+                    usuario: user,
+                    password: pass
+                },
+                dataType: "JSON",
+                success: function (response) {
+                    
+                },
+                error: function () {
+
+                } 
+            });
+        });
+    </script>
+</body>
+</html>

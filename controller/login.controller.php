@@ -12,7 +12,6 @@ switch ($modo) {
         try {
             $result = $read->checkLogIn($_POST['email'], $_POST['password']);
             if ($result) {
-                // Inicia una sesión y establece una cookie de sesión segura
                 session_start();
                 $_SESSION['user_id'] = $result;
                 echo json_encode(['status' => 'OK']);

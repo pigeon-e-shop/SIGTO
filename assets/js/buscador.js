@@ -16,7 +16,7 @@ $(document).ready(function () {
             return;
         }
         $.ajax({
-            url: "http://localhost/controller/buscador.controller.php",
+            url: "../../controller/buscador.controller.php",
             type: "GET",
             data: { id: item },
             success: function (response) {

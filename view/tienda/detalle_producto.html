@@ -90,19 +90,17 @@
                 if (productId) {
                     // Solicitud AJAX para obtener los datos del producto
                     $.ajax({
-                        url: "http://localhost/controller/index.controller.php",
+                        url: "../../controller/index.controller.php",
                         method: "GET",
                         data: { id: productId, mode: mode },
                         dataType: "json",
                         success: function (data) {
                             if (data.error) {
-                                // Manejar el caso en que no se encontró el producto
                                 $("#nombreArticulo").text("Producto no encontrado");
                                 $("#descripcionArticulo").text("");
                                 $("#precioProducto").text("");
                                 $("#imagenArticulo").attr("src", "");
                             } else {
-                                // Actualizar los detalles del producto en la página
                                 let producto = data[0];
                                 $("#nombreArticulo").text(producto.nombre);
                                 $("#descripcionArticulo").text(producto.descripcion);
@@ -111,7 +109,6 @@
                             }
                         },
                         error: function () {
-                            // Manejar errores de la solicitud AJAX
                             $("#nombreArticulo").text("Error al cargar el producto");
                             $("#descripcionArticulo").text("");
                             $("#precioProducto").text("");

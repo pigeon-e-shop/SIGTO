@@ -1,133 +1,130 @@
 $(document).ready(function () {
-    class Articulo {
-        constructor(id, nombre, precio, descripcion, rutaImagen) {
-            this.id = id;
-            this.nombre = nombre;
-            this.precio = precio;
-            this.descripcion = descripcion;
-            this.rutaImagen = rutaImagen;
-        }
-    }
+    var Articulos = {
+        articulos: [],
+        cantArticulos: 0,
 
-    class Articulos {
-        constructor() {
-            this.articulos = [];
-            this.cantArticulos = Number(localStorage.getItem('cantArticulos')) || 0;
+        cargarArticulos: function () {
+            var self = this;
+            return new Promise(function (resolve, reject) {
+                retornarDatos().then(resolve).catch(reject);
+            });
+        },
 
-            // Renderizamos los artículos en el carrito
-            this.renderizarArticulos();
+        imageExists: function (url) {
+            return new Promise(function (resolve) {
+                var img = new Image();
 
-            $(".clear-cart").click(() => this.eliminarTodosLosArticulos());
-            this.mostrarArticulosEnIndex(); // Asegúrate de llamar a esta función después de la inicialización
-        }
+                img.onload = function () {
+                    resolve(true);
+                };
 
-        // Función para cargar artículos
-        async cargarArticulos() {
-            try {
-                const response = await retornarDatos();
-                return response; // Retorna directamente los datos
-            } catch (error) {
-                console.error("Error al cargar artículos:", error);
-                return []; // Devuelve un array vacío en caso de error
-            }
-        }
+                img.onerror = function () {
+                    resolve(false);
+                };
 
-        async mostrarArticulosEnIndex() {
-            const $carouselInner = $("#articulosCarrusel .carousel-inner");
-            $carouselInner.html(""); // Vaciar contenido existente
+                img.onabort = function () {
+                    resolve(false);
+                };
 
-            try {
-                const articulos = await this.cargarArticulos(); // Espera la resolución de la promesa
+                img.src = url;
+            });
+        },
 
+
+        mostrarArticulosEnIndex: function () {
+            var $carouselInner = $("#articulosCarrusel .carousel-inner");
+            $carouselInner.html("");
+
+            this.cargarArticulos().then(function (articulos) {
                 console.log("Artículos cargados:", articulos);
 
-                // Verifica que articulos sea un array antes de iterar
                 if (Array.isArray(articulos) && articulos.length > 0) {
-                    let slideHTML = "";
-                    let isActive = true;
+                    var slideHTML = "";
+                    var isActive = true;
 
-                    articulos.forEach((articulo, index) => {
-                        if (index % 3 === 0) { // Empieza una nueva slide cada 3 artículos
+                    articulos.forEach(function (articulo, index) {
+                        if (index % 3 === 0) {
                             if (slideHTML) {
-                                $carouselInner.append(`<div class="carousel-item ${isActive ? 'active' : ''}">
-                                    <div class="row">
-                                        ${slideHTML}
+                                $carouselInner.append(`
+                                    <div class="carousel-item ${isActive ? 'active' : ''}">
+                                        <div class="row">
+                                            ${slideHTML}
+                                        </div>
                                     </div>
-                                </div>`);
+                                `);
                                 slideHTML = "";
                                 isActive = false;
                             }
                         }
 
-                        // Añade el artículo a la slide actual
+
                         slideHTML += `
-                        <div class="col-md-4">
-                        <div class="card">
-                        <a href="http://localhost/view/tienda/detalle_producto.html?id=${articulo.idArticulo}&modo=exclusivo2"
-                        <img src="${articulo.rutaImagen}" width="300" height="400" class="card-img-top" alt="${articulo.nombre}" />
-                        <div class="card-body">
-                                        <h5 class="card-title">${articulo.nombre}</h5>
-                                        <p class="card-text">${articulo.descripcion}</p>
-                                        <p class="card-text">USD $${articulo.precio}</p>
-                                        <a class="btn btn-primary agregarArt" id="agregarArtIndex">Agregar carrito</a>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="../../view/tienda/detalle_producto.html?id=${articulo.idArticulo}&modo=exclusivo2">
+                                                <img src="${articulo.rutaImagen}" width="300" height="400" class="card-img-top" alt="${articulo.nombre}" />
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${articulo.nombre}</h5>
+                                                    <p class="card-text">${articulo.descripcion}</p>
+                                                    <p class="card-text">USD $${articulo.precio}</p>
+                                                    <a class="btn btn-primary agregarArt" data-id="${articulo.idArticulo}">Agregar carrito</a>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                    </a>
-                                </div>
-                            </div>
-                        `;
+                                `;
                     });
 
-                    // Añadir la última slide
                     if (slideHTML) {
-                        $carouselInner.append(`<div class="carousel-item">
-                            <div class="row">
-                                ${slideHTML}
+                        $carouselInner.append(`
+                            <div class="carousel-item">
+                                <div class="row">
+                                    ${slideHTML}
+                                </div>
                             </div>
-                        </div>`);
+                        `);
                     }
 
                 } else {
                     console.warn("No se encontraron artículos.");
                     $("#articulosCarrusel").html("<p>No se encontraron artículos.</p>");
                 }
-            } catch (error) {
+            }).catch(function (error) {
                 console.error("Error al obtener los datos:", error);
                 $("#articulosCarrusel").html("<p>Hubo un error al cargar los artículos.</p>");
-            }
-        }
+            });
+        },
 
-
-
-        agregarArt(articulo) {
+        agregarArt: function (articulo) {
             this.articulos.push(articulo);
             this.cantArticulos = this.articulos.length;
             localStorage.setItem('articulos', JSON.stringify(this.articulos));
             localStorage.setItem('cantArticulos', this.cantArticulos);
             $("#cantArticulos").html(this.cantArticulos);
             this.renderizarArticulos();
-        }
+        },
 
-        eliminarTodosLosArticulos() {
+        eliminarTodosLosArticulos: function () {
             this.articulos = [];
             this.cantArticulos = 0;
             localStorage.setItem('articulos', JSON.stringify(this.articulos));
             localStorage.setItem('cantArticulos', this.cantArticulos);
             $("#cantArticulos").html(this.cantArticulos);
             this.renderizarArticulos();
-        }
+        },
 
-        renderizarArticulos() {
-            const cartItemsList = $("#cartItemsList");
-            const cartTotal = $("#cartTotal");
-            let total = 0;
+        renderizarArticulos: function () {
+            var cartItemsList = $("#cartItemsList");
+            var cartTotal = $("#cartTotal");
+            var total = 0;
             cartItemsList.empty();
 
-            this.articulos.forEach((articulo, index) => {
-                const item = `
+            this.articulos.forEach(function (articulo, index) {
+                var item = `
                     <li>
                         <img src="${articulo.rutaImagen}" width="100" height="100" class="articuloImagen">
                         <span class="articuloTexto">${articulo.nombre} - $${articulo.precio}</span>
-                        <button class="btn-remove" onclick="articulos.eliminarArticulo(${index})">Eliminar</button>
+                        <button class="btn-remove" onclick="Articulos.eliminarArticulo(${index})">Eliminar</button>
                     </li>
                 `;
                 cartItemsList.append(item);
@@ -135,9 +132,9 @@ $(document).ready(function () {
             });
 
             cartTotal.text(total.toFixed(2));
-        }
+        },
 
-        eliminarArticulo(index) {
+        eliminarArticulo: function (index) {
             this.articulos.splice(index, 1);
             this.cantArticulos = this.articulos.length;
             localStorage.setItem('articulos', JSON.stringify(this.articulos));
@@ -145,11 +142,11 @@ $(document).ready(function () {
             $("#cantArticulos").html(this.cantArticulos);
             this.renderizarArticulos();
         }
-    }
+    };
 
-    let retornarDatos = () => {
-        return new Promise((resolve, reject) => {
-            let url = `http://localhost/controller/index.controller.php`;
+    function retornarDatos() {
+        return new Promise(function (resolve, reject) {
+            var url = `../../controller/index.controller.php`;
             $.ajax({
                 url: url,
                 dataType: "JSON",
@@ -167,10 +164,7 @@ $(document).ready(function () {
                 }
             });
         });
-    };
+    }
 
-
-    $(document).ready(async function () {
-        window.articulos = new Articulos(); // Guarda la instancia en el objeto global para acceder desde eventos
-    });
+    Articulos.mostrarArticulosEnIndex();
 });

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#signInBtn").click(function (e) {
         e.preventDefault();
-        let url = "http://localhost/controller/login.controller.php";
+        let url = "../../controller/login.controller.php";
         let mode = "logIn";
         $.ajax({
             type: "POST",
@@ -12,7 +12,8 @@ $(document).ready(function () {
                 password: $("#passwordIS").val()
             },
             dataType: "JSON",
-            success: function () {
+            success: function (response) {
+                console.log(response);
                 $.ajax({
                     type: "POST",
                     url: url,
@@ -22,8 +23,9 @@ $(document).ready(function () {
                         password: $("#passwordIS").val()
                     },
                     dataType: "JSON",
-                    success: function () {
-                        location.reload();
+                    success: function (response) {
+                        console.log(response);
+                        
                     },
                     error: function (xhr, status, error) {
                         console.error("Status: " + status);
@@ -39,4 +41,12 @@ $(document).ready(function () {
             }            
         });
     });
+    $("#showPasswordCheckbox").click(function () {
+        var passwordField = $("#passwordIS");
+        if (this.checked) {
+            passwordField.attr("type", "text");
+        } else {
+            passwordField.attr("type", "password");
+        }
+    });    
 });
