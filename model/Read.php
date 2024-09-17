@@ -130,16 +130,20 @@ class Read {
     }
 
     public function checkLogIn($username, $password) {
-        $stmt = $this->conn->prepare("SELECT id, contraseña FROM usuarios WHERE email=:username");
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($password, $user['contraseña'])) {
-            return $user['id'];
-        } else {
+        try {
+            $stmt = $this->conn->prepare("SELECT id FROM usuarios WHERE email = :username AND contraseña = :pass");
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
+            $stmt->execute();
+            return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
+            
+        } catch (PDOException $e) {
+            error_log("Error en la consulta: " . $e->getMessage());
             return false;
         }
     }
+    
+    
     public function getColumnsWithTypes($table) {
         $sql = "SHOW COLUMNS FROM $table";
         $stmt = $this->conn->prepare($sql);

@@ -16,10 +16,10 @@ switch ($modo) {
                 $_SESSION['user_id'] = $result;
                 echo json_encode(['status' => 'OK']);
             } else {
-                echo json_encode(['error' => 'Usuario o contraseña incorrectos']);
+                echo json_encode(['status' => 'Usuario o contraseña incorrectos']);
             }
         } catch (Exception $e) {
-            echo json_encode(['error' => 'Se produjo un error en el servidor']);
+            echo json_encode(['status' => 'Se produjo un error en el servidor']);
         }
         break;
 
@@ -51,6 +51,9 @@ switch ($modo) {
         $expiryTime = time() + (30 * 24 * 60 * 60);
         setcookie($cookieName, $cookieData, $expiryTime, '/', '', true, true); // Atributos de seguridad
         echo json_encode(['status' => 'Cookie actualizada']);
+        break;
+
+    case 'logInAdmin':
         break;
 
     default:
