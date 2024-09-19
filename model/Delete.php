@@ -14,17 +14,9 @@ class Delete {
 
     public function delete($tabla, $id) {
     
-		switch ($tabla) {
-			case 'articulo':
-				$columnaId = 'idArticulo';
-				break;
-			
-			default:
-				# code...
-				break;
-		}
+		$columna = $this->read->getPrimaryKeyColumn($tabla);
 
-		$query = "DELETE FROM `$tabla` WHERE `$columnaId` = :id";
+		$query = "DELETE FROM `$tabla` WHERE `$columna` = :id";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $result = $stmt->execute();

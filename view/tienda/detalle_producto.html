@@ -86,9 +86,8 @@
             $(document).ready(function () {
                 const urlParams = new URLSearchParams(window.location.search);
                 const productId = urlParams.get("id");
-                const mode = urlParams.get("modo")
+                const mode = urlParams.get("modo");
                 if (productId) {
-                    // Solicitud AJAX para obtener los datos del producto
                     $.ajax({
                         url: "../../controller/index.controller.php",
                         method: "GET",

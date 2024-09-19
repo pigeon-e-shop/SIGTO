@@ -2,6 +2,9 @@ Header set Access-Control-Allow-Origin "*"
 Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
 Header set Access-Control-Allow-Headers "Origin, Content-Type, X-Auth-Token"
 
+RewriteEngine On
+RewriteRule ^admin$ /view/admin/crud.html [L]
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_METHOD} OPTIONS

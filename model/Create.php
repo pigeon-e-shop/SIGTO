@@ -7,9 +7,10 @@ class Create {
 		$connection = new Connection ();
 		$this->conn = $connection->connection ();
 	}
-	public function crearUsuario($apellido, $nombre, $calle, $email, $contraseña, $Npuerta, $telefono) {
-		$sql = "INSERT INTO usuarios (apellido, nombre, calle, email, contraseña, Npuerta, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	public function crearUsuario(string $apellido='', string $nombre='', string $calle='', string $email='', string $contraseña='', string $Npuerta='', string $telefono='') {
+		$sql = "INSERT INTO usuarios (apellido, nombre, calle, email, contrasena, Npuerta, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$stmt = $this->conn->prepare ( $sql );
+		$contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
 		$stmt->execute ( [
 				$apellido,
 				$nombre,

@@ -56,8 +56,7 @@ class Read {
     }
 
     public function getTableFields($table) {
-        // Escapar el nombre de la tabla correctamente
-        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table); // Asegúrate de que solo contenga caracteres válidos
+        $table = preg_replace('/[^a-zA-Z0-9_]/', '', $table);
         $sql = "DESCRIBE " . $table;
         $stmt = $this->conn->query($sql);
         $fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,13 +82,13 @@ class Read {
     }
 
     public function read_articulo_detalle() {
-        $query = "SELECT idArticulo, nombre, precio, descripcion, rutaImagen FROM articulo;";
+        $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo;";
         $result = $this->conn->query($query);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function read_articulo_detalle_exclusivo($id) {
-        $query = "SELECT idArticulo, nombre, precio, descripcion, rutaImagen FROM articulo WHERE idArticulo = :id";
+        $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -103,7 +102,6 @@ class Read {
     }
 
     public function readOne($id, $tabla = 'articulo') {
-        // Utiliza la columna de clave primaria dinámica
         $primaryKey = $this->getPrimaryKeyColumn($tabla);
         if (!$primaryKey) {
             throw new InvalidArgumentException("No se encontró la clave primaria para la tabla {$tabla}");
@@ -133,8 +131,12 @@ class Read {
         try {
             $stmt = $this->conn->prepare("SELECT id FROM usuarios WHERE email = :username AND contraseña = :pass");
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-            $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
-            $stmt->execute();
+            if (password_verify($password,PASSWORD_DEFAULT)) {
+                $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
+                $stmt->execute();
+            } else {
+                return json_encode(['?']);
+            }
             return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
             
         } catch (PDOException $e) {
@@ -168,7 +170,6 @@ class Read {
                 'extra' => $extra
             ];
 
-            // Detecta si es un ENUM y obtiene los valores
             if (preg_match("/^enum\((.*)\)$/", $type, $matches)) {
                 $enumValues = str_getcsv($matches[1], ',', "'");
                 $columnType['enum_values'] = $enumValues;
@@ -177,6 +178,13 @@ class Read {
             $result[] = $columnType;
         }
         return $result;
+    }
+
+    public function getStock() {
+        $sql = "SELECT descuento FROM articulo WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

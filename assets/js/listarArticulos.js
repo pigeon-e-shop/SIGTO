@@ -7,16 +7,13 @@ $(document).ready(function () {
         data: { mode: 'readDetalle'},
         dataType: "JSON",
         success: function (response) {
-            console.log("Respuesta del servidor:", response); // Añadir esta línea para depuración
 
-            let content = ''; // Inicializar una variable para acumular el HTML
+            let content = '';
 
-            if (Array.isArray(response)) { // Verificar que la respuesta sea un array
-                // Recorrer cada elemento en la respuesta
+            if (Array.isArray(response)) { 
                 response.forEach(element => {
-                    // Concatenar el HTML para cada artículo
                     content += `
-                    <a class="articuloLista" href="detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2">
+                    <a class="articuloLista" href="detalle_producto.html?id=${element.id}&modo=exclusivo2">
                     <div class="row">
                         <div class="col">
                             <img src="${element.rutaImagen}" alt="${element.nombre}" height="120px">

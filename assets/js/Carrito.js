@@ -36,8 +36,6 @@ $(document).ready(function () {
             $carouselInner.html("");
 
             this.cargarArticulos().then(function (articulos) {
-                console.log("Artículos cargados:", articulos);
-
                 if (Array.isArray(articulos) && articulos.length > 0) {
                     var slideHTML = "";
                     var isActive = true;
@@ -61,7 +59,7 @@ $(document).ready(function () {
                         slideHTML += `
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <a href="../../view/tienda/detalle_producto.html?id=${articulo.idArticulo}&modo=exclusivo2">
+                                            <a href="../../view/tienda/detalle_producto.html?id=${articulo.id}&modo=exclusivo2">
                                                 <img src="${articulo.rutaImagen}" width="300" height="400" class="card-img-top" alt="${articulo.nombre}" />
                                                 <div class="card-body">
                                                     <h5 class="card-title">${articulo.nombre}</h5>
