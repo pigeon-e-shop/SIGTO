@@ -27,6 +27,11 @@ main * {
     color: #007bff;
     margin-bottom: 20px;
 }
+
+.product-stock-container * {
+    font-size: larger;
+}
+
 .btn-add-to-cart {
     background-color: #007bff;
     color: #fff;

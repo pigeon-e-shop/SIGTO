@@ -11,7 +11,15 @@ try {
             break;
 
         case 'exclusivo2':
-            echo json_encode($read->read_articulo_detalle_exclusivo($_GET['id']));
+            $articulo = $read->read_articulo_detalle_exclusivo($_GET['id']);
+            $descuento = $read->getDiscount($_GET['id']);
+            $stock = $read->getStock($_GET['id']);
+            $data = [
+                'articulo' => $articulo,
+                'descuento' => $descuento,
+                'stock' => $stock
+            ];
+            echo json_encode($data);
             break;
 
         default:

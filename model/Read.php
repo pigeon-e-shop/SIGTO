@@ -180,10 +180,17 @@ class Read {
         return $result;
     }
 
-    public function getStock() {
-        $sql = "SELECT descuento FROM articulo WHERE id = :id";
+    public function getStock($id) {
+        $sql = "SELECT stock FROM articulo WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getDiscount($id) {
+        $sql = "SELECT descuento FROM articulo WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

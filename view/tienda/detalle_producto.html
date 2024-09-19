@@ -39,15 +39,15 @@
                             <div class="dropdown">
                                 <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
                                 <div class="dropdown-menu col-md-6">
-                                    <a class="dropdown-item" href="view/tienda/signIn.html">Inicia sesion ahora</a>
-                                    <a class="dropdown-item" href="view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                    <a class="dropdown-item" href="/view/tienda/signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="/view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
                                 </div>
                             </div>
                         </div>
                         <!-- DIVISOR VERTICAL -->
                         <div class="vr"></div>
                         <div class="content-shopping-cart d-inline">
-                            <a href="view/tienda/carrito.html">
+                            <a href="/view/tienda/carrito.html">
                                 <i class="fa-solid fa-basket-shopping"></i>
                                 <span class="text d-none d-sm-inline d-xs-inline">Carrito</span>
                                 <span id="cantArticulos" class="number"> </span>
@@ -67,6 +67,12 @@
                         <h1 class="product-title" id="nombreArticulo">Nombre del Producto</h1>
                         <p class="product-description" id="descripcionArticulo">Descripción detallada del producto...</p>
                         <p class="product-price" id="precioProducto">$XX.XX</p>
+                        <p class="product-price" id="precioProducto1" style="display: none;">$XX.XX</p>
+                        <div class="product-stock-container" style="display: none;">
+                            <hr>
+                            <p class="product-stock" id="stockProducto">X Por el momento no tenemos stock. :(</p>
+                            <hr>
+                        </div>
                         <button class="btn btn-add-to-cart"><i class="fa-solid fa-shopping-cart"></i> Agregar al Carrito</button>
                         <p class="mt-4"><i class="fa-solid fa-plane-up"></i> Envío gratuito a nivel mundial</p>
                         <p><i class="fa-solid fa-wallet"></i> Reembolso en caso de fallas</p>
@@ -98,12 +104,27 @@
                                 $("#nombreArticulo").text("Producto no encontrado");
                                 $("#descripcionArticulo").text("");
                                 $("#precioProducto").text("");
+                                $("#precioProducto1").text("");
                                 $("#imagenArticulo").attr("src", "");
                             } else {
-                                let producto = data[0];
+                                let producto = data.articulo[0];
                                 $("#nombreArticulo").text(producto.nombre);
                                 $("#descripcionArticulo").text(producto.descripcion);
                                 $("#precioProducto").text("$" + producto.precio);
+                                if (data.descuento[0].descuento != 0) {
+                                    $("#precioProducto").css("text-decoration", "line-through solid blue 3px");
+                                    $("#precioProducto").css("display", "inline");
+                                    $("#precioProducto1").text(data.descuento[0].descuento + "% | ");
+                                    $("#precioProducto1").append("$" + (parseFloat(producto.precio) * (1 - data.descuento[0].descuento / 100)).toFixed(2));
+                                    $("#precioProducto1").css("display","block");
+                                    $("#precioProducto1").css("color","red");
+                                }
+                                if (data.stock[0].stock != 0) {
+                                    $(".product-stock-container").css("display","block");
+                                    $("#stockProducto").text("Tenemos " + data.stock[0].stock + " en stock. Compra antes de que se acabe!");
+                                } else {
+                                    // $(".product-stock-container").css("display","block");
+                                }
                                 $("#imagenArticulo").attr("src", producto.rutaImagen);
                             }
                         },
