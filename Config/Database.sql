@@ -1,4 +1,6 @@
 -- pigeon.compra definition
+create database pigeon;
+use pigeon;
 
 CREATE TABLE `compra` (
   `fechaCompra` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
