@@ -24,11 +24,10 @@ switch ($modo) {
         break;
 
     case 'setCookies':
-        // NO almacenes contraseñas en cookies
-        $cookieName = 'session';
-        $cookieData = json_encode(['username' => $_POST['username']]);
+        $cookieName = 'usuario';
+        $cookieData = json_encode(['username' => $_POST['username'],$read->getIdByEmail($_POST['username'])]);
         $expiryTime = time() + (30 * 24 * 60 * 60);
-        setcookie($cookieName, $cookieData, $expiryTime, '/', '', true, true); // Atributos de seguridad
+        setcookie($cookieName, $cookieData, $expiryTime, '/', '', true, true);
         echo json_encode(['status' => 'Cookie establecida']);
         break;
 
@@ -41,7 +40,7 @@ switch ($modo) {
         break;
 
     case 'deleteCookies':
-        setcookie('session', '', time() - 3600, '/', '', true, true); // Atributos de seguridad
+        setcookie('session', '', time() - 3600, '/', '', true, true);
         echo json_encode(['status' => 'Cookie eliminada']);
         break;
 

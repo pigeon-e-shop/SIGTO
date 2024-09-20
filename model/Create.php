@@ -122,11 +122,10 @@ class Create {
 				$idCompra
 		] );
 	}
-	public function crearConsulta($fecha, $idArticulo, $id) {
-		$sql = "INSERT INTO consulta (fecha, idArticulo, id) VALUES (?, ?, ?)";
+	public function crearConsulta($idArticulo, $id) {
+		$sql = "INSERT INTO consulta (idArticulo, id) VALUES (?, ?)";
 		$stmt = $this->conn->prepare ( $sql );
 		$stmt->execute ( [
-				$fecha,
 				$idArticulo,
 				$id
 		] );
@@ -164,8 +163,4 @@ class Create {
 		] );
 	}
 
-	
-
 }
-
-?>

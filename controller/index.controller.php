@@ -22,6 +22,11 @@ try {
             echo json_encode($data);
             break;
 
+        case 'listaArticulos':
+            echo json_encode($read->read_articulo_detalle());
+            $descuento = $read->getDiscount($_POST['id']);
+            break;
+
         default:
             echo json_encode(["error" => "Invalid mode"]);
             break;

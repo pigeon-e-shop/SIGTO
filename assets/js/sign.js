@@ -20,12 +20,11 @@ $(document).ready(function () {
                     data: {
                         mode: "setCookies",
                         username: $("#emailIS").val(),
-                        password: $("#passwordIS").val()
                     },
                     dataType: "JSON",
                     success: function (response) {
                         console.log(response);
-                        
+                        window.location.href = "/"
                     },
                     error: function (xhr, status, error) {
                         console.error("Status: " + status);

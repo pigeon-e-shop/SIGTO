@@ -193,5 +193,24 @@ class Read {
         $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getIdByEmail($email) {
+        $sql = "SELECT id FROM usuarios WHERE email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCookie($cookieName, $key) {
+        if (isset($_COOKIE[$cookieName])) {
+            $cookieData = json_decode($_COOKIE[$cookieName], true);
+            if (array_key_exists($key, $cookieData)) {
+                return $cookieData[$key];
+            } else {
+                throw new Exception("La clave '{$key}' no se encuentra en la cookie '{$cookieName}'.");
+            }
+        } else {
+            throw new Exception("La cookie '{$cookieName}' no está definida.");
+        }
+    }
 }
-?>
