@@ -59,14 +59,21 @@
             </div>
         </header>
         <main id="articulos" class="container">
-            <section>
-                <header>
-                    <p>Aca van a ir los filtros</p>
-                </header>
-                <main id="articulosMain" class="">
+            <div>
+                <div class="m-5">
+                    <select name="filtros" id="filtrosSelect">
+                        <option value="default" selected>Seleccione una opcion</option>
+                        <option value="precioMayor">Precio mayor a menor</option>
+                        <option value="precioMenor">Precio menor a mayor</option>
+                        <option value="descuentoMayor">Mayor descuento</option>
+                        <option value="descuentoMenor">Menor descuento</option>
+                    </select>
+                    <input type="text" placeholder="Buscar..." aria-label="Buscar...">
+                </div>
+                <div id="articulosMain" class="">
 
-                </main>
-            </section>
+                </div>
+            </div>
         </main>
         <footer class="footer">
             <p>© 2024 Pigeon e-Shop. Todos los derechos reservados.</p>

@@ -82,7 +82,7 @@ class Read {
     }
 
     public function read_articulo_detalle() {
-        $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo;";
+        $query = "SELECT id, nombre, descuento, precio, descripcion, rutaImagen FROM articulo;";
         $result = $this->conn->query($query);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -94,6 +94,16 @@ class Read {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function read_articulo_by_nombre($nombre) {
+        $query = "SELECT id, nombre, precio, descripcion FROM articulo WHERE nombre LIKE :nombre LIMIT 5";
+        $stmt = $this->conn->prepare($query);
+        $nombre = "%$nombre%";
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 
     public function readAll($tabla = 'articulo') {
         $query = "SELECT * FROM $tabla";
@@ -198,8 +208,10 @@ class Read {
         $sql = "SELECT id FROM usuarios WHERE email = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$email]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['id'] : null;
     }
+    
 
     public function getCookie($cookieName, $key) {
         if (isset($_COOKIE[$cookieName])) {
@@ -212,5 +224,33 @@ class Read {
         } else {
             throw new Exception("La cookie '{$cookieName}' no está definida.");
         }
+    }
+
+    public function getComment($id){
+        $sql = "SELECT * FROM calificacion WHERE id=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCommentsByUser($id_usuario){
+        $sql = "SELECT * FROM calificacion WHERE id_usuario=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id_usuario]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getCommentsByArticulo($id_articulo){
+        $sql = "SELECT * FROM tomar_calificacion WHERE id_articulo=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id_articulo]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getStars($id_articulo) {
+        $sql = "SELECT calificacion FROM articulo WHERE id=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id_articulo]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

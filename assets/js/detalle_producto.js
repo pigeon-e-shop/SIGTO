@@ -17,7 +17,7 @@ $(document).ready(function () {
                     $("#imagenArticulo").attr("src", "");
                 } else {
                     let producto = data.articulo[0];
-                    $("#nombreArticulo").text(producto.nombre);
+                    $("#nombreArticulo").html(`${producto.nombre} | <div class="stars-title" style="--calificacion: ${data.calificacion[0].calificacion}"></div>`);
                     $("#descripcionArticulo").text(producto.descripcion);
                     $("#precioProducto").text("$" + producto.precio);
                     if (data.descuento[0].descuento != 0) {

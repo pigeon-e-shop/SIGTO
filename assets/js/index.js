@@ -58,7 +58,7 @@ $(document).ready(function () {
                         dataType: "JSON",
                         success: function (response) {
                             console.log('Login response:', response);
-                            if (Array.isArray(response) && response.includes("error Usuario o contrasena incorrectos")) {
+                            if (Array.isArray(response)) {
                                 console.log('Session not started');
                             } else if (Array.isArray(response) && response.includes("OK")) {
                             }
