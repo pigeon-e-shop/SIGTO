@@ -2,6 +2,8 @@
 create database pigeon;
 use pigeon;
 
+-- pigeon.compra definition
+
 CREATE TABLE `compra` (
   `fechaCompra` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idCompra` int unsigned NOT NULL AUTO_INCREMENT,
@@ -60,6 +62,7 @@ CREATE TABLE `usuarios` (
   `contrasena` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Npuerta` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `telefono` varchar(9) COLLATE utf8mb4_general_ci NOT NULL,
+  `VISIBLE` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Usuarios_unique` (`email`),
   UNIQUE KEY `Usuarios_unique_1` (`telefono`)
@@ -92,11 +95,30 @@ CREATE TABLE `articulo` (
   `codigoBarra` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `rutaImagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '../../assets/img/productos/error.png',
   `fechaAgregado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `calificacion` decimal(3,2) NOT NULL,
+  `VISIBLE` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Articulo_unique` (`codigoBarra`),
   KEY `articulo_empresa_FK` (`empresa`),
   CONSTRAINT `articulo_empresa_FK` FOREIGN KEY (`empresa`) REFERENCES `empresa` (`idEmpresa`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- pigeon.calificacion definition
+
+CREATE TABLE `calificacion` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id_articulo` int unsigned NOT NULL,
+  `id_usuario` int unsigned NOT NULL,
+  `puntuacion` decimal(3,2) NOT NULL,
+  `comentario` varchar(250) DEFAULT NULL,
+  `fecha_calificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `calificacion_articulo_FK` (`id_articulo`),
+  KEY `calificacion_usuarios_FK` (`id_usuario`),
+  CONSTRAINT `calificacion_articulo_FK` FOREIGN KEY (`id_articulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `calificacion_usuarios_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- pigeon.cliente definition
