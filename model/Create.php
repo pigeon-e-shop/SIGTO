@@ -167,7 +167,7 @@ class Create {
 	}
 
 	public function crearCalificacion($id_articulo,$id_usuario, $puntuacion, $comentario) {
-		$sql = "INSERT INTO califiacion (id_articulo, id_usuario, puntuacion, comentario) VALUES (?,?,?,?)";
+		$sql = "INSERT INTO calificacion (id_articulo, id_usuario, puntuacion, comentario) VALUES (?,?,?,?)";
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute([$id_articulo,$id_usuario,$puntuacion,$comentario]);
 	}

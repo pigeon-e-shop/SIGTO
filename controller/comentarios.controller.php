@@ -9,6 +9,7 @@ header('Content-Type: application/json');
 
 $read = new Read();
 $create = new Create();
+$update = new Update();
 
 try {
     switch ($_POST['mode']) {
@@ -23,6 +24,8 @@ try {
         
         case 'createComment':
             $create->crearCalificacion($_POST['idArticulo'],$_POST['idUsuario'],$_POST['calificacion'],$_POST['comentario']);
+            $update->promediarCalificacion($_POST['idArticulo']);
+            echo json_encode(['OK']);
             break;
         
         default:
