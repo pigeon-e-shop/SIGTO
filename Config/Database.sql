@@ -287,3 +287,60 @@ INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, sto
 INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(250, 'Apple Watch Series 6', 399.99, 'Accesorios tecnológicos', 0, 'Reloj inteligente con monitoreo de salud.', 20, 12, '1234567890173', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
 INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(251, 'Samsung Galaxy Buds', 149.99, 'Accesorios tecnológicos', 0, 'Auriculares inalámbricos con cancelación de ruido.', 30, 12, '1234567890174', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
 INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(252, 'Xiaomi Mi Band 6', 49.99, 'Accesorios tecnológicos', 0, 'Pulsera inteligente para monitoreo de actividad.', 100, 12, '1234567890175', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
+
+-- views
+
+-- pigeon.listar_articulos source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `listar_articulos` AS
+select
+    `a`.`id` AS `id`,
+    `a`.`nombre` AS `nombre`,
+    `a`.`descripcion` AS `descripcion`,
+    `a`.`rutaImagen` AS `rutaImagen`,
+    `a`.`descuento` AS `descuento`,
+    `a`.`precio` AS `precio`
+from
+    `articulo` `a`
+where
+    (`a`.`VISIBLE` = 1);
+
+
+-- pigeon.listar_articulos_lista source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `listar_articulos_lista` AS
+select
+    `a`.`id` AS `id`,
+    `a`.`nombre` AS `nombre`,
+    `a`.`precio` AS `precio`,
+    `a`.`categoria` AS `categoria`,
+    `a`.`descuento` AS `descuento`,
+    `a`.`descripcion` AS `descripcion`,
+    `a`.`stock` AS `stock`,
+    `a`.`rutaImagen` AS `rutaImagen`,
+    `a`.`calificacion` AS `calificacion`,
+    `a`.`VISIBLE` AS `VISIBLE`
+from
+    `articulo` `a`
+where
+    (`a`.`VISIBLE` = 1);
+
+
+-- pigeon.tomar_calificacion source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `tomar_calificacion` AS
+select
+    `u`.`nombre` AS `nombre_usuario`,
+    `c`.`puntuacion` AS `calificacion`,
+    `c`.`comentario` AS `comentario`,
+    `c`.`fecha_calificacion` AS `fecha_calificacion`,
+    `c`.`id_articulo` AS `id_articulo`
+from
+    ((`calificacion` `c`
+join `usuarios` `u` on
+    ((`c`.`id_usuario` = `u`.`id`)))
+join `articulo` `a` on
+    ((`c`.`id_articulo` = `a`.`id`)));
