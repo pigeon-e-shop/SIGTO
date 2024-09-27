@@ -17,7 +17,7 @@ $(document).ready(function () {
                     $("#imagenArticulo").attr("src", "");
                 } else {
                     let producto = data.articulo[0];
-                    $("#nombreArticulo").text(producto.nombre);
+                    $("#nombreArticulo").html(`${producto.nombre} | <div class="stars-title" style="--calificacion: ${data.calificacion[0].calificacion}"></div>`);
                     $("#descripcionArticulo").text(producto.descripcion);
                     $("#precioProducto").text("$" + producto.precio);
                     if (data.descuento[0].descuento != 0) {
@@ -56,29 +56,35 @@ $(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "/controller/historial.controller.php",
-        data: {mode: 'getCookie'},
+        data: {modo: 'getCookie'},
         dataType: "JSON",
         success: function (response) {
+            console.log('Primera respuesta:', response);
             if (response.error == 'Error') {
-                console.error("ERROR");
+                console.error("ERROR en getCookie");
             } else {
+                console.log('Valor recibido:', response.valor);
                 $.ajax({
                     type: "POST",
                     url: "/controller/historial.controller.php",
                     data: {
-                        mode: 'agregar',
-                        idArticulo:productId,
+                        modo: 'agregar',
+                        idArticulo: productId,
                         id: response.valor
                     },
                     dataType: "JSON",
-                    error: function (xhr,status,error) {
-                        console.error(xhr,stataus,error);
+                    success: function (response2) {
+                        console.log('OK en agregar');
+                        console.log(response2);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error en agregar:', xhr, status, error);
                     }
                 });
             }
         },
-        error: function (xhr,status,error) {
-            console.error(xhr,status,error)
+        error: function (xhr, status, error) {
+            console.error('Error en getCookie:', xhr, status, error);
         }
     });
 

@@ -130,4 +130,18 @@ class Update
 		$stmt = $this->conn->prepare($query);
 		return $stmt->execute([$idFactura, $id]);
 	}
+
+	public function promediarCalificacion($id) {
+		$query = "UPDATE articulo a
+				  SET a.calificacion = (
+					  SELECT AVG(c.puntuacion)
+					  FROM calificacion c
+					  WHERE c.id_articulo = a.id
+				  )
+				  WHERE a.id = ?";
+		
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute([$id]);
+	}
+	
 }
