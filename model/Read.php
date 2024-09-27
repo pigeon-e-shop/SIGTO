@@ -82,7 +82,7 @@ class Read {
     }
 
     public function read_articulo_detalle() {
-        $query = "SELECT id, nombre, descuento, precio, descripcion, rutaImagen FROM articulo;";
+        $query = "SELECT * FROM listar_articulos;";
         $result = $this->conn->query($query);
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -253,4 +253,20 @@ class Read {
         $stmt->execute([$id_articulo]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function readDetalleLista() {
+        $sql = "SELECT id, nombre, precio, categoria, descuento, descripcion, stock, rutaImagen, calificacion, VISIBLE FROM pigeon.listar_articulos_lista";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function readDetalleLista2($nombre) {
+        $sql = "SELECT id, nombre, precio, categoria, descuento, descripcion, stock, rutaImagen, calificacion, VISIBLE FROM pigeon.listar_articulos_lista WHERE nombre LIKE ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['%' . $nombre . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+
 }

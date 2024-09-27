@@ -17,10 +17,11 @@ try {
     switch ($_POST['modo'] ?? 'getCookie') {
         case 'agregar':
             $create->crearConsulta($_POST['idArticulo'], $_POST['id']);
+            echo json_encode(['OK']);
             break;
 
         case 'getCookie':
-            $cookieValue = $read->getCookie('usuario', 'id');
+            $cookieValue = $read->getCookie('usuario', 'usuario');
             echo json_encode(["valor" => $cookieValue]);
             break;
 

@@ -124,12 +124,15 @@ class Create {
 	}
 	public function crearConsulta($idArticulo, $id) {
 		$sql = "INSERT INTO consulta (idArticulo, id) VALUES (?, ?)";
-		$stmt = $this->conn->prepare ( $sql );
-		$stmt->execute ( [
-				$idArticulo,
-				$id
-		] );
+		$stmt = $this->conn->prepare($sql);
+		try {
+			return $stmt->execute([$idArticulo, $id]);
+		} catch (PDOException $e) {
+			error_log("Error en crearConsulta: " . $e->getMessage());
+			return false;
+		}
 	}
+	
 	public function crearPertenece($id, $idEmpresa) {
 		$sql = "INSERT INTO pertenece (id, idEmpresa) VALUES (?, ?)";
 		$stmt = $this->conn->prepare ( $sql );
