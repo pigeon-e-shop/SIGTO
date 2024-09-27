@@ -7,35 +7,72 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   </head>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    header {
+      background-color: #1B3454;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    select, tableSelector, input {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    footer {
+      margin-top: 50px;
+      background-color: #A3D6D2;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h4, h6 {
+      margin-bottom: 15px;
+    }
+  </style>
   <body>
     <header class="container">
+      <div class="row justify-content-center">
       <h4>CRUD - Pigeon e-Shop</h4>
-      <br>
-      <select id="tableSelector" class="tableSelector">
-        <option value="">Selecciona una tabla</option>
-      </select>
-      <select id="columnSelector">
-        <option value="">Selecciona una columna</option>
-      </select>
-      <input type="text" id="filterInput" placeholder="Filtrar datos" />
-    </header>
+      <div class="col-md-4">
+        <select id="tableSelector" class="tableSelector form-select">
+          <option value="">Selecciona una tabla</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <select id="columnSelector" class="form-select">
+          <option value="">Selecciona una columna</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="filterInput" placeholder="Filtrar datos" class="form-select" />
+      </div>
+      </div>
+      </header>
+
     <main class="container-flex mt-5">
       <table id="dataTable" class="table table-sm table-hover">
         <tbody></tbody>
       </table>
     </main>
+    
     <footer class="container">
-      <hr />
+      <hr/>
       <section>
         <h4>Crear</h4>
         <h6>Elija una tabla</h6>
-        <select id="tableSelector2" class="tableSelector">
+        <select id="tableSelector2" class="tableSelector form-select">
           <option value="">Selecciona una tabla</option>
         </select>
       </section>
-      <section id="createFormSection">
+      <section id="createFormSection"class="mt-4">
       </section>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="../../assets/js/crudLogin.js"></script>
