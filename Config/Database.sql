@@ -346,3 +346,9 @@ join `usuarios` `u` on
     ((`c`.`id_usuario` = `u`.`id`)))
 join `articulo` `a` on
     ((`c`.`id_articulo` = `a`.`id`)));
+
+
+-- Crear el usuario
+CREATE USER 'pigeon'@'localhost' IDENTIFIED BY 'pigeon';
+GRANT ALL PRIVILEGES ON *.* TO 'pigeon'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
