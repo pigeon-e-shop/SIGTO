@@ -53,7 +53,7 @@ switch ($modo) {
 
     case 'readCookies':
         if (isset($_COOKIE['usuario'])) {
-            echo json_encode(json_decode($_COOKIE['usuario'], true));
+            echo ($_COOKIE['usuario']);
         } else {
             echo json_encode(['error' => 'Cookie no encontrada']);
         }

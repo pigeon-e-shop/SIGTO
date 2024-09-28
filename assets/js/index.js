@@ -28,61 +28,25 @@ $(document).ready(function () {
     function checklogin() {
         $.ajax({
             type: "POST",
-            url: "http://localhost/controller/login.controller.php",
+            url: "/controller/login.controller.php",
             data: { mode: 'readCookies' },
             dataType: "JSON",
             success: function (redcookies) {
                 console.log('Cookies read response:', redcookies);
-                if (redcookies.includes("Cookie not found")) {
-                    $.ajax({
-                        type: "POST",
-                        url: "http://localhost/controller/login.controller.php",
-                        data: { mode: 'setCookies', username: '', password: '' },
-                        dataType: "JSON",
-                        success: function (response) {
-                            console.log('Cookie created:', response);
-                        },
-                        error: function (xhr2, status2, error2) {
-                            console.error('Set cookies error:', xhr2, status2, error2);
-                        }
-                    });
+                if (redcookies.error == "Cookie no encontrada") {
+                    $('#contenedor-usuario-login').html(`<div class="dropdown">
+                                <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
+                                <div class="dropdown-menu col-md-6">
+                                    <a class="dropdown-item" href="view/tienda/signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                </div>
+                            </div>`);
+                    
                 } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "http://localhost/controller/login.controller.php",
-                        data: {
-                            mode: 'logIn',
-                            username: redcookies.username,
-                            password: redcookies.password
-                        },
-                        dataType: "JSON",
-                        success: function (response) {
-                            console.log('Login response:', response);
-                            if (Array.isArray(response)) {
-                                console.log('Session not started');
-                            } else if (Array.isArray(response) && response.includes("OK")) {
-                            }
-                        },
-                        error: function (error) {
-                            console.error('Login error:', error);
-                        }
-                    });
+                    $("#contenedor-usuario-login").html(`<a href="/view/tienda/usuario.html" class="fa-solid fa-user border-0"></a>`)
                 }
             },
             error: function (xhr, status, error) {
-                console.log('Error checking cookies:', xhr, status, error);
-                $.ajax({
-                    type: "POST",
-                    url: "../../controller/login.controller.php",
-                    data: { mode: 'setCookies', username: '', password: '' },
-                    dataType: "JSON",
-                    success: function (response) {
-                        console.log('Cookie created:', response);
-                    },
-                    error: function (xhr2, status2, error2) {
-                        console.error('Set cookies error:', xhr2, status2, error2);
-                    }
-                });
             }
         });
     }
