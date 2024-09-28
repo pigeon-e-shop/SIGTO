@@ -3,8 +3,8 @@
 class Connection
 {
     private $servername = "localhost";
-    private $username = "root";
-    private $password = "";
+    private $username = "pigeon";
+    private $password = "pigeon";
     private $dbname = "pigeon";
     private $port = "3306";
     private $charset = "utf8mb4";

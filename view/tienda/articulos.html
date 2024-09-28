@@ -59,27 +59,33 @@
                 </div>
             </div>
         </header>
-        <main id="articulos" class="container">
-            <div>
-                <div class="m-5 row">
-                    <select name="filtros" id="filtrosSelect" class="col-2">
+        <main id="articulos" class="container mt-5">
+            <div class="row mb-4">
+                <div class="col-md-2">
+                    <select name="filtros" id="filtrosSelect" class="form-select">
                         <option value="default" selected>Seleccione un filtro</option>
+                        <option value="masRelevante">Mas relevantes</option>
                         <option value="precioMayor">Precio mayor a menor</option>
                         <option value="precioMenor">Precio menor a mayor</option>
                         <option value="descuentoMayor">Mayor descuento</option>
                         <option value="descuentoMenor">Menor descuento</option>
+                        <option value="mejorValorado">Mejor calificacion</option>
                     </select>
-                    <select name="filtroCategoria" id="filtroCategoria" class="col-2">
-                        <option value="default">Seleccione una categoria</option>
-                    </select>
-                    <div class="col-5"></div>
-                    <input id="filtroNombre" type="text" placeholder="Buscar..." aria-label="Buscar..." class="col">
                 </div>
-                <div id="articulosMain" class="">
-
+                <div class="col-md-3">
+                    <select name="filtroCategoria" id="filtroCategoria" class="form-select">
+                        <option value="default">Seleccione una categoría</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <input id="filtroNombre" type="text" placeholder="Buscar..." aria-label="Buscar..." class="form-control">
                 </div>
             </div>
+            
+            <div id="articulosMain" class="row">
+            </div>
         </main>
+        
         <footer class="footer">
             <p>© 2024 Pigeon e-Shop. Todos los derechos reservados.</p>
         </footer>
