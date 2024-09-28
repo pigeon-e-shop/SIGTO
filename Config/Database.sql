@@ -95,7 +95,7 @@ CREATE TABLE `articulo` (
   `codigoBarra` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `rutaImagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '../../assets/img/productos/error.png',
   `fechaAgregado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `calificacion` decimal(3,2) NOT NULL,
+  `calificacion` decimal(3,2) NOT NULL DEFAULT 0,
   `VISIBLE` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `Articulo_unique` (`codigoBarra`),
@@ -110,7 +110,7 @@ CREATE TABLE `calificacion` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `id_articulo` int unsigned NOT NULL,
   `id_usuario` int unsigned NOT NULL,
-  `puntuacion` decimal(3,2) NOT NULL,
+  `puntuacion` decimal(3,2) NOT NULL DEFAULT 0,
   `comentario` varchar(250) DEFAULT NULL,
   `fecha_calificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -118,7 +118,7 @@ CREATE TABLE `calificacion` (
   KEY `calificacion_usuarios_FK` (`id_usuario`),
   CONSTRAINT `calificacion_articulo_FK` FOREIGN KEY (`id_articulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `calificacion_usuarios_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- pigeon.cliente definition
@@ -370,7 +370,6 @@ join `articulo` `a` on
     ((`c`.`id_articulo` = `a`.`id`)));
 
 
--- Crear el usuario
-CREATE USER 'pigeon'@'localhost' IDENTIFIED BY 'pigeon';
+CREATE USER IF NOT EXISTS 'pigeon'@'localhost' IDENTIFIED BY 'pigeon';
 GRANT ALL PRIVILEGES ON *.* TO 'pigeon'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
