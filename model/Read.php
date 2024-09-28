@@ -154,6 +154,24 @@ class Read {
             return false;
         }
     }
+
+    public function checkLogInAdmin($username, $password) {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM loginAdmin WHERE email = :username AND contraseña = :pass");
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            if (password_verify($password,PASSWORD_DEFAULT)) {
+                $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
+                $stmt->execute();
+            } else {
+                return json_encode(['?']);
+            }
+            return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
+            
+        } catch (PDOException $e) {
+            error_log("Error en la consulta: " . $e->getMessage());
+            return false;
+        }
+    }
     
     
     public function getColumnsWithTypes($table) {

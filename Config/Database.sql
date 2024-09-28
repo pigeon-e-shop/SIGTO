@@ -369,6 +369,17 @@ join `usuarios` `u` on
 join `articulo` `a` on
     ((`c`.`id_articulo` = `a`.`id`)));
 
+-- pigeon.loginAdmin source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `loginAdmin` AS
+select
+    `u`.`email` AS `email`,
+    `u`.`contrasena` AS `contrasena`
+from
+    (`usuarios` `u`
+join `administrador` `a` on
+    ((`a`.`id` = `u`.`id`)));
 
 -- Crear el usuario
 CREATE USER 'pigeon'@'localhost' IDENTIFIED BY 'pigeon';

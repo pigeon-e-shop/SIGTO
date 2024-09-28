@@ -87,7 +87,23 @@ switch ($modo) {
         break;
 
     case 'logInAdmin':
-        // Implementar la lógica para logInAdmin
+        if (empty($_POST['email']) || empty($_POST['password'])) {
+            echo json_encode(['status' => 'Email y contraseña son requeridos']);
+            break;
+        }
+
+        try {
+            $result = $read->checkLogIn($_POST['email'], $_POST['password']);
+            if ($result) {
+                session_start();
+                $_SESSION['user_id'] = $result;
+                echo json_encode(['status' => 'OK']);
+            } else {
+                echo json_encode(['status' => 'Usuario o contraseña incorrectos']);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'Se produjo un error en el servidor', 'error' => $e->getMessage()]);
+        }
         break;
 
     default:
