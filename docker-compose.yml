@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  website:
+    image: php:apache
+    volumes:
+      - ./website:/var/www/html/SIGTO
+    ports:
+      - "80:80" 
+    depends_on: 
+      - database
+    restart: always
+
+  database:
+    image: mariadb
+    container_name: bd-P-e-Shop
+    environment:
+      MYSQL_ROOT_PASSWORD: nosotrosIsboNGGLS 
+      MYSQL_DATABASE: bdPigeon-e-Shop
+      MYSQL_USER: pigeonSuperusuario
+      MYSQL_PASSWORD: nosotrosIsboNGGLS
+    ports:
+      - "33060:3306"
+    volumes:
+      - ptVolume:/var/lib/mysql
+    restart: always
+
+volumes:
+  ptVolume:
