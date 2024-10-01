@@ -1,70 +1,138 @@
 $(document).ready(function () {
-    $.ajax({
-        url: "../../controller/crud.controller.php",
-        type: "GET",
-        data: { action: "getTables" },
-        success: function (data) {
-            data.forEach(function (table) {
-                $(".tableSelector").append('<option value="' + table + '">' + table + "</option>");
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error("Error en la solicitud:", status, error);
-        },
+    loadTables();
+    articulosXPaginaDefault()
+    $("#pagination").hide();
+
+    function loadArticles(page = 1, limit = 5) {
+        var table = $("#tableSelector").val();
+        if (!table) return;
+
+        $.ajax({
+            url: "../../controller/crud.controller.php",
+            type: "POST",
+            data: {
+                action: "getDataWithPagination",
+                table: table,
+                page: page,
+                limit: limit
+            },
+            success: function (response) {
+                var data = response;
+                var rows = "";
+                data.articles.forEach(function (item) {
+                    var row = "<tr>";
+                    for (var key in item) {
+                        if (item.hasOwnProperty(key) && key !== "idArticulo") {
+                            row += "<td>" + item[key] + "</td>";
+                        }
+                    }
+                    row += '<td><button class="editBtn btn btn-sm" data-id="' + item.idArticulo + '">Editar</button> <button class="deleteBtn btn btn-sm" data-id="' + item.idArticulo + '">Eliminar</button></td></tr>';
+                    rows += row;
+                });
+                // anade a la tabla los datos
+                $("#dataTable tbody").html(rows);
+                // muestra la paginacion.
+                // Lógica para mostrar/ocultar la paginación
+                if (data.totalPages > 1) {
+                    $("#pagination").show(); // Muestra la paginación si hay más de una página
+                    renderPagination(data.totalPages, page);
+                } else {
+                    $("#pagination").hide(); // Oculta la paginación si solo hay una página
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+            }
+        });
+    }
+
+    function renderPagination(totalPages, currentPage) {
+        $("#pagination").empty(); // Limpia el contenido anterior
+        const paginationNav = $('<nav aria-label="Page navigation example"><ul class="pagination justify-content-center"></ul></nav>');
+
+        // Botón "Anterior"
+        const prevDisabled = currentPage === 1 ? 'disabled' : '';
+        paginationNav.find('ul').append(`
+            <li class="page-item ${prevDisabled}">
+                <a class="page-link" href="#" aria-label="Previous" data-page="${currentPage - 1}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        `);
+
+        // Botones de página
+        for (let i = 1; i <= totalPages; i++) {
+            const activeClass = i === currentPage ? 'active' : '';
+            paginationNav.find('ul').append(`
+                <li class="page-item ${activeClass}">
+                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                </li>
+            `);
+        }
+
+        // Botón "Siguiente"
+        const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+        paginationNav.find('ul').append(`
+            <li class="page-item ${nextDisabled}">
+                <a class="page-link" href="#" aria-label="Next" data-page="${currentPage + 1}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        `);
+
+        // Añade la navegación de paginación al contenedor
+        $("#pagination").append(paginationNav);
+    }
+
+    $("#pagination").on("click", ".page-link", function (event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del enlace
+        const page = $(this).data('page'); // Obtiene el número de página
+        const limit = $("#itemsPerPage").val(); // Obtiene el límite de artículos por página
+        loadArticles(page, limit); // Carga los artículos de la página seleccionada
     });
+
+
+    function loadTables() {
+        $.ajax({
+            url: "../../controller/crud.controller.php",
+            type: "GET",
+            data: { action: "getTables" },
+            success: function (data) {
+                data.forEach(function (table) {
+                    $(".tableSelector").append('<option value="' + table + '">' + table + "</option>");
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
+            },
+        });
+    }
 
     $("#tableSelector").change(function () {
         var table = $(this).val();
         $("#columnSelector").empty().append('<option value="">Selecciona una columna</option>');
         $("#filterInput").val("");
         if (table) {
-            $.ajax({
-                url: "../../controller/crud.controller.php",
-                type: "GET",
-                data: { action: "getColumns", table: table },
-                success: function (data) {
-                    data.forEach(function (column) {
-                        $("#columnSelector").append('<option value="' + column + '">' + column + "</option>");
-                    });
-                    $("#filterInput").trigger("change");
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud:", status, error);
-                },
+            loadArticles();
+            getColumnas(table, function (keys) {
+                agregarColumnas(keys);
             });
         }
     });
 
     $("#filterInput").change(function () {
-        var table = $("#tableSelector").val();
-        var column = $("#columnSelector").val();
-        var filter = $("#filterInput").val();
+        loadArticles();
+    });
 
-        if (table) {
-            var url = column ? "../../controller/crud.controller.php?action=getDataFilter&table=" + table + "&column=" + column + "&filter=" + filter : "../../controller/crud.controller.php?action=getData&table=" + table;
+    $("#pagination").on("click", ".page-btn", function () {
+        const page = $(this).data('page');
+        const limit = $("#itemsPerPage").val();
+        loadArticles(page, limit);
+    });
 
-            $.ajax({
-                url: url,
-                type: "GET",
-                success: function (data) {
-                    var rows = "";
-                    data.forEach(function (item) {
-                        var row = "<tr>";
-                        for (var key in item) {
-                            if (item.hasOwnProperty(key) && key !== "idArticulo") {
-                                row += "<td>" + item[key] + "</td>";
-                            }
-                        }
-                        row += '<td><button class="editBtn btn btn-sm" data-id="' + item.id + '">Editar</button> <button class="deleteBtn btn btn-sm" data-id="' + item.id + '">Eliminar</button></td></tr>';
-                        rows += row;
-                    });
-                    $("#dataTable tbody").html(rows);
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud:", status, error);
-                },
-            });
-        }
+    $("#itemsPerPage").change(function () {
+        const limit = $(this).val();
+        loadArticles(1, limit);
     });
 
     $("#dataTable").on("click", ".editBtn", function () {
@@ -72,20 +140,15 @@ $(document).ready(function () {
         var row = $(this).closest("tr");
         var table = $("#tableSelector").val();
 
-        getColumnas(
-            table,
-            function (keys) {
-                row.find("td")
-                    .not(":last-child")
-                    .each(function (index) {
-                        var text = $(this).text();
-                        $(this).html('<input type="text" name="' + keys[index] + '" value="' + text + '">');
-                    });
+        getColumnas(table, function (keys) {
+            row.find("td").not(":last-child").each(function (index) {
+                var text = $(this).text();
+                $(this).html('<input type="text" name="' + keys[index] + '" value="' + text + '">');
+            });
 
-                $(this).replaceWith('<button class="updateBtn btn btn-sm" data-id="' + id + '">Actualizar</button>');
-                row.find(".deleteBtn").replaceWith('<button class="cancelBtn btn btn-sm" data-id="' + id + '">Cancelar</button>');
-            }.bind(this)
-        );
+            $(this).replaceWith('<button class="updateBtn btn btn-sm" data-id="' + id + '">Actualizar</button>');
+            row.find(".deleteBtn").replaceWith('<button class="cancelBtn btn btn-sm" data-id="' + id + '">Cancelar</button>');
+        }.bind(this));
     });
 
     $("#dataTable").on("click", ".updateBtn", function () {
@@ -211,6 +274,20 @@ $(document).ready(function () {
         });
     });
 
+    function agregarColumnas(nombresColumnas) {
+        $('#table-head').empty();
+        $('#columnSelector').empty().append('<option value="">Selecciona una columna</option>');
+        let fila = $('<tr></tr>');
+        $.each(nombresColumnas, function (index, nombre) {
+            let th = $('<th></th>').text(nombre);
+            fila.append(th);
+            $('#columnSelector').append('<option value="' + nombre + '">' + nombre + '</option>');
+        });
+
+        $('#table-head').append(fila);
+    }
+
+
     function wrapTrInForm(button) {
         var $tr = $(button).closest("tr");
         var $clonedTr = $tr.clone();
@@ -243,5 +320,9 @@ $(document).ready(function () {
         });
 
         return dataObj;
+    }
+
+    function articulosXPaginaDefault() {
+        $("#itemsPerPage").val("5");
     }
 });

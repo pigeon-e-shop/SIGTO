@@ -285,6 +285,21 @@ class Read {
         $stmt->execute(['%' . $nombre . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
+    public function getDataWithPagination($table, $limit = 5, $page = 1) {
+        $offset = ($page - 1) * $limit;
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM $table");
+        $stmt->execute();
+        $totalRows = $stmt->fetchColumn();
+        $totalPages = ceil($totalRows / $limit);
+        
+        $stmt = $this->conn->prepare("SELECT * FROM $table LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return array('articles' => $data, 'totalPages' => $totalPages);
+    }
 
 }

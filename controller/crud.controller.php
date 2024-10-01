@@ -37,11 +37,20 @@ switch ($action) {
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
         $column = isset($_GET['column']) ? $_GET['column'] : (isset($_POST['column']) ? $_POST['column'] : '');
         if ($table) {
-            $data = $read->getData($table, $column); 
+            $data = $read->getData($table, $column);
         } else {
             $data = ['error' => 'Nombre de tabla no proporcionado'];
         }
         break;
+
+    case 'getDataWithPagination':
+        header('Content-Type: application/json');
+        $table = isset($_POST['table']) ? $_POST['table'] : '';
+        $limit = isset($_POST['limit']) ? intval($_POST['limit']) : 5;
+        $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $response = $read->getDataWithPagination($table, $limit, $page);
+        echo json_encode($response);
+        exit;
 
     case 'getDataFilter':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
@@ -78,7 +87,7 @@ switch ($action) {
                     $data['telefono'] ?? null
                 );
                 break;
-        
+
             case 'articulo':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -95,7 +104,7 @@ switch ($action) {
                     $data['codigoBarra'] ?? null
                 );
                 break;
-        
+
             case 'empresa':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -108,7 +117,7 @@ switch ($action) {
                     $data['telefono'] ?? null
                 );
                 break;
-        
+
             case 'cliente':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -117,7 +126,7 @@ switch ($action) {
                     $data['cedula'] ?? null
                 );
                 break;
-        
+
             case 'administrador':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -127,7 +136,7 @@ switch ($action) {
                     $data['claveSecreta'] ?? null
                 );
                 break;
-        
+
             case 'vendedor':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -136,7 +145,7 @@ switch ($action) {
                     $data['cedula'] ?? null
                 );
                 break;
-        
+
             case 'carrito':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -147,7 +156,7 @@ switch ($action) {
                     $data['monto'] ?? null
                 );
                 break;
-        
+
             case 'compra':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -157,7 +166,7 @@ switch ($action) {
                     $data['idCarrito'] ?? null
                 );
                 break;
-        
+
             case 'envios':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -168,7 +177,7 @@ switch ($action) {
                     $data['fechaLlegada'] ?? null
                 );
                 break;
-        
+
             case 'factura':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -177,7 +186,7 @@ switch ($action) {
                     $data['horaEmitida'] ?? null
                 );
                 break;
-        
+
             case 'agregan':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -186,7 +195,7 @@ switch ($action) {
                     $data['idArticulo'] ?? null
                 );
                 break;
-        
+
             case 'compone':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -195,7 +204,7 @@ switch ($action) {
                     $data['idCompra'] ?? null
                 );
                 break;
-        
+
             case 'consulta':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -205,7 +214,7 @@ switch ($action) {
                     $data['idArticulo'] ?? null
                 );
                 break;
-        
+
             case 'pertenece':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -214,7 +223,7 @@ switch ($action) {
                     $data['idEmpresa'] ?? null
                 );
                 break;
-        
+
             case 'crea':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -224,7 +233,7 @@ switch ($action) {
                     $data['idArticulo'] ?? null
                 );
                 break;
-        
+
             case 'generan':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -233,7 +242,7 @@ switch ($action) {
                     $data['idArticulo'] ?? null
                 );
                 break;
-        
+
             case 'recibe':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -242,7 +251,6 @@ switch ($action) {
                     $data['id'] ?? null
                 );
                 break;
-            
         }
 
         if (isset($result) && $result) {
@@ -266,7 +274,7 @@ switch ($action) {
     case 'getColumnsWithTypes':
         $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
         if ($table) {
-            $data = $read->getColumnsWithTypes($table); 
+            $data = $read->getColumnsWithTypes($table);
         } else {
             $data = ['error' => 'Nombre de tabla no proporcionado'];
         }
@@ -277,13 +285,13 @@ switch ($action) {
         switch ($table) {
             case 'articulo':
                 $data = $_POST['data'];
-                
+
                 break;
 
             case 'usuarios':
                 $data = [];
                 $dataArray = $_POST['data'];
-                parse_str($dataArray,$data);
+                parse_str($dataArray, $data);
                 $create->crearUsuario(
                     $data['apellido'],
                     $data['nombre'],
