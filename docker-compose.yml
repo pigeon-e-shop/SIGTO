@@ -6,25 +6,26 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./website:/var/www/html/SIGTO
+      - /home/pigeon/SIGTO:/var/www/html
     ports:
-      - "80:80" 
-    depends_on: 
+      - "80:80"
+    depends_on:
       - database
     restart: always
 
   database:
     image: mariadb
-    container_name: bd-P-e-Shop
+    container_name: dbPigeon
     environment:
-      MYSQL_ROOT_PASSWORD: nosotrosIsboNGGLS 
-      MYSQL_DATABASE: bdPigeon-e-Shop
-      MYSQL_USER: pigeonSuperusuario
-      MYSQL_PASSWORD: nosotrosIsboNGGLS
+      MYSQL_ROOT_PASSWORD: nosotrosIsbo
+      MYSQL_DATABASE: pigeon
+      MYSQL_USER: pigeon
+      MYSQL_PASSWORD: nosotrosIsbo
     ports:
       - "33060:3306"
     volumes:
       - ptVolume:/var/lib/mysql
+      - ./Config/initdb:/docker-entrypoint-initdb.d
     restart: always
 
 volumes:
