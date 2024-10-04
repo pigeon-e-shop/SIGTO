@@ -204,65 +204,172 @@ $(document).ready(function () {
         var table = $(this).val();
         $("#createFormSection").empty();
         if (table) {
-            $.ajax({
-                url: "../../controller/crud.controller.php",
-                type: "GET",
-                data: { action: "getColumnsWithTypes", table: table },
-                success: function (data) {
-                    var formHtml = '<form id="createForm">';
-                    data.forEach(function (column) {
-                        var fieldHtml = '<div class="mb-3">';
-                        var columnName = column.field;
-                        if (column.extra && column.extra.includes("auto_increment")) {
-                            return;
-                        }
+            if (table == 'articulo') {
 
-                        switch (true) {
-                            case column.type.startsWith("enum"):
-                                fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                fieldHtml += '<select id="' + columnName + '" name="' + columnName + '" class="form-select">';
-                                if (column.enum_values && column.enum_values.length > 0) {
-                                    column.enum_values.forEach(function (value) {
-                                        fieldHtml += '<option value="' + value + '">' + value + "</option>";
-                                    });
-                                }
-                                fieldHtml += "</select>";
-                                break;
-                            case column.type.startsWith("int"):
-                            case column.type.startsWith("float"):
-                                fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                fieldHtml += '<input type="number" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                break;
-                            case column.type.startsWith("varchar"):
-                            default:
-                                fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                break;
-                        }
-                        fieldHtml += "</div>";
-                        formHtml += fieldHtml;
-                    });
-                    formHtml += '<button type="submit" class="btn btn-primary">Crear</button></form>';
-                    $("#createFormSection").html(formHtml);
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud:", status, error);
-                },
-            });
+                let formHtml = `
+            <form id="createForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select class="form-control" id="categoria" name="categoria" required>
+                    <option value="Teléfonos móviles">Teléfonos móviles</option>
+                    <option value="Computadoras y Laptops">Computadoras y Laptops</option>
+                    <option value="Televisores y Audio">Televisores y Audio</option>
+                    <option value="Accesorios tecnológicos">Accesorios tecnológicos</option>
+                    <option value="Ropa de Hombre">Ropa de Hombre</option>
+                    <option value="Ropa de Mujer">Ropa de Mujer</option>
+                    <option value="Zapatos y Accesorios">Zapatos y Accesorios</option>
+                    <option value="Ropa para Niños">Ropa para Niños</option>
+                    <option value="Muebles">Muebles</option>
+                    <option value="Decoración">Decoración</option>
+                    <option value="Herramientas y Mejoras para el Hogar">Herramientas y Mejoras para el Hogar</option>
+                    <option value="Jardinería">Jardinería</option>
+                    <option value="Productos para el Cuidado de la Piel">Productos para el Cuidado de la Piel</option>
+                    <option value="Maquillaje">Maquillaje</option>
+                    <option value="Productos para el Cuidado del Cabello">Productos para el Cuidado del Cabello</option>
+                    <option value="Suplementos y Vitaminas">Suplementos y Vitaminas</option>
+                    <option value="Equipamiento Deportivo">Equipamiento Deportivo</option>
+                    <option value="Ropa Deportiva">Ropa Deportiva</option>
+                    <option value="Bicicletas y Patinetes">Bicicletas y Patinetes</option>
+                    <option value="Camping y Senderismo">Camping y Senderismo</option>
+                    <option value="Juguetes para Niños">Juguetes para Niños</option>
+                    <option value="Juegos de Mesa">Juegos de Mesa</option>
+                    <option value="Videojuegos y Consolas">Videojuegos y Consolas</option>
+                    <option value="Puzzles y Rompecabezas">Puzzles y Rompecabezas</option>
+                    <option value="Accesorios para Automóviles">Accesorios para Automóviles</option>
+                    <option value="Accesorios para Motocicletas">Accesorios para Motocicletas</option>
+                    <option value="Herramientas y Equipos">Herramientas y Equipos</option>
+                    <option value="Neumáticos y Llantas">Neumáticos y Llantas</option>
+                    <option value="Comida Gourmet">Comida Gourmet</option>
+                    <option value="Bebidas Alcohólicas">Bebidas Alcohólicas</option>
+                    <option value="Alimentos Orgánicos">Alimentos Orgánicos</option>
+                    <option value="Snacks y Dulces">Snacks y Dulces</option>
+                    <option value="Ropa de Bebé">Ropa de Bebé</option>
+                    <option value="Juguetes para Bebés">Juguetes para Bebés</option>
+                    <option value="Productos para la Alimentación del Bebé">Productos para la Alimentación del Bebé</option>
+                    <option value="Mobiliario Infantil">Mobiliario Infantil</option>
+                    <option value="Libros Físicos y E-Books">Libros Físicos y E-Books</option>
+                    <option value="Música y CDs">Música y CDs</option>
+                    <option value="Instrumentos Musicales">Instrumentos Musicales</option>
+                    <option value="Audiolibros y Podcasts">Audiolibros y Podcasts</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descuento">Descuento:</label>
+                <input type="number" class="form-control" id="descuento" name="descuento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+            </div>
+
+            <div class="form-group row">
+                <div class="col">
+                <label for="rutaImagen" class="form-label">Nombre Imagen</label>
+                <input type="file" id="rutaImagen" name="rutaImagen" class="form-control" accept="image/*">
+                </div>
+                <div class="col">
+                <img id="preview" src="#" alt="Vista previa" style="display:none; margin-top:10px; max-width:200px;">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="stock">Stock:</label>
+                <input type="number" class="form-control" id="stock" name="stock" required>
+            </div>
+
+            <div class="form-group">
+                <label for="empresa">Empresa ID:</label>
+                <input type="number" class="form-control" id="empresa" name="empresa" required>
+            </div>
+
+            <button type="submit" id="" class="btn btn-primary">Crear</button>
+        </form>`;
+
+                $("#createFormSection").html(formHtml);
+            } else {
+                $.ajax({
+                    url: "../../controller/crud.controller.php",
+                    type: "GET",
+                    data: { action: "getColumnsWithTypes", table: table },
+                    success: function (data) {
+                        var formHtml = '<form id="createForm" >';
+                        data.forEach(function (column) {
+                            var fieldHtml = '<div class="mb-3">';
+                            var columnName = column.field;
+                            if (column.extra && column.extra.includes("auto_increment")) {
+                                return;
+                            }
+
+                            switch (true) {
+                                case column.type.startsWith("enum"):
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<select id="' + columnName + '" name="' + columnName + '" class="form-select">';
+                                    if (column.enum_values && column.enum_values.length > 0) {
+                                        column.enum_values.forEach(function (value) {
+                                            fieldHtml += '<option value="' + value + '">' + value + "</option>";
+                                        });
+                                    }
+                                    fieldHtml += "</select>";
+                                    break;
+                                case column.type.startsWith("int"):
+                                case column.type.startsWith("float"):
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<input type="number" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                    break;
+                                case column.type.startsWith("varchar"):
+                                default:
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                    break;
+                            }
+                            fieldHtml += "</div>";
+                            formHtml += fieldHtml;
+                        });
+                        formHtml += '<button type="submit" class="btn btn-primary">Crear</button></form>';
+                        $("#createFormSection").html(formHtml);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error en la solicitud:", status, error);
+                    },
+                });
+            }
         }
     });
 
     $("#createFormSection").on("submit", "#createForm", function (e) {
         e.preventDefault();
-        var formData = $(this).serialize();
+        var formData = {
+            nombre: $('#nombre').val(),
+            precio: $('#precio').val(),
+            descripcion: $('#descripcion').val(),
+            categoria: $('#categoria').val().replace('+', ' '),
+            descuento: $('#descuento').val(),
+            empresa: $('#empresa').val(),
+            stock: $('#stock').val()
+        };
+
         $.ajax({
             url: "../../controller/crud.controller.php",
             type: "POST",
-            data: {
-                action: "createData",
-                table: $("#tableSelector2").val(),
-                data: formData,
-            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                action: 'createData',
+                table: 'articulo',
+                data: formData
+            }),
             success: function (response) {
                 alert("Registro creado");
                 $("#tableSelector2").trigger("change");
@@ -325,4 +432,15 @@ $(document).ready(function () {
     function articulosXPaginaDefault() {
         $("#itemsPerPage").val("5");
     }
+    $('#rutaImagen').on('change', function () {
+        var file = $(this)[0].files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result).show();
+            }
+            reader.readAsDataURL(file);
+        }
+    });
 });
+

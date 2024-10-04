@@ -19,10 +19,10 @@ class Update
 		return $stmt->execute([$apellido, $nombre, $calle, $email, $hashedPassword, $Npuerta, $telefono, $id]);
 	}
 
-	public function updateArticulo($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $codigoBarra)
+	public function updateArticulo($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock)
 	{
-		$stmt = $this->conn->prepare("UPDATE articulo SET nombre=?, precio=?, descripcion=?, rutaImagen=?, categoria=?, descuento=?, empresa=?, stock=?, codigoBarra=? WHERE id=?");
-		return $stmt->execute([$nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $codigoBarra, $id]);
+		$stmt = $this->conn->prepare("UPDATE articulo SET nombre=?, precio=?, descripcion=?, rutaImagen=?, categoria=?, descuento=?, empresa=?, stock=? WHERE id=?");
+		return $stmt->execute([$nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $id]);
 	}
 
 	public function updateEmpresa($id, $email, $nombre, $categoria, $RUT, $telefono)

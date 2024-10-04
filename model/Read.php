@@ -302,4 +302,20 @@ class Read {
         return array('articles' => $data, 'totalPages' => $totalPages);
     }
 
+    public function readInfoUser($id) {
+        $sql = "SELECT * FROM infoUsuario WHERE id=?";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$id]);
+        $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return array($data);
+    }
+
+    public function readGetOrdenes($id) {
+        $sql = "SELECT * FROM getOrdenes WHERE id=?";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$id]);
+        $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return ($data);
+    }
+
 }
