@@ -318,4 +318,18 @@ class Read {
         return ($data);
     }
 
+    public function verifyPassword($inputPassword, $userId) {
+        $sql = "SELECT id, contrasena FROM usuarios WHERE id = ?";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$userId]);
+        $data = $sql->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$data) {
+            return false; 
+        }
+    
+        return password_verify($inputPassword, $data['contrasena']);
+    }
+    
+
 }

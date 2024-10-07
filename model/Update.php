@@ -143,5 +143,11 @@ class Update
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute([$id]);
 	}
+
+	public function updatePassword($userId, $newPassword) {
+		$sql = "UPDATE usuarios SET contrasena = ? WHERE id = ?";
+		$stmt = $this->conn->prepare($sql);
+		return $stmt->execute([$newPassword, $userId]);
+	}
 	
 }
