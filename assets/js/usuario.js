@@ -1,6 +1,97 @@
 $(document).ready(function () {
     let idUser;
+    let content1 = `<div id="contentUser" class="col-11 container-flex">
+                <section id="misOrdenes" class="p-3">
+                    <h3 class="text-center mb-4">Mis Órdenes</h3>
+                    <div class="container-flex table-responsive">
+                        <table id="tablaOrdenes" class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID Compra</th>
+                                    <th>ID Envío</th>
+                                    <th>Método de Envío</th>
+                                    <th>Fecha de Salida</th>
+                                    <th>Fecha de Llegada</th>
+                                    <th>Calle</th>
+                                    <th>Número de Puerta</th>
+                                    <th>Total de la Orden</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+                <hr class="container">
+                <section id="infoCuenta" class="">
+                    <h3 class="text-center mt-4">Info Cuenta</h3>
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <p id="nombre" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="apellido" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="email" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="calle" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="numeroPuerta" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="contrasena" class="font-weight-bold"></p>
+                        </div>
+                    </div>
+                </section>
+            </div>`;
+    let content2 = `<section id="infoCuenta" class="">
+                    <h3 class="text-center mt-4">Info Cuenta</h3>
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <p id="nombre" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="apellido" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="email" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="calle" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="numeroPuerta" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="contrasena" class="font-weight-bold"></p>
+                        </div>
+                    </div>
+                </section>`;
 
+    let content3 = `<section id="misOrdenes" class="p-3">
+                    <h3 class="text-center mb-4">Mis Órdenes</h3>
+                    <div class="container-flex table-responsive">
+                        <table id="tablaOrdenes" class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID Compra</th>
+                                    <th>ID Envío</th>
+                                    <th>Método de Envío</th>
+                                    <th>Fecha de Salida</th>
+                                    <th>Fecha de Llegada</th>
+                                    <th>Calle</th>
+                                    <th>Número de Puerta</th>
+                                    <th>Total de la Orden</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>`;
     $.ajax({
         type: "POST",
         url: "/controller/login.controller.php",
@@ -36,10 +127,12 @@ $(document).ready(function () {
                 $("#email").html(userInfo.email);
 
                 if (filter == 1) {
+                    $("#usuarioMain").html(content3);
+                    /*
                     $("#calle").html(`<input type="text" value="${userInfo.calle}">`);
                     $("#numeroPuerta").html(`<input type="text" value="${userInfo.nPuerta}">`);
                     $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
-
+                    */
                 } else {
                     $("#calle").html(userInfo.calle);
                     $("#numeroPuerta").html(userInfo.nPuerta);
@@ -82,7 +175,7 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on('click', '#btnEditPassword', function (e) {
+    $(document).on("click", "#btnEditPassword", function (e) {
         e.preventDefault();
         $("#contrasena").html(`
             <div>
@@ -103,35 +196,32 @@ $(document).ready(function () {
         `);
     });
 
-    $(document).on('click', '#btnCancel', function (e) {
+    $(document).on("click", "#btnCancel", function (e) {
         e.preventDefault();
         $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
     });
 
-    $(document).on('click', '#submitNewPassword', function (e) {
+    $(document).on("click", "#submitNewPassword", function (e) {
         e.preventDefault();
         let oldPassword = $("#oldPassword").val();
         let newPassword = $("#newPassword").val();
         validateAndSubmitPassword(oldPassword, newPassword);
     });
 
-    $(document).on('change', '#showPassword', function (e) {
+    $(document).on("change", "#showPassword", function (e) {
         e.preventDefault();
-        if ($(this).is(':checked')) {
+        if ($(this).is(":checked")) {
             $("#newPassword").attr("type", "text");
         } else {
             $("#newPassword").attr("type", "password");
         }
     });
-    
-
-
 
     function validateAndSubmitPassword(oldPassword, newPassword) {
         if (oldPassword === newPassword) {
-            alert('Las contraseñas no pueden ser iguales');
-        } else if (oldPassword === '' || newPassword === '') {
-            alert('Los campos no pueden estar vacíos');
+            alert("Las contraseñas no pueden ser iguales");
+        } else if (oldPassword === "" || newPassword === "") {
+            alert("Los campos no pueden estar vacíos");
         } else if (!isValidPassword(newPassword)) {
             alert("La nueva contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.");
         } else {
@@ -139,31 +229,31 @@ $(document).ready(function () {
                 type: "POST",
                 url: "/controller/usuario.controller.php",
                 data: {
-                    mode: 'editPassword',
+                    mode: "editPassword",
                     old: oldPassword,
                     new: newPassword,
-                    id: idUser
+                    id: idUser,
                 },
                 success: function (response) {
                     switch (response.status) {
-                        case 'old=new':
-                            alert('La antigua contraseña no puede ser igual a la nueva');
+                        case "old=new":
+                            alert("La antigua contraseña no puede ser igual a la nueva");
                             break;
-                        case 'ok':
-                            alert('Contraseña cambiada con éxito');
+                        case "ok":
+                            alert("Contraseña cambiada con éxito");
                             $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
                             break;
-                        case 'old!=old':
-                            alert('La antigua contrasena no es la correcta')
+                        case "old!=old":
+                            alert("La antigua contrasena no es la correcta");
                             break;
                         default:
-                            alert('Error inesperado, intenta de nuevo.');
+                            alert("Error inesperado, intenta de nuevo.");
                             break;
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error("Error al cambiar la contraseña:", error);
-                }
+                },
             });
         }
     }
