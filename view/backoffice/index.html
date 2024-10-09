@@ -60,7 +60,7 @@
 </div>
 </header>
 <main class="container">
-    <div class="container">
+    <div class="container" id="content" style="height: 100vh;">
         <p class="display-5" id="nombre">
             Nombre Empresa
         </p>
@@ -73,6 +73,11 @@
         <p class="display-5" id="telefono">
             TELEFONO
         </p>
+        <a href="#details" class="btn">Mas detalles</a>
+    </div>
+    <div id="details">
+        <button class="btn">Editar</button>
+        <p>Este boton enviara un mensaje a los administradores. Por temas de seguridad. Pigeon e-Shop se encargara de editar las empresas</p>
     </div>
 </main>
 <script src="/assets/js/jquery-3.7.1.min.js"></script>
@@ -83,12 +88,21 @@
         //cerrar sesion
     });
     $(document).ready(function () {
-        // tomar de ajax
-        $("#tituloPagina").text("");
-        $("#nombre").text("");
-        $("#rut").text("");
-        $("#email").text("");
-        $("#telefono").text("");
+        $.ajax({
+            type: "POST",
+            url: "/controller/backoffice.controller.php",
+            data: {
+                mode: 'getInfoEmpresa',
+                email: 'empresa1@example.com'
+            },
+            success: function (response) {
+                $("#tituloPagina").text(response[0].nombre);
+                $("#nombre").text(response[0].nombre);
+                $("#rut").text(response[0].RUT);
+                $("#email").text(response[0].email);
+                $("#telefono").text(response[0].telefono);
+            }
+        });
     });
 </script>
 </body>

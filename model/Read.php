@@ -337,6 +337,22 @@ class Read {
     
         return password_verify($inputPassword, $data['contrasena']);
     }
+
+    public function readArticuloById ($id):array|bool {
+        $sql = "SELECT * FROM articulo WHERE id = ?";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$id]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function readDetalleEmpresa($email) {
+        $sql = "SELECT * FROM empresa WHERE email=:email";
+        $sql = $this->conn->prepare($sql);
+        $sql->bindParam(":email",$email,PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    }
     
 
 }

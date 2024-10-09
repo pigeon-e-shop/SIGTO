@@ -34,7 +34,30 @@ switch ($_POST['mode']) {
             echo json_encode($e);
         }
         break;
-    default:
-        # code...
+
+    case 'getInfoArticulo':
+        try {
+            if (!(isset($_POST['idArticulo']))) {
+                throw new Exception("Error",1);
+            } else {
+                echo json_encode($read->readArticuloById($_POST['idArticulo']));
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
         break;
+
+    case 'getInfoEmpresa':
+        try {
+            if (!(isset($_POST['email']))) {
+                throw new Exception("Error Processing Request", 1);
+            } else {
+                echo json_encode($read->readDetalleEmpresa($_POST['email']));
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+        break;
+    default:
+        throw new Exception("Error",1);
 }
