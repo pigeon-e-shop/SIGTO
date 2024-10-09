@@ -149,5 +149,15 @@ class Update
 		$stmt = $this->conn->prepare($sql);
 		return $stmt->execute([$newPassword, $userId]);
 	}
+
+	public function cambiarVisibilidad($visible,$idArticulo) {
+		try {
+			$sql = "UPDATE articulo a SET a.VISIBLE=? WHERE a.id=?";
+			$stmt = $this->conn->prepare($sql);
+			return $stmt->execute([$visible,$idArticulo]);
+		} catch (Exception $e) {
+			throw $e;
+		}
+	}
 	
 }

@@ -87,6 +87,13 @@ class Read {
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function read_articulo_detalleByEmpresa($id) {
+        $query = "SELECT * FROM articulo WHERE empresa=?";
+        $result = $this->conn->prepare($query);
+        $result->execute([$id]);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function read_articulo_detalle_exclusivo($id) {
         $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo WHERE id = :id";
         $stmt = $this->conn->prepare($query);
