@@ -1,3 +1,7 @@
+html {
+    background-color: #5B73B9;
+}
+
 .rectangle {
     background: #5B73B9;
 }
@@ -38,4 +42,55 @@
 
 header {
     background-color: #5B73B9;
+}
+
+#info{
+    background-color: #353535;
+    color: aliceblue;
+    border-radius: 7px;
+    font-size: large;
+}
+
+#cardVentas {
+    background-color: #353535;
+    border-radius: 7px;
+    min-width: max-content;
+}
+
+.card {
+    background-color: #353535;
+    border-radius: 7px; 
+    color: aliceblue;
+    font-size: large;
+    min-height: 150px;
+
+    p {
+        color: aliceblue;
+        font-size: large;
+    }
+}
+
+#totalVentas {
+    color: aliceblue;
+    font-size: large;
+}
+
+.textoTotalVentas {
+    color: aliceblue;
+    font-size: large;
+}
+
+
+#comentarios {
+    max-height: 300px;
+    display: block;
+}
+
+#calificacion {
+    background-color: #353535;
+    border-radius: 7px;
+}
+
+#infoDiv {
+    min-width: max-content;
 }

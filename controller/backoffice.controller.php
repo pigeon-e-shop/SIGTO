@@ -58,6 +58,19 @@ switch ($_POST['mode']) {
             throw $e;
         }
         break;
+
+    case 'getComments':
+        try {
+            // check ID
+            if (!(isset($_POST['id']))) {
+                throw new Exception("Error Processing Request", 1);
+            } else {
+                echo json_encode($read->getCommentsByArticulo($_POST['id']));
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+        break;
     default:
         throw new Exception("Error",1);
 }
