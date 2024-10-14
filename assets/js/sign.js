@@ -9,7 +9,7 @@ $(document).ready(function () {
             data: {
                 mode: mode,
                 username: $("#emailIS").val(),
-                password: $("#passwordIS").val()
+                password: $("#passwordIS").val(),
             },
             dataType: "JSON",
             success: function (response) {
@@ -22,23 +22,87 @@ $(document).ready(function () {
                         username: $("#emailIS").val(),
                     },
                     dataType: "JSON",
-                    success: function (response) {
-                        console.log(response);
-                        window.location.href = "/"
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Status: " + status);
-                        console.error("Error: " + error);
-                        console.error("Response Text: " + xhr.responseText);
-                    }
+                    success: function (response) {},
+                    error: function (xhr, status, error) {},
                 });
             },
             error: function (xhr, status, error) {
                 console.error("Status: " + status);
                 console.error("Error: " + error);
                 console.error("Response Text: " + xhr.responseText);
-            }            
+            },
         });
+    });
+    $("#signUpBtn").click(function (e) {
+        e.preventDefault();
+        try {
+            if (!$("#apellidoIngresado").val()) {
+                throw new Error("Apellido not set");
+            }
+            if (!$("#nombreIngresado").val()) {
+                throw new Error("Nombre not set");
+            }
+            if (!$("#emailIngresado").val()) {
+                throw new Error("Email not set");
+            }
+            if (!$("#passwordIngresado").val()) {
+                throw new Error("Contrasena not set");
+            }
+            $.ajax({
+                type: "POST",
+                url: "/controller/login.controller.php",
+                data: {
+                    mode: "registrar",
+                    apellido: $("#apellidoIngresado").val(),
+                    nombre: $("#nombreIngresado").val(),
+                    email: $("#emailIngresado").val(),
+                    contrasena: $("#passwordIngresado").val(),
+                },
+                success: function (response) {
+                    if (response.status == "error") {
+                        throw new Error(response.message);
+                    } else {
+                        $("#modalTr").click();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    throw new Error("ERROR" + xhr, status, error);
+                },
+            });
+        } catch (error) {
+            let alertMessage;
+
+            switch (error.message) {
+                case "Apellido not set":
+                    alertMessage = "Error: Apellido is required.";
+                    break;
+                case "Nombre not set":
+                    alertMessage = "Error: Nombre is required.";
+                    break;
+                case "Email not set":
+                    alertMessage = "Error: Email is required.";
+                    break;
+                case "Contraseña not set":
+                    alertMessage = "Error: Contraseña is required.";
+                    break;
+                default:
+                    alertMessage = error.message;
+                    break;
+            }
+
+            const alertElement = $(`
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            ${alertMessage}
+        </div>
+    `);
+
+            $("#alertContainer").append(alertElement);
+
+            setTimeout(() => {
+                alertElement.alert("close");
+            }, 5000);
+        }
     });
     $("#showPasswordCheckbox").click(function () {
         var passwordField = $("#passwordIS");
@@ -47,5 +111,9 @@ $(document).ready(function () {
         } else {
             passwordField.attr("type", "password");
         }
-    });    
+    });
+    $("#modalTr").click(function (e) { 
+        e.preventDefault();
+        window.location.href = "/";
+    });
 });

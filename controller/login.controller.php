@@ -1,8 +1,10 @@
 <?php
 require_once '../Config/Database.php';
 require_once '../model/Read.php';
+require_once '../model/Create.php';
 
 $read = new Read();
+$create = new Create();
 $modo = $_POST['mode'] ?? '';
 
 header('Content-Type: application/json');
@@ -28,6 +30,38 @@ switch ($modo) {
         }
         break;
 
+        case 'registrar':
+            try {
+                if (!empty($_POST)) {
+                    $nombre = $_POST['nombre'] ?? throw new Exception("El campo 'nombre' no está establecido", 1);
+                    if (empty($nombre)) throw new Exception("El campo 'nombre' no puede estar vacío", 1);
+        
+                    $apellido = $_POST['apellido'] ?? throw new Exception("El campo 'apellido' no está establecido", 1);
+                    if (empty($apellido)) throw new Exception("El campo 'apellido' no puede estar vacío", 1);
+        
+                    $email = $_POST['email'] ?? throw new Exception("El campo 'email' no está establecido", 1);
+                    if (empty($email)) throw new Exception("El campo 'email' no puede estar vacío", 1);
+                    
+                    $contrasena = $_POST['contrasena'] ?? throw new Exception("El campo 'contrasena' no está establecido", 1);
+                    if (empty($contrasena)) throw new Exception("El campo 'contrasena' no puede estar vacío", 1);
+                    
+                    $calle = $_POST['calle'] ?? '';
+                    $Npuerta = $_POST['Npuerta'] ?? '';
+                    $telefono = $_POST['telefono'] ?? '';
+        
+                    // Llamar a la función crearUsuario
+                    $create->crearUsuario($apellido, $nombre, $calle, $email, $contrasena, $Npuerta, $telefono);
+                    
+                    // Retornar respuesta de éxito
+                    echo json_encode(["status" => "success", "message" => "Usuario registrado con éxito."]);
+                } else {
+                    throw new Exception("No se recibió información POST", 1);
+                }
+            } catch (Exception $e) {
+                echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+            }
+            break;
+        
     case 'setCookies':
         if (empty($_POST['username'])) {
             echo json_encode(['status' => 'El nombre de usuario es requerido']);
