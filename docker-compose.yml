@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /home/pigeon/SIGTO:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - database
+    restart: always
+
+  database:
+    image: mariadb
+    container_name: dbPigeon
+    environment:
+      MYSQL_ROOT_PASSWORD: nosotrosIsbo
+      MYSQL_DATABASE: pigeon
+      MYSQL_USER: pigeon
+      MYSQL_PASSWORD: nosotrosIsbo
+    ports:
+      - "33060:3306"
+    volumes:
+      - ptVolume:/var/lib/mysql
+      - ./Config/initdb:/docker-entrypoint-initdb.d
+    restart: always
+
+volumes:
+  ptVolume:
