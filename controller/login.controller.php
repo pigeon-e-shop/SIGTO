@@ -11,24 +11,35 @@ header('Content-Type: application/json');
 
 switch ($modo) {
     case 'logIn':
-        if (empty($_POST['email']) || empty($_POST['password'])) {
-            echo json_encode(['status' => 'Email y contraseña son requeridos']);
-            break;
-        }
-
         try {
-            $result = $read->checkLogIn($_POST['email'], $_POST['password']);
+            // Validate input
+            if (empty($_POST['username']) || empty($_POST['password'])) {
+                throw new Exception('Email y contraseña son requeridos.');
+            }
+    
+            // Sanitize input
+            $email = filter_var(trim($_POST['username']), FILTER_SANITIZE_EMAIL);
+            $password = trim($_POST['password']);
+    
+            // Check login credentials
+            $result = $read->checkLogIn($email, $password);
+            
             if ($result) {
                 session_start();
                 $_SESSION['user_id'] = $result;
                 echo json_encode(['status' => 'OK']);
             } else {
-                echo json_encode(['status' => 'Usuario o contraseña incorrectos']);
+                throw new Exception('Credenciales incorrectas.');
             }
         } catch (Exception $e) {
-            echo json_encode(['status' => 'Se produjo un error en el servidor', 'error' => $e->getMessage()]);
+            // Handle exceptions and return error messages
+            echo json_encode([
+                'status' => 'error', 
+                'message' => $e->getMessage()
+            ]);
         }
         break;
+    
 
         case 'registrar':
             try {

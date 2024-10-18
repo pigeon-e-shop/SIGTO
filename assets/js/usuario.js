@@ -36,10 +36,24 @@ $(document).ready(function () {
                 $("#email").html(userInfo.email);
 
                 if (filter == 1) {
-                    $("#calle").html(`<input type="text" value="${userInfo.calle}">`);
-                    $("#numeroPuerta").html(`<input type="text" value="${userInfo.nPuerta}">`);
-                    $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
+                    if (userInfo.calle !== "null") {
 
+                        $("#calle").html(`<input type="text" id="form-calle" class="form-control" value="${userInfo.calle}" readonly="readonly">`);
+                        $("#numeroPuerta").html(`<input type="text" id="form-npuerta" class="form-control" value="${userInfo.nPuerta}" readonly="readonly">`);
+                        $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
+                        $("#form-calle").attr("readonly", "readonly");
+                        $("#form-npuerta").attr("readonly", "readonly");
+
+                        $("#form-calle, #form-npuerta").on("dblclick", function () {
+                            $(this).css("box-shadow", "1px 1px 1px 1px black");
+                            $(this).removeAttr("readonly");
+                        });
+
+                    } else {
+                        $("#calle").html(`<input type="text" class="form-control" value="${userInfo.calle}" placeholder="Calle">`);
+                        $("#numeroPuerta").html(`<input type="text" class="form-control" value="${userInfo.nPuerta}" placeholder="No de puerta">`);
+                        $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
+                    }
                 } else {
                     $("#calle").html(userInfo.calle);
                     $("#numeroPuerta").html(userInfo.nPuerta);
@@ -82,7 +96,7 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on('click', '#btnEditPassword', function (e) {
+    $(document).on("click", "#btnEditPassword", function (e) {
         e.preventDefault();
         $("#contrasena").html(`
             <div>
@@ -103,35 +117,32 @@ $(document).ready(function () {
         `);
     });
 
-    $(document).on('click', '#btnCancel', function (e) {
+    $(document).on("click", "#btnCancel", function (e) {
         e.preventDefault();
         $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
     });
 
-    $(document).on('click', '#submitNewPassword', function (e) {
+    $(document).on("click", "#submitNewPassword", function (e) {
         e.preventDefault();
         let oldPassword = $("#oldPassword").val();
         let newPassword = $("#newPassword").val();
         validateAndSubmitPassword(oldPassword, newPassword);
     });
 
-    $(document).on('change', '#showPassword', function (e) {
+    $(document).on("change", "#showPassword", function (e) {
         e.preventDefault();
-        if ($(this).is(':checked')) {
+        if ($(this).is(":checked")) {
             $("#newPassword").attr("type", "text");
         } else {
             $("#newPassword").attr("type", "password");
         }
     });
-    
-
-
 
     function validateAndSubmitPassword(oldPassword, newPassword) {
         if (oldPassword === newPassword) {
-            alert('Las contraseñas no pueden ser iguales');
-        } else if (oldPassword === '' || newPassword === '') {
-            alert('Los campos no pueden estar vacíos');
+            alert("Las contraseñas no pueden ser iguales");
+        } else if (oldPassword === "" || newPassword === "") {
+            alert("Los campos no pueden estar vacíos");
         } else if (!isValidPassword(newPassword)) {
             alert("La nueva contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.");
         } else {
@@ -139,31 +150,31 @@ $(document).ready(function () {
                 type: "POST",
                 url: "/controller/usuario.controller.php",
                 data: {
-                    mode: 'editPassword',
+                    mode: "editPassword",
                     old: oldPassword,
                     new: newPassword,
-                    id: idUser
+                    id: idUser,
                 },
                 success: function (response) {
                     switch (response.status) {
-                        case 'old=new':
-                            alert('La antigua contraseña no puede ser igual a la nueva');
+                        case "old=new":
+                            alert("La antigua contraseña no puede ser igual a la nueva");
                             break;
-                        case 'ok':
-                            alert('Contraseña cambiada con éxito');
+                        case "ok":
+                            alert("Contraseña cambiada con éxito");
                             $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
                             break;
-                        case 'old!=old':
-                            alert('La antigua contrasena no es la correcta')
+                        case "old!=old":
+                            alert("La antigua contrasena no es la correcta");
                             break;
                         default:
-                            alert('Error inesperado, intenta de nuevo.');
+                            alert("Error inesperado, intenta de nuevo.");
                             break;
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error("Error al cambiar la contraseña:", error);
-                }
+                },
             });
         }
     }

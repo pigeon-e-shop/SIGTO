@@ -1,0 +1,199 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2024-10-16 08:58:40
+count workspace : c:\xampp\htdocs
+total files : 167
+total code lines : 8701
+total comment lines : 101
+total blank lines : 640
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .md|             18|              8|              8|   0.21|
+   |          .html|           2777|             23|             81|     32|
+   |           .php|           1288|             15|            192|     15|
+   |          .json|             11|              0|              0|   0.13|
+   |               |             69|              0|             12|   0.79|
+   |           .yml|             23|              0|              1|   0.26|
+   |         .prefs|             61|              1|              0|   0.70|
+   |           .sql|            294|             25|             68|    3.4|
+   |            .js|           1418|             20|            138|     16|
+   |           .css|            526|              8|            127|    6.0|
+   |          .scss|             60|              0|             13|   0.69|
+   |           .ini|              3|              0|              0|  0.034|
+   |           .xml|            111|              0|              0|    1.3|
+   |         .setup|              6|              0|              0|  0.069|
+   |       .version|              2|              0|              0|  0.023|
+   |           .xmi|           2034|              1|              0|     23|
+   -------------------------------------------------------------------------
+.gitignore, code is 3, comment is 0, blank is 0.
+.htaccess, code is 14, comment is 0, blank is 3.
+.metadata\.lock, code is 0, comment is 0, blank is 0.
+.metadata\.mylyn\repositories.xml.zip, it is a binary file.
+.metadata\.plugins\org.eclipse.core.resources\.projects\.org.eclipse.egit.core.cmp\.location, it is a binary file.
+.metadata\.plugins\org.eclipse.core.resources\.root\.indexes\history.version, code is 1, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.resources\.root\.indexes\properties.index, it is a binary file.
+.metadata\.plugins\org.eclipse.core.resources\.root\.indexes\properties.version, code is 1, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.resources\.root\1.tree, it is a binary file.
+.metadata\.plugins\org.eclipse.core.resources\.safetable\org.eclipse.core.resources, it is a binary file.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.core.resources.prefs, code is 3, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.debug.ui.prefs, code is 3, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.dltk.ui.prefs, code is 5, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.mylyn.context.core.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.mylyn.monitor.ui.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.mylyn.tasks.ui.prefs, code is 4, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.php.core.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.php.ui.prefs, code is 4, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ui.ide.prefs, code is 4, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ui.navigator.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ui.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.ui.workbench.prefs, code is 9, comment is 1, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.urischeme.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.wst.jsdt.ui.prefs, code is 9, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.wst.sse.ui.prefs, code is 4, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.dltk.core\Containers.dat, it is a binary file.
+.metadata\.plugins\org.eclipse.dltk.ui\OpenTypeHistoryorg_eclipse_php_core_PHPNature.xml, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.e4.workbench\workbench.xmi, code is 2034, comment is 1, blank is 0.
+.metadata\.plugins\org.eclipse.egit.core\.org.eclipse.egit.core.cmp\.project, code is 11, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.egit.core\.org.eclipse.egit.core.cmp\.settings\org.eclipse.core.resources.prefs, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.mylyn.github.ui\avatars.ser, it is a binary file.
+.metadata\.plugins\org.eclipse.oomph.setup\workspace.setup, code is 6, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.php.ui\dialog_settings.xml, code is 7, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.php.ui\pdt-images\0.png, it is a binary file.
+.metadata\.plugins\org.eclipse.ui.ide\dialog_settings.xml, code is 39, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.ui.intro\introstate, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.ui.workbench\dialog_settings.xml, code is 13, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.ui.workbench\workingsets.xml, code is 4, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.wst.internet.cache\cache.xml, code is 1, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.wst.jsdt.core\variablesAndContainers.dat, it is a binary file.
+.metadata\.plugins\org.eclipse.wst.jsdt.ui\OpenTypeHistory.xml, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.wst.jsdt.ui\QualifiedTypeNameHistory.xml, code is 2, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.wst.sse.ui\dialog_settings.xml, code is 5, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.wst.xml.core\default_catalog.xml, code is 5, comment is 0, blank is 0.
+.metadata\.plugins\org.eclipse.wst.xml.core\system_catalog.xml, code is 31, comment is 0, blank is 0.
+.metadata\version.ini, code is 3, comment is 0, blank is 0.
+.project, code is 11, comment is 0, blank is 0.
+.settings\org.eclipse.core.resources.prefs, code is 2, comment is 0, blank is 0.
+assets\core-rhino-85-black.otf, it is a binary file.
+assets\css\admin.css, code is 16, comment is 0, blank is 5.
+assets\css\articulosLista.css, code is 4, comment is 0, blank is 0.
+assets\css\carrito.css, code is 51, comment is 0, blank is 9.
+assets\css\comoComprar.css, code is 9, comment is 0, blank is 5.
+assets\css\detalle_producto.css, code is 45, comment is 0, blank is 3.
+assets\css\detalle_producto2.scss, code is 60, comment is 0, blank is 13.
+assets\css\error.css, code is 14, comment is 0, blank is 5.
+assets\css\footer.css, code is 8, comment is 0, blank is 0.
+assets\css\header.css, code is 62, comment is 3, blank is 11.
+assets\css\olvideContrasena.css, code is 5, comment is 0, blank is 2.
+assets\css\signIn.css, code is 22, comment is 0, blank is 11.
+assets\css\signUp.css, code is 17, comment is 0, blank is 6.
+assets\css\styleBackoffice.css, code is 24, comment is 0, blank is 14.
+assets\css\styles.css, code is 229, comment is 5, blank is 48.
+assets\css\stylesServicioCliente.css, code is 8, comment is 0, blank is 5.
+assets\css\usuario.css, code is 12, comment is 0, blank is 3.
+assets\img\banners\banner1.jpg, it is a binary file.
+assets\img\banners\banner2.jpg, it is a binary file.
+assets\img\banners\banner3.jpg, it is a binary file.
+assets\img\banners\banner4.jpg, it is a binary file.
+assets\img\error404.jpg, it is a binary file.
+assets\img\icono.png, it is a binary file.
+assets\img\image.png, it is a binary file.
+assets\img\image3.png, it is a binary file.
+assets\img\logo.png, it is a binary file.
+assets\img\productos\camisetaPumaGris.jpg, it is a binary file.
+assets\img\productos\error.png, it is a binary file.
+assets\img\productos\futbol.png, it is a binary file.
+assets\img\productos\googlePlayCard50.jpg, it is a binary file.
+assets\img\productos\iphone14.jpg, it is a binary file.
+assets\img\productos\lapizLabialAzul.jpg, it is a binary file.
+assets\img\productos\lapizLabialRojo.jpg, it is a binary file.
+assets\img\productos\mandoPs5.jpg, it is a binary file.
+assets\img\productos\nike-vomero-17-black.JPG, it is a binary file.
+assets\img\productos\pantalon-nike-club-black.JPG, it is a binary file.
+assets\img\productos\rimel.jpg, it is a binary file.
+assets\img\productos\rugby.jpeg, it is a binary file.
+assets\img\productos\rugby.png, it is a binary file.
+assets\img\productos\televisor_4k_55.png, it is a binary file.
+assets\img\productos\usbMemory.jpg, it is a binary file.
+assets\js\1.html, code is 69, comment is 1, blank is 5.
+assets\js\administrar_articulos.js, code is 39, comment is 0, blank is 8.
+assets\js\buscador.js, code is 49, comment is 0, blank is 6.
+assets\js\Carrito.js, code is 146, comment is 0, blank is 22.
+assets\js\comentarios.js, code is 85, comment is 0, blank is 3.
+assets\js\crud.html, code is 101, comment is 0, blank is 4.
+assets\js\crudAdmin.js, code is 394, comment is 14, blank is 45.
+assets\js\crudLogin.js, code is 11, comment is 0, blank is 1.
+assets\js\detalle_producto.js, code is 87, comment is 1, blank is 3.
+assets\js\index.js, code is 51, comment is 0, blank is 2.
+assets\js\jquery-3.7.1.min.js, code is 1, comment is 2, blank is 0.
+assets\js\listarArticulos.js, code is 177, comment is 0, blank is 25.
+assets\js\loginAdmin.js, code is 25, comment is 0, blank is 0.
+assets\js\sesionIniciada.js, code is 1, comment is 1, blank is 0.
+assets\js\sign.js, code is 142, comment is 1, blank is 5.
+assets\js\tomarInfoArticulos.js, code is 49, comment is 1, blank is 3.
+assets\js\usuario.js, code is 161, comment is 0, blank is 15.
+Config\Database.php, code is 25, comment is 0, blank is 2.
+Config\Database.sql, code is 294, comment is 25, blank is 68.
+Config\docker-compose.yml, code is 23, comment is 0, blank is 1.
+controller\buscador.controller.php, code is 5, comment is 0, blank is 2.
+controller\comentarios.controller.php, code is 31, comment is 0, blank is 6.
+controller\crud.controller.php, code is 340, comment is 9, blank is 43.
+controller\historial.controller.php, code is 28, comment is 0, blank is 6.
+controller\index.controller.php, code is 42, comment is 0, blank is 9.
+controller\login.controller.php, code is 127, comment is 6, blank is 24.
+controller\usuario.controller.php, code is 47, comment is 0, blank is 11.
+index.html, code is 319, comment is 2, blank is 9.
+LICENSE, code is 17, comment is 0, blank is 4.
+model\Create.php, code is 189, comment is 0, blank is 7.
+model\Delete.php, code is 18, comment is 0, blank is 7.
+model\Read.php, code is 275, comment is 0, blank is 51.
+model\Update.php, code is 161, comment is 0, blank is 24.
+package.json, code is 11, comment is 0, blank is 0.
+README.md, code is 18, comment is 8, blank is 8.
+TODO, code is 11, comment is 0, blank is 5.
+view\admin\crud.html, code is 101, comment is 0, blank is 5.
+view\admin\index.html, code is 15, comment is 1, blank is 0.
+view\backoffice\administrar_articulos.html, code is 119, comment is 0, blank is 0.
+view\backoffice\aggArticulos.html, code is 10, comment is 0, blank is 1.
+view\backoffice\aggCompras.html, code is 0, comment is 0, blank is 0.
+view\backoffice\aggEmpresa.html, code is 0, comment is 0, blank is 0.
+view\backoffice\aggEnvios.html, code is 0, comment is 0, blank is 0.
+view\backoffice\aggUsuarios.html, code is 0, comment is 0, blank is 0.
+view\backoffice\delArticulos.html, code is 0, comment is 0, blank is 0.
+view\backoffice\delCompras.html, code is 0, comment is 0, blank is 0.
+view\backoffice\delEmpresa.html, code is 0, comment is 0, blank is 0.
+view\backoffice\delEnvios.html, code is 0, comment is 0, blank is 0.
+view\backoffice\delUsuario.html, code is 0, comment is 0, blank is 0.
+view\backoffice\indexBackoffice.html, code is 68, comment is 0, blank is 7.
+view\backoffice\indexEmp.html, code is 72, comment is 0, blank is 1.
+view\backoffice\info_empresa.html, code is 70, comment is 0, blank is 0.
+view\backoffice\modArticulos.html, code is 0, comment is 0, blank is 0.
+view\backoffice\modCompras.html, code is 0, comment is 0, blank is 0.
+view\backoffice\modeloAgg.html, code is 131, comment is 0, blank is 4.
+view\backoffice\modeloDel.html, code is 61, comment is 0, blank is 5.
+view\backoffice\modeloMod.html, code is 21, comment is 0, blank is 1.
+view\backoffice\modeloVer.html, code is 21, comment is 0, blank is 1.
+view\backoffice\modEmpresa.html, code is 0, comment is 0, blank is 0.
+view\backoffice\modEnvios.html, code is 0, comment is 0, blank is 0.
+view\backoffice\modUsuario.html, code is 0, comment is 0, blank is 0.
+view\backoffice\verArticulos.html, code is 0, comment is 0, blank is 0.
+view\backoffice\verCompras.html, code is 0, comment is 0, blank is 0.
+view\backoffice\verEmpresa.html, code is 0, comment is 0, blank is 0.
+view\backoffice\verEnvios.html, code is 0, comment is 0, blank is 0.
+view\backoffice\verUsuarios.html, code is 0, comment is 0, blank is 0.
+view\error.html, code is 47, comment is 0, blank is 1.
+view\tienda\articulos.html, code is 91, comment is 1, blank is 5.
+view\tienda\carrito.html, code is 186, comment is 1, blank is 3.
+view\tienda\comoComprar.html, code is 69, comment is 1, blank is 3.
+view\tienda\detalle_producto.html, code is 148, comment is 10, blank is 3.
+view\tienda\nosotros.html, code is 90, comment is 0, blank is 0.
+view\tienda\olvideContrasena.html, code is 185, comment is 1, blank is 4.
+view\tienda\servicioCliente.html, code is 185, comment is 1, blank is 3.
+view\tienda\signIn.html, code is 103, comment is 1, blank is 4.
+view\tienda\signUp.html, code is 125, comment is 1, blank is 3.
+view\tienda\usuario.html, code is 135, comment is 1, blank is 3.
+vue.html, code is 235, comment is 1, blank is 6.
+===============================================================================

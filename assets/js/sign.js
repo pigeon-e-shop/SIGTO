@@ -13,26 +13,55 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             success: function (response) {
-                console.log(response);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {
-                        mode: "setCookies",
-                        username: $("#emailIS").val(),
-                    },
-                    dataType: "JSON",
-                    success: function (response) {},
-                    error: function (xhr, status, error) {},
-                });
+                if (response.status === "OK") {
+                    const successAlert = $(`
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            ${response.message || "Login successful!"}
+                        </div>
+                    `);
+                    $("#alertContainer").append(successAlert);
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            mode: "setCookies",
+                            username: $("#emailIS").val(),
+                        },
+                        dataType: "JSON",
+                        success: function (response) {
+                            window.location.href = "/";
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error setting cookies: ", error);
+                        },
+                    });
+                } else {
+                    // Show error message
+                    const errorAlert = $(`
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            ${response.message || "Login failed. Please try again."}
+                        </div>
+                    `);
+                    $("#alertContainer").append(errorAlert);
+                }
             },
             error: function (xhr, status, error) {
+                const errorMessage = $(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        An unexpected error occurred: ${error}
+                    </div>
+                `);
+                $("#alertContainer").append(errorMessage);
                 console.error("Status: " + status);
                 console.error("Error: " + error);
                 console.error("Response Text: " + xhr.responseText);
             },
         });
-    });
+    });    
     $("#signUpBtn").click(function (e) {
         e.preventDefault();
         try {
