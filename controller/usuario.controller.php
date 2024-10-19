@@ -50,6 +50,13 @@ switch ($_POST['mode']) {
             }
         
             break;
+
+    case 'updateDireccion':
+        $id = $_POST['id'];
+        $calle = $_POST['calle'];
+        $nPuerta = $_POST['npuerta'];
+        $update->updateDatosEnvio($id,$calle,$nPuerta);
+        break;
         
 
     default:
