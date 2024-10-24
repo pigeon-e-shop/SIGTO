@@ -1,3 +1,5 @@
+import Alertas from "./Alertas.js";
+const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
     let idUser;
 
@@ -23,29 +25,30 @@ $(document).ready(function () {
 
     $(document).keypress(function (e) {
         var key = e.which;
-        if(key == 13)
-         {
-           // get info
-           let calle = $("#form-calle").val();
-           let npuerta = $("#form-npuerta").val();
-           // ajax request
-           $.ajax({
-            type: "POST",
-            url: "/controller/usuario.controller.php",
-            data: {
-                mode: 'updateDireccion',
-                id: idUser,
-                calle: calle,
-                npuerta: npuerta
-            },
-            success: function (response) {
-                getUserInfo(idUser);
-            }
-           });
-         }
-       });  
-    
-
+        if (key == 13) {
+            // get info
+            let calle = $("#form-calle").val();
+            let npuerta = $("#form-npuerta").val();
+            // ajax request
+            $.ajax({
+                type: "POST",
+                url: "/controller/usuario.controller.php",
+                data: {
+                    mode: "updateDireccion",
+                    id: idUser,
+                    calle: calle,
+                    npuerta: npuerta,
+                },
+                success: function (response) {
+                    alertas.success("HOLA");
+                    getUserInfo(idUser);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr, status, error);
+                },
+            });
+        }
+    });
 
     function getUserInfo(idUser) {
         $.ajax({
@@ -63,7 +66,6 @@ $(document).ready(function () {
 
                 if (filter == 1) {
                     if (userInfo.calle !== "null") {
-
                         $("#calle").html(`<input type="street" id="form-calle" class="form-control" value="${userInfo.calle}" readonly="readonly">`);
                         $("#numeroPuerta").html(`<input type="number" id="form-npuerta" class="form-control" value="${userInfo.nPuerta}" readonly="readonly">`);
                         $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
@@ -74,8 +76,6 @@ $(document).ready(function () {
                             $(this).css("box-shadow", "1px 1px 1px 1px black");
                             $(this).removeAttr("readonly");
                         });
-
-
                     } else {
                         $("#calle").html(`<input type="text" name="direccion" class="form-control" value="${userInfo.calle}" placeholder="Calle">`);
                         $("#numeroPuerta").html(`<input type="text" name="direccion" class="form-control" value="${userInfo.nPuerta}" placeholder="No de puerta">`);
@@ -104,21 +104,21 @@ $(document).ready(function () {
                     $("#tablaOrdenes tbody").append(`
                         <tr>
                             <td>${compra.idCompra}</td>
-                            <td>${compra.idEnvios}</td>
+                            <td>${compra.idEnvio}</td>
                             <td>${compra.metodoEnvio}</td>
                             <td>${new Date(compra.fechaSalida).toLocaleString()}</td>
                             <td>${compra.fechaLlegada ? new Date(compra.fechaLlegada).toLocaleString() : "No disponible"}</td>
                             <td>${compra.calle}</td>
                             <td>${compra.Npuerta}</td>
                             <td>${!isNaN(precio) ? precio.toFixed(2) : "No disponible"}</td>
-                            <td><button class="btn btn-info">Detalles</button></td>
+                            <td><button class="btn btn-info" data-id="${compra.idCompra}">Detalles</button></td>
                         </tr>
                     `);
                 });
             },
             error: function (xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", error);
-                alert("Ocurrió un error al cargar los datos.");
+                alertas.warning("Ocurrió un error al cargar los datos.");
             },
         });
     }
@@ -167,7 +167,7 @@ $(document).ready(function () {
     });
 
     function validateAndSubmitPassword(oldPassword, newPassword) {
-        const alertas = new Alertas('#alert-container');
+        const alertas = new Alertas("#alert-container");
         if (oldPassword === newPassword) {
             alertas.warning("Las contraseñas no pueden ser iguales");
         } else if (oldPassword === "" || newPassword === "") {
@@ -190,6 +190,7 @@ $(document).ready(function () {
                             alertas.warning("La antigua contraseña no puede ser igual a la nueva");
                             break;
                         case "ok":
+                        case "password_updated":
                             alertas.success("Contraseña cambiada con éxito");
                             $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
                             break;
@@ -217,38 +218,3 @@ $(document).ready(function () {
         return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
     }
 });
-
-class Alertas {
-    constructor(contenedor) {
-        this.contenedor = contenedor;
-    }
-
-    success(texto) {
-        this.showAlert('success', texto);
-    }
-
-    error(texto) {
-        this.showAlert('danger', texto);
-    }
-
-    warning(texto) {
-        this.showAlert('warning', texto);
-    }
-
-    showAlert(tipo, texto) {
-        const alertElement = $(`
-            <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
-                ${texto}
-                <button type="button" class="btn close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        `);
-
-        $(this.contenedor).append(alertElement);
-
-        setTimeout(() => {
-            alertElement.alert('close');
-        }, 3000);
-    }
-}

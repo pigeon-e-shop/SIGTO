@@ -59,11 +59,9 @@ $(document).ready(function () {
         data: {modo: 'getCookie'},
         dataType: "JSON",
         success: function (response) {
-            console.log('Primera respuesta:', response);
             if (response.error == 'Error') {
                 console.error("ERROR en getCookie");
             } else {
-                console.log('Valor recibido:', response.valor);
                 $.ajax({
                     type: "POST",
                     url: "/controller/historial.controller.php",
@@ -74,8 +72,6 @@ $(document).ready(function () {
                     },
                     dataType: "JSON",
                     success: function (response2) {
-                        console.log('OK en agregar');
-                        console.log(response2);
                     },
                     error: function (xhr, status, error) {
                         console.error('Error en agregar:', xhr, status, error);

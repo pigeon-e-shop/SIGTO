@@ -1,3 +1,6 @@
+import Alertas from './Alertas.js'
+let idUser;
+const alertas = new Alertas();
 $(document).ready(function () {
     $("#dropdownCategorias").hover(
         function () {
@@ -32,7 +35,7 @@ $(document).ready(function () {
             data: { mode: 'readCookies' },
             dataType: "JSON",
             success: function (redcookies) {
-                console.log('Cookies read response:', redcookies);
+                idUser = redcookies.usuario;
                 if (redcookies.error == "Cookie no encontrada") {
                     $('#contenedor-usuario-login').html(`<div class="dropdown">
                                 <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
@@ -50,4 +53,27 @@ $(document).ready(function () {
             }
         });
     }
+    $(document).on('click','.agregarArt',function (e) { 
+        e.preventDefault();
+        // agregar a la bd.
+        $.ajax({
+            type: "POST",
+            url: "/controller/carrito.controller.php",
+            data: {
+                mode: 'agregar',
+                idUser: idUser,
+                idArticulo: $('.agregarArt').data('id')
+            },
+            success: function (response) {
+                if (response.status == 'ok') {
+                    alertas.success('articulo agregado correctamente')
+                } else {
+                    alertas.error('Error.');
+                }
+            },
+            error: function () {
+                alertas.error('Error.');
+            }
+        });
+    });
 });

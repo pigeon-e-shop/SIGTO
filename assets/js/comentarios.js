@@ -39,7 +39,6 @@ $(document).ready(function () {
         let comments = $("#comentarios-inner");
         const urlParams = new URLSearchParams(window.location.search);
         const articuloId = urlParams.get("id");
-        console.log(articuloId);
         $.ajax({
             type: "POST",
             url: "/controller/comentarios.controller.php?id=" + articuloId,

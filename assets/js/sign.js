@@ -1,8 +1,12 @@
+import Alertas from './Alertas.js';
+const alertas = new Alertas("#alertContainer");
+
 $(document).ready(function () {
     $("#signInBtn").click(function (e) {
         e.preventDefault();
         let url = "../../controller/login.controller.php";
         let mode = "logIn";
+        
         $.ajax({
             type: "POST",
             url: url,
@@ -13,15 +17,9 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             success: function (response) {
-                if (response.status === "OK") {
-                    const successAlert = $(`
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            ${response.message || "Login successful!"}
-                        </div>
-                    `);
-                    $("#alertContainer").append(successAlert);
-                    
+                if (response.status == "success") {
+                    alertas.success(response.message || "Login successful!");
+    
                     $.ajax({
                         type: "POST",
                         url: url,
@@ -34,34 +32,22 @@ $(document).ready(function () {
                             window.location.href = "/";
                         },
                         error: function (xhr, status, error) {
-                            console.error("Error setting cookies: ", error);
-                        },
+                        }
                     });
+                } else if (response.status == "error") {
+                    alertas.error("Login failed. Please try again.");
                 } else {
-                    // Show error message
-                    const errorAlert = $(`
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            ${response.message || "Login failed. Please try again."}
-                        </div>
-                    `);
-                    $("#alertContainer").append(errorAlert);
+                    alertas.error("Login failed. Please try again.");
                 }
             },
             error: function (xhr, status, error) {
-                const errorMessage = $(`
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        An unexpected error occurred: ${error}
-                    </div>
-                `);
-                $("#alertContainer").append(errorMessage);
+                alertas.error( `An unexpected error occurred: ${error}`);
                 console.error("Status: " + status);
                 console.error("Error: " + error);
                 console.error("Response Text: " + xhr.responseText);
             },
         });
-    });    
+    });  
     $("#signUpBtn").click(function (e) {
         e.preventDefault();
         try {
@@ -91,7 +77,10 @@ $(document).ready(function () {
                     if (response.status == "error") {
                         throw new Error(response.message);
                     } else {
-                        $("#modalTr").click();
+                        alertas.success("Cuenta creada con exito!");
+                        setTimeout(() => {
+                            window.location.href = "/";
+                        }, 1000);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -119,17 +108,12 @@ $(document).ready(function () {
                     break;
             }
 
-            const alertElement = $(`
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            ${alertMessage}
-        </div>
-    `);
+            
 
-            $("#alertContainer").append(alertElement);
-
+            
+            alertas.error(alertMessage);
             setTimeout(() => {
-                alertElement.alert("close");
+                alertas.close();
             }, 5000);
         }
     });
@@ -143,6 +127,5 @@ $(document).ready(function () {
     });
     $("#modalTr").click(function (e) { 
         e.preventDefault();
-        window.location.href = "/";
     });
 });
