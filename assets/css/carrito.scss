@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 15px;
+    transition: transform 0.2s;
+}
+
+.cart-item:hover {
+    transform: scale(1.02);
+}
+
+.articulo-imagen {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+    transition: 300ms ease-in-out;
+    &:hover {
+        transform: scale(1.15);
+        box-shadow: 1 1 1 1 #333;
+    }
+}
+
+.articulo-detalles {
+    flex: 1;
+}
+
+.articulo-nombre {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.articulo-precio {
+    font-size: 16px;
+    color: #555;
+}
+
+.btn-remove {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-remove:hover {
+    background-color: #ff0000;
+}
+
+#resumen-container {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    background-color: #f9f9f9;
+}
+
+#alert-container {
+    position: fixed;
+    top: 20px; /* Ajusta la distancia desde la parte superior */
+    right: 20px; /* Ajusta la distancia desde el lado derecho */
+    z-index: 1050; /* Un z-index mayor para asegurarte de que esté encima */
+    width: max-content; /* O puedes fijar un ancho específico */
+    max-width: max-content; /* Limitar el ancho máximo */
+}
+
+hr.dashed {
+    border-bottom: 1px dashed black;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+#card {
+    background-color: rgb(240, 241, 216);
+    * {
+        font-family: Verdana;
+    }
+}
+
