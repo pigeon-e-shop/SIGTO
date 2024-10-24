@@ -52,12 +52,15 @@ switch ($_POST['mode']) {
             break;
 
     case 'updateDireccion':
-        $id = $_POST['id'];
-        $calle = $_POST['calle'];
-        $nPuerta = $_POST['npuerta'];
-        $update->updateDatosEnvio($id,$calle,$nPuerta);
-        break;
-        
+        $data = null;
+        try {
+            $id = $_POST['id'];
+            $calle = $_POST['calle'];
+            $nPuerta = $_POST['npuerta'];
+            echo $update->updateDatosEnvio($id,$calle,$nPuerta);
+        } catch (Exception $e) {
+            echo json_encode(array('status' => FALSE));
+        }
 
     default:
         echo json_encode(["error"]);

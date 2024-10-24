@@ -85,7 +85,7 @@
                     </section>
                 </div>
             </section>
-            <div class="col-10 container-flex">
+            <div id="content-main" class="col-10 container-flex">
                 <section id="misOrdenes" class="p-3">
                     <h3 class="text-center mb-4">Mis Órdenes</h3>
                     <div class="container-flex table-responsive">
@@ -133,6 +133,9 @@
                 </section>
             </div>
         </main>
+        <div id="alert-container">
+
+        </div>
         <script src="../../assets/js/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
@@ -161,16 +164,34 @@
                         break;
                     case 3:
                         title.text("Historial");
+                        mainDiv = $("#content-main");
+                        mainDiv.empty("");
+                        // crear el contenedor del historial
+                        mainDiv.html("<h1>Historial</h1>");
+                        mainDiv.append(`<ul id="listaHistorial"></ul>`);
+                        $.ajax({
+                            type: "POST",
+                            url: "/controller/usuario.controller.php",
+                            data: {
+                                mode: 'getHistorial',
+                                idUser: idUser
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                
+                            }
+                        });
+
                         break;
                     case 0:
                         title.text("Informacion de usuario");
                         break;
                     default:
-                        window.href.location = "/view/tienda/usuario.html?mode=0";
+                        window.location.href = "/view/tienda/usuario.html?mode=0";
                         break;
                 }
             });
         </script>
-        <script src="/assets/js/usuario.js"></script>
+        <script type="module" src="/assets/js/usuario.js"></script>
     </body>
 </html>

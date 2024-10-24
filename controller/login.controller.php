@@ -23,13 +23,15 @@ switch ($modo) {
     
             // Check login credentials
             $result = $read->checkLogIn($email, $password);
-            
-            if ($result) {
+            $result = json_decode($result,true);
+            if ($result["status"] == "success") {
                 session_start();
                 $_SESSION['user_id'] = $result;
-                echo json_encode(['status' => 'OK']);
+                echo json_encode(['status' => 'success']);
+            } else if($result["status"] == "error") {
+                throw new Exception($result["message"]);
             } else {
-                throw new Exception('Credenciales incorrectas.');
+                throw new Exception($result["message"]);
             }
         } catch (Exception $e) {
             // Handle exceptions and return error messages
