@@ -82,17 +82,7 @@ class Create
 			$cedula
 		]);
 	}
-	public function crearCarrito($Estado, $fecha, $id, $monto)
-	{
-		$sql = "INSERT INTO carrito (Estado, fecha, id, monto) VALUES (?, ?, ?, ?)";
-		$stmt = $this->conn->prepare($sql);
-		$stmt->execute([
-			$Estado,
-			$fecha,
-			$id,
-			$monto
-		]);
-	}
+	
 	public function crearCompra($fechaCompra, $idCarrito)
 	{
 		$sql = "INSERT INTO compra (fechaCompra, idCarrito) VALUES (?, ?)";
@@ -144,11 +134,15 @@ class Create
 		$sql = "INSERT INTO consulta (idArticulo, id) VALUES (?, ?)";
 		$stmt = $this->conn->prepare($sql);
 		try {
-			return $stmt->execute([$idArticulo, $id]);
+			$data = $stmt->execute([$idArticulo, $id]);
 		} catch (PDOException $e) {
 			error_log("Error en crearConsulta: " . $e->getMessage());
 			return false;
+		} catch (Exception $e) {
+			return false;
 		}
+
+		return $data;
 	}
 
 	public function crearPertenece($id, $idEmpresa)
@@ -193,5 +187,20 @@ class Create
 		$sql = "INSERT INTO calificacion (id_articulo, id_usuario, puntuacion, comentario) VALUES (?,?,?,?)";
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute([$id_articulo, $id_usuario, $puntuacion, $comentario]);
+	}
+
+	public function crearCarrito($id_usuario) {
+		// idCarrito - autoincrement.
+		// estado - default
+		// fecha - default
+		// id - argumento
+		$sql = "INSERT INTO carrito(id) VALUES (?)";
+		$stmt = $this->conn->prepare($sql);
+		$stmt->execute([$id_usuario]);
+	}
+	public function agregarCarrito($id_carrito,$id_articulo,$cantidad) {
+		$sql = "INSERT INTO compone(idCarrito, idArticulo, cantidad) VALUES (?,?,?)";
+		$stmt = $this->conn->prepare($sql);
+		$stmt->execute([$id_carrito,$id_articulo,$cantidad]);
 	}
 }

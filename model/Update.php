@@ -160,14 +160,9 @@ class Update
 			$sql->bindParam(':calle', $calle, PDO::PARAM_STR);
 			$sql->bindParam(':npuerta', $Npuerta, PDO::PARAM_STR);
 			$sql->bindParam(':id', $userId, PDO::PARAM_INT);
-			$data = $sql->execute();
-			if ($data) {
-				return $data;
-			} else {
-				throw new Exception("Error Processing Request", 1);
-			}
+			return $sql->execute();
 		} catch (Exception $e) {
-			throw $e;
+			return false;
 		}
 	}
 
@@ -187,5 +182,20 @@ class Update
 		} catch (Exception $e) {
 			throw $e;
 		}
+	}
+
+	public function editCantidadArticulosEnCarrito($cantidad,$idCarrito,$idArticulo) {
+		try {
+			$sql = "UPDATE compone SET cantidad = :cantidad WHERE idCarrito = :idCarrito AND idArticulo = :idArticulo;";
+			$sql = $this->conn->prepare($sql);
+			$sql->bindParam(':cantidad',$cantidad,PDO::PARAM_STR);
+			$sql->bindParam(':idCarrito',$idCarrito,PDO::PARAM_STR);
+			$sql->bindParam(':idArticulo',$idArticulo,PDO::PARAM_STR);
+			$sql->execute();
+			return ['status'=>'success','message'=>'actualizado correctamente'];
+		} catch (Exception $e) {
+			return ['status' => 'error','message'=>$e];
+		}
+		
 	}
 }

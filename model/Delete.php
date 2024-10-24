@@ -22,4 +22,10 @@ class Delete {
             $result = $stmt->execute();
 	
 	}
+
+    public function sacarDelCarrito($idArticulo,$idCarrito) {
+        $sql = "DELETE FROM compone WHERE idArticulo=? AND idCarrito=?;";
+        $sql = $this->conn->prepare($sql);
+        $sql = $sql->execute([$idArticulo,$idCarrito]);
+    }
 }
