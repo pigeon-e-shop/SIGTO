@@ -72,7 +72,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status === "success") {
                     alertas.success("Carrito cargado!");
-                    carritoId = response.data[1].CarritoId; // Guardar el idCarrito
+                    carritoId = response.data[0].CarritoId; // Guardar el idCarrito
                     renderizarArticulos(response.data);
                     actualizarResumenCompra(); // Llamar aquí
                 }

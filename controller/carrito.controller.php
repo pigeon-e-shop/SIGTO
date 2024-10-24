@@ -28,8 +28,11 @@ try {
             break;
 
         case 'actualizar':
+            // tomar idCarrito
+            $data = $read->getIdCarritoByUser($_POST['idUser']);
+            echo json_encode($data);
             // cambiar cantidad
-            echo json_encode($update->editCantidadArticulosEnCarrito($_POST['cantidad'], $_POST['idCarrito'], $_POST['idArticulo']));
+            // echo json_encode($update->editCantidadArticulosEnCarrito($_POST['cantidad'], $_POST['idCarrito'], $_POST['idArticulo']));
             break;
 
         case 'leer':

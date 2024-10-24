@@ -375,8 +375,6 @@ class Read
             $sql = "SELECT * FROM getarticuloscarrito WHERE UsuarioId = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id_usuario]);
-            error_log('Consulta SQL: ' . $sql);
-            error_log('Ejecutando con UsuarioId: ' . $id_usuario);
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -391,8 +389,26 @@ class Read
             throw new Exception("Error: " . $e->getMessage());
         }
     }
+    
+    public function getIdCarritoByUser($id_usuario) {
+        try {
+            $sql = "SELECT IdCarrito FROM carrito WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $e) {
+            return ['status'=>'error'];
+        }
+    }
 
 
 
-    public function getHistorialUser($id_usuario) {}
+    public function getHistorialUser($id_usuario) {
+        $sql = "SELECT * FROM verhistorial WHERE id = :id ORDER BY fecha ASC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id_usuario]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
 }

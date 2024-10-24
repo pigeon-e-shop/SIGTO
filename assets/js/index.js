@@ -65,6 +65,8 @@ $(document).ready(function () {
                 idArticulo: $('.agregarArt').data('id')
             },
             success: function (response) {
+                console.log(response);
+                
                 if (response.status == 'ok') {
                     alertas.success('articulo agregado correctamente')
                 } else {
