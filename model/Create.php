@@ -198,8 +198,13 @@ class Create
 		$stmt->execute([$id_usuario]);
 	}
 	public function agregarCarrito($id_carrito,$id_articulo,$cantidad) {
-		$sql = "INSERT INTO compone(idCarrito, idArticulo, cantidad) VALUES (?,?,?)";
+		try {
+			$sql = "INSERT INTO compone(idCarrito, idArticulo, cantidad) VALUES (?,?,?)";
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute([$id_carrito,$id_articulo,$cantidad]);
+		return true;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 }

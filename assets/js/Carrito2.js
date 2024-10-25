@@ -1,16 +1,15 @@
-import Alertas from './Alertas.js';
+import Alertas from "./Alertas.js";
 
 $(document).ready(function () {
     const alertas = new Alertas("#alert-container");
-    let carritoId; // Declarar la variable carritoId
+    let carritoId; 
 
-    // Función para inicializar eventos
     function initEvents() {
         $(document).on("click", ".agregarArt", agregarArticulo);
-        $(document).on('change', '.articulo-cantidad', actualizarCantidad);
+        $(document).on("change", ".articulo-cantidad", actualizarCantidad);
+        $(document).on("click",".btn-remove", eliminarArticulo);
     }
 
-    // Función para agregar un artículo al carrito
     function agregarArticulo(e) {
         e.preventDefault();
         const idArticulo = $(this).data("id");
@@ -27,12 +26,12 @@ $(document).ready(function () {
                 mode: "agregar",
                 idUser: checklogin(),
                 idArticulo: idArticulo,
-                idCarrito: carritoId // Pasar el idCarrito
+                idCarrito: carritoId, 
             },
             success: function (response) {
                 if (response.status === "ok") {
                     alertas.success("Artículo agregado correctamente");
-                    getItems(checklogin()); // Actualizar el carrito después de agregar
+                    getItems(checklogin()); 
                 } else {
                     alertas.error("Error al agregar el artículo.");
                 }
@@ -43,7 +42,27 @@ $(document).ready(function () {
         });
     }
 
-    // Función para verificar si el usuario está logueado
+    function eliminarArticulo () {
+        const articuloId = $(this).data("id");
+        console.log(articuloId); 
+        
+        $.ajax({
+            type: "POST",
+            url: "/controller/carrito.controller.php",
+            data: {
+                mode: 'eliminar',
+                idArticulo: articuloId,
+                idUser: checklogin()
+            },
+            dataType: "dataType",
+            success: function (response) {
+                
+            }
+        });
+
+        // checklogin(getItems);
+    }
+
     function checklogin(callback) {
         $.ajax({
             type: "POST",
@@ -60,7 +79,6 @@ $(document).ready(function () {
         });
     }
 
-    // Función para obtener los artículos del carrito
     function getItems(idUsuario) {
         $.ajax({
             type: "POST",
@@ -72,9 +90,9 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status === "success") {
                     alertas.success("Carrito cargado!");
-                    carritoId = response.data[0].CarritoId; // Guardar el idCarrito
+                    carritoId = response.data[0].CarritoId; 
                     renderizarArticulos(response.data);
-                    actualizarResumenCompra(); // Llamar aquí
+                    actualizarResumenCompra(); 
                 }
             },
             error: function (xhr, status, message) {
@@ -83,11 +101,9 @@ $(document).ready(function () {
         });
     }
 
-    // Función para renderizar artículos en el carrito
     function renderizarArticulos(data) {
         let precioTotal = 0;
 
-        // Limpiar contenido previo
         $("#resumen-lista").empty();
         $("#main-content").empty();
 
@@ -99,15 +115,12 @@ $(document).ready(function () {
             $("#main-content").append(htmlContent);
             precioTotal += articulo.precio * articulo.cantidad;
 
-            // Establecer el valor seleccionado en el select
             $(`#cantidad-${articulo.id}`).val(articulo.cantidad);
         });
 
-        // Actualizar el total del carrito
-        $("#cartTotal").text(precioTotal.toFixed(2)); // Asegurarse de mostrar 2 decimales
+        $("#cartTotal").text(precioTotal.toFixed(2));
     }
 
-    // Función para crear el HTML de un artículo
     function crearHtmlArticulo(articulo) {
         return `
         <li class="list-group-item d-flex justify-content-between align-items-center cart-item">
@@ -128,11 +141,10 @@ $(document).ready(function () {
                 <span class="articulo-descuento">Descuento: <strong>${articulo.descuento}%</strong></span>
                 <span class="articulo-precio-final">Precio Final: <strong>$<span id="precio-final-${articulo.id}">${(articulo.precio * (1 - articulo.descuento / 100)).toFixed(2)}</span></strong></span>
             </div>
-            <button class="btn btn-danger btn-remove">Eliminar</button>
+            <button class="btn btn-danger btn-remove" data-id="${articulo.id}">Eliminar</button>
         </li>`;
     }
 
-    // Función para crear el HTML del resumen de artículos
     function crearHtmlResumen(articulo) {
         return `
         <li class="d-flex justify-content-between w-100" data-id="${articulo.id}">
@@ -141,99 +153,88 @@ $(document).ready(function () {
         </li>`;
     }
 
-    // Función para actualizar la cantidad de un artículo
     function actualizarCantidad() {
-        const articuloId = $(this).attr('id').split('-')[1];
+        const articuloId = $(this).attr("id").split("-")[1];
         const cantidadSeleccionada = parseInt($(this).val());
 
-        const $articulo = $(`#precio-final-${articuloId}`).closest('.cart-item');
-        const precioUnitario = parseFloat($articulo.find('.articulo-precio').text().replace('$', ''));
-        const descuento = parseFloat($articulo.find('.articulo-descuento strong').text().replace('%', '')) / 100;
+        const $articulo = $(`#precio-final-${articuloId}`).closest(".cart-item");
+        const precioUnitario = parseFloat($articulo.find(".articulo-precio").text().replace("$", ""));
+        const descuento = parseFloat($articulo.find(".articulo-descuento strong").text().replace("%", "")) / 100;
 
-        // Calcular el nuevo precio final
         const precioFinal = (precioUnitario * (1 - descuento) * cantidadSeleccionada).toFixed(2);
-        $articulo.find(`#precio-final-${articuloId}`).text(precioFinal); // Actualizar el precio final del artículo actual
+        $articulo.find(`#precio-final-${articuloId}`).text(precioFinal);
 
-        // Actualizar la cantidad en la base de datos
         $.ajax({
             type: "POST",
             url: "/controller/carrito.controller.php",
             data: {
-                mode: 'actualizar',
+                mode: "actualizar",
                 cantidad: cantidadSeleccionada,
                 idArticulo: articuloId,
-                idCarrito: carritoId
+                idCarrito: carritoId,
+                idUser: checklogin()
             },
             success: function (response) {
                 alertas.success("Cantidad actualizada correctamente.");
-                actualizarTotalCarrito(); // Actualizar total del carrito
-                actualizarResumen(); // Actualizar resumen del carrito
-                actualizarResumenCompra(); // Llamar aquí también
+                actualizarTotalCarrito(); 
+                actualizarResumen(); 
+                actualizarResumenCompra(); 
             },
             error: function (xhr, status, message) {
                 alertas.error("Error al actualizar la cantidad.");
                 console.error(xhr, status, message);
-            }
+            },
         });
     }
 
-    // Función para actualizar el resumen de la compra
-function actualizarResumenCompra() {
-    let subtotal = 0;
-    let totalDescuento = 0; // Variable para el total de descuentos
-    let totalConDescuento = 0; // Variable para el total después de aplicar descuentos
+    function actualizarResumenCompra() {
+        let subtotal = 0;
+        let totalDescuento = 0;
+        let totalConDescuento = 0; 
 
-    $('.cart-item').each(function () {
-        const $articulo = $(this);
-        const cantidad = parseInt($articulo.find('.articulo-cantidad').val());
-        const precioUnitario = parseFloat($articulo.find('.articulo-precio').text().replace('$', ''));
-        const descuento = parseFloat($articulo.find('.articulo-descuento strong').text().replace('%', '')) / 100;
+        $(".cart-item").each(function () {
+            const $articulo = $(this);
+            const cantidad = parseInt($articulo.find(".articulo-cantidad").val());
+            const precioUnitario = parseFloat($articulo.find(".articulo-precio").text().replace("$", ""));
+            const descuento = parseFloat($articulo.find(".articulo-descuento strong").text().replace("%", "")) / 100;
 
-        // Calcular subtotal y descuentos
-        const subtotalArticulo = precioUnitario * cantidad;
-        const descuentoArticulo = subtotalArticulo * descuento;
-        
-        subtotal += subtotalArticulo;
-        totalDescuento += descuentoArticulo; // Acumular descuentos
-        totalConDescuento += (subtotalArticulo - descuentoArticulo); // Calcular total con descuento
-    });
+            // Calcular subtotal y descuentos
+            const subtotalArticulo = precioUnitario * cantidad;
+            const descuentoArticulo = subtotalArticulo * descuento;
 
-    // Actualizar los elementos del DOM
-    $("#subtotalResumen").text(`US$${subtotal.toFixed(2)}`); // Solo el precio
-    $("#descuentoResumen").text(`US$${totalDescuento.toFixed(2)}`); // Solo el precio
-    $("#totalResumen").text(`US$${totalConDescuento.toFixed(2)}`); // Solo el precio
-    
-    alertas.success("Resumen de compra actualizado correctamente.");
-}
+            subtotal += subtotalArticulo;
+            totalDescuento += descuentoArticulo;
+            totalConDescuento += subtotalArticulo - descuentoArticulo;
+        });
 
-// Asegúrate de llamar a esta función en las siguientes partes del código:
-// 1. Al finalizar la función `renderizarArticulos`.
-// 2. Después de `actualizarTotalCarrito` y `actualizarResumen` en `actualizarCantidad`.
+        $("#subtotalResumen").text(`US$${subtotal.toFixed(2)}`); 
+        $("#descuentoResumen").text(`US$${totalDescuento.toFixed(2)}`); 
+        $("#totalResumen").text(`US$${totalConDescuento.toFixed(2)}`); 
 
+        alertas.success("Resumen de compra actualizado correctamente.");
+    }
 
-    // Función para actualizar el total del carrito
     function actualizarTotalCarrito() {
         let precioTotal = 0;
-        $('.cart-item').each(function () {
+        $(".cart-item").each(function () {
             const $articulo = $(this);
-            const precioFinal = parseFloat($articulo.find('.articulo-precio-final span').text());
-            const cantidad = parseInt($articulo.find('.articulo-cantidad').val());
+            const precioFinal = parseFloat($articulo.find(".articulo-precio-final span").text());
+            const cantidad = parseInt($articulo.find(".articulo-cantidad").val());
             precioTotal += precioFinal;
         });
-        $("#cartTotal").text(precioTotal.toFixed(2)); // Asegurarse de mostrar 2 decimales
+        $("#cartTotal").text(precioTotal.toFixed(2)); 
         alertas.success("Total del carrito actualizado correctamente.");
     }
 
-    // Función para actualizar el resumen de artículos
     function actualizarResumen() {
         let resumenHtml = "";
         let precioTotalResumen = 0;
 
-        $('.cart-item').each(function () {
+        $(".cart-item").each(function () {
             const $articulo = $(this);
-            const nombre = $articulo.find('.articulo-nombre').text();
-            const cantidad = parseInt($articulo.find('.articulo-cantidad').val());
-            const precioUnitario = parseFloat($articulo.find('.articulo-precio').text().replace('$', ''));
+            const nombre = $articulo.find(".articulo-nombre").text();
+            const cantidad = parseInt($articulo.find(".articulo-cantidad").val());
+            const precioUnitario = parseFloat($articulo.find(".articulo-precio").text().replace("$", ""));
             const subtotal = (precioUnitario * cantidad).toFixed(2);
             precioTotalResumen += parseFloat(subtotal);
 
@@ -244,13 +245,11 @@ function actualizarResumenCompra() {
             </li>`;
         });
 
-        // Actualizar el resumen en el DOM
         $("#resumen-lista").html(resumenHtml);
-        $("#precioTotalResumen").text(precioTotalResumen.toFixed(2)); // Asegurarse de mostrar 2 decimales
+        $("#precioTotalResumen").text(precioTotalResumen.toFixed(2));
         alertas.success("Resumen actualizado correctamente.");
     }
 
-    // Verificar si el usuario está logueado y cargar el carrito
     checklogin(getItems);
     initEvents();
 });

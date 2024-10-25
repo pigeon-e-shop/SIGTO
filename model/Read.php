@@ -402,7 +402,17 @@ class Read
         }
     }
 
-
+    public function verificarArticuloEnCarrito($idCarrito, $idArticulo) {
+        try {
+            $sql = "SELECT cantidad FROM compone WHERE idCarrito = ? AND idArticulo = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$idCarrito, $idArticulo]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
 
     public function getHistorialUser($id_usuario) {
         $sql = "SELECT * FROM verhistorial WHERE id = :id ORDER BY fecha ASC";

@@ -51,6 +51,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
+                alertas.error("Debes loguearte primero");
             }
         });
     }
@@ -59,7 +60,6 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopPropagation();
         var idArticulo = $(this).data('id');
-        console.log("ID Artículo:", idArticulo);
         
         $.ajax({
             type: "POST",
@@ -73,6 +73,8 @@ $(document).ready(function () {
                 console.log(response);
                 if (response.status == 'ok') {
                     alertas.success('articulo agregado correctamente');
+                } else if (response.message == "Debes loguearte primero") {
+                    alertas.error("Debes loguearte primero.")
                 } else {
                     alertas.error('Error.');
                 }

@@ -1,7 +1,9 @@
+import Alertas from './Alertas.js'
 $(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
     const mode = urlParams.get("modo");
+    const alertas = new Alertas("#alert-container");
     if (productId) {
         $.ajax({
             url: "../../controller/index.controller.php",
@@ -51,6 +53,49 @@ $(document).ready(function () {
         $("#imagenArticulo").attr("src", "");
     }
 
+    $(document).on('click','.btn-add-to-cart', function (e) {
+        // agregar
+        e.preventDefault();
+        e.stopPropagation();
+        
+        $.ajax({
+            type: "POST",
+            url: "/controller/historial.controller.php",
+            data: {modo: 'getCookie'},
+            dataType: "JSON",
+            success: function (response) {
+                if (response.error == 'Error') {
+                    console.error("Error en getCookie");
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/controller/carrito.controller.php",
+                        data: {
+                            mode: 'agregar',
+                            idUser: response.valor,
+                            idArticulo: productId
+                        },
+                        success: function (response) {
+                            console.log(response);
+                            if (response.status == 'ok') {
+                                alertas.success('articulo agregado correctamente');
+                            } else if (response.message == "Debes loguearte primero") {
+                                alertas.error("Debes loguearte primero.")
+                            } else {
+                                alertas.error('Error.');
+                            }
+                        },
+                        error: function (xhr,status,message) {
+                            alertas.error('Error.');
+                            console.error(xhr,status,message);
+                            
+                        }
+                    });
+                }
+            }
+        });
+    });
+
     // agregar al historial
 
     $.ajax({
@@ -83,5 +128,7 @@ $(document).ready(function () {
             console.error('Error en getCookie:', xhr, status, error);
         }
     });
+
+    
 
 });
