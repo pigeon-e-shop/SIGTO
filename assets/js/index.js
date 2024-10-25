@@ -1,7 +1,8 @@
 import Alertas from './Alertas.js'
 let idUser;
-const alertas = new Alertas();
+const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
+    alertas.success("Bienvenido!");
     $("#dropdownCategorias").hover(
         function () {
             $(this).addClass("show");
@@ -53,29 +54,38 @@ $(document).ready(function () {
             }
         });
     }
-    $(document).on('click','.agregarArt',function (e) { 
+    
+    $(document).on('click', '.agregarArt', function (e) { 
         e.preventDefault();
-        // agregar a la bd.
+        e.stopPropagation();
+        var idArticulo = $(this).data('id');
+        console.log("ID Artículo:", idArticulo);
+        
         $.ajax({
             type: "POST",
             url: "/controller/carrito.controller.php",
             data: {
                 mode: 'agregar',
                 idUser: idUser,
-                idArticulo: $('.agregarArt').data('id')
+                idArticulo: idArticulo
             },
             success: function (response) {
                 console.log(response);
-                
                 if (response.status == 'ok') {
-                    alertas.success('articulo agregado correctamente')
+                    alertas.success('articulo agregado correctamente');
                 } else {
                     alertas.error('Error.');
                 }
             },
-            error: function () {
+            error: function (xhr,status,message) {
                 alertas.error('Error.');
+                console.error(xhr,status,message);
+                
             }
         });
+        
     });
+    
+    
+    
 });

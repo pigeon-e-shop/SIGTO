@@ -1,11 +1,11 @@
 #comoComprarMain {
 
-    background-color: whitesmoke;
+    background-color: --background-color;
 
     & * {
 
         font-family: Arial, Helvetica, sans-serif;
-        color: black;
+        color: --primary-color;
         font-weight: 600;
         font-size: 170%;
 

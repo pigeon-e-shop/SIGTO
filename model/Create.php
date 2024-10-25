@@ -54,13 +54,12 @@ class Create
 			$telefono
 		]);
 	}
-	public function crearCliente($id, $cedula)
+	public function crearCliente($id)
 	{
-		$sql = "INSERT INTO cliente (id, cedula) VALUES (?, ?)";
+		$sql = "INSERT INTO cliente (id) VALUES (?)";
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute([
-			$id,
-			$cedula
+			$id
 		]);
 	}
 	public function crearAdministrador($id, $cedula, $claveSecreta)

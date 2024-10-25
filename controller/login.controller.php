@@ -64,6 +64,10 @@ switch ($modo) {
         
                     // Llamar a la función crearUsuario
                     $create->crearUsuario($apellido, $nombre, $calle, $email, $contrasena, $Npuerta, $telefono);
+                    sleep(1);
+                    $id = $read->getIdByEmail($email);
+                    $create->crearCliente($id);
+                    $create->crearCarrito($id);
                     
                     // Retornar respuesta de éxito
                     echo json_encode(["status" => "success", "message" => "Usuario registrado con éxito."]);

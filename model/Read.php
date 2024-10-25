@@ -347,7 +347,7 @@ class Read
 
     public function readGetOrdenes($id)
     {
-        $sql = "SELECT * FROM getordenes WHERE userId = ?";
+        $sql = "SELECT * FROM getOrdenes WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
