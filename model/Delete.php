@@ -23,9 +23,14 @@ class Delete {
 	
 	}
 
-    public function sacarDelCarrito($idArticulo,$idCarrito) {
-        $sql = "DELETE FROM compone WHERE idArticulo=? AND idCarrito=?;";
-        $sql = $this->conn->prepare($sql);
-        $sql = $sql->execute([$idArticulo,$idCarrito]);
+    public function sacarDelCarrito($idArticulo, $idCarrito) {
+        $sql = "DELETE FROM compone WHERE idArticulo = ? AND idCarrito = ?;";
+        $stmt = $this->conn->prepare($sql);
+        
+        if ($stmt->execute([$idArticulo, $idCarrito])) {
+            return true;
+        } else {
+            throw new Exception("Error al eliminar el artículo del carrito.");
+        }
     }
 }

@@ -180,7 +180,7 @@ class Read
     public function checkLogInAdmin($username, $password)
     {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM loginAdmin WHERE email = :username AND contraseña = :pass");
+            $stmt = $this->conn->prepare("SELECT * FROM loginadmin WHERE email = :username AND contraseña = :pass");
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             if (password_verify($password, PASSWORD_DEFAULT)) {
                 $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
@@ -338,7 +338,7 @@ class Read
 
     public function readInfoUser($id)
     {
-        $sql = "SELECT * FROM infoUsuario WHERE id=?";
+        $sql = "SELECT * FROM infousuario WHERE id=?";
         $sql = $this->conn->prepare($sql);
         $sql->execute([$id]);
         $data = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -347,7 +347,7 @@ class Read
 
     public function readGetOrdenes($id)
     {
-        $sql = "SELECT * FROM getOrdenes WHERE id = ?";
+        $sql = "SELECT * FROM getordenes WHERE userId = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

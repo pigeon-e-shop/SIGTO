@@ -42,26 +42,40 @@ $(document).ready(function () {
         });
     }
 
-    function eliminarArticulo () {
+    function eliminarArticulo() {
         const articuloId = $(this).data("id");
-        console.log(articuloId); 
-        
-        $.ajax({
-            type: "POST",
-            url: "/controller/carrito.controller.php",
-            data: {
-                mode: 'eliminar',
-                idArticulo: articuloId,
-                idUser: checklogin()
-            },
-            dataType: "dataType",
-            success: function (response) {
-                
-            }
+    
+        if (!carritoId) {
+            alertas.error("Carrito no encontrado. No se puede eliminar el artículo.");
+            return;
+        }
+    
+        checklogin((idUsuario) => {
+            $.ajax({
+                type: "POST",
+                url: "/controller/carrito.controller.php",
+                data: {
+                    mode: 'eliminar',
+                    idArticulo: articuloId,
+                    idUser: idUsuario,
+                },
+                success: function (response) {
+                    if (response.status == "success") {
+                        alertas.success("Artículo eliminado correctamente.");
+                        checklogin(getItems);
+                    } else {
+                        alertas.error("Error al eliminar el artículo: " + response.message);
+                    }
+                },
+                error: function (xhr,status,message) {
+                    console.error(xhr,status,message);
+                    alertas.error("Error en la conexión al eliminar el artículo.");
+                },
+            });
         });
-
-        // checklogin(getItems);
     }
+    
+    
 
     function checklogin(callback) {
         $.ajax({
@@ -89,10 +103,16 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.status === "success") {
-                    alertas.success("Carrito cargado!");
-                    carritoId = response.data[0].CarritoId; 
-                    renderizarArticulos(response.data);
-                    actualizarResumenCompra(); 
+                    if (response.message == "El carrito está vacío.") {
+                        mostrarCarritoVacio();
+                    } else {
+                        alertas.success("Carrito cargado!");
+                        carritoId = response.data[0].CarritoId; 
+                        renderizarArticulos(response.data);
+                        actualizarResumenCompra(); 
+                    }
+                } else {
+                    mostrarCarritoVacio();
                 }
             },
             error: function (xhr, status, message) {
@@ -100,6 +120,18 @@ $(document).ready(function () {
             },
         });
     }
+    
+    function mostrarCarritoVacio() {
+        $("#main-content").empty().append(`
+            <div class="alert alert-info">
+                <p>Parece que tu carrito está vacío! Vamos a comprar algo!</p>
+                <a href="/" class="btn btn-primary">Ir a comprar</a>
+            </div>
+        `);
+        $("#resumen-lista").empty();
+        $("#cartTotal").text("US$0.00");
+    }
+    
 
     function renderizarArticulos(data) {
         let precioTotal = 0;

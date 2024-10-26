@@ -18,34 +18,29 @@ $mode = $_POST['mode'];
 try {
     switch ($mode) {
         case 'agregar':
-            // Verificar si el usuario está autenticado
             if (!isset($_POST['idUser'])) {
                 throw new Exception("Debes loguearte primero", 1);
             }
-        
-            // Obtener el idCarrito del usuario
+
             $data = $read->getIdCarritoByUser(id_usuario: $_POST['idUser']);
-            
+
             if (!empty($data) && isset($data[0]['IdCarrito'])) {
                 $idCarrito = $data[0]['IdCarrito'];
-                
-                // Verificar si el artículo ya está en el carrito
+
                 $articuloExistente = $read->verificarArticuloEnCarrito($idCarrito, $_POST['idArticulo']);
-                
+
                 if ($articuloExistente) {
-                    // Si ya existe, incrementa la cantidad
                     $nuevaCantidad = $articuloExistente['cantidad'] + 1;
-                    $updateStatus = $update->editCantidadArticulosEnCarrito(idCarrito:$idCarrito, idArticulo:$_POST['idArticulo'], cantidad:$nuevaCantidad);
-                    
+                    $updateStatus = $update->editCantidadArticulosEnCarrito(idCarrito: $idCarrito, idArticulo: $_POST['idArticulo'], cantidad: $nuevaCantidad);
+
                     if ($updateStatus) {
                         $response = ['status' => 'ok', 'message' => 'Cantidad actualizada correctamente'];
                     } else {
                         $response = ['status' => 'error', 'message' => 'No se pudo actualizar la cantidad'];
                     }
                 } else {
-                    // Si no existe, agregar el artículo con cantidad inicial de 1
                     $insertStatus = $create->agregarCarrito($idCarrito, $_POST['idArticulo'], 1);
-                    
+
                     if ($insertStatus) {
                         $response = ['status' => 'ok', 'message' => 'Artículo agregado al carrito'];
                     } else {
@@ -55,20 +50,28 @@ try {
             } else {
                 $response = ["status" => "error", "message" => "No se encontró el carrito para este usuario"];
             }
-        
+
             echo json_encode($response);
             break;
 
         case 'eliminar':
-            // sacar del carrito
             try {
-                $data = $read->getIdCarritoByUser(id_usuario: $_POST['idUser']);
-                $idCarrito = $data[0]['IdCarrito'];
-                $delete->sacarDelCarrito($_POST['idArticulo'], $idCarrito);
+                $idUser = filter_var($_POST['idUser'], FILTER_SANITIZE_NUMBER_INT);
+                $idArticulo = filter_var($_POST['idArticulo'], FILTER_SANITIZE_NUMBER_INT);
+
+                $data = $read->getIdCarritoByUser($idUser);
+                $idCarrito = $data[0]['IdCarrito'] ?? null;
+
+                if ($idCarrito) {
+                    $delete->sacarDelCarrito($idArticulo, $idCarrito);
+                    echo json_encode(['status' => 'success', 'message' => 'Artículo eliminado del carrito.']);
+                } else {
+                    throw new Exception("No se encontró el carrito asociado al usuario.");
+                }
+            } catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'message' => 'Error en la base de datos: ' . $e->getMessage()]);
             } catch (Exception $e) {
-                echo json_encode(['status'=>'error','message'=>$e->getMessage()]);
-            } finally {
-                echo json_encode(['status'=>'ok','message',"eliminado"]);
+                echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
             }
             break;
 
@@ -83,7 +86,7 @@ try {
         case 'leer':
             try {
                 $data = $read->getCarrito($_POST['idUsuario']);
-            
+
                 if (empty($data)) {
                     echo json_encode(['status' => 'error', 'message' => 'El carrito está vacío.']);
                 } else {
@@ -92,12 +95,12 @@ try {
             } catch (Exception $e) {
                 echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
             }
-            break;  
+            break;
 
 
         default:
             throw new Exception("Error Processing Request", 1);
     }
 } catch (Exception $e) {
-    echo json_encode(['status'=>'error','message'=>$e->getMessage()]);   
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
