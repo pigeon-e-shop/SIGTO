@@ -217,4 +217,86 @@ $(document).ready(function () {
         const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
         return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
     }
+    // interfaz pagina
+    // 0 = informacion de usuario: mis ordenes e info
+    // 1 = editar usuario: info editable
+    // 2 = Seguimiento de envios: mis ordenes y seguimiento de envios
+    // 3 = historial: historial: historial de articulos vistos
+    const urlParams = new URLSearchParams(window.location.search);
+    let filter = urlParams.get("mode");
+    try {
+        filter = parseInt(filter);
+    } catch (Error) {
+        console.error(Error);
+    }
+    let title = $("title");
+    switch (filter) {
+        case 1:
+            title.text("Editar usuario");
+            break;
+        case 2:
+            title.text("Seguimiento de envios");
+            break;
+        case 3:
+            title.text("Historial");
+            let mainDiv = $("#content-main");
+            mainDiv.empty("");
+            // crear el contenedor del historial
+            mainDiv.html("<h1>Historial</h1>");
+            mainDiv.append(`<ul class="row w-100" id="listaHistorial"></ul>`);
+            $.ajax({
+                type: "POST",
+                url: "/controller/login.controller.php",
+                data: { mode: "readCookies" },
+                dataType: "JSON",
+                success: function (redcookies) {
+                    console.log("Cookies read response:", redcookies);
+                    if (redcookies.error === "Cookie no encontrada") {
+                        window.location.href = "/";
+                    } else {
+                        idUser = redcookies.usuario;
+                        $.ajax({
+                            type: "POST",
+                            url: "/controller/usuario.controller.php",
+                            data: {
+                                mode: 'getHistorial',
+                                idUser: idUser
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                response.forEach(element => {
+                                    let content = 
+                                    `
+                                    
+                                    <div class="col col-12 col-md-2 card m-5">
+                                      <img src="${element.rutaImagen}" class="card-img-top"  alt="${element.nombre}">
+                                        <div class="card-body">
+                                          <h5 class="card-title">${element.nombre}</h5>
+                                          <p class="card-text">${element.precio}</p>
+                                          <a href="/view/tienda/detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2" class="btn btn-primary">Ver pagina</a>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    `
+                                    $("#listaHistorial").append(content);
+                                });
+                            }
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error al leer cookies:", error);
+                },
+            });
+            
+
+            break;
+        case 0:
+            title.text("Informacion de usuario");
+            break;
+        default:
+            window.location.href = "/view/tienda/usuario.html?mode=0";
+            break;
+    }
 });

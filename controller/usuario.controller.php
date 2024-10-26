@@ -61,6 +61,11 @@ switch ($_POST['mode']) {
         } catch (Exception $e) {
             echo json_encode(array('status' => FALSE));
         }
+        break;
+        
+    case 'getHistorial':
+        echo json_encode($read->getHistorialUser($_POST['idUser']));
+        break;
 
     default:
         echo json_encode(["error"]);

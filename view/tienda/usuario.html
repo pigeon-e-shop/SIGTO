@@ -83,12 +83,13 @@
                             </li>
                         </ul>
                     </section>
+                    <p class="justify-self-end">Cerrar sesion</p>
                 </div>
             </section>
             <div id="content-main" class="col-10 container-flex">
                 <section id="misOrdenes" class="p-3">
                     <h3 class="text-center mb-4">Mis Órdenes</h3>
-                    <div class="container-flex table-responsive">
+                    <div class="container-flex table-responsive w-100 overflow-x-scroll">
                         <table id="tablaOrdenes" class="table table-striped table-hover">
                             <thead class="table-light">
                                 <tr>
@@ -140,58 +141,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/81581fb069.js" crossorigin="anonymous"></script>
         <script src="../../assets/js/Carrito.js"></script>
-        <script>
-            // interfaz pagina
-            // 0 = informacion de usuario: mis ordenes e info
-            // 1 = editar usuario: info editable
-            // 2 = Seguimiento de envios: mis ordenes y seguimiento de envios
-            // 3 = historial: historial: historial de articulos vistos
-            $(document).ready(function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                let filter = urlParams.get("mode");
-                try {
-                    filter = parseInt(filter);
-                } catch (Error) {
-                    console.error(Error);
-                }
-                title = $("title");
-                switch (filter) {
-                    case 1:
-                        title.text("Editar usuario");
-                        break;
-                    case 2:
-                        title.text("Seguimiento de envios");
-                        break;
-                    case 3:
-                        title.text("Historial");
-                        mainDiv = $("#content-main");
-                        mainDiv.empty("");
-                        // crear el contenedor del historial
-                        mainDiv.html("<h1>Historial</h1>");
-                        mainDiv.append(`<ul id="listaHistorial"></ul>`);
-                        $.ajax({
-                            type: "POST",
-                            url: "/controller/usuario.controller.php",
-                            data: {
-                                mode: 'getHistorial',
-                                idUser: idUser
-                            },
-                            dataType: 'json',
-                            success: function (response) {
-                                
-                            }
-                        });
-
-                        break;
-                    case 0:
-                        title.text("Informacion de usuario");
-                        break;
-                    default:
-                        window.location.href = "/view/tienda/usuario.html?mode=0";
-                        break;
-                }
-            });
-        </script>
         <script type="module" src="/assets/js/usuario.js"></script>
     </body>
 </html>

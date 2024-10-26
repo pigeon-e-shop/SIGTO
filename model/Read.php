@@ -415,7 +415,7 @@ class Read
     
 
     public function getHistorialUser($id_usuario) {
-        $sql = "SELECT * FROM verhistorial WHERE id = :id ORDER BY fecha ASC";
+        $sql = "SELECT * FROM verhistorial WHERE idUsuario = ? ORDER BY fecha ASC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id_usuario]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
