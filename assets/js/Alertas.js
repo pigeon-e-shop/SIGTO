@@ -15,6 +15,22 @@ class Alertas {
         this.showAlert("warning", texto);
     }
 
+    info(texto) {
+        this.showAlert("info", texto);
+    }
+
+    secondary(texto) {
+        this.showAlert("secondary", texto);
+    }
+
+    light(texto) {
+        this.showAlert("light", texto);
+    }
+
+    dark(texto) {
+        this.showAlert("dark", texto);
+    }
+
     showAlert(tipo, texto) {
         const alertElement = $(`
             <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">

@@ -12,16 +12,13 @@ header('Content-Type: application/json');
 switch ($modo) {
     case 'logIn':
         try {
-            // Validate input
             if (empty($_POST['username']) || empty($_POST['password'])) {
                 throw new Exception('Email y contraseña son requeridos.');
             }
     
-            // Sanitize input
             $email = filter_var(trim($_POST['username']), FILTER_SANITIZE_EMAIL);
             $password = trim($_POST['password']);
     
-            // Check login credentials
             $result = $read->checkLogIn($email, $password);
             $result = json_decode($result,true);
             if ($result["status"] == "success") {
@@ -34,7 +31,6 @@ switch ($modo) {
                 throw new Exception($result["message"]);
             }
         } catch (Exception $e) {
-            // Handle exceptions and return error messages
             echo json_encode([
                 'status' => 'error', 
                 'message' => $e->getMessage()
@@ -62,14 +58,12 @@ switch ($modo) {
                     $Npuerta = $_POST['Npuerta'] ?? '';
                     $telefono = $_POST['telefono'] ?? '';
         
-                    // Llamar a la función crearUsuario
                     $create->crearUsuario($apellido, $nombre, $calle, $email, $contrasena, $Npuerta, $telefono);
                     sleep(1);
                     $id = $read->getIdByEmail($email);
                     $create->crearCliente($id);
                     $create->crearCarrito($id);
                     
-                    // Retornar respuesta de éxito
                     echo json_encode(["status" => "success", "message" => "Usuario registrado con éxito."]);
                 } else {
                     throw new Exception("No se recibió información POST", 1);

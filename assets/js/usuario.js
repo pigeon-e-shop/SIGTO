@@ -236,6 +236,15 @@ $(document).ready(function () {
             break;
         case 2:
             title.text("Seguimiento de envios");
+            // borrar info usuario
+            // infoCuenta
+            let container = $("#infoCuenta");
+            container.empty("");
+            container.html("<div class='container mt-5'><h2>Seguimiento de envios</h2></div>");
+            container.append("<ul id='seguimiento'>");
+            for (let index = 0; index < 5; index++) {
+                $("#seguimiento").append(`<li>${index}</li>`);
+            }
             break;
         case 3:
             title.text("Historial");

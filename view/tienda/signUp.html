@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../../assets/css/header.css" />
         <link rel="stylesheet" href="../../assets/css/styles.css" />
         <link rel="stylesheet" href="../../assets/css/footer.css" />
-        <link rel="stylesheet" href="../../assets/css/signUp.css" />
+        <link rel="stylesheet" href="../../assets/css/signUp.scss" />
     </head>
     <body>
         <header>
@@ -55,6 +55,9 @@
                 </div>
             </div>
         </header>
+        <div id="alertContainer">
+
+        </div>
         <main class="container mt-5 p-5 formSignUp">
             <form id="signUpForm" class="row">
                 <div class="col-md-6">
@@ -73,13 +76,16 @@
                 <div class="col-md-6">
                     <div>
                         <label for="passwordIngresado" class="form-label">Contraseña</label>
-                        <label class="float-end d-flex justify-content-end col-sm-6 col-xs-7" for="showPasswordCheckbox"> <input name="mostrarContra" type="checkbox" class="m-2" id="showPasswordCheckbox" />Mostrar contraseña </label>
+                        <label class="float-end d-flex justify-content-end col-sm-6 col-xs-7" for="showPasswordCheckbox">
+                            <input name="mostrarContra" type="checkbox" class="m-2" id="showPasswordCheckbox" />
+                            Mostrar contraseña
+                        </label>
                     </div>
                     <input type="password" class="form-control" id="passwordIngresado" required />
-                    <br />
+                    
                     <div class="progress" role="progressbar" aria-label="Seguridad de la contraseña" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-bar" id="progress-bar" style="width: 0%">Introduce una contraseña</div>
-                    </div>
+                    </div>                                      
                 </div>
                 <div class="col-12">
                     <div class="form-check">
