@@ -353,6 +353,13 @@ class Read {
         return $sql->fetchAll(PDO::FETCH_ASSOC);
 
     }
+
+    public function getvistasXMes ($id_articulo) {
+        $sql = "SELECT * FROM vista_articulos_por_mes WHERE idArticulo = ? ORDER BY año, mes;";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$id_articulo]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 
 }

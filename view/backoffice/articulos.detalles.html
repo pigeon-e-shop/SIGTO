@@ -65,7 +65,7 @@
                     <div class="stars-title" id="calificacion"></div>
                 </div>
                 <div class="col col-9 w-sm-100 overflow-y-scroll" id="comentarios">
-                        <ul class="list-group" id="comentariosList"></ul>
+                    <ul class="list-group" id="comentariosList"></ul>
                 </div>
                 <div class="row mt-5 w-100">
                     <div class="col h-auto col-6 w-sm-100 m card p-3" id="cardVentas">
@@ -181,48 +181,72 @@
                         },
                     },
                 });
-                const vlc = $("#viewsLineChart")[0].getContext("2d");
-                const viewsLineChart = new Chart(vlc, {
-                    type: "line",
+                // get vistas.
+                $.ajax({
+                    type: "POST",
+                    url: "/controller/backoffice.controller.php",
                     data: {
-                        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-                        datasets: [
-                            {
-                                label: "Vistas",
-                                data: [2, 2, 2, 2, 1, 1], // Datos de ejemplo
-                                backgroundColor: "rgba(54, 162, 235, 0.2)",
-                                borderColor: "rgba(54, 162, 235, 1)",
-                                borderWidth: 2,
-                                fill: true,
-                            },
-                        ],
+                        mode: "getViewsXMes",
+                        idArticulo: idArticulo,
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: "Vistas",
+                    dataType: "JSON",
+                    success: function (response) {
+                        console.log(response); // Asegúrate de que la respuesta tenga la estructura adecuada
+
+                        // Extraer los datos
+                        const labels = response.map((item) => item.nombreMes); // Asegúrate de que el nombre de la propiedad sea correcto
+                        const data = response.map((item) => item.total_articulos);
+                        console.log(labels,data);
+                        const viewsTotales = data.reduce((acc, val) => acc + val, 0);
+                        $("#totalViews").text(viewsTotales);
+
+                        const vlc = $("#viewsLineChart")[0].getContext("2d");
+                        const viewsLineChart = new Chart(vlc, {
+                            type: "line",
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: "Vistas",
+                                        data: data,
+                                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                                        borderColor: "rgba(54, 162, 235, 1)",
+                                        borderWidth: 2,
+                                        fill: true,
+                                    },
+                                ],
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: "Vistas",
+                                        },
+                                    },
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: "Meses",
+                                        },
+                                    },
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        position: "top",
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: "Vistas Mensuales",
+                                    },
                                 },
                             },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: "Meses",
-                                },
-                            },
-                        },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: "top",
-                            },
-                            title: {
-                                display: true,
-                                text: "Vistas Mensuales",
-                            },
-                        },
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error en la solicitud AJAX:", error);
                     },
                 });
             });

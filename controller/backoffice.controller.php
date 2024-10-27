@@ -71,6 +71,11 @@ switch ($_POST['mode']) {
             throw $e;
         }
         break;
+    
+    case 'getViewsXMes':
+        echo json_encode($read->getvistasXMes($_POST['idArticulo']));
+        break;
     default:
-        throw new Exception("Error",1);
+        echo json_encode(['status'=>'error','message'=>'default']);
+        break;
 }
