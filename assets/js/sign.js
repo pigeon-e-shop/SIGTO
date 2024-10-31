@@ -1,7 +1,7 @@
 import Alertas from './Alertas.js';
-
 $(document).ready(function () {
     const alertas = new Alertas("#alertContainer");
+
     $("#signInBtn").click(function (e) {
         e.preventDefault();
         let url = "../../controller/login.controller.php";
@@ -28,45 +28,35 @@ $(document).ready(function () {
                             username: $("#emailIS").val(),
                         },
                         dataType: "JSON",
-                        success: function (response) {
+                        success: function () {
                             window.location.href = "/";
                         },
                         error: function (xhr, status, error) {
+                            alertas.error(`Error setting cookies: ${error}`);
                         }
                     });
-                } else if (response.status == "error") {
-                    alertas.error("Login failed. Please try again.");
                 } else {
                     alertas.error("Login failed. Please try again.");
                 }
             },
             error: function (xhr, status, error) {
                 alertas.error(`An unexpected error occurred: ${error}`);
-                console.error("Status: " + status);
-                console.error("Error: " + error);
-                console.error("Response Text: " + xhr.responseText);
+                console.error("Status:", status);
+                console.error("Error:", error);
+                console.error("Response Text:", xhr.responseText);
             },
         });
     });
+
     $("#signUpBtn").click(function (e) {
         e.preventDefault();
         try {
-            if (!$("#apellidoIngresado").val()) {
-                throw new Error("Apellido not set");
-            }
-            if (!$("#nombreIngresado").val()) {
-                throw new Error("Nombre not set");
-            }
-            if (!$("#emailIngresado").val()) {
-                throw new Error("Email not set");
-            }
-            if (!$("#passwordIngresado").val()) {
-                throw new Error("Contrasena not set");
-            }
-            // verificar contrasena
-            // valor de la contrasena
+            if (!$("#apellidoIngresado").val()) throw new Error("Apellido not set");
+            if (!$("#nombreIngresado").val()) throw new Error("Nombre not set");
+            if (!$("#emailIngresado").val()) throw new Error("Email not set");
+            if (!$("#passwordIngresado").val()) throw new Error("Contraseña not set");
+
             let seguridad = verificarSeguridadContrasena($("#passwordIngresado").val());
-            // objeto mensajes
             const mensajesError = {
                 1: "Mínimo 8 caracteres",
                 2: "Debe contener 1 número",
@@ -74,18 +64,14 @@ $(document).ready(function () {
                 4: "Debe contener 1 minúscula",
                 5: "Debe contener 1 carácter especial"
             };
-            // si seguridad es un numero es porque hay un error.
             if (typeof seguridad === 'number') {
-                // se usa la variable seguridad como clave para el objeto de mensajes
                 alertas.error(mensajesError[seguridad] || "Contraseña no segura.");
-                // tira error para no hacer la peticion AJAX
                 throw new Error("La contraseña no es segura");
             }
 
-            if (!($("#gridCheck").is(":checked"))) {
-                alert.error("Debes aceptar los terminos y condiciones.")
-                throw new Error("Debes aceptar los terminos y condiciones");
-
+            if (!$("#gridCheck").is(":checked")) {
+                alertas.error("Debes aceptar los términos y condiciones.");
+                throw new Error("Debes aceptar los términos y condiciones");
             }
 
             $.ajax({
@@ -99,57 +85,24 @@ $(document).ready(function () {
                     contrasena: $("#passwordIngresado").val(),
                 },
                 success: function (response) {
-                    if (response.status == "error") {
-                        throw new Error(response.message);
+                    if (response.status === "error") {
+                        alertas.error(response.message);
                     } else {
-                        alertas.success("Cuenta creada con exito!");
+                        alertas.success("Cuenta creada con éxito!");
                         setTimeout(() => {
                             window.location.href = "/view/tienda/signIn.html";
                         }, 1000);
                     }
                 },
                 error: function (xhr, status, error) {
-                    throw new Error("ERROR" + xhr, status, error);
+                    alertas.error(`Error al crear la cuenta: ${error}`);
                 },
             });
         } catch (error) {
-            let alertMessage;
-
-            switch (error.message) {
-                case "Apellido not set":
-                    alertMessage = "Error: Apellido is required.";
-                    break;
-                case "Nombre not set":
-                    alertMessage = "Error: Nombre is required.";
-                    break;
-                case "Email not set":
-                    alertMessage = "Error: Email is required.";
-                    break;
-                case "Contraseña not set":
-                    alertMessage = "Error: Contraseña is required.";
-                    break;
-                default:
-                    alertMessage = error.message;
-                    break;
-            }
-
-
-
-
-            alertas.error(alertMessage);
+            alertas.error(error.message || "Error desconocido");
         }
     });
-    $("#showPasswordCheckbox").click(function () {
-        var passwordField = $("#passwordIS");
-        if (this.checked) {
-            passwordField.attr("type", "text");
-        } else {
-            passwordField.attr("type", "password");
-        }
-    });
-    $("#modalTr").click(function (e) {
-        e.preventDefault();
-    });
+
     function verificarSeguridadContrasena(contrasena) {
         const longitudMinima = 8;
         const tieneNumero = /[0-9]/.test(contrasena);
@@ -157,105 +110,74 @@ $(document).ready(function () {
         const tieneMinuscula = /[a-z]/.test(contrasena);
         const tieneCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(contrasena);
 
-        if (contrasena.length < longitudMinima) {
-            return 1;
-        }
-
-        if (!tieneNumero) {
-            return 2;
-        }
-
-        if (!tieneMayuscula) {
-            return 3;
-        }
-
-        if (!tieneMinuscula) {
-            return 4;
-        }
-
-        if (!tieneCaracterEspecial) {
-            return 5;
-        }
+        if (contrasena.length < longitudMinima) return 1;
+        if (!tieneNumero) return 2;
+        if (!tieneMayuscula) return 3;
+        if (!tieneMinuscula) return 4;
+        if (!tieneCaracterEspecial) return 5;
 
         return true;
     }
 
-    const passwordInput = $('#passwordIngresado').val();
-
-    function verificarSeguridadContrasena(contrasena) {
-        const longitudMinima = 8;
-        const tieneNumero = /[0-9]/.test(contrasena);
-        const tieneMayuscula = /[A-Z]/.test(contrasena);
-        const tieneMinuscula = /[a-z]/.test(contrasena);
-        const tieneCaracterEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(contrasena);
-
-        let puntos = 0;
-
-        if (contrasena.length >= longitudMinima) puntos++;
-        if (tieneNumero) puntos++;
-        if (tieneMayuscula) puntos++;
-        if (tieneMinuscula) puntos++;
-        if (tieneCaracterEspecial) puntos++;
-        console.log(tieneCaracterEspecial);
-        
-        return puntos;
-    }
-
-
-    function actualizarBarraProgreso(porcentaje) {
+    function actualizarBarraProgreso(seguridad) {
         const progressBar = $('#progress-bar');
-        progressBar.css('width', porcentaje + '%');
+        let porcentaje = 0;
+        let mensaje = "Contraseña débil";
 
-        if (porcentaje < 50) {
-            progressBar.removeClass('success warning info').addClass('danger');
-            progressBar.text('Contraseña débil');
-        } else if (porcentaje < 75) {
-            progressBar.removeClass('success danger info').addClass('warning');
-            progressBar.text('Contraseña media');
-        } else {
-            progressBar.removeClass('danger warning').addClass('success');
-            progressBar.text('Contraseña fuerte');
+        switch (seguridad) {
+            case 1:
+                porcentaje = 20;
+                mensaje = "Mínimo 8 caracteres";
+                break;
+            case 2:
+                porcentaje = 40;
+                mensaje = "Debe contener 1 número";
+                break;
+            case 3:
+                porcentaje = 60;
+                mensaje = "Debe contener 1 mayúscula";
+                break;
+            case 4:
+                porcentaje = 80;
+                mensaje = "Debe contener 1 minúscula";
+                break;
+            case 5:
+                porcentaje = 90;
+                mensaje = "Debe contener 1 carácter especial";
+                break;
+            default:
+                porcentaje = 100;
+                mensaje = "Contraseña fuerte";
+                break;
         }
+
+        progressBar.css('width', porcentaje + '%').text(mensaje);
+
+        progressBar.removeClass('danger warning success').addClass(
+            porcentaje < 50 ? 'danger' :
+            porcentaje < 75 ? 'warning' : 'success'
+        );
     }
 
     $('#passwordIngresado').on('input', function () {
         const contrasena = $(this).val();
         const seguridad = verificarSeguridadContrasena(contrasena);
-
-        if (typeof seguridad === 'number') {
-            actualizarBarraProgreso(seguridad * 20);
-        } else {
-            actualizarBarraProgreso(100);
-        }
+        actualizarBarraProgreso(seguridad);
     });
 
     const observer = new MutationObserver(() => {
-        const contrasena = passwordInput.value;
+        const contrasena = $('#passwordIngresado').val();
         const seguridad = verificarSeguridadContrasena(contrasena);
-
-        if (typeof seguridad === 'number') {
-            actualizarBarraProgreso(seguridad * 20);
-        } else {
-            actualizarBarraProgreso(100);
-        }
+        actualizarBarraProgreso(seguridad);
     });
 
-    observer.observe(passwordInput, {
+    observer.observe(document.getElementById('passwordIngresado'), {
         attributes: true,
         attributeFilter: ['value'],
     });
 
-    // Evento para mostrar/ocultar contraseña
     $('#showPasswordCheckbox').on('change', function () {
         const passwordInput = $('#passwordIngresado');
-        if (this.checked) {
-            passwordInput.attr('type', 'text');
-        } else {
-            passwordInput.attr('type', 'password');
-        }
+        passwordInput.attr('type', this.checked ? 'text' : 'password');
     });
-
-
-
-
 });
