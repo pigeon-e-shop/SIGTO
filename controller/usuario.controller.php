@@ -67,6 +67,10 @@ switch ($_POST['mode']) {
         echo json_encode($read->getHistorialUser($_POST['idUser']));
         break;
 
+    case 'getDireccion':
+        echo json_encode($read->getDireccionByUser($_POST['idUsuario']));
+        break;
+
     default:
         echo json_encode(["error"]);
         break;

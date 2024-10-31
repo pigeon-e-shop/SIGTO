@@ -198,4 +198,17 @@ class Update
 		}
 		
 	}
+
+	public function updateStock($id_articulo,$stock) {
+		try {
+			$sql = "UPDATE articulo SET stock = :stock WHERE id = :id";
+			$sql = $this->conn->prepare($sql);
+			$sql->bindParam(':stock',$stock,PDO::PARAM_STR);
+			$sql->bindParam(':id',$id_articulo,PDO::PARAM_STR);
+			$sql->execute();
+			return ['status'=>'success','message'=>'actualizado correctamente'];
+		} catch (Exception $e) {
+			return ['status' => 'error','message'=>$e];
+		}
+	}
 }

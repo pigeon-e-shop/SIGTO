@@ -282,6 +282,10 @@ $(document).ready(function () {
         alertas.success("Resumen actualizado correctamente.");
     }
 
+    $("#pagar").on('click', function () {
+        window.location.href = "/view/tienda/pago.html"
+    });
+
     checklogin(getItems);
     initEvents();
 });

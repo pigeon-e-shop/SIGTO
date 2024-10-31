@@ -180,7 +180,7 @@ $(document).ready(function () {
         return true;
     }
 
-    const passwordInput = $('#passwordIngresado').get(0);
+    const passwordInput = $('#passwordIngresado').val();
 
     function verificarSeguridadContrasena(contrasena) {
         const longitudMinima = 8;

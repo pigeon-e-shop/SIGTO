@@ -392,7 +392,7 @@ class Read
     
     public function getIdCarritoByUser($id_usuario) {
         try {
-            $sql = "SELECT IdCarrito FROM carrito WHERE id = ?";
+            $sql = "SELECT IdCarrito FROM carrito WHERE id = ? ORDER BY fecha ASC";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id_usuario]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -413,12 +413,48 @@ class Read
         }
     }
     
-
     public function getHistorialUser($id_usuario) {
-        $sql = "SELECT * FROM verhistorial WHERE idUsuario = ? ORDER BY fecha ASC";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$id_usuario]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        try {
+            $sql = "SELECT * FROM verhistorial WHERE idUsuario = ? ORDER BY fecha ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
     }
+    
+    public function getDireccionByUser($id_usuario) {
+        try {
+            $sql = "SELECT calle, npuerta FROM usuarios WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getIdCompra($id_carrito) {
+        try {
+            $sql = "SELECT idCompra FROM compra WHERE idCarrito = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_carrito]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getIdEnvio($idUsuario) {
+        try {
+            $sql = "SELECT idEnvios FROM envios WHERE idUsuario = ? ORDER BY fechaSalida ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$idUsuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+        
 }

@@ -5,6 +5,7 @@ require_once('../model/Create.php');
 require_once('../model/Read.php');
 require_once('../model/Update.php');
 require_once('../model/Delete.php');
+require_once('../Config/Database.php');
 
 header('Content-Type: application/json');
 
@@ -12,6 +13,8 @@ $read = new Read();
 $create = new Create();
 $update = new Update();
 $delete = new Delete();
+$connection = new Connection();
+$conn = $connection->connection();
 
 $mode = $_POST['mode'];
 
@@ -97,10 +100,73 @@ try {
             }
             break;
 
+        case 'pagar':
+            try {
+                $conn->beginTransaction();
+                $idUsuario = $_POST['idUsuario'] ?? null;
+                $metodoEnvio = $_POST['metodoEnvio'] ?? null;
+                $calle = $_POST['calle'] ?? null;
+                $nPuerta = $_POST['nPuerta'] ?? null;
+                $post = array($idUsuario,$metodoEnvio,$calle,$nPuerta);
+                for ($i=0; $i < count($post); $i++) { 
+                    if ($post[$i] == null) {
+                        throw new Exception("Faltan variables POST",   $i+1);
+                    }
+                }
+                $envios = ['RETIRO', 'EXPRESS', 'NORMAL'];
+                if (!in_array($metodoEnvio,$envios)) {
+                    throw new Exception('Envio INCORRECTO', 1);
+                }
+                $data = $read->getIdCarritoByUser($_POST['idUsuario']);
+                $idCarrito = $data[0]['IdCarrito'] ?? null;
+                if (is_null($idCarrito)) {
+                    throw new Exception("idCarrito can't be null", 2);
+                }
+                if (!$create->crearCompra($idCarrito)) {
+                    throw new Exception("Error en crearCompra", 3);
+                }
+                if (!$create->crearCarrito($_POST['idUsuario'])) {
+                    throw new Exception("Error en crearCarrito", 4);
+                }
+                $data = $read->getIdCarritoByUser($_POST['idUsuario']);
+                $idCarrito = $data[0]['IdCarrito'] ?? null;
+                if (is_null($idCarrito)) {
+                    throw new Exception("idCarrito can't be null", 5);
+                }
+                $data = $read->getIdCompra($idCarrito);
+                $idCompra = ($data[0]['idCompra']) ?? null;
+                if (is_null($idCompra)) {
+                    throw new Exception("idCompra can't be null", 6);
+                }
+                if (!$create->crearHistorial($_POST['idUsuario'],$idCompra)) {
+                    throw new Exception("Error en crearHistorial", 7);
+                }
+                if (!$create->crearEnvios($_POST['metodoEnvio'],$_POST['idUsuario'],$_POST['calle'],$_POST['nPuerta'])) {
+                    throw new Exception("Error en crearEnvio", 8);
+                }
+                sleep(1);
+                $data = $read->getIdEnvio($_POST['idUsuario']);
+                $idEnvio = $data[0]['idEnvios'] ?? null;
+                if (is_null($idEnvio)) {
+                    throw new Exception("idEnvio can't be null", 9);
+                }
+                if (!$create->crearEnvioCompra($idEnvio,$idCompra)) {
+                    throw new Exception("Error en crearEnvioCompra", 10);
+                }
+                $conn->commit();
+                echo json_encode(value: ['status' => 'success', 'message' => 'exito']);
+            } catch (PDOException $e) {
+                $conn->rollBack();
+                echo json_encode(['status' => $e->getCode(), 'message' => $e->getMessage()]);
+            } catch (Exception $e) {
+                $conn->rollBack();
+                echo json_encode(['status' => 'error', 'message' => $e->getMessage(), 'code'=>$e->getCode()]);
+            } 
+        break;
 
         default:
-            throw new Exception("Error Processing Request", 1);
+            throw new Exception("Error DEFAULT", 1);
     }
 } catch (Exception $e) {
-    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+    echo json_encode(value: ['status' => 'error', 'message' => $e->getMessage()]);
 }

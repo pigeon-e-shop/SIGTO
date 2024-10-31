@@ -81,25 +81,29 @@ class Create
 			$cedula
 		]);
 	}
-	
-	public function crearCompra($fechaCompra, $idCarrito)
+
+	public function crearCompra($idCarrito)
 	{
-		$sql = "INSERT INTO compra (fechaCompra, idCarrito) VALUES (?, ?)";
-		$stmt = $this->conn->prepare($sql);
-		$stmt->execute([
-			$fechaCompra,
-			$idCarrito
-		]);
+		try {
+			$sql = "INSERT INTO compra (idCarrito, metodoPago) VALUES (?, 'paypal')";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->execute([$idCarrito]);
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
-	public function crearEnvios($metodoEnvio, $fechaSalida, $fechaLlegada)
+
+	public function crearEnvios($metodoEnvio,$idUsuario,$calle,$nPuerta)
 	{
-		$sql = "INSERT INTO envios (metodoEnvio, fechaSalida, fechaLlegada) VALUES (?, ?, ?)";
-		$stmt = $this->conn->prepare($sql);
-		$stmt->execute([
-			$metodoEnvio,
-			$fechaSalida,
-			$fechaLlegada
-		]);
+		try {
+			$sql = "INSERT INTO envios (metodoEnvio,idUsuario,direccion,npuerta) VALUES (?,?,?,?)";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->execute([$metodoEnvio,$idUsuario,$calle,$nPuerta]);
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 	public function crearFactura($horaEmitida)
 	{
@@ -188,21 +192,53 @@ class Create
 		$stmt->execute([$id_articulo, $id_usuario, $puntuacion, $comentario]);
 	}
 
-	public function crearCarrito($id_usuario) {
+	public function crearCarrito($id_usuario)
+	{
 		// idCarrito - autoincrement.
 		// estado - default
 		// fecha - default
 		// id - argumento
-		$sql = "INSERT INTO carrito(id) VALUES (?)";
-		$stmt = $this->conn->prepare($sql);
-		$stmt->execute([$id_usuario]);
+		try {
+			$sql = "INSERT INTO carrito(id) VALUES (?)";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->execute([$id_usuario]);
+			return true;
+		} catch (Exception $e) {
+			return false;	
+		}
 	}
-	public function agregarCarrito($id_carrito,$id_articulo,$cantidad) {
+	public function agregarCarrito($id_carrito, $id_articulo, $cantidad)
+	{
 		try {
 			$sql = "INSERT INTO compone(idCarrito, idArticulo, cantidad) VALUES (?,?,?)";
-		$stmt = $this->conn->prepare($sql);
-		$stmt->execute([$id_carrito,$id_articulo,$cantidad]);
-		return true;
+			$stmt = $this->conn->prepare($sql);
+			$stmt->execute([$id_carrito, $id_articulo, $cantidad]);
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+	public function crearHistorial($id_usuario,$id_compra) {
+		// idUsuario
+		// idCompra
+		// estado: no entregado.
+		try {
+			$sql = "INSERT INTO historial (idCompra,idUsuario,estado) VALUES (?,?,'no entregado')";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->execute([$id_compra,$id_usuario]);
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+	public function crearEnvioCompra($id_envio,$id_compra) {
+		try {
+			$sql = "INSERT INTO crea (idEnvio,idCompra) VALUES (?,?)";
+			$stmt = $this->conn->prepare($sql);
+			$stmt->execute([$id_envio,$id_compra]);
+			return true;
 		} catch (Exception $e) {
 			return false;
 		}
