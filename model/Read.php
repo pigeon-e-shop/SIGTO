@@ -361,5 +361,26 @@ class Read {
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function checkLogInVendedor($email, $password) {
+        $sql = "SELECT * FROM usuarios u JOIN vendedor v ON u.id = v.id WHERE u.email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$email]);
+        
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && password_verify($password, $user['contrasena'])) {
+            return $user;
+        }
+        
+        return false;
+    }
+
+    public function getEmpresaByVendedor($id) {
+        $sql = "SELECT e.email FROM pertenece p  JOIN empresa e on e.idEmpresa = p.idEmpresa JOIN usuarios u on p.id = u.id  WHERE u.email = ? LIMIT 1;";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 
 }

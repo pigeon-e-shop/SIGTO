@@ -73,51 +73,24 @@
         <script>
             $("#cerrarSesion").click(function () {
                 e.preventDefault();
-                // document.cookie
             });
             $(document).ready(function () {
-                // leer cookie
+                // obtener id empresa
                 $.ajax({
                     type: "POST",
                     url: "/controller/backoffice.controller.php",
-                    data: { mode: "getId" },
+                    data: { mode: "getInfoEmpresa"},
                     dataType: "JSON",
                     success: function (response) {
-                        if (!response || response.status === "error") {
+                        if (response.status === "error") {
                             handleError(response);
                             return;
                         }
-                        $.ajax({
-                            type: "POST",
-                            url: "/controller/backoffice.controller.php",
-                            data: { mode: "getEmail" },
-                            dataType: "JSON",
-                            success: function (response) {
-                                if (response.status === "error") {
-                                    handleError(response);
-                                    return;
-                                }
-                                $.ajax({
-                                    type: "POST",
-                                    url: "/controller/backoffice.controller.php",
-                                    data: { mode: "getInfoEmpresa", email: response.email },
-                                    dataType: "JSON",
-                                    success: function (response) {
-                                        if (response.status === "error") {
-                                            handleError(response);
-                                            return;
-                                        }
-                                        $("#tituloPagina").text(response.nombre);
-                                        $("#nombre").text(response.nombre);
-                                        $("#rut").text(response.RUT);
-                                        $("#email").text(response.email);
-                                        $("#telefono").text(response.telefono);
-                                    },
-                                    error: handleAjaxError,
-                                });
-                            },
-                            error: handleAjaxError,
-                        });
+                        $("#tituloPagina").text(response.nombre);
+                        $("#nombre").text(response.nombre);
+                        $("#rut").text(response.RUT);
+                        $("#email").text(response.email);
+                        $("#telefono").text(response.telefono);
                     },
                     error: handleAjaxError,
                 });
