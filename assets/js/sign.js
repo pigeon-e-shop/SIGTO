@@ -48,7 +48,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#signUpBtn").click(function (e) {
+    $("#signUpForm").on('submit',function (e) {
         e.preventDefault();
         try {
             if (!$("#apellidoIngresado").val()) throw new Error("Apellido not set");
@@ -72,6 +72,18 @@ $(document).ready(function () {
             if (!$("#gridCheck").is(":checked")) {
                 alertas.error("Debes aceptar los términos y condiciones.");
                 throw new Error("Debes aceptar los términos y condiciones");
+            }
+
+
+            if ($("#emailIngresado").val()) {
+                if ($("#emailIngresado").val().includes('@')) {
+                    console.log(true);
+                } else {
+                    throw new Error("Email incorrecto");
+                }
+            } else {
+                throw new Error("Email es requerido");
+                
             }
 
             $.ajax({
@@ -180,4 +192,7 @@ $(document).ready(function () {
         const passwordInput = $('#passwordIngresado');
         passwordInput.attr('type', this.checked ? 'text' : 'password');
     });
+
+
+
 });
