@@ -106,8 +106,13 @@ switch ($modo) {
 
     case 'deleteCookies':
         setcookie('usuario', '', time() - 3600, '/', '', true, true);
-        echo json_encode(['status' => 'Cookie eliminada']);
+        if (!isset($_COOKIE['usuario'])) {
+            echo json_encode(['status' => 'Cookie eliminada']);
+        } else {    
+            echo json_encode(['status' => 'Error', 'message' => 'La cookie no se pudo eliminar']);
+        }
         break;
+        
 
     case 'updateCookies':
         if (empty($_POST['username'])) {
