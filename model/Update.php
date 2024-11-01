@@ -25,6 +25,25 @@ class Update
 		return $stmt->execute([$nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $id]);
 	}
 
+	public function updateArticulo2($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $stock)
+	{
+		error_log("Actualizando artículo con ID: $id, Nombre: $nombre, Precio: $precio, Descripción: $descripcion, Ruta Imagen: $rutaImagen, Categoría: $categoria, Descuento: $descuento, Stock: $stock");
+		$stmt = $this->conn->prepare("UPDATE articulo SET nombre = :nombre, precio = :precio, descripcion = :descripcion, rutaImagen = :rutaImagen, categoria = :categoria, descuento = :descuento, stock = :stock WHERE id = :id");
+
+		$stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+		$stmt->bindParam(':precio', $precio, PDO::PARAM_STR);
+		$stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+		$stmt->bindParam(':rutaImagen', $rutaImagen, PDO::PARAM_STR);
+		$stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
+		$stmt->bindParam(':descuento', $descuento, PDO::PARAM_STR);
+		$stmt->bindParam(':stock', $stock, PDO::PARAM_INT);
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+		return $stmt->execute();
+	}
+
+
+
 	public function updateEmpresa($id, $email, $nombre, $categoria, $RUT, $telefono)
 	{
 		$query = "UPDATE empresa SET email=?, nombre=?, categoria=?, RUT=?, telefono=? WHERE idEmpresa=?";
@@ -131,7 +150,8 @@ class Update
 		return $stmt->execute([$idFactura, $id]);
 	}
 
-	public function promediarCalificacion($id) {
+	public function promediarCalificacion($id)
+	{
 		$query = "UPDATE articulo a
 				  SET a.calificacion = (
 					  SELECT AVG(c.puntuacion)
@@ -139,25 +159,26 @@ class Update
 					  WHERE c.id_articulo = a.id
 				  )
 				  WHERE a.id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute([$id]);
 	}
 
-	public function updatePassword($userId, $newPassword) {
+	public function updatePassword($userId, $newPassword)
+	{
 		$sql = "UPDATE usuarios SET contrasena = ? WHERE id = ?";
 		$stmt = $this->conn->prepare($sql);
 		return $stmt->execute([$newPassword, $userId]);
 	}
 
-	public function cambiarVisibilidad($visible,$idArticulo) {
+	public function cambiarVisibilidad($visible, $idArticulo)
+	{
 		try {
 			$sql = "UPDATE articulo a SET a.VISIBLE=? WHERE a.id=?";
 			$stmt = $this->conn->prepare($sql);
-			return $stmt->execute([$visible,$idArticulo]);
+			return $stmt->execute([$visible, $idArticulo]);
 		} catch (Exception $e) {
 			throw $e;
 		}
 	}
-	
 }

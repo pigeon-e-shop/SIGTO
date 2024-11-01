@@ -54,10 +54,10 @@ switch ($_POST['mode']) {
                 throw new Exception("Error Processing Request: Email is required", 1);
             } else {
                 $data = $read->getEmpresaByVendedor($_COOKIE['email']);
-                
+
                 $data = json_encode($read->readDetalleEmpresa($read->getEmpresaByVendedor($_COOKIE['email'])[0]['email'])[0]);
-                $data = json_decode($data,1);
-                setcookie('idEmpresa',$data['idEmpresa']);
+                $data = json_decode($data, 1);
+                setcookie('idEmpresa', $data['idEmpresa']);
                 echo json_encode($read->readDetalleEmpresa($read->getEmpresaByVendedor($_COOKIE['email'])[0]['email'])[0]);
             }
         } catch (Exception $e) {
@@ -90,6 +90,50 @@ switch ($_POST['mode']) {
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
         break;
+
+    case 'getArticulo':
+        echo json_encode($read->readArticuloById($_POST['id'])[0]);
+        break;
+
+    case 'updateArticulo':
+        $nombre = $_POST['nombre'] ?? '';
+        $descripcion = $_POST['descripcion'] ?? '';
+        $precio = $_POST['precio'] ?? '';
+        $categorias = $_POST['categorias'] ?? '';
+        $descuento = $_POST['descuento'] ?? '';
+        $stock = $_POST['stock'] ?? '';
+        $id = $_POST['id'] ?? '';
+
+        $rutaImagen = null;
+
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['imagen'];
+            $uploadDir = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/assets/img/productos/';
+            $uploadFile = $uploadDir . basename($file['name']);
+            error_log("Intentando mover a: " . $uploadFile);
+
+            if (!is_dir($uploadDir)) {
+                echo json_encode(['status' => 'error', 'message' => 'El directorio de destino no existe.']);
+                break;
+            }
+
+            if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
+                $rutaImagen = '/assets/img/productos/' . basename($file['name']);
+                error_log($rutaImagen);
+
+                $updateResult = $update->updateArticulo2($id, $nombre, $precio, $descripcion, $rutaImagen, $categorias, $descuento, $stock);
+
+                if ($updateResult) {
+                    echo json_encode(['status' => 'success', 'message' => 'Artículo actualizado con éxito.']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el artículo.']);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error al mover el archivo.', 'php_error' => $lastError]);
+            }
+        }
+        break;
+
 
     default:
         echo json_encode(['status' => 'error', 'message' => 'default']);
