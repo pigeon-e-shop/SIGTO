@@ -177,20 +177,11 @@ $(document).ready(function () {
         actualizarBarraProgreso(seguridad);
     });
 
-    const observer = new MutationObserver(() => {
-        const contrasena = $('#passwordIngresado').val();
-        const seguridad = verificarSeguridadContrasena(contrasena);
-        actualizarBarraProgreso(seguridad);
-    });
-
-    observer.observe(document.getElementById('passwordIngresado'), {
-        attributes: true,
-        attributeFilter: ['value'],
-    });
-
     $('#showPasswordCheckbox').on('change', function () {
         const passwordInput = $('#passwordIngresado');
+        const passwordInput2 = $("#passwordIS");
         passwordInput.attr('type', this.checked ? 'text' : 'password');
+        passwordInput2.attr('type', this.checked ? 'text' : 'password');
     });
 
 
