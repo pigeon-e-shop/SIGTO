@@ -15,7 +15,7 @@ $delete = new Delete();
 
 switch ($_POST['mode']) {
     case 'getArticulos':
-        echo json_encode($read->read_articulo_detalleByEmpresa(8));
+        echo json_encode($read->read_articulo_detalleByEmpresa($_COOKIE['idEmpresa']));
         break;
 
     case 'cambiarVisibilidad':
@@ -54,7 +54,10 @@ switch ($_POST['mode']) {
                 throw new Exception("Error Processing Request: Email is required", 1);
             } else {
                 $data = $read->getEmpresaByVendedor($_COOKIE['email']);
-                //1
+                
+                $data = json_encode($read->readDetalleEmpresa($read->getEmpresaByVendedor($_COOKIE['email'])[0]['email'])[0]);
+                $data = json_decode($data,1);
+                setcookie('idEmpresa',$data['idEmpresa']);
                 echo json_encode($read->readDetalleEmpresa($read->getEmpresaByVendedor($_COOKIE['email'])[0]['email'])[0]);
             }
         } catch (Exception $e) {
