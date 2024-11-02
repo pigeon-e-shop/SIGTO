@@ -1,5 +1,7 @@
-
+import Alertas from './Alertas.js';
 $(document).ready(function () {
+    const alertas = new Alertas("#alert-container");
+    alertas.info("Bienvenido!")
     $.ajax({
         type: "POST",
         url: "/controller/backoffice.controller.php",
@@ -59,7 +61,9 @@ $(document).ready(function () {
                         idArticulo: idArticulo,
                     },
                     success: function (response) {
-                        console.log(response);
+                        if (response.status == "success") {
+                            alertas.success("Visibilidad Cambiada");
+                        }
                     },
                 });
             });

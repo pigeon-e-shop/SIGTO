@@ -1,4 +1,6 @@
+import Alertas from './Alertas.js';
 $(document).ready(function () {
+    const alertas = new Alertas("#alert-container");
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get("id");
 
@@ -43,10 +45,17 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                window.location.href = "/view/backoffice/articulos.html"
+                if (response.status == 'success') {
+                    setTimeout(() => {
+                        alertas.success("Actualizado con exito");
+                    }, 2000);
+                    window.location.href = "/view/backoffice/articulos.html";
+                } else {
+                    alertas.error("Error");
+                }
             },
             error: function (xhr, status, error) {
-                $("#response").html("Error: " + error);
+                alertas.error("Error" + status + error);
             },
         });
     });

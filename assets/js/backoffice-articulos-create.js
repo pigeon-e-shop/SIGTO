@@ -1,4 +1,6 @@
+import Alertas from './Alertas.js';
 $(document).ready(function () {
+    const alertas = new Alertas("#alert-container");
     let categorias = ["Teléfonos móviles", "Computadoras y Laptops", "Televisores y Audio", "Accesorios tecnológicos", "Ropa de Hombre", "Ropa de Mujer", "Zapatos y Accesorios", "Ropa para Niños", "Muebles", "Decoración", "Herramientas y Mejoras para el Hogar", "Jardinería", "Productos para el Cuidado de la Piel", "Maquillaje", "Productos para el Cuidado del Cabello", "Suplementos y Vitaminas", "Equipamiento Deportivo", "Ropa Deportiva", "Bicicletas y Patinetes", "Camping y Senderismo", "Juguetes para Niños", "Juegos de Mesa", "Videojuegos y Consolas", "Puzzles y Rompecabezas", "Accesorios para Automóviles", "Accesorios para Motocicletas", "Herramientas y Equipos", "Neumáticos y Llantas", "Comida Gourmet", "Bebidas Alcohólicas", "Alimentos Orgánicos", "Snacks y Dulces", "Ropa de Bebé", "Juguetes para Bebés", "Productos para la Alimentación del Bebé", "Mobiliario Infantil", "Libros Físicos y E-Books", "Música y CDs", "Instrumentos Musicales", "Audiolibros y Podcasts"];
     for (let index = 0; index < categorias.length; index++) {
         const element = categorias[index];
@@ -39,11 +41,14 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                console.log(response);
+                if (response.status == 'success') {
+                    alertas.success("Articulo creado");
+                } else {
+                    alertas.error(response.message);
+                }
             },
             error: function (xhr, status, message) {
-                console.error(xhr, status, message);
-
+                alertas.error("error");
             }
         });
     });
