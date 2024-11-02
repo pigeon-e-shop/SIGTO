@@ -8,7 +8,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
         <link rel="stylesheet" href="/assets/css/backoffice.scss" />
-        <link rel="stylesheet" href="/assets/css/alertas.scss">
     </head>
     <body class="container-flex">
         <header class="container-flex w-100">
@@ -58,41 +57,50 @@
                 </div>
             </div>
         </header>
-        <main class="container-flex m-3">
-            <div class="m-5 text-center">
-                <button class="btn btn-sm btn-primary d-flex justify-content-center align-items-center" id="nuevoArticulo" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .99rem;">
-                    <span class="">Agregar nuevo artículo</span>
-                    <i class="bi bi-plus fs-2"></i>
-                </button>
-            </div>            
-            <table class="table table-responsive table-striped">
-                <thead>
-                    <tr>
-                        <td>ID articulo</td>
-                        <td>Nombre</td>
-                        <td>Precio</td>
-                        <td>Descuento</td>
-                        <td>Stock</td>
-                        <td>Imagen</td>
-                        <td>Visibilidad</td>
-                        <td>Acciones</td>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <main class="container p-5">
+            <form id="form" class="col" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+                    <small id="helpId" class="form-text text-muted">Nombre del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <textarea class="form-control" name="descripcion" id="descripcion" rows="1" aria-describedby="helpId"></textarea>
+                    <small id="helpId" class="form-text text-muted">Descripcion del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" step="0.01" placeholder="0.00" />
+                    <small id="helpId" class="form-text text-muted">Precio del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="categorias" class="form-label">Categorias</label>
+                    <select class="form-select form-select-lg" name="categorias" id="categorias"></select>
+                </div>
+                <div class="mb-3">
+                    <label for="descuento" class="form-label">Descuento</label>
+                    <input type="number" class="form-control" name="descuento" id="descuento" aria-describedby="helpId" placeholder="0" />
+                    <small id="helpId" class="form-text text-muted">Descuento del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" name="stock" id="stock" aria-describedby="helpId" placeholder="0" />
+                    <small id="helpId" class="form-text text-muted">Stock del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" name="imagen" id="imagen" placeholder="imagen.png" aria-describedby="fileHelpId" accept="image/* " />
+                    <div id="fileHelpId" class="form-text">Usa un archivo .png para que conserve mejor la calidad.</div>
+                </div>
+                <button type="submit" class="btn btn-success">Crear</button>
+            </form>
+            <div id="previewContainer" class="col"></div>
         </main>
         <div id="alert-container"></div>
         <script src="/assets/js/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script type="module" src="/assets/js/backoffice-articulos-read.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#nuevoArticulo").click(function (e) { 
-                    e.preventDefault();
-                    window.location.href = "/view/backoffice/articulos.new.html";
-                });
-            });
-        </script>
+        <script type="module" src="/assets/js/backoffice-articulos-create.js"></script>
     </body>
 </html>
