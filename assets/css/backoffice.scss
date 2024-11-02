@@ -2,6 +2,14 @@ html {
     background-color: #5B73B9;
 }
 
+:root {
+    --primary-color: #417a93;
+    --secondary-color: #A3D6D2;
+    --tertiary-color: #FFDE59;
+    --background-color: #f9f5f0;
+    --dark-color: #1b3454;
+}
+
 .rectangle {
     background: #5B73B9;
 }
@@ -93,4 +101,8 @@ header {
 
 #infoDiv {
     min-width: max-content;
+}
+
+main{
+    background-color: var(--background-color);
 }

@@ -39,7 +39,7 @@ class Create
 		$stmt->bindParam(':empresa', $empresa);
 		$stmt->bindParam(':stock', $stock);
 
-		$stmt->execute();
+		return $stmt->execute();
 	}
 
 	public function crearEmpresa($email, $nombre, $categoria, $RUT, $telefono)

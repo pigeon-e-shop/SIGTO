@@ -134,6 +134,46 @@ switch ($_POST['mode']) {
         }
         break;
 
+        case 'createArticulo':
+            $nombre = $_POST['nombre'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
+            $precio = $_POST['precio'] ?? 0.00;
+            $categorias = $_POST['categorias'] ?? '';
+            $descuento = $_POST['descuento'] ?? 0;
+            $stock = $_POST['stock'] ?? 0;
+        
+            if (isset($_FILES['imagen'])) {
+                $file = $_FILES['imagen'];
+                if ($file['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/productos/';
+                    $uploadFile = $uploadDir . basename($file['name']);
+        
+                    if (!is_dir($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
+        
+                    if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
+                        $rutaImagen = '/assets/img/productos/' . basename($file['name']);
+                        error_log($categorias);
+                        $insertResult = $create->crearArticulo($nombre, $precio, $descripcion, $rutaImagen, $categorias, $descuento,$_COOKIE['idEmpresa'], $stock);
+        
+                        if ($insertResult) {
+                            echo json_encode(['status' => 'success', 'message' => 'Artículo creado con éxito.']);
+                        } else {
+                            echo json_encode(['status' => 'error', 'message' => 'Error al insertar el artículo.']);
+                        }
+                    } else {
+                        echo json_encode(['status' => 'error', 'message' => 'Error al mover el archivo.']);
+                    }
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error al subir la imagen.']);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'No se proporcionó una imagen.']);
+            }
+            break;
+        
+
 
     default:
         echo json_encode(['status' => 'error', 'message' => 'default']);
