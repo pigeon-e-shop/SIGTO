@@ -261,59 +261,80 @@ INSERT INTO empresa (idEmpresa, email, nombre, categoria, RUT, telefono) VALUES(
 INSERT INTO empresa (idEmpresa, email, nombre, categoria, RUT, telefono) VALUES(11, 'empresa4@example.com', 'Empresa Cuatro', 'Videojuegos y Consolas', 'RUT45678901', '321654987');
 INSERT INTO empresa (idEmpresa, email, nombre, categoria, RUT, telefono) VALUES(12, 'empresa5@example.com', 'Empresa Cinco', 'Muebles', 'RUT56789012', '789123456');
 
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(200, 'iPhone 14', 799.99, 'Teléfonos móviles', 30, 'Smartphone con pantalla de 6.1 pulgadas y cámara dual.', 50, 8, '1234567890123', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(201, 'Dell XPS 13', 1299.00, 'Computadoras y Laptops', 5, 'Laptop ultradelgada con procesador Intel i7 y pantalla 4K.', 30, 8, '1234567890124', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(202, 'Nike T-Shirt', 29.99, 'Ropa de Hombre', 0, 'Camiseta de algodón 100% con logo de Nike.', 100, 9, '1234567890125', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(203, 'PlayStation 5', 499.99, 'Videojuegos y Consolas', 15, 'Consola de videojuegos de última generación con 825 GB de almacenamiento.', 20, 10, '1234567890126', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(204, 'IKEA Kallax', 89.99, 'Muebles', 20, 'Estantería modular de madera, ideal para cualquier habitación.', 15, 11, '1234567890127', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(205, 'Samsung Galaxy S21', 799.99, 'Teléfonos móviles', 0, 'Smartphone con pantalla AMOLED y triple cámara.', 60, 8, '1234567890128', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(206, 'HP Spectre x360', 1499.00, 'Computadoras y Laptops', 5, 'Convertible 2 en 1 con pantalla táctil y diseño elegante.', 25, 8, '1234567890129', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(207, 'Levi’s 501 Jeans', 59.99, 'Ropa de Hombre', 10, 'Jeans clásicos de corte recto, cómodos y duraderos.', 75, 9, '1234567890130', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(208, 'Xbox Series X', 499.00, 'Videojuegos y Consolas', 5, 'Consola de videojuegos con potencia para 4K y HDR.', 18, 10, '1234567890131', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(209, 'Sofa de 3 Plazas', 399.99, 'Muebles', 15, 'Cómodo sofá en tela suave, ideal para salas de estar.', 10, 11, '1234567890132', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(210, 'OnePlus 9', 729.00, 'Teléfonos móviles', 0, 'Smartphone con carga rápida y cámara Hasselblad.', 45, 8, '1234567890133', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(211, 'Lenovo ThinkPad X1', 1399.00, 'Computadoras y Laptops', 0, 'Laptop empresarial con gran duración de batería.', 20, 8, '1234567890134', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(212, 'Adidas Sweatpants', 49.99, 'Ropa de Hombre', 5, 'Pantalones deportivos de algodón, cómodos y elegantes.', 50, 9, '1234567890135', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(213, 'Nintendo Switch', 299.99, 'Videojuegos y Consolas', 10, 'Consola portátil que se puede jugar en casa o en movimiento.', 30, 10, '1234567890136', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(214, 'Mesa de Comedor', 299.00, 'Muebles', 10, 'Mesa de madera maciza, perfecta para reuniones familiares.', 12, 11, '1234567890137', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(215, 'Google Pixel 6', 599.00, 'Teléfonos móviles', 5, 'Smartphone con cámara de 50 MP y software inteligente.', 40, 8, '1234567890138', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(216, 'Asus ZenBook 14', 1199.00, 'Computadoras y Laptops', 0, 'Laptop ligera con pantalla NanoEdge y gran rendimiento.', 18, 8, '1234567890139', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(217, 'Puma Sports Jacket', 69.99, 'Ropa de Hombre', 15, 'Chaqueta deportiva resistente al agua y transpirable.', 25, 9, '1234567890140', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(218, 'Razer Gaming Mouse', 79.99, 'Videojuegos y Consolas', 5, 'Mouse gaming con alta precisión y retroiluminación RGB.', 15, 10, '1234567890141', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(219, 'Cama King Size', 499.99, 'Muebles', 20, 'Cama de gran tamaño con colchón viscoelástico.', 0, 11, '1234567890142', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(220, 'Xiaomi Mi 11', 749.00, 'Teléfonos móviles', 0, 'Smartphone con pantalla AMOLED y carga rápida de 55W.', 55, 8, '1234567890143', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(221, 'Acer Swift 3', 899.00, 'Computadoras y Laptops', 5, 'Laptop delgada y ligera con buen rendimiento para estudiantes.', 35, 8, '1234567890144', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(222, 'H&M Casual Shirt', 34.99, 'Ropa de Hombre', 0, 'Camisa casual de manga larga en algodón suave.', 80, 9, '1234567890145', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(223, 'Steam Deck', 399.00, 'Videojuegos y Consolas', 10, 'PC portátil para jugar tus juegos de Steam en cualquier lugar.', 25, 10, '1234567890146', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(224, 'Estantería Modular', 199.99, 'Muebles', 15, 'Estantería ajustable en altura, ideal para libros y decoración.', 10, 11, '1234567890147', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(225, 'Sony Xperia 1 III', 1299.99, 'Teléfonos móviles', 99, 'Smartphone con pantalla 4K y cámara triple.', 20, 8, '1234567890148', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(226, 'Microsoft Surface Laptop 4', 1399.00, 'Computadoras y Laptops', 0, 'Laptop elegante con pantalla táctil y buena duración de batería.', 12, 8, '1234567890149', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(227, 'Tommy Hilfiger Hoodie', 59.99, 'Ropa de Hombre', 10, 'Sudadera con capucha de la marca Tommy Hilfiger.', 40, 9, '1234567890150', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(228, 'Oculus Quest 2', 299.99, 'Videojuegos y Consolas', 15, 'Gafas de realidad virtual todo en uno, sin cables.', 22, 10, '1234567890151', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(229, 'Mesa de Noche', 149.99, 'Muebles', 20, 'Mesa de noche con cajón, ideal para dormitorio.', 25, 11, '1234567890152', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(230, 'Huawei P40 Pro', 899.00, 'Teléfonos móviles', 0, 'Smartphone con cámara cuádruple y potente batería.', 35, 8, '1234567890153', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(231, 'LG Gram 17', 1699.00, 'Computadoras y Laptops', 0, 'Laptop ligera de 17 pulgadas, ideal para portabilidad.', 10, 8, '1234567890154', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(232, 'Gap Chinos', 49.99, 'Ropa de Hombre', 5, 'Pantalones chinos en variedad de colores, cómodos y elegantes.', 50, 9, '1234567890155', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(233, 'Razer Blade 15', 1999.99, 'Videojuegos y Consolas', 5, 'Laptop gaming con gráficos NVIDIA GeForce RTX.', 5, 10, '1234567890156', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(234, 'Silla Ergonomica', 249.99, 'Muebles', 10, 'Silla de oficina con soporte lumbar y ajuste de altura.', 15, 11, '1234567890157', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(235, 'Realme GT', 499.99, 'Teléfonos móviles', 0, 'Smartphone con carga rápida y pantalla AMOLED.', 40, 8, '1234567890158', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(236, 'Toshiba Satellite', 799.00, 'Computadoras y Laptops', 0, 'Laptop confiable para uso diario y trabajo.', 20, 8, '1234567890159', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(237, 'American Eagle Shorts', 29.99, 'Ropa de Hombre', 10, 'Shorts cómodos y ligeros, perfectos para el verano.', 100, 9, '1234567890160', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(238, 'Gaming Headset', 89.99, 'Videojuegos y Consolas', 5, 'Auriculares con micrófono y sonido envolvente.', 25, 10, '1234567890161', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(239, 'Escritorio de Oficina', 299.00, 'Muebles', 15, 'Escritorio amplio con espacio para computadora y documentos.', 10, 11, '1234567890162', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(240, 'Nokia G50', 299.99, 'Teléfonos móviles', 0, 'Smartphone 5G con batería de larga duración.', 45, 8, '1234567890163', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(241, 'Razer Stealth', 1599.99, 'Computadoras y Laptops', 0, 'Laptop gamer compacta con diseño atractivo y gran rendimiento.', 15, 8, '1234567890164', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(242, 'Under Armour Compression Shirt', 39.99, 'Ropa de Hombre', 0, 'Camiseta compresora ideal para hacer deporte.', 80, 9, '1234567890165', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(243, 'Guitar Hero Live', 49.99, 'Videojuegos y Consolas', 5, 'Juego de música para PlayStation, Wii y Xbox.', 15, 10, '1234567890166', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(244, 'Comoda de Madera', 199.99, 'Muebles', 20, 'Cómoda espaciosa de madera con varios cajones.', 10, 11, '1234567890167', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(245, 'Oppo Find X3', 899.00, 'Teléfonos móviles', 0, 'Smartphone con pantalla curva y cámara de 50 MP.', 40, 8, '1234567890168', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(246, 'Lenovo Yoga 9i', 1399.99, 'Computadoras y Laptops', 0, 'Laptop convertible con buena duración de batería.', 10, 8, '1234567890169', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(247, 'Puma Sneakers', 79.99, 'Ropa de Hombre', 0, 'Zapatillas deportivas cómodas y ligeras.', 60, 9, '1234567890170', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(248, 'Razer Gamepad', 49.99, 'Videojuegos y Consolas', 5, 'Controlador de juegos compatible con múltiples plataformas.', 25, 10, '1234567890171', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(249, 'Mesa de Centro', 199.99, 'Muebles', 15, 'Mesa de centro moderna, ideal para el salón.', 10, 11, '1234567890172', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(250, 'Apple Watch Series 6', 399.99, 'Accesorios tecnológicos', 0, 'Reloj inteligente con monitoreo de salud.', 20, 12, '1234567890173', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(251, 'Samsung Galaxy Buds', 149.99, 'Accesorios tecnológicos', 0, 'Auriculares inalámbricos con cancelación de ruido.', 30, 12, '1234567890174', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
-INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, stock, empresa, codigoBarra, rutaImagen, fechaAgregado) VALUES(252, 'Xiaomi Mi Band 6', 49.99, 'Accesorios tecnológicos', 0, 'Pulsera inteligente para monitoreo de actividad.', 100, 12, '1234567890175', '../../assets/img/productos/error.png', '2024-09-19 19:55:40');
+INSERT INTO `articulo` (`nombre`, `precio`, `categoria`, `descripcion`, `stock`, `empresa`) VALUES
+('Teléfono Móvil XYZ', 299.99, 'Teléfonos móviles', 'Teléfono móvil con pantalla de 6.5 pulgadas.', 50, 8),
+('Laptop ABC', 899.99, 'Computadoras y Laptops', 'Laptop de alto rendimiento con procesador i7.', 30, 8),
+('Televisor LED 55"', 499.99, 'Televisores y Audio', 'Televisor 4K con HDR y Smart TV.', 20, 8),
+('Auriculares Inalámbricos', 89.99, 'Accesorios tecnológicos', 'Auriculares Bluetooth con cancelación de ruido.', 100, 8),
+('Camisa de Hombre', 39.99, 'Ropa de Hombre', 'Camisa de algodón, disponible en varias tallas.', 200, 8),
+('Vestido de Mujer', 49.99, 'Ropa de Mujer', 'Vestido elegante, ideal para ocasiones especiales.', 150, 8),
+('Zapatillas Deportivas', 59.99, 'Ropa Deportiva', 'Zapatillas cómodas para correr.', 75, 8),
+('Juguete Educativo', 19.99, 'Juguetes para Niños', 'Juguete que estimula la creatividad de los niños.', 100, 8),
+('Silla de Oficina', 149.99, 'Muebles', 'Silla ergonómica para largas horas de trabajo.', 40, 8),
+('Cafetera Automática', 79.99, 'Herramientas y Mejoras para el Hogar', 'Cafetera de fácil uso para preparar café.', 60, 8),
+('Set de Jardinería', 29.99, 'Jardinería', 'Set completo de herramientas para el jardín.', 80, 8),
+('Crema Hidratante', 24.99, 'Productos para el Cuidado de la Piel', 'Crema que proporciona hidratación profunda.', 150, 8),
+('Paleta de Maquillaje', 34.99, 'Maquillaje', 'Paleta con colores vibrantes para todo tipo de piel.', 90, 8),
+('Shampoo Nutritivo', 12.99, 'Productos para el Cuidado del Cabello', 'Shampoo enriquecido con vitaminas.', 200, 8),
+('Proteína en Polvo', 39.99, 'Suplementos y Vitaminas', 'Suplemento de proteína para deportistas.', 100, 8),
+('Bicicleta de Montaña', 299.99, 'Bicicletas y Patinetes', 'Bicicleta robusta para todo tipo de terrenos.', 20, 8),
+('Tienda de Camping', 199.99, 'Camping y Senderismo', 'Tienda liviana y fácil de montar.', 15, 8),
+('Juego de Mesa Clásico', 24.99, 'Juegos de Mesa', 'Juego de mesa que reúne a la familia.', 120, 8),
+('Consola de Videojuegos', 399.99, 'Videojuegos y Consolas', 'Consola de última generación.', 25, 8),
+('Puzzles de 1000 Piezas', 19.99, 'Puzzles y Rompecabezas', 'Puzzle desafiante para amantes de los rompecabezas.', 50, 8),
+('Accesorio para Auto', 39.99, 'Accesorios para Automóviles', 'Accesorio práctico para mejorar la comodidad en el auto.', 75, 8),
+('Accesorio para Moto', 49.99, 'Accesorios para Motocicletas', 'Accesorio que aumenta la seguridad al conducir.', 40, 8),
+('Set de Herramientas', 59.99, 'Herramientas y Equipos', 'Set de herramientas para cualquier tipo de trabajo.', 60, 8),
+('Neumático de Coche', 79.99, 'Neumáticos y Llantas', 'Neumático duradero y seguro para tu coche.', 30, 8),
+('Gourmet Snack', 9.99, 'Comida Gourmet', 'Snack delicioso y saludable.', 200, 8),
+('Vino Tinto', 29.99, 'Bebidas Alcohólicas', 'Vino tinto de la mejor calidad.', 50, 8),
+('Almendras Orgánicas', 14.99, 'Alimentos Orgánicos', 'Almendras orgánicas, un snack saludable.', 120, 8),
+('Barra de Chocolate', 2.99, 'Snacks y Dulces', 'Barra de chocolate oscuro.', 250, 8),
+('Smartwatch', 199.99, 'Accesorios tecnológicos', 'Reloj inteligente con múltiples funciones.', 35, 8),
+('Cámara Digital', 499.99, 'Accesorios tecnológicos', 'Cámara de alta definición para fotografía.', 20, 8),
+('Cargador Solar', 49.99, 'Accesorios tecnológicos', 'Cargador portátil que funciona con energía solar.', 70, 8),
+('Mesa de Comedor', 299.99, 'Muebles', 'Mesa de comedor de madera para 6 personas.', 15, 8),
+('Sofá Cama', 399.99, 'Muebles', 'Sofá que se convierte en cama, ideal para visitas.', 10, 8),
+('Pantalón de Hombre', 49.99, 'Ropa de Hombre', 'Pantalón de tela cómoda, ideal para el trabajo.', 150, 8),
+('Chaqueta de Mujer', 79.99, 'Ropa de Mujer', 'Chaqueta abrigadora para climas fríos.', 80, 8),
+('Botas de Trabajo', 99.99, 'Zapatos y Accesorios', 'Botas resistentes y cómodas para el trabajo.', 60, 8),
+('Mochila Escolar', 34.99, 'Ropa para Niños', 'Mochila con diseños divertidos para niños.', 100, 8),
+('Juego de Construcción', 29.99, 'Juguetes para Niños', 'Juego de bloques para desarrollar habilidades motoras.', 80, 8),
+('Gafas de Sol', 24.99, 'Accesorios para Automóviles', 'Gafas de sol con protección UV.', 150, 8),
+('Manta de Picnic', 19.99, 'Camping y Senderismo', 'Manta ideal para salir de picnic.', 50, 8),
+('Reloj de Pared', 34.99, 'Decoración', 'Reloj de pared moderno para el hogar.', 30, 8),
+('Portavelas', 12.99, 'Decoración', 'Portavelas decorativo para iluminar espacios.', 80, 8),
+('Espejo Decorativo', 49.99, 'Decoración', 'Espejo con marco elegante para cualquier habitación.', 25, 8),
+('Lámpara LED', 19.99, 'Decoración', 'Lámpara LED eficiente y de bajo consumo.', 60, 8),
+('Almohada Ergonomica', 29.99, 'Muebles', 'Almohada que brinda soporte para el cuello.', 70, 8),
+('Colchón Doble', 399.99, 'Muebles', 'Colchón de alta calidad para mayor comodidad.', 15, 8),
+('Botella de Agua', 9.99, 'Accesorios tecnológicos', 'Botella reutilizable para mantenerte hidratado.', 200, 8),
+('Taza de Cerámica', 14.99, 'Accesorios para el Hogar', 'Taza de cerámica con diseño único.', 150, 8),
+('Set de Cuchillos', 49.99, 'Herramientas y Mejoras para el Hogar', 'Set de cuchillos de cocina de acero inoxidable.', 40, 8),
+('Funda para Laptop', 29.99, 'Accesorios tecnológicos', 'Funda acolchada para proteger tu laptop.', 80, 8),
+('Mochila de Senderismo', 89.99, 'Camping y Senderismo', 'Mochila resistente para largas caminatas.', 30, 8),
+('Chaqueta Impermeable', 59.99, 'Ropa Deportiva', 'Chaqueta que protege de la lluvia.', 100, 8),
+('Camiseta Deportiva', 24.99, 'Ropa Deportiva', 'Camiseta cómoda y transpirable para hacer ejercicio.', 150, 8),
+('Botiquín de Primeros Auxilios', 39.99, 'Herramientas y Mejoras para el Hogar', 'Kit completo para emergencias.', 40, 8),
+('Luz LED para Bicicleta', 19.99, 'Bicicletas y Patinetes', 'Luz que aumenta la seguridad al montar.', 60, 8),
+('Ropa de Cama', 49.99, 'Muebles', 'Juego de sábanas de algodón suave.', 80, 8),
+('Tarjetero de Cuero', 19.99, 'Accesorios para el Hogar', 'Tarjetero elegante y duradero.', 100, 8),
+('Portátil de Videojuegos', 299.99, 'Videojuegos y Consolas', 'Dispositivo portátil para jugar en cualquier lugar.', 25, 8),
+('Altavoz Bluetooth', 79.99, 'Accesorios tecnológicos', 'Altavoz inalámbrico con gran calidad de sonido.', 50, 8),
+('Conector HDMI', 9.99, 'Accesorios tecnológicos', 'Cable HDMI de alta velocidad.', 200, 8),
+('Juego de Sartenes', 59.99, 'Herramientas y Mejoras para el Hogar', 'Juego de sartenes antiadherentes.', 30, 8),
+('Paraguas', 14.99, 'Accesorios para el Hogar', 'Paraguas resistente y liviano.', 100, 8),
+('Cojín Decorativo', 19.99, 'Decoración', 'Cojín suave para dar color a tu hogar.', 75, 8),
+('Set de Baño', 39.99, 'Accesorios para el Hogar', 'Set de toallas de baño de alta calidad.', 60, 8),
+('Bolsa de Deporte', 34.99, 'Ropa Deportiva', 'Bolsa para llevar tus cosas al gimnasio.', 100, 8),
+('Ropa de Entrenamiento', 49.99, 'Ropa Deportiva', 'Conjunto cómodo para entrenar.', 80, 8),
+('Termo de Acero', 29.99, 'Accesorios tecnológicos', 'Termo que mantiene la temperatura de las bebidas.', 150, 8),
+('Cámara de Seguridad', 99.99, 'Herramientas y Mejoras para el Hogar', 'Cámara para vigilancia con conexión Wi-Fi.', 40, 8),
+('Estantería de Madera', 149.99, 'Muebles', 'Estantería elegante y funcional.', 25, 8),
+('Bandeja Organizadora', 19.99, 'Accesorios para el Hogar', 'Bandeja para mantener ordenados los objetos.', 100, 8),
+('Cuaderno de Notas', 6.99, 'Accesorios para el Hogar', 'Cuaderno con hojas recicladas.', 200, 8),
+('Bolígrafo de Lujo', 14.99, 'Accesorios para el Hogar', 'Bolígrafo elegante para escribir.', 150, 8);
+
 
 -- views
 
@@ -447,6 +468,10 @@ join `administrador` `a` on
     ((`a`.`id` = `u`.`id`)));
     
     CREATE OR REPLACE
+
+-- pigeon.verHistorial source
+
+CREATE OR REPLACE
 ALGORITHM = UNDEFINED VIEW `verHistorial` AS
 select
     `a`.`nombre` AS `nombre`,

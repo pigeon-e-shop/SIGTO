@@ -1,0 +1,13 @@
+.carousel-controller {
+    max-width: 70px;
+    max-height: 506px;
+}
+
+#alert-container {
+    position: fixed;
+    top: 20px; /* Ajusta la distancia desde la parte superior */
+    right: 20px; /* Ajusta la distancia desde el lado derecho */
+    z-index: 1050; /* Un z-index mayor para asegurarte de que esté encima */
+    width: max-content; /* O puedes fijar un ancho específico */
+    max-width: max-content; /* Limitar el ancho máximo */
+}

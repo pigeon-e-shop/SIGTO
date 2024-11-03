@@ -1,4 +1,8 @@
+import Alertas from './Alertas.js'
+let idUser;
+const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
+    alertas.success("Bienvenido!");
     $("#dropdownCategorias").hover(
         function () {
             $(this).addClass("show");
@@ -32,7 +36,7 @@ $(document).ready(function () {
             data: { mode: 'readCookies' },
             dataType: "JSON",
             success: function (redcookies) {
-                console.log('Cookies read response:', redcookies);
+                idUser = redcookies.usuario;
                 if (redcookies.error == "Cookie no encontrada") {
                     $('#contenedor-usuario-login').html(`<div class="dropdown">
                                 <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
@@ -47,7 +51,43 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
+                alertas.error("Debes loguearte primero");
             }
         });
     }
+    
+    $(document).on('click', '.agregarArt', function (e) { 
+        e.preventDefault();
+        e.stopPropagation();
+        var idArticulo = $(this).data('id');
+        
+        $.ajax({
+            type: "POST",
+            url: "/controller/carrito.controller.php",
+            data: {
+                mode: 'agregar',
+                idUser: idUser,
+                idArticulo: idArticulo
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.status == 'ok') {
+                    alertas.success('articulo agregado correctamente');
+                } else if (response.message == "Debes loguearte primero") {
+                    alertas.error("Debes loguearte primero.")
+                } else {
+                    alertas.error('Error.');
+                }
+            },
+            error: function (xhr,status,message) {
+                alertas.error('Error.');
+                console.error(xhr,status,message);
+                
+            }
+        });
+        
+    });
+    
+    
+    
 });

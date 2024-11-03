@@ -18,6 +18,10 @@ html {
     font-family: "core-rhino-85-black", sans-serif, "arial";
 }
 
+.carousel-control-next,.carousel-control-prev {
+    background-color: var(--primary-color);
+}
+
 * {
     margin: 0;
     padding: 0;

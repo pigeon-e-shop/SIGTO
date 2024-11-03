@@ -16,8 +16,15 @@ try {
 
     switch ($_POST['modo'] ?? 'getCookie') {
         case 'agregar':
-            $create->crearConsulta($_POST['idArticulo'], $_POST['id']);
-            echo json_encode(['OK']);
+            if ($create->crearConsulta($_POST['idArticulo'], $_POST['id'])) {
+                echo json_encode("OK");
+            } else {
+                echo json_encode("error");
+            }
+            break;
+
+        case 'getHistorial':
+
             break;
 
         case 'getCookie':

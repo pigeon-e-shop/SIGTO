@@ -1,3 +1,5 @@
+import Alertas from "./Alertas.js";
+const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
     let idUser;
     let content1 = `<div id="contentUser" class="col-11 container-flex">
@@ -112,6 +114,33 @@ $(document).ready(function () {
         },
     });
 
+    $(document).keypress(function (e) {
+        var key = e.which;
+        if (key == 13) {
+            // get info
+            let calle = $("#form-calle").val();
+            let npuerta = $("#form-npuerta").val();
+            // ajax request
+            $.ajax({
+                type: "POST",
+                url: "/controller/usuario.controller.php",
+                data: {
+                    mode: "updateDireccion",
+                    id: idUser,
+                    calle: calle,
+                    npuerta: npuerta,
+                },
+                success: function (response) {
+                    alertas.success("HOLA");
+                    getUserInfo(idUser);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr, status, error);
+                },
+            });
+        }
+    });
+
     function getUserInfo(idUser) {
         $.ajax({
             type: "POST",
@@ -127,12 +156,22 @@ $(document).ready(function () {
                 $("#email").html(userInfo.email);
 
                 if (filter == 1) {
-                    $("#usuarioMain").html(content3);
-                    /*
-                    $("#calle").html(`<input type="text" value="${userInfo.calle}">`);
-                    $("#numeroPuerta").html(`<input type="text" value="${userInfo.nPuerta}">`);
-                    $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
-                    */
+                    if (userInfo.calle !== "null") {
+                        $("#calle").html(`<input type="street" id="form-calle" class="form-control" value="${userInfo.calle}" readonly="readonly">`);
+                        $("#numeroPuerta").html(`<input type="number" id="form-npuerta" class="form-control" value="${userInfo.nPuerta}" readonly="readonly">`);
+                        $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
+                        $("#form-calle").attr("readonly", "readonly");
+                        $("#form-npuerta").attr("readonly", "readonly");
+
+                        $("#form-calle, #form-npuerta").on("dblclick", function () {
+                            $(this).css("box-shadow", "1px 1px 1px 1px black");
+                            $(this).removeAttr("readonly");
+                        });
+                    } else {
+                        $("#calle").html(`<input type="text" name="direccion" class="form-control" value="${userInfo.calle}" placeholder="Calle">`);
+                        $("#numeroPuerta").html(`<input type="text" name="direccion" class="form-control" value="${userInfo.nPuerta}" placeholder="No de puerta">`);
+                        $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
+                    }
                 } else {
                     $("#calle").html(userInfo.calle);
                     $("#numeroPuerta").html(userInfo.nPuerta);
@@ -156,21 +195,21 @@ $(document).ready(function () {
                     $("#tablaOrdenes tbody").append(`
                         <tr>
                             <td>${compra.idCompra}</td>
-                            <td>${compra.idEnvios}</td>
+                            <td>${compra.idEnvio}</td>
                             <td>${compra.metodoEnvio}</td>
                             <td>${new Date(compra.fechaSalida).toLocaleString()}</td>
                             <td>${compra.fechaLlegada ? new Date(compra.fechaLlegada).toLocaleString() : "No disponible"}</td>
                             <td>${compra.calle}</td>
                             <td>${compra.Npuerta}</td>
                             <td>${!isNaN(precio) ? precio.toFixed(2) : "No disponible"}</td>
-                            <td><button class="btn btn-info">Detalles</button></td>
+                            <td><button class="btn btn-info" data-id="${compra.idCompra}">Detalles</button></td>
                         </tr>
                     `);
                 });
             },
             error: function (xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", error);
-                alert("Ocurrió un error al cargar los datos.");
+                alertas.warning("Ocurrió un error al cargar los datos.");
             },
         });
     }
@@ -178,13 +217,14 @@ $(document).ready(function () {
     $(document).on("click", "#btnEditPassword", function (e) {
         e.preventDefault();
         $("#contrasena").html(`
-            <div>
+            <div class="w-100">
+                <div id="alert-container"></div>
                 <hr>
                 <label for="oldPassword">Antigua contraseña</label>
-                <input type="password" name="oldPassword" id="oldPassword" required>
+                <input class="form-control" type="password" name="oldPassword" id="oldPassword" required>
                 <hr>
                 <label for="newPassword">Nueva contraseña</label>
-                <input type="password" name="newPassword" id="newPassword" required>
+                <input class="form-control" type="password" name="newPassword" id="newPassword" required>
                 <div class="my-3">
                     <label for="showPassword">Mostrar contraseña</label>
                     <input type="checkbox" name="showPassword" id="showPassword">
@@ -218,12 +258,13 @@ $(document).ready(function () {
     });
 
     function validateAndSubmitPassword(oldPassword, newPassword) {
+        const alertas = new Alertas("#alert-container");
         if (oldPassword === newPassword) {
-            alert("Las contraseñas no pueden ser iguales");
+            alertas.warning("Las contraseñas no pueden ser iguales");
         } else if (oldPassword === "" || newPassword === "") {
-            alert("Los campos no pueden estar vacíos");
+            alertas.warning("Los campos no pueden estar vacíos");
         } else if (!isValidPassword(newPassword)) {
-            alert("La nueva contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.");
+            alertas.warning("La nueva contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.");
         } else {
             $.ajax({
                 type: "POST",
@@ -237,17 +278,18 @@ $(document).ready(function () {
                 success: function (response) {
                     switch (response.status) {
                         case "old=new":
-                            alert("La antigua contraseña no puede ser igual a la nueva");
+                            alertas.warning("La antigua contraseña no puede ser igual a la nueva");
                             break;
                         case "ok":
-                            alert("Contraseña cambiada con éxito");
+                        case "password_updated":
+                            alertas.success("Contraseña cambiada con éxito");
                             $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
                             break;
                         case "old!=old":
-                            alert("La antigua contrasena no es la correcta");
+                            alertas.error("La antigua contrasena no es la correcta");
                             break;
                         default:
-                            alert("Error inesperado, intenta de nuevo.");
+                            alertas.error("Error inesperado, intenta de nuevo.");
                             break;
                     }
                 },
@@ -265,5 +307,96 @@ $(document).ready(function () {
         const hasNumbers = /\d/.test(password);
         const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
         return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
+    }
+    // interfaz pagina
+    // 0 = informacion de usuario: mis ordenes e info
+    // 1 = editar usuario: info editable
+    // 2 = Seguimiento de envios: mis ordenes y seguimiento de envios
+    // 3 = historial: historial: historial de articulos vistos
+    const urlParams = new URLSearchParams(window.location.search);
+    let filter = urlParams.get("mode");
+    try {
+        filter = parseInt(filter);
+    } catch (Error) {
+        console.error(Error);
+    }
+    let title = $("title");
+    switch (filter) {
+        case 1:
+            title.text("Editar usuario");
+            break;
+        case 2:
+            title.text("Seguimiento de envios");
+            // borrar info usuario
+            // infoCuenta
+            let container = $("#infoCuenta");
+            container.empty("");
+            container.html("<div class='container mt-5'><h2>Seguimiento de envios</h2></div>");
+            container.append("<ul id='seguimiento'>");
+            for (let index = 0; index < 5; index++) {
+                $("#seguimiento").append(`<li>${index}</li>`);
+            }
+            break;
+        case 3:
+            title.text("Historial");
+            let mainDiv = $("#content-main");
+            mainDiv.empty("");
+            // crear el contenedor del historial
+            mainDiv.html("<h1>Historial</h1>");
+            mainDiv.append(`<ul class="row w-100" id="listaHistorial"></ul>`);
+            $.ajax({
+                type: "POST",
+                url: "/controller/login.controller.php",
+                data: { mode: "readCookies" },
+                dataType: "JSON",
+                success: function (redcookies) {
+                    console.log("Cookies read response:", redcookies);
+                    if (redcookies.error === "Cookie no encontrada") {
+                        window.location.href = "/";
+                    } else {
+                        idUser = redcookies.usuario;
+                        $.ajax({
+                            type: "POST",
+                            url: "/controller/usuario.controller.php",
+                            data: {
+                                mode: 'getHistorial',
+                                idUser: idUser
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                response.forEach(element => {
+                                    let content = 
+                                    `
+                                    
+                                    <div class="col col-12 col-md-2 card m-5">
+                                      <img src="${element.rutaImagen}" class="card-img-top"  alt="${element.nombre}">
+                                        <div class="card-body">
+                                          <h5 class="card-title">${element.nombre}</h5>
+                                          <p class="card-text">${element.precio}</p>
+                                          <a href="/view/tienda/detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2" class="btn btn-primary">Ver pagina</a>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    `
+                                    $("#listaHistorial").append(content);
+                                });
+                            }
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error al leer cookies:", error);
+                },
+            });
+            
+
+            break;
+        case 0:
+            title.text("Informacion de usuario");
+            break;
+        default:
+            window.location.href = "/view/tienda/usuario.html?mode=0";
+            break;
     }
 });

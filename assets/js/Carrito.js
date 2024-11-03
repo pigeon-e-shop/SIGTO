@@ -65,7 +65,7 @@ $(document).ready(function () {
                                                     <h5 class="card-title">${articulo.nombre}</h5>
                                                     <p class="card-text">${articulo.descripcion}</p>
                                                     <p class="card-text">USD $${articulo.precio}</p>
-                                                    <a class="btn btn-primary agregarArt" data-id="${articulo.idArticulo}">Agregar carrito</a>
+                                                    <a class="btn btn-primary agregarArt" data-id="${articulo.id}">Agregar carrito</a>
                                                 </div>
                                             </a>
                                         </div>
@@ -141,6 +141,8 @@ $(document).ready(function () {
             this.renderizarArticulos();
         }
     };
+
+    
 
     function retornarDatos() {
         return new Promise(function (resolve, reject) {

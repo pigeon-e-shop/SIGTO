@@ -107,6 +107,7 @@ class Read
     }
 
     public function read_articulo_detalle_exclusivo($id)
+   
     {
         $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -164,25 +165,30 @@ class Read
     public function checkLogIn($username, $password)
     {
         try {
-            $stmt = $this->conn->prepare("SELECT id FROM usuarios WHERE email = :username AND contraseña = :pass");
+            $stmt = $this->conn->prepare("SELECT id, contrasena FROM usuarios WHERE email = :username");
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-            if (password_verify($password, PASSWORD_DEFAULT)) {
-                $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
-                $stmt->execute();
+            $stmt->execute();
+
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($password, $user['contrasena'])) {
+                return json_encode(['status' => 'success', 'id' => $user['id'], 'message' => 'Inicio de sesión exitoso']);
             } else {
-                return json_encode(['?']);
+                return json_encode(['status' => 'error', 'message' => 'Credenciales incorrectas']);
             }
             return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
+            
         } catch (PDOException $e) {
             error_log("Error en la consulta: " . $e->getMessage());
-            return false;
+            return json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
+        } catch (Exception $e) {
+            return json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
         }
     }
 
-    public function checkLogInAdmin($username, $password)
-    {
+    public function checkLogInAdmin($username, $password) {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM loginAdmin WHERE email = :username AND contraseña = :pass");
+            $stmt = $this->conn->prepare("SELECT * FROM loginadmin WHERE email = :username AND contraseña = :pass");
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             if (password_verify($password, PASSWORD_DEFAULT)) {
                 $stmt->bindParam(':pass', $password, PDO::PARAM_STR);
@@ -257,9 +263,9 @@ class Read
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['id'] : null;
     }
+    
 
-    public function getCookie($cookieName, $key)
-    {
+    public function getCookie($cookieName, $key) {
         if (isset($_COOKIE[$cookieName])) {
             $cookieData = json_decode($_COOKIE[$cookieName], true);
             if (array_key_exists($key, $cookieData)) {
@@ -337,8 +343,7 @@ class Read
         return array('articles' => $data, 'totalPages' => $totalPages);
     }
 
-    public function readInfoUser($id)
-    {
+    public function readInfoUser($id) {
         $sql = "SELECT * FROM infoUsuario WHERE id=?";
         $sql = $this->conn->prepare($sql);
         $sql->execute([$id]);
@@ -348,12 +353,13 @@ class Read
 
     public function readGetOrdenes($id)
     {
-        $sql = "SELECT * FROM getOrdenes WHERE id=?";
-        $sql = $this->conn->prepare($sql);
-        $sql->execute([$id]);
-        $data = $sql->fetchAll(PDO::FETCH_ASSOC);
-        return ($data);
+        $sql = "SELECT * FROM getordenes WHERE userId = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
+
 
     public function verifyPassword($inputPassword, $userId)
     {
@@ -367,6 +373,93 @@ class Read
         }
 
         return password_verify($inputPassword, $data['contrasena']);
+    }
+    public function getCarrito($id_usuario)
+    {
+        try {
+            $sql = "SELECT * FROM getarticuloscarrito WHERE UsuarioId = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if ($data === false) {
+                throw new Exception("Error al recuperar datos.");
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Error en la base de datos: " . $e->getMessage());
+        } catch (Exception $e) {
+            throw new Exception("Error: " . $e->getMessage());
+        }
+    }
+    
+    public function getIdCarritoByUser($id_usuario) {
+        try {
+            $sql = "SELECT IdCarrito FROM carrito WHERE id = ? ORDER BY fecha ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (Exception $e) {
+            return ['status'=>'error'];
+        }
+    }
+
+    public function verificarArticuloEnCarrito($idCarrito, $idArticulo) {
+        try {
+            $sql = "SELECT cantidad FROM compone WHERE idCarrito = ? AND idArticulo = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$idCarrito, $idArticulo]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getHistorialUser($id_usuario) {
+        try {
+            $sql = "SELECT * FROM verhistorial WHERE idUsuario = ? ORDER BY fecha ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getDireccionByUser($id_usuario) {
+        try {
+            $sql = "SELECT calle, npuerta FROM usuarios WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getIdCompra($id_carrito) {
+        try {
+            $sql = "SELECT idCompra FROM compra WHERE idCarrito = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$id_carrito]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
+    }
+    
+    public function getIdEnvio($idUsuario) {
+        try {
+            $sql = "SELECT idEnvios FROM envios WHERE idUsuario = ? ORDER BY fechaSalida ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$idUsuario]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
     }
 
     public function readArticuloById($id): array|bool

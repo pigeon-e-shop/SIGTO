@@ -50,7 +50,26 @@ switch ($_POST['mode']) {
             }
         
             break;
+
+    case 'updateDireccion':
+        $data = null;
+        try {
+            $id = $_POST['id'];
+            $calle = $_POST['calle'];
+            $nPuerta = $_POST['npuerta'];
+            echo $update->updateDatosEnvio($id,$calle,$nPuerta);
+        } catch (Exception $e) {
+            echo json_encode(array('status' => FALSE));
+        }
+        break;
         
+    case 'getHistorial':
+        echo json_encode($read->getHistorialUser($_POST['idUser']));
+        break;
+
+    case 'getDireccion':
+        echo json_encode($read->getDireccionByUser($_POST['idUsuario']));
+        break;
 
     default:
         echo json_encode(["error"]);
