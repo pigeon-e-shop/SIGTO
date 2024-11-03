@@ -457,24 +457,6 @@ join `usuarios` `u` on
 join `articulo` `a` on
     ((`c`.`id_articulo` = `a`.`id`)));
 
-<<<<<<< Updated upstream
-=======
-
--- pigeon.verHistorial source
-
-CREATE OR REPLACE
-ALGORITHM = UNDEFINED VIEW `verHistorial` AS
-select
-    `a`.`nombre` AS `nombre`,
-    `c`.`fecha` AS `fecha`,
-    `u`.`id` AS `id`
-from
-    ((`consulta` `c`
-join `articulo` `a` on
-    ((`a`.`id` = `c`.`idArticulo`)))
-join `usuarios` `u` on
-    ((`u`.`id` = `c`.`id`)));
->>>>>>> Stashed changes
 
 -- pigeon.verHistorial source
 
