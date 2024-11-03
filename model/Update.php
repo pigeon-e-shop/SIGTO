@@ -19,10 +19,10 @@ class Update
 		return $stmt->execute([$apellido, $nombre, $calle, $email, $hashedPassword, $Npuerta, $telefono, $id]);
 	}
 
-	public function updateArticulo($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $codigoBarra)
+	public function updateArticulo($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock)
 	{
-		$stmt = $this->conn->prepare("UPDATE articulo SET nombre=?, precio=?, descripcion=?, rutaImagen=?, categoria=?, descuento=?, empresa=?, stock=?, codigoBarra=? WHERE id=?");
-		return $stmt->execute([$nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $codigoBarra, $id]);
+		$stmt = $this->conn->prepare("UPDATE articulo SET nombre=?, precio=?, descripcion=?, rutaImagen=?, categoria=?, descuento=?, empresa=?, stock=? WHERE id=?");
+		return $stmt->execute([$nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $empresa, $stock, $id]);
 	}
 
 	public function updateEmpresa($id, $email, $nombre, $categoria, $RUT, $telefono)
@@ -131,7 +131,8 @@ class Update
 		return $stmt->execute([$idFactura, $id]);
 	}
 
-	public function promediarCalificacion($id) {
+	public function promediarCalificacion($id)
+	{
 		$query = "UPDATE articulo a
 				  SET a.calificacion = (
 					  SELECT AVG(c.puntuacion)
@@ -139,9 +140,75 @@ class Update
 					  WHERE c.id_articulo = a.id
 				  )
 				  WHERE a.id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute([$id]);
 	}
-	
+
+	public function updatePassword($userId, $newPassword)
+	{
+		$sql = "UPDATE usuarios SET contrasena = ? WHERE id = ?";
+		$stmt = $this->conn->prepare($sql);
+		return $stmt->execute([$newPassword, $userId]);
+	}
+
+	public function updateDatosEnvio($userId, $calle, $Npuerta)
+	{
+		try {
+			$sql = "UPDATE usuarios SET calle = :calle, Npuerta = :npuerta WHERE id = :id;";
+			$sql = $this->conn->prepare($sql);
+			$sql->bindParam(':calle', $calle, PDO::PARAM_STR);
+			$sql->bindParam(':npuerta', $Npuerta, PDO::PARAM_STR);
+			$sql->bindParam(':id', $userId, PDO::PARAM_INT);
+			return $sql->execute();
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+
+	public function updateTelefono($userId, $telefono)
+	{
+		try {
+			$sql = "UPDATE usuarios SET telefono = :telefono WHERE id = :id;";
+			$sql = $this->conn->prepare($sql);
+			$sql->bindParam(':telefono', $telefono, PDO::PARAM_STR);
+			$sql->bindParam(':id', $userId, PDO::PARAM_INT);
+			$data =  $sql->execute();
+			if ($data) {
+				return $data;
+			} else {
+				throw new Exception("Error Processing Request", 1);
+			}
+		} catch (Exception $e) {
+			throw $e;
+		}
+	}
+
+	public function editCantidadArticulosEnCarrito($cantidad,$idCarrito,$idArticulo) {
+		try {
+			$sql = "UPDATE compone SET cantidad = :cantidad WHERE idCarrito = :idCarrito AND idArticulo = :idArticulo;";
+			$sql = $this->conn->prepare($sql);
+			$sql->bindParam(':cantidad',$cantidad,PDO::PARAM_STR);
+			$sql->bindParam(':idCarrito',$idCarrito,PDO::PARAM_STR);
+			$sql->bindParam(':idArticulo',$idArticulo,PDO::PARAM_STR);
+			$sql->execute();
+			return ['status'=>'success','message'=>'actualizado correctamente'];
+		} catch (Exception $e) {
+			return ['status' => 'error','message'=>$e];
+		}
+		
+	}
+
+	public function updateStock($id_articulo,$stock) {
+		try {
+			$sql = "UPDATE articulo SET stock = :stock WHERE id = :id";
+			$sql = $this->conn->prepare($sql);
+			$sql->bindParam(':stock',$stock,PDO::PARAM_STR);
+			$sql->bindParam(':id',$id_articulo,PDO::PARAM_STR);
+			$sql->execute();
+			return ['status'=>'success','message'=>'actualizado correctamente'];
+		} catch (Exception $e) {
+			return ['status' => 'error','message'=>$e];
+		}
+	}
 }

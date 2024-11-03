@@ -7,3 +7,15 @@
     }
 
 }
+html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+  }
+
+#cerrarSesion{
+  * {
+    font-size: x-large;
+  }
+}

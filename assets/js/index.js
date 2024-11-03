@@ -1,4 +1,8 @@
+import Alertas from './Alertas.js'
+let idUser;
+const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
+    alertas.success("Bienvenido!");
     $("#dropdownCategorias").hover(
         function () {
             $(this).addClass("show");
@@ -28,62 +32,62 @@ $(document).ready(function () {
     function checklogin() {
         $.ajax({
             type: "POST",
-            url: "http://localhost/controller/login.controller.php",
+            url: "/controller/login.controller.php",
             data: { mode: 'readCookies' },
             dataType: "JSON",
             success: function (redcookies) {
-                console.log('Cookies read response:', redcookies);
-                if (redcookies.includes("Cookie not found")) {
-                    $.ajax({
-                        type: "POST",
-                        url: "http://localhost/controller/login.controller.php",
-                        data: { mode: 'setCookies', username: '', password: '' },
-                        dataType: "JSON",
-                        success: function (response) {
-                            console.log('Cookie created:', response);
-                        },
-                        error: function (xhr2, status2, error2) {
-                            console.error('Set cookies error:', xhr2, status2, error2);
-                        }
-                    });
+                idUser = redcookies.usuario;
+                if (redcookies.error == "Cookie no encontrada") {
+                    $('#contenedor-usuario-login').html(`<div class="dropdown">
+                                <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
+                                <div class="dropdown-menu col-md-6">
+                                    <a class="dropdown-item" href="view/tienda/signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                </div>
+                            </div>`);
+                    
                 } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "http://localhost/controller/login.controller.php",
-                        data: {
-                            mode: 'logIn',
-                            username: redcookies.username,
-                            password: redcookies.password
-                        },
-                        dataType: "JSON",
-                        success: function (response) {
-                            console.log('Login response:', response);
-                            if (Array.isArray(response)) {
-                                console.log('Session not started');
-                            } else if (Array.isArray(response) && response.includes("OK")) {
-                            }
-                        },
-                        error: function (error) {
-                            console.error('Login error:', error);
-                        }
-                    });
+                    $("#contenedor-usuario-login").html(`<a href="/view/tienda/usuario.html" class="fa-solid fa-user border-0"></a>`)
                 }
             },
             error: function (xhr, status, error) {
-                console.log('Error checking cookies:', xhr, status, error);
-                $.ajax({
-                    type: "POST",
-                    url: "../../controller/login.controller.php",
-                    data: { mode: 'setCookies', username: '', password: '' },
-                    dataType: "JSON",
-                    success: function (response) {
-                        console.log('Cookie created:', response);
-                    },
-                    error: function (xhr2, status2, error2) {
-                        console.error('Set cookies error:', xhr2, status2, error2);
-                    }
-                });
+                alertas.error("Debes loguearte primero");
             }
         });
     }
+    
+    $(document).on('click', '.agregarArt', function (e) { 
+        e.preventDefault();
+        e.stopPropagation();
+        var idArticulo = $(this).data('id');
+        
+        $.ajax({
+            type: "POST",
+            url: "/controller/carrito.controller.php",
+            data: {
+                mode: 'agregar',
+                idUser: idUser,
+                idArticulo: idArticulo
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.status == 'ok') {
+                    alertas.success('articulo agregado correctamente');
+                } else if (response.message == "Debes loguearte primero") {
+                    alertas.error("Debes loguearte primero.")
+                } else {
+                    alertas.error('Error.');
+                }
+            },
+            error: function (xhr,status,message) {
+                alertas.error('Error.');
+                console.error(xhr,status,message);
+                
+            }
+        });
+        
+    });
+    
+    
+    
 });

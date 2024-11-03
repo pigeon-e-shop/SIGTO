@@ -7,6 +7,8 @@
 
 :root {
     --primary-color: #417a93;
+    --secondary-color: #A3D6D2;
+    --tertiary-color: #FFDE59;
     --background-color: #f9f5f0;
     --dark-color: #1b3454;
 }
@@ -14,6 +16,10 @@
 html {
     font-size: 62.5%;
     font-family: "core-rhino-85-black", sans-serif, "arial";
+}
+
+.carousel-control-next,.carousel-control-prev {
+    background-color: var(--primary-color);
 }
 
 * {

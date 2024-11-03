@@ -2,6 +2,8 @@ let articulos = [];
 
 $(document).ready(function () {
     const url = `/controller/index.controller.php`;
+    const urlParams = new URLSearchParams(window.location.search);
+    const filter = urlParams.get("filtro");
 
     $.ajax({
         type: "GET",
@@ -10,8 +12,11 @@ $(document).ready(function () {
         dataType: "JSON",
         success: function (response) {
             if (Array.isArray(response)) {
-                articulos = response; 
+                articulos = response;
                 $("#articulosMain").html(generarContenidoArticulos(articulos));
+                if (filter && categoriaMap[filter]) {
+                    $("#filtroCategoria").val(categoriaMap[filter]).change();
+                }
             } else {
                 console.error("La respuesta no es un array:", response);
             }
@@ -21,9 +26,8 @@ $(document).ready(function () {
         }
     });
 
-    $('#filtroCategoria').change(function () {
+    $('#filtroCategoria').on('change', function () {
         let selectedValue = $(this).val();
-
         if (selectedValue !== 'default') {
             let filteredArticulos = articulos.filter(element => element.categoria === selectedValue);
             $("#articulosMain").html(generarContenidoArticulos(filteredArticulos));
@@ -50,10 +54,10 @@ $(document).ready(function () {
                                     <img src="${element.rutaImagen}" alt="${element.nombre}" height="120px">
                                 </div>
                                 <div class="col">
-                                    <p><h2><strong>${element.nombre}</strong></h2></p>
-                                    <p><h4>${element.descripcion}</h4></p>
-                                    <h5 style="text-decoration: line-through solid blue 1.5px">${precio}</h5>
-                                    <h4>${"$" + precioFinal}</h4>
+                                    <h2><strong>${element.nombre}</strong></h2>
+                                    <h4>${element.descripcion}</h4>
+                                    <h5 style="text-decoration: line-through solid blue 1.5px">${parseFloat(precio).toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}</h5>
+                                    <h4>${parseFloat(precioFinal).toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}</h4>
                                 </div>
                                 <div class="stars-title col" style="--calificacion: ${element.calificacion}">
                                 </div>
@@ -69,9 +73,9 @@ $(document).ready(function () {
                                     <img src="${element.rutaImagen}" alt="${element.nombre}" height="120px">
                                 </div>
                                 <div class="col">
-                                    <p><h2><strong>${element.nombre}</strong></h2></p>
-                                    <p><h4>${element.descripcion}</h4></p>
-                                    <h4>${precio}</h4></p>
+                                    <h2><strong>${element.nombre}</strong></h2>
+                                    <h4>${element.descripcion}</h4>
+                                    <h4>${parseFloat(precio).toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}</h4>
                                 </div>
                                 <div class="stars-title col" style="--calificacion: ${element.calificacion}">
                                 </div>
@@ -90,27 +94,47 @@ $(document).ready(function () {
 
     let categorias = [
         'Teléfonos móviles', 'Computadoras y Laptops', 'Televisores y Audio',
-        'Accesorios tecnológicos', 'Ropa de Hombre', 'Ropa de Mujer', 
+        'Accesorios tecnológicos', 'Ropa de Hombre', 'Ropa de Mujer',
         'Zapatos y Accesorios', 'Ropa para Niños', 'Muebles', 'Decoración',
         'Herramientas y Mejoras para el Hogar', 'Jardinería',
         'Productos para el Cuidado de la Piel', 'Maquillaje',
         'Productos para el Cuidado del Cabello', 'Suplementos y Vitaminas',
         'Equipamiento Deportivo', 'Ropa Deportiva', 'Bicicletas y Patinetes',
         'Camping y Senderismo', 'Juguetes para Niños', 'Juegos de Mesa',
-        'Videojuegos y Consolas', 'Puzzles y Rompecabezas', 
-        'Accesorios para Automóviles', 'Accesorios para Motocicletas', 
-        'Herramientas y Equipos', 'Neumáticos y Llantas', 'Comida Gourmet', 
-        'Bebidas Alcohólicas', 'Alimentos Orgánicos', 'Snacks y Dulces', 
-        'Ropa de Bebé', 'Juguetes para Bebés', 
+        'Videojuegos y Consolas', 'Puzzles y Rompecabezas',
+        'Accesorios para Automóviles', 'Accesorios para Motocicletas',
+        'Herramientas y Equipos', 'Neumáticos y Llantas', 'Comida Gourmet',
+        'Bebidas Alcohólicas', 'Alimentos Orgánicos', 'Snacks y Dulces',
+        'Ropa de Bebé', 'Juguetes para Bebés',
         'Productos para la Alimentación del Bebé', 'Mobiliario Infantil',
-        'Libros Físicos y E-Books', 'Música y CDs', 'Instrumentos Musicales', 
+        'Libros Físicos y E-Books', 'Música y CDs', 'Instrumentos Musicales',
         'Audiolibros y Podcasts'
     ];
+
+    let categorias2 = [
+        'Teléfonos_móviles', 'Computadoras_y_Laptops', 'Televisores_y_Audio',
+        'Accesorios_tecnológicos', 'Ropa_de_Hombre', 'Ropa_de_Mujer',
+        'Zapatos_y_Accesorios', 'Ropa_para_Niños', 'Muebles', 'Decoración',
+        'Herramientas_y_Mejora_para_el_Hogar', 'Jardinería',
+        'Productos_para_el_Cuidado_de_la_Piel', 'Maquillaje',
+        'Productos_para_el_Cuidado_del_Cabello', 'Suplementos_y_Vitaminas',
+        'Equipamiento_Deportivo', 'Ropa_Deportiva', 'Bicicletas_y_Patinetes',
+        'Camping_y_Senderismo', 'Juguetes_para_Niños', 'Juegos_de_Mesa',
+        'Videojuegos_y_Consolas', 'Puzzles_y_Rompecabezas',
+        'Accesorios_para_Automóviles', 'Accesorios_para_Motocicletas',
+        'Herramientas_y_Equipos', 'Neumáticos_y_Llantas', 'Comida_Gourmet',
+        'Bebidas_Alcohólicas', 'Alimentos_Orgánicos', 'Snacks_y_Dulces',
+        'Ropa_de_Bebé', 'Juguetes_para_Bebés',
+        'Productos_para_la_Alimentación_del_Bebé', 'Mobiliario_Infantil',
+        'Libros_Físicos_y_E-Books', 'Música_y_CDs', 'Instrumentos_Musicales',
+        'Audiolibros_y_Podcasts'
+    ];
+
 
     function agregarCategorias() {
         let select = $('#filtroCategoria');
 
-        categorias.forEach(categoria => {
+        categorias.forEach((categoria, i) => {
             select.append(`<option value="${categoria}">${categoria}</option>`);
         });
     }
@@ -143,7 +167,7 @@ $(document).ready(function () {
     });
 
     let keyupTimer;
-    $('#filtroNombre').keyup(function (e) { 
+    $('#filtroNombre').keyup(function (e) {
         keyupTimer = setTimeout(function () {
             $.ajax({
                 type: "POST",
@@ -153,7 +177,7 @@ $(document).ready(function () {
                     content: $('#filtroNombre').val()
                 },
                 success: function (response) {
-                    articulos = response; 
+                    articulos = response;
                     $("#articulosMain").html(generarContenidoArticulos(articulos));
                     $('#filtrosSelect').val('default');
                     $('#filtroCategoria').val('default');
@@ -162,6 +186,17 @@ $(document).ready(function () {
         }, 450);
     });
 
-    
+    let categoriaMap = {};
+    categorias.forEach((cat, index) => {
+        categoriaMap[categorias2[index]] = cat;
+    });
+
+    if (filter) {
+        if (categoriaMap[filter]) {
+            $("#filtroCategoria").val(categoriaMap[filter]).change();
+        }
+    }
+
+
 
 });

@@ -1,0 +1,2308 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\xampp\\htdocs",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2024-10-16 08:58:40",
+            "filesum": 167,
+            "codesum": 8701,
+            "commentsum": 101,
+            "blanksum": 640,
+            "statistics": {
+                ".md": {
+                    "code": 18,
+                    "comment": 8,
+                    "blank": 8
+                },
+                ".html": {
+                    "code": 2777,
+                    "comment": 23,
+                    "blank": 81
+                },
+                ".php": {
+                    "code": 1288,
+                    "comment": 15,
+                    "blank": 192
+                },
+                ".json": {
+                    "code": 11,
+                    "comment": 0,
+                    "blank": 0
+                },
+                "": {
+                    "code": 69,
+                    "comment": 0,
+                    "blank": 12
+                },
+                ".yml": {
+                    "code": 23,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".prefs": {
+                    "code": 61,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".sql": {
+                    "code": 294,
+                    "comment": 25,
+                    "blank": 68
+                },
+                ".js": {
+                    "code": 1418,
+                    "comment": 20,
+                    "blank": 138
+                },
+                ".css": {
+                    "code": 526,
+                    "comment": 8,
+                    "blank": 127
+                },
+                ".scss": {
+                    "code": 60,
+                    "comment": 0,
+                    "blank": 13
+                },
+                ".ini": {
+                    "code": 3,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".xml": {
+                    "code": 111,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".setup": {
+                    "code": 6,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".version": {
+                    "code": 2,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".xmi": {
+                    "code": 2034,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 3,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": ".htaccess"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": ".metadata\\.lock"
+                },
+                {
+                    "filename": ".metadata\\.mylyn\\repositories.xml.zip",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.projects\\.org.eclipse.egit.core.cmp\\.location",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\.indexes\\history.version"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\.indexes\\properties.index",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\.indexes\\properties.version"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\1.tree",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.safetable\\org.eclipse.core.resources",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.debug.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.dltk.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.mylyn.context.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.mylyn.monitor.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.mylyn.tasks.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.php.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.php.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.ide.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.navigator.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 1,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.workbench.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.urischeme.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.wst.jsdt.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.wst.sse.ui.prefs"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.dltk.core\\Containers.dat",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.dltk.ui\\OpenTypeHistoryorg_eclipse_php_core_PHPNature.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 2034,
+                    "comment": 1,
+                    "filename": ".metadata\\.plugins\\org.eclipse.e4.workbench\\workbench.xmi"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.egit.core\\.org.eclipse.egit.core.cmp\\.project"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.egit.core\\.org.eclipse.egit.core.cmp\\.settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.mylyn.github.ui\\avatars.ser",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.oomph.setup\\workspace.setup"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.php.ui\\dialog_settings.xml"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.php.ui\\pdt-images\\0.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.ide\\dialog_settings.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.intro\\introstate"
+                },
+                {
+                    "blank": 0,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.workbench\\dialog_settings.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.workbench\\workingsets.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.internet.cache\\cache.xml"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.jsdt.core\\variablesAndContainers.dat",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.jsdt.ui\\OpenTypeHistory.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.jsdt.ui\\QualifiedTypeNameHistory.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.sse.ui\\dialog_settings.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.xml.core\\default_catalog.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.xml.core\\system_catalog.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".metadata\\version.ini"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".project"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "filename": "assets\\core-rhino-85-black.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "assets\\css\\admin.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\css\\articulosLista.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "assets\\css\\carrito.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "assets\\css\\comoComprar.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "assets\\css\\detalle_producto.css"
+                },
+                {
+                    "blank": 13,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "assets\\css\\detalle_producto2.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "assets\\css\\error.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "assets\\css\\footer.css"
+                },
+                {
+                    "blank": 11,
+                    "code": 62,
+                    "comment": 3,
+                    "filename": "assets\\css\\header.css"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "assets\\css\\olvideContrasena.css"
+                },
+                {
+                    "blank": 11,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "assets\\css\\signIn.css"
+                },
+                {
+                    "blank": 6,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "assets\\css\\signUp.css"
+                },
+                {
+                    "blank": 14,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "assets\\css\\styleBackoffice.css"
+                },
+                {
+                    "blank": 48,
+                    "code": 229,
+                    "comment": 5,
+                    "filename": "assets\\css\\styles.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "assets\\css\\stylesServicioCliente.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "assets\\css\\usuario.css"
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner1.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner2.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner3.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner4.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\error404.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\icono.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\image.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\image3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\camisetaPumaGris.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\error.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\futbol.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\googlePlayCard50.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\iphone14.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\lapizLabialAzul.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\lapizLabialRojo.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\mandoPs5.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\nike-vomero-17-black.JPG",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\pantalon-nike-club-black.JPG",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\rimel.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\rugby.jpeg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\rugby.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\televisor_4k_55.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\usbMemory.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 69,
+                    "comment": 1,
+                    "filename": "assets\\js\\1.html"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "assets\\js\\administrar_articulos.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "assets\\js\\buscador.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 146,
+                    "comment": 0,
+                    "filename": "assets\\js\\Carrito.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 85,
+                    "comment": 0,
+                    "filename": "assets\\js\\comentarios.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "assets\\js\\crud.html"
+                },
+                {
+                    "blank": 45,
+                    "code": 394,
+                    "comment": 14,
+                    "filename": "assets\\js\\crudAdmin.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "assets\\js\\crudLogin.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 87,
+                    "comment": 1,
+                    "filename": "assets\\js\\detalle_producto.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "assets\\js\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "assets\\js\\jquery-3.7.1.min.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 177,
+                    "comment": 0,
+                    "filename": "assets\\js\\listarArticulos.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "assets\\js\\loginAdmin.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "assets\\js\\sesionIniciada.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 142,
+                    "comment": 1,
+                    "filename": "assets\\js\\sign.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 49,
+                    "comment": 1,
+                    "filename": "assets\\js\\tomarInfoArticulos.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 161,
+                    "comment": 0,
+                    "filename": "assets\\js\\usuario.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "Config\\Database.php"
+                },
+                {
+                    "blank": 68,
+                    "code": 294,
+                    "comment": 25,
+                    "filename": "Config\\Database.sql"
+                },
+                {
+                    "blank": 1,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "Config\\docker-compose.yml"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "controller\\buscador.controller.php"
+                },
+                {
+                    "blank": 6,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "controller\\comentarios.controller.php"
+                },
+                {
+                    "blank": 43,
+                    "code": 340,
+                    "comment": 9,
+                    "filename": "controller\\crud.controller.php"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "controller\\historial.controller.php"
+                },
+                {
+                    "blank": 9,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "controller\\index.controller.php"
+                },
+                {
+                    "blank": 24,
+                    "code": 127,
+                    "comment": 6,
+                    "filename": "controller\\login.controller.php"
+                },
+                {
+                    "blank": 11,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "controller\\usuario.controller.php"
+                },
+                {
+                    "blank": 9,
+                    "code": 319,
+                    "comment": 2,
+                    "filename": "index.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 7,
+                    "code": 189,
+                    "comment": 0,
+                    "filename": "model\\Create.php"
+                },
+                {
+                    "blank": 7,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "model\\Delete.php"
+                },
+                {
+                    "blank": 51,
+                    "code": 275,
+                    "comment": 0,
+                    "filename": "model\\Read.php"
+                },
+                {
+                    "blank": 24,
+                    "code": 161,
+                    "comment": 0,
+                    "filename": "model\\Update.php"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 8,
+                    "code": 18,
+                    "comment": 8,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "TODO"
+                },
+                {
+                    "blank": 5,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "view\\admin\\crud.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 1,
+                    "filename": "view\\admin\\index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 119,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\administrar_articulos.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggCompras.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggUsuarios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delCompras.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delUsuario.html"
+                },
+                {
+                    "blank": 7,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\indexBackoffice.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 72,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\indexEmp.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\info_empresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modCompras.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloAgg.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloDel.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloMod.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloVer.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modUsuario.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verCompras.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verUsuarios.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "view\\error.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 91,
+                    "comment": 1,
+                    "filename": "view\\tienda\\articulos.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 186,
+                    "comment": 1,
+                    "filename": "view\\tienda\\carrito.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 69,
+                    "comment": 1,
+                    "filename": "view\\tienda\\comoComprar.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 148,
+                    "comment": 10,
+                    "filename": "view\\tienda\\detalle_producto.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 90,
+                    "comment": 0,
+                    "filename": "view\\tienda\\nosotros.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 185,
+                    "comment": 1,
+                    "filename": "view\\tienda\\olvideContrasena.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 185,
+                    "comment": 1,
+                    "filename": "view\\tienda\\servicioCliente.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 103,
+                    "comment": 1,
+                    "filename": "view\\tienda\\signIn.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 125,
+                    "comment": 1,
+                    "filename": "view\\tienda\\signUp.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 135,
+                    "comment": 1,
+                    "filename": "view\\tienda\\usuario.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 235,
+                    "comment": 1,
+                    "filename": "vue.html"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2024-10-25 11:59:51",
+            "filesum": 174,
+            "codesum": 9403,
+            "commentsum": 586,
+            "blanksum": 1086,
+            "statistics": {
+                ".html": {
+                    "code": 2572,
+                    "comment": 23,
+                    "blank": 79
+                },
+                ".json": {
+                    "code": 11,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".php": {
+                    "code": 1475,
+                    "comment": 27,
+                    "blank": 230
+                },
+                "": {
+                    "code": 69,
+                    "comment": 0,
+                    "blank": 12
+                },
+                ".md": {
+                    "code": 18,
+                    "comment": 8,
+                    "blank": 8
+                },
+                ".yml": {
+                    "code": 23,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".sql": {
+                    "code": 638,
+                    "comment": 494,
+                    "blank": 416
+                },
+                ".js": {
+                    "code": 1740,
+                    "comment": 24,
+                    "blank": 192
+                },
+                ".css": {
+                    "code": 486,
+                    "comment": 8,
+                    "blank": 120
+                },
+                ".scss": {
+                    "code": 154,
+                    "comment": 0,
+                    "blank": 28
+                },
+                ".prefs": {
+                    "code": 61,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".ini": {
+                    "code": 3,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".xml": {
+                    "code": 111,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".setup": {
+                    "code": 6,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".version": {
+                    "code": 2,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".xmi": {
+                    "code": 2034,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 3,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": ".htaccess"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": ".metadata\\.lock"
+                },
+                {
+                    "filename": ".metadata\\.mylyn\\repositories.xml.zip",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.projects\\.org.eclipse.egit.core.cmp\\.location",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\.indexes\\history.version"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\.indexes\\properties.index",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\.indexes\\properties.version"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.root\\1.tree",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.resources\\.safetable\\org.eclipse.core.resources",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.debug.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.dltk.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.mylyn.context.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.mylyn.monitor.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.mylyn.tasks.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.php.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.php.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.ide.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.navigator.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 1,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.ui.workbench.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.urischeme.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.wst.jsdt.ui.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.core.runtime\\.settings\\org.eclipse.wst.sse.ui.prefs"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.dltk.core\\Containers.dat",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.dltk.ui\\OpenTypeHistoryorg_eclipse_php_core_PHPNature.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 2034,
+                    "comment": 1,
+                    "filename": ".metadata\\.plugins\\org.eclipse.e4.workbench\\workbench.xmi"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.egit.core\\.org.eclipse.egit.core.cmp\\.project"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.egit.core\\.org.eclipse.egit.core.cmp\\.settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.mylyn.github.ui\\avatars.ser",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.oomph.setup\\workspace.setup"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.php.ui\\dialog_settings.xml"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.php.ui\\pdt-images\\0.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.ide\\dialog_settings.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.intro\\introstate"
+                },
+                {
+                    "blank": 0,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.workbench\\dialog_settings.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.ui.workbench\\workingsets.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.internet.cache\\cache.xml"
+                },
+                {
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.jsdt.core\\variablesAndContainers.dat",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.jsdt.ui\\OpenTypeHistory.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.jsdt.ui\\QualifiedTypeNameHistory.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.sse.ui\\dialog_settings.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.xml.core\\default_catalog.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": ".metadata\\.plugins\\org.eclipse.wst.xml.core\\system_catalog.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".metadata\\version.ini"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".project"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "filename": "assets\\core-rhino-85-black.otf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "assets\\css\\admin.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "assets\\css\\articulosLista.css"
+                },
+                {
+                    "blank": 14,
+                    "code": 82,
+                    "comment": 0,
+                    "filename": "assets\\css\\carrito.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "assets\\css\\comoComprar.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": "assets\\css\\detalle_producto.css"
+                },
+                {
+                    "blank": 13,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "assets\\css\\detalle_producto2.scss"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "assets\\css\\error.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "assets\\css\\footer.css"
+                },
+                {
+                    "blank": 11,
+                    "code": 62,
+                    "comment": 3,
+                    "filename": "assets\\css\\header.css"
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "assets\\css\\index.scss"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "assets\\css\\olvideContrasena.css"
+                },
+                {
+                    "blank": 11,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "assets\\css\\signIn.css"
+                },
+                {
+                    "blank": 6,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "assets\\css\\signUp.css"
+                },
+                {
+                    "blank": 14,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "assets\\css\\styleBackoffice.css"
+                },
+                {
+                    "blank": 49,
+                    "code": 232,
+                    "comment": 5,
+                    "filename": "assets\\css\\styles.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "assets\\css\\stylesServicioCliente.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "assets\\css\\usuario.css"
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner1.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner2.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner3.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\banners\\banner4.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\error404.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\icono.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\image.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\image3.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\logo.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\auriculares-inalambricos.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\camisetaPumaGris.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\error.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\futbol.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\googlePlayCard50.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\iphone14.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\lapizLabialAzul.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\lapizLabialRojo.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\mandoPs5.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\nike-vomero-17-black.JPG",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\pantalon-nike-club-black.JPG",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\rimel.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\rugby.jpeg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\rugby.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\telefono-xyz.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\televisor_4k_55.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\usbMemory.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "assets\\img\\productos\\vino-tinto.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 69,
+                    "comment": 1,
+                    "filename": "assets\\js\\1.html"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "assets\\js\\administrar_articulos.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "assets\\js\\Alertas.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "assets\\js\\buscador.js"
+                },
+                {
+                    "blank": 24,
+                    "code": 146,
+                    "comment": 0,
+                    "filename": "assets\\js\\Carrito.js"
+                },
+                {
+                    "blank": 31,
+                    "code": 200,
+                    "comment": 2,
+                    "filename": "assets\\js\\Carrito2.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "assets\\js\\comentarios.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "assets\\js\\crud.html"
+                },
+                {
+                    "blank": 45,
+                    "code": 394,
+                    "comment": 14,
+                    "filename": "assets\\js\\crudAdmin.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "assets\\js\\crudLogin.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 124,
+                    "comment": 2,
+                    "filename": "assets\\js\\detalle_producto.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "assets\\js\\index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "assets\\js\\jquery-3.7.1.min.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 177,
+                    "comment": 0,
+                    "filename": "assets\\js\\listarArticulos.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "assets\\js\\loginAdmin.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "assets\\js\\sesionIniciada.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 123,
+                    "comment": 0,
+                    "filename": "assets\\js\\sign.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 49,
+                    "comment": 1,
+                    "filename": "assets\\js\\tomarInfoArticulos.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 202,
+                    "comment": 2,
+                    "filename": "assets\\js\\usuario.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "Config\\Database.php"
+                },
+                {
+                    "blank": 79,
+                    "code": 372,
+                    "comment": 28,
+                    "filename": "Config\\Database.sql"
+                },
+                {
+                    "blank": 1,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "Config\\docker-compose.yml"
+                },
+                {
+                    "blank": 337,
+                    "code": 266,
+                    "comment": 466,
+                    "filename": "Config\\dump-pigeon-202410231614.sql"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "controller\\buscador.controller.php"
+                },
+                {
+                    "blank": 20,
+                    "code": 68,
+                    "comment": 8,
+                    "filename": "controller\\carrito.controller.php"
+                },
+                {
+                    "blank": 6,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "controller\\comentarios.controller.php"
+                },
+                {
+                    "blank": 43,
+                    "code": 340,
+                    "comment": 9,
+                    "filename": "controller\\crud.controller.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "controller\\historial.controller.php"
+                },
+                {
+                    "blank": 9,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "controller\\index.controller.php"
+                },
+                {
+                    "blank": 23,
+                    "code": 134,
+                    "comment": 6,
+                    "filename": "controller\\login.controller.php"
+                },
+                {
+                    "blank": 11,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "controller\\usuario.controller.php"
+                },
+                {
+                    "blank": 9,
+                    "code": 310,
+                    "comment": 3,
+                    "filename": "index.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 10,
+                    "code": 195,
+                    "comment": 4,
+                    "filename": "model\\Create.php"
+                },
+                {
+                    "blank": 8,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "model\\Delete.php"
+                },
+                {
+                    "blank": 62,
+                    "code": 353,
+                    "comment": 0,
+                    "filename": "model\\Read.php"
+                },
+                {
+                    "blank": 26,
+                    "code": 169,
+                    "comment": 0,
+                    "filename": "model\\Update.php"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 8,
+                    "code": 18,
+                    "comment": 8,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "TODO"
+                },
+                {
+                    "blank": 5,
+                    "code": 101,
+                    "comment": 0,
+                    "filename": "view\\admin\\crud.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 1,
+                    "filename": "view\\admin\\index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 119,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\administrar_articulos.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggCompras.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\aggUsuarios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delCompras.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\delUsuario.html"
+                },
+                {
+                    "blank": 7,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\indexBackoffice.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 72,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\indexEmp.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\info_empresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modCompras.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 131,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloAgg.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloDel.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloMod.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modeloVer.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\modUsuario.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verArticulos.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verCompras.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verEmpresa.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verEnvios.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "view\\backoffice\\verUsuarios.html"
+                },
+                {
+                    "blank": 1,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "view\\error.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 91,
+                    "comment": 1,
+                    "filename": "view\\tienda\\articulos.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 187,
+                    "comment": 1,
+                    "filename": "view\\tienda\\carrito.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 69,
+                    "comment": 1,
+                    "filename": "view\\tienda\\comoComprar.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 150,
+                    "comment": 10,
+                    "filename": "view\\tienda\\detalle_producto.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 90,
+                    "comment": 0,
+                    "filename": "view\\tienda\\nosotros.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 185,
+                    "comment": 1,
+                    "filename": "view\\tienda\\olvideContrasena.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 185,
+                    "comment": 1,
+                    "filename": "view\\tienda\\servicioCliente.html"
+                },
+                {
+                    "blank": 4,
+                    "code": 103,
+                    "comment": 1,
+                    "filename": "view\\tienda\\signIn.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 106,
+                    "comment": 1,
+                    "filename": "view\\tienda\\signUp.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 190,
+                    "comment": 1,
+                    "filename": "view\\tienda\\usuario.html"
+                }
+            ]
+        }
+    ]
+}
