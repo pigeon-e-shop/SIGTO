@@ -152,8 +152,6 @@ class Update
 
 	public function promediarCalificacion($id)
 	{
-	public function promediarCalificacion($id)
-	{
 		$query = "UPDATE articulo a
 				  SET a.calificacion = (
 					  SELECT AVG(c.puntuacion)
@@ -167,8 +165,6 @@ class Update
 		$stmt->execute([$id]);
 	}
 
-	public function updatePassword($userId, $newPassword)
-	{
 	public function updatePassword($userId, $newPassword)
 	{
 		$sql = "UPDATE usuarios SET contrasena = ? WHERE id = ?";
