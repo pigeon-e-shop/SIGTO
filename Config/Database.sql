@@ -2,18 +2,6 @@
 create database pigeon;
 use pigeon;
 
--- pigeon.compra definition
-
-CREATE TABLE `compra` (
-  `fechaCompra` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `idCompra` int unsigned NOT NULL AUTO_INCREMENT,
-  `idCarrito` int unsigned NOT NULL,
-  `metodoPago` enum('paypal','efectivo','mercado Pago') COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`idCompra`),
-  UNIQUE KEY `compra_unique` (`idCarrito`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 -- pigeon.empresa definition
 
 CREATE TABLE `empresa` (
@@ -31,22 +19,12 @@ CREATE TABLE `empresa` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- pigeon.envios definition
-
-CREATE TABLE `envios` (
-  `idEnvios` int unsigned NOT NULL AUTO_INCREMENT,
-  `metodoEnvio` enum('RETIRO','EXPRESS','NORMAL') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'RETIRO',
-  `fechaSalida` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fechaLlegada` datetime DEFAULT NULL,
-  PRIMARY KEY (`idEnvios`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 -- pigeon.factura definition
 
 CREATE TABLE `factura` (
   `horaEmitida` datetime NOT NULL,
   `idFactura` int unsigned NOT NULL AUTO_INCREMENT,
+  `contenido` text COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`idFactura`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,7 +44,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `Usuarios_unique` (`email`),
   UNIQUE KEY `Usuarios_unique_1` (`telefono`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Los usuarios del sistema';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Los usuarios del sistema';
 
 
 -- pigeon.administrador definition
@@ -90,18 +68,16 @@ CREATE TABLE `articulo` (
   `categoria` enum('Teléfonos móviles','Computadoras y Laptops','Televisores y Audio','Accesorios tecnológicos','Ropa de Hombre','Ropa de Mujer','Zapatos y Accesorios','Ropa para Niños','Muebles','Decoración','Herramientas y Mejoras para el Hogar','Jardinería','Productos para el Cuidado de la Piel','Maquillaje','Productos para el Cuidado del Cabello','Suplementos y Vitaminas','Equipamiento Deportivo','Ropa Deportiva','Bicicletas y Patinetes','Camping y Senderismo','Juguetes para Niños','Juegos de Mesa','Videojuegos y Consolas','Puzzles y Rompecabezas','Accesorios para Automóviles','Accesorios para Motocicletas','Herramientas y Equipos','Neumáticos y Llantas','Comida Gourmet','Bebidas Alcohólicas','Alimentos Orgánicos','Snacks y Dulces','Ropa de Bebé','Juguetes para Bebés','Productos para la Alimentación del Bebé','Mobiliario Infantil','Libros Físicos y E-Books','Música y CDs','Instrumentos Musicales','Audiolibros y Podcasts') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `descuento` int DEFAULT '0',
   `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `stock` int unsigned NOT NULL,
+  `stock` int unsigned NOT NULL DEFAULT '0',
   `empresa` int unsigned NOT NULL,
-  `codigoBarra` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `rutaImagen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '../../assets/img/productos/error.png',
   `fechaAgregado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `calificacion` decimal(3,2) NOT NULL,
+  `calificacion` decimal(3,2) NOT NULL DEFAULT '0.00',
   `VISIBLE` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Articulo_unique` (`codigoBarra`),
   KEY `articulo_empresa_FK` (`empresa`),
   CONSTRAINT `articulo_empresa_FK` FOREIGN KEY (`empresa`) REFERENCES `empresa` (`idEmpresa`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- pigeon.calificacion definition
@@ -118,7 +94,7 @@ CREATE TABLE `calificacion` (
   KEY `calificacion_usuarios_FK` (`id_usuario`),
   CONSTRAINT `calificacion_articulo_FK` FOREIGN KEY (`id_articulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `calificacion_usuarios_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- pigeon.cliente definition
@@ -132,21 +108,10 @@ CREATE TABLE `cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- pigeon.compone definition
-
-CREATE TABLE `compone` (
-  `idArticulo` int unsigned NOT NULL,
-  `idCompra` int unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`idArticulo`),
-  UNIQUE KEY `Compone_unique` (`idCompra`),
-  CONSTRAINT `Compone_Articulo_FK` FOREIGN KEY (`idArticulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 -- pigeon.consulta definition
 
 CREATE TABLE `consulta` (
-  `fecha` datetime NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idArticulo` int unsigned NOT NULL,
   `id` int unsigned NOT NULL,
   PRIMARY KEY (`fecha`,`idArticulo`,`id`),
@@ -157,20 +122,18 @@ CREATE TABLE `consulta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- pigeon.crea definition
+-- pigeon.envios definition
 
-CREATE TABLE `crea` (
-  `idCompra` int unsigned NOT NULL,
-  `idArticulo` int unsigned NOT NULL,
-  `idEnvios` int unsigned NOT NULL,
+CREATE TABLE `envios` (
+  `idEnvios` int unsigned NOT NULL AUTO_INCREMENT,
+  `metodoEnvio` enum('RETIRO','EXPRESS','NORMAL') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'RETIRO',
+  `fechaSalida` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fechaLlegada` datetime DEFAULT NULL,
+  `idUsuario` int unsigned NOT NULL,
   PRIMARY KEY (`idEnvios`),
-  UNIQUE KEY `Crea_unique` (`idEnvios`),
-  KEY `Crea_Compra_FK` (`idCompra`),
-  KEY `Crea_Compone_FK` (`idArticulo`),
-  CONSTRAINT `Crea_Compone_FK` FOREIGN KEY (`idArticulo`) REFERENCES `compone` (`idArticulo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Crea_Compra_FK` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Crea_Envios_FK` FOREIGN KEY (`idEnvios`) REFERENCES `envios` (`idEnvios`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `envios_usuarios_FK` (`idUsuario`),
+  CONSTRAINT `envios_usuarios_FK` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- pigeon.generan definition
@@ -220,18 +183,6 @@ CREATE TABLE `vendedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Vendedores representantes de las empresas';
 
 
--- pigeon.agregan definition
-
-CREATE TABLE `agregan` (
-  `id` int unsigned NOT NULL,
-  `idArticulo` int unsigned NOT NULL,
-  UNIQUE KEY `Agregan_unique_1` (`idArticulo`),
-  KEY `Agregan_Usuarios_FK` (`id`),
-  CONSTRAINT `Agregan_Articulo_FK` FOREIGN KEY (`idArticulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Agregan_Usuarios_FK` FOREIGN KEY (`id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 -- pigeon.carrito definition
 
 CREATE TABLE `carrito` (
@@ -239,11 +190,63 @@ CREATE TABLE `carrito` (
   `Estado` enum('PAGO','NO PAGO') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'NO PAGO',
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id` int unsigned NOT NULL,
-  `monto` decimal(12,2) unsigned DEFAULT NULL,
   PRIMARY KEY (`IdCarrito`),
   UNIQUE KEY `Carrito_unique` (`id`),
   CONSTRAINT `Carrito_Cliente_FK` FOREIGN KEY (`id`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- pigeon.compra definition
+
+CREATE TABLE `compra` (
+  `fechaCompra` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idCompra` int unsigned NOT NULL AUTO_INCREMENT,
+  `idCarrito` int unsigned NOT NULL,
+  `metodoPago` enum('paypal','efectivo','mercado Pago') COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`idCompra`),
+  UNIQUE KEY `compra_unique` (`idCarrito`),
+  CONSTRAINT `compra_carrito_FK` FOREIGN KEY (`idCarrito`) REFERENCES `carrito` (`IdCarrito`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- pigeon.crea definition
+
+CREATE TABLE `crea` (
+  `idCompra` int unsigned NOT NULL,
+  `idEnvios` int unsigned NOT NULL,
+  PRIMARY KEY (`idEnvios`),
+  UNIQUE KEY `Crea_unique` (`idEnvios`),
+  KEY `Crea_Compra_FK` (`idCompra`),
+  CONSTRAINT `Crea_Compra_FK` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Crea_Envios_FK` FOREIGN KEY (`idEnvios`) REFERENCES `envios` (`idEnvios`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- pigeon.agregan definition
+
+CREATE TABLE `agregan` (
+  `id` int unsigned NOT NULL,
+  `idArticulo` int unsigned NOT NULL,
+  `idCarrito` int unsigned DEFAULT NULL,
+  UNIQUE KEY `Agregan_unique_1` (`idArticulo`),
+  KEY `Agregan_Usuarios_FK` (`id`),
+  KEY `agregan_carrito_FK` (`idCarrito`),
+  CONSTRAINT `Agregan_Articulo_FK` FOREIGN KEY (`idArticulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `agregan_carrito_FK` FOREIGN KEY (`idCarrito`) REFERENCES `carrito` (`IdCarrito`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Agregan_Usuarios_FK` FOREIGN KEY (`id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- pigeon.compone definition
+
+CREATE TABLE `compone` (
+  `idArticulo` int unsigned NOT NULL,
+  `idCompra` int unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idArticulo`),
+  UNIQUE KEY `Compone_unique` (`idCompra`),
+  CONSTRAINT `Compone_Articulo_FK` FOREIGN KEY (`idArticulo`) REFERENCES `articulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `compone_compra_FK` FOREIGN KEY (`idCompra`) REFERENCES `compra` (`idCompra`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO usuarios (id, apellido, nombre, calle, email, contrasena, Npuerta, telefono) VALUES(2, 'Pérez', 'María Jose', 'Avenida Siempre Viva ', 'maria.perez@example.com', '$2y$10$n4fBVnKDwKFPOu3H/Mw/z.1f7M3wyI3Ewgc3FSjLAWSD52PVa84Ue', '34B', '300765432');
 INSERT INTO usuarios (id, apellido, nombre, calle, email, contrasena, Npuerta, telefono) VALUES(3, 'López', 'Carlos', 'Boulevard de los Sueños', 'carlos.lopez@example.com', '$2y$10$bKZBqYtb7/duOugcL31ikeMzOMckge2qJo860XitkBX.N5qsaU/oy', '56C', '300112233');
@@ -314,6 +317,57 @@ INSERT INTO articulo (id, nombre, precio, categoria, descuento, descripcion, sto
 
 -- views
 
+-- pigeon.getOrdenes source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `getOrdenes` AS
+select
+    `u`.`id` AS `id`,
+    `u`.`calle` AS `calle`,
+    `u`.`Npuerta` AS `Npuerta`,
+    `c`.`idCompra` AS `idCompra`,
+    `e`.`idEnvios` AS `idEnvios`,
+    `e`.`metodoEnvio` AS `metodoEnvio`,
+    `e`.`fechaSalida` AS `fechaSalida`,
+    `e`.`fechaLlegada` AS `fechaLlegada`,
+    sum(`a2`.`precio`) AS `precio`,
+    sum(`a2`.`descuento`) AS `descuento`
+from
+    ((((((`envios` `e`
+join `usuarios` `u` on
+    ((`e`.`idUsuario` = `u`.`id`)))
+join `crea` `c` on
+    ((`c`.`idEnvios` = `e`.`idEnvios`)))
+join `compra` `c2` on
+    ((`c`.`idCompra` = `c2`.`idCompra`)))
+join `carrito` `c3` on
+    ((`c3`.`id` = `u`.`id`)))
+join `agregan` `a` on
+    ((`a`.`id` = `u`.`id`)))
+join `articulo` `a2` on
+    ((`a`.`idArticulo` = `a2`.`id`)))
+group by
+    `u`.`id`,
+    `c`.`idCompra`,
+    `e`.`idEnvios`;
+
+
+-- pigeon.infoUsuario source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `infoUsuario` AS
+select
+    `u`.`id` AS `id`,
+    `u`.`nombre` AS `nombre`,
+    `u`.`apellido` AS `apellido`,
+    `u`.`email` AS `email`,
+    `u`.`telefono` AS `telefono`,
+    `u`.`calle` AS `calle`,
+    `u`.`Npuerta` AS `nPuerta`
+from
+    `usuarios` `u`;
+
+
 -- pigeon.listar_articulos source
 
 CREATE OR REPLACE
@@ -352,6 +406,19 @@ where
     (`a`.`VISIBLE` = 1);
 
 
+-- pigeon.loginAdmin source
+
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `loginAdmin` AS
+select
+    `u`.`email` AS `email`,
+    `u`.`contrasena` AS `contrasena`
+from
+    (`usuarios` `u`
+join `administrador` `a` on
+    ((`a`.`id` = `u`.`id`)));
+
+
 -- pigeon.tomar_calificacion source
 
 CREATE OR REPLACE
@@ -369,8 +436,6 @@ join `usuarios` `u` on
 join `articulo` `a` on
     ((`c`.`id_articulo` = `a`.`id`)));
 
--- pigeon.loginAdmin source
-
 CREATE OR REPLACE
 ALGORITHM = UNDEFINED VIEW `loginAdmin` AS
 select
@@ -380,6 +445,19 @@ from
     (`usuarios` `u`
 join `administrador` `a` on
     ((`a`.`id` = `u`.`id`)));
+    
+    CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `verHistorial` AS
+select
+    `a`.`nombre` AS `nombre`,
+    `c`.`fecha` AS `fecha`,
+    `u`.`id` AS `id`
+from
+    ((`consulta` `c`
+join `articulo` `a` on
+    ((`a`.`id` = `c`.`idArticulo`)))
+join `usuarios` `u` on
+    ((`u`.`id` = `c`.`id`)));
 
 -- Crear el usuario
 CREATE USER 'pigeon'@'localhost' IDENTIFIED BY 'pigeon';
