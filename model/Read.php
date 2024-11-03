@@ -98,7 +98,16 @@ class Read
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function read_articulo_detalleByEmpresa($id)
+    {
+        $query = "SELECT * FROM articulo WHERE empresa=?";
+        $result = $this->conn->prepare($query);
+        $result->execute([$id]);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function read_articulo_detalle_exclusivo($id)
+   
     {
         $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -167,6 +176,8 @@ class Read
             } else {
                 return json_encode(['status' => 'error', 'message' => 'Credenciales incorrectas']);
             }
+            return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
+            
         } catch (PDOException $e) {
             error_log("Error en la consulta: " . $e->getMessage());
             return json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
@@ -175,10 +186,7 @@ class Read
         }
     }
 
-
-
-    public function checkLogInAdmin($username, $password)
-    {
+    public function checkLogInAdmin($username, $password) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM loginadmin WHERE email = :username AND contraseña = :pass");
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -255,10 +263,9 @@ class Read
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['id'] : null;
     }
+    
 
-
-    public function getCookie($cookieName, $key)
-    {
+    public function getCookie($cookieName, $key) {
         if (isset($_COOKIE[$cookieName])) {
             $cookieData = json_decode($_COOKIE[$cookieName], true);
             if (array_key_exists($key, $cookieData)) {
@@ -336,9 +343,8 @@ class Read
         return array('articles' => $data, 'totalPages' => $totalPages);
     }
 
-    public function readInfoUser($id)
-    {
-        $sql = "SELECT * FROM infousuario WHERE id=?";
+    public function readInfoUser($id) {
+        $sql = "SELECT * FROM infoUsuario WHERE id=?";
         $sql = $this->conn->prepare($sql);
         $sql->execute([$id]);
         $data = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -368,7 +374,6 @@ class Read
 
         return password_verify($inputPassword, $data['contrasena']);
     }
-
     public function getCarrito($id_usuario)
     {
         try {
@@ -456,5 +461,77 @@ class Read
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
-        
+
+    public function readArticuloById($id): array|bool
+    {
+        $sql = "SELECT * FROM articulo WHERE id = ?";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$id]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function readDetalleEmpresa($email)
+    {
+        $sql = "SELECT * FROM empresa WHERE email=:email";
+        $sql = $this->conn->prepare($sql);
+        $sql->bindParam(":email", $email, PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getvistasXMes($id_articulo)
+    {
+        $sql = "SELECT * FROM vista_articulos_por_mes WHERE idArticulo = ? ORDER BY año, mes;";
+        $sql = $this->conn->prepare($sql);
+        $sql->execute([$id_articulo]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function checkLogInVendedor($email, $password)
+    {
+        $sql = "SELECT * FROM usuarios u JOIN vendedor v ON u.id = v.id WHERE u.email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$email]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['contrasena'])) {
+            return $user;
+        }
+
+        return false;
+    }
+
+    public function getEmpresaByVendedor($id)
+    {
+        $sql = "SELECT e.email FROM pertenece p  JOIN empresa e on e.idEmpresa = p.idEmpresa JOIN usuarios u on p.id = u.id  WHERE u.email = ? LIMIT 1;";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getVendedoresByEmpresa($idEmpresa)
+    {
+        $sql = "SELECT u.id,u.email,u.nombre,u.apellido,u.telefono FROM usuarios u JOIN pertenece p ON p.id = u.id WHERE p.idEmpresa = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$idEmpresa]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function isVendedor($email): bool|int
+    {
+        $sql = "SELECT u.id FROM usuarios u JOIN vendedor v ON v.id = u.id WHERE u.email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $vendor = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $vendor ? (int) $vendor['id'] : false;
+    }
+
+    public function isFree($email) {
+        $sql = "SELECT u.email FROM usuarios u JOIN pertenece p on p.id = u.id WHERE u.email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

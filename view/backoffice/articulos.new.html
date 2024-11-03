@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestion de articulos</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+        <link rel="stylesheet" href="/assets/css/backoffice.scss" />
+    </head>
+    <body class="container-flex">
+        <header class="container-flex w-100">
+            <div class="row container">
+                <div class="col-2 col-md-2">
+                    <button class="btn fs-1" data-bs-toggle="offcanvas" role="button" data-bs-target="#rectangle" aria-controls="rectangle" tabindex="-1"><i class="bi bi-list"></i></button>
+                </div>
+                <p class="col-10 col-md-10 align-self-center display-3">Pigeon e-Shop</p>
+            </div>
+            <div class="rectangle offcanvas offcanvas-start" id="rectangle">
+                <div class="container d-flex flex-column">
+                    <div class="d-flex align-self-end">
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="row align-items-start list-container flex-grow-1">
+                        <a href="/view/backoffice/articulos.html" class="list-item btn">
+                            <span>Gestionar artículos</span>
+                            <span>👁️</span>
+                        </a>
+                        <a href="/view/backoffice/ventas.html" class="btn list-item">
+                            <span>Ventas</span>
+                            <span>💰</span>
+                        </a>
+                        <a href="/view/backoffice/pedidos.html" class="btn list-item">
+                            <span>Pedidos</span>
+                            <span>📦</span>
+                        </a>
+                        <a href="/view/backoffice/vendedores.html" class="btn list-item">
+                            <span>Vendedores</span>
+                            <span>👤</span>
+                        </a>
+                        <a href="/view/backoffice/" class="btn list-item">
+                            <span>Mi empresa</span>
+                            <span>🏢</span>
+                        </a>
+                    </div>
+                    <div class="row fixed-bottom position-absolute align-items-end">
+                        <div class="cerrar-ses">
+                            <button class="btn" id="cerrarSesion">
+                                <span>Cerrar sesión</span>
+                                <span>
+                                    <i class="bi bi-box-arrow-right"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="container p-5">
+            <form id="form" class="col" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+                    <small id="helpId" class="form-text text-muted">Nombre del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <textarea class="form-control" name="descripcion" id="descripcion" rows="1" aria-describedby="helpId"></textarea>
+                    <small id="helpId" class="form-text text-muted">Descripcion del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" name="precio" id="precio" aria-describedby="helpId" step="0.01" placeholder="0.00" />
+                    <small id="helpId" class="form-text text-muted">Precio del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="categorias" class="form-label">Categorias</label>
+                    <select class="form-select form-select-lg" name="categorias" id="categorias"></select>
+                </div>
+                <div class="mb-3">
+                    <label for="descuento" class="form-label">Descuento</label>
+                    <input type="number" class="form-control" name="descuento" id="descuento" aria-describedby="helpId" placeholder="0" />
+                    <small id="helpId" class="form-text text-muted">Descuento del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" name="stock" id="stock" aria-describedby="helpId" placeholder="0" />
+                    <small id="helpId" class="form-text text-muted">Stock del articulo.</small>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" name="imagen" id="imagen" placeholder="imagen.png" aria-describedby="fileHelpId" accept="image/* " />
+                    <div id="fileHelpId" class="form-text">Usa un archivo .png para que conserve mejor la calidad.</div>
+                </div>
+                <button type="submit" class="btn btn-success">Crear</button>
+            </form>
+            <div id="previewContainer" class="col"></div>
+        </main>
+        <div id="alert-container"></div>
+        <script src="/assets/js/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script type="module" src="/assets/js/backoffice-articulos-create.js"></script>
+    </body>
+</html>

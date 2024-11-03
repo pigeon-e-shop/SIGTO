@@ -113,7 +113,6 @@ switch ($action) {
                     $data['descuento'] ?? null,
                     $data['empresa'] ?? null,
                     $data['stock'] ?? null,
-                    $data['codigoBarra'] ?? null
                 );
                 break;
 

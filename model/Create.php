@@ -39,7 +39,7 @@ class Create
 		$stmt->bindParam(':empresa', $empresa);
 		$stmt->bindParam(':stock', $stock);
 
-		$stmt->execute();
+		return $stmt->execute();
 	}
 
 	public function crearEmpresa($email, $nombre, $categoria, $RUT, $telefono)
@@ -242,5 +242,11 @@ class Create
 		} catch (Exception $e) {
 			return false;
 		}
+	}
+
+	public function agregarVendedor($id,$idEmpresa) {
+		$sql = "INSERT INTO pertenece VALUES (?,?)";
+		$stmt = $this->conn->prepare($sql);
+		return $stmt->execute([$id,$idEmpresa]);
 	}
 }

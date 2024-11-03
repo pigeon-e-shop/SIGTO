@@ -2,7 +2,98 @@ import Alertas from "./Alertas.js";
 const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
     let idUser;
+    let content1 = `<div id="contentUser" class="col-11 container-flex">
+                <section id="misOrdenes" class="p-3">
+                    <h3 class="text-center mb-4">Mis Órdenes</h3>
+                    <div class="container-flex table-responsive">
+                        <table id="tablaOrdenes" class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID Compra</th>
+                                    <th>ID Envío</th>
+                                    <th>Método de Envío</th>
+                                    <th>Fecha de Salida</th>
+                                    <th>Fecha de Llegada</th>
+                                    <th>Calle</th>
+                                    <th>Número de Puerta</th>
+                                    <th>Total de la Orden</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+                <hr class="container">
+                <section id="infoCuenta" class="">
+                    <h3 class="text-center mt-4">Info Cuenta</h3>
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <p id="nombre" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="apellido" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="email" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="calle" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="numeroPuerta" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="contrasena" class="font-weight-bold"></p>
+                        </div>
+                    </div>
+                </section>
+            </div>`;
+    let content2 = `<section id="infoCuenta" class="">
+                    <h3 class="text-center mt-4">Info Cuenta</h3>
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <p id="nombre" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="apellido" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="email" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="calle" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="numeroPuerta" class="font-weight-bold"></p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p id="contrasena" class="font-weight-bold"></p>
+                        </div>
+                    </div>
+                </section>`;
 
+    let content3 = `<section id="misOrdenes" class="p-3">
+                    <h3 class="text-center mb-4">Mis Órdenes</h3>
+                    <div class="container-flex table-responsive">
+                        <table id="tablaOrdenes" class="table table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID Compra</th>
+                                    <th>ID Envío</th>
+                                    <th>Método de Envío</th>
+                                    <th>Fecha de Salida</th>
+                                    <th>Fecha de Llegada</th>
+                                    <th>Calle</th>
+                                    <th>Número de Puerta</th>
+                                    <th>Total de la Orden</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>`;
     $.ajax({
         type: "POST",
         url: "/controller/login.controller.php",

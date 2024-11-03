@@ -1,0 +1,108 @@
+html {
+    background-color: #5B73B9;
+}
+
+:root {
+    --primary-color: #417a93;
+    --secondary-color: #A3D6D2;
+    --tertiary-color: #FFDE59;
+    --background-color: #f9f5f0;
+    --dark-color: #1b3454;
+}
+
+.rectangle {
+    background: #5B73B9;
+}
+
+.list-container {
+    width: 300px;
+    height: fit-content;
+    background: #353535;
+    border-radius: 12px;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.36);
+    z-index: 2; 
+    margin: 10px auto; 
+    flex: 1;
+}
+
+.list-item {
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    &:hover {
+        color: #5B73B9;
+    }
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.cerrar-ses {
+    color: rgba(233, 233, 238, 1);
+    font-size: 17px;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 20px;
+}
+
+header {
+    background-color: #5B73B9;
+}
+
+#info{
+    background-color: #353535;
+    color: aliceblue;
+    border-radius: 7px;
+    font-size: large;
+}
+
+#cardVentas {
+    background-color: #353535;
+    border-radius: 7px;
+    min-width: max-content;
+}
+
+.card {
+    background-color: #353535;
+    border-radius: 7px; 
+    color: aliceblue;
+    font-size: large;
+    min-height: 150px;
+
+    p {
+        color: aliceblue;
+        font-size: large;
+    }
+}
+
+#totalVentas {
+    color: aliceblue;
+    font-size: large;
+}
+
+.textoTotalVentas {
+    color: aliceblue;
+    font-size: large;
+}
+
+
+#comentarios {
+    max-height: 300px;
+    display: block;
+}
+
+#calificacion {
+    background-color: #353535;
+    border-radius: 7px;
+}
+
+#infoDiv {
+    min-width: max-content;
+}
+
+main{
+    background-color: var(--background-color);
+}

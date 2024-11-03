@@ -457,6 +457,17 @@ join `usuarios` `u` on
 join `articulo` `a` on
     ((`c`.`id_articulo` = `a`.`id`)));
 
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `loginAdmin` AS
+select
+    `u`.`email` AS `email`,
+    `u`.`contrasena` AS `contrasena`
+from
+    (`usuarios` `u`
+join `administrador` `a` on
+    ((`a`.`id` = `u`.`id`)));
+    
+    CREATE OR REPLACE
 
 -- pigeon.verHistorial source
 

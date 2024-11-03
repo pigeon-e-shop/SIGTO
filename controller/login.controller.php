@@ -152,9 +152,42 @@ switch ($modo) {
                 echo json_encode(['status' => 'Usuario o contraseña incorrectos']);
             }
         } catch (Exception $e) {
-            echo json_encode(['status' => 'Se produjo un error en el servidor', 'error' => $e->getMessage()]);
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
         break;
+
+    case 'loginVendedor':
+        try {
+            if (empty($_POST['email'])) {
+                throw new Exception("email vacio", 1);
+            }
+            if (empty($_POST['password'])) {
+                throw new Exception("password vacio", 1);
+            }
+            $result = $read->checkLogInVendedor($_POST['email'], $_POST['password']);
+            if ($result) {
+                if (empty($result)) {
+                    throw new Exception("respuesta vacia", 1);
+                } else {
+                    echo json_encode($result);
+                }
+            } else {
+                throw new Exception("respuesta vacia", 1);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+        break;
+
+    case 'startSessionVendedor':
+        setcookie('email', $_POST['email'], time() + (86400 * 1), '/');
+        echo json_encode(["status" => 'ok', "email" => $_COOKIE['email']]);
+        break;
+
+    case 'closeSessionVendedor':
+        setcookie('email', '', time() - 3600, '/');
+        break;
+
 
     default:
         echo json_encode(['error' => 'Modo no especificado']);
