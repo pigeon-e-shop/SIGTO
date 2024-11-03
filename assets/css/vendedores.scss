@@ -1,0 +1,9 @@
+.custom-popover {
+    --bs-popover-max-width: 200px;
+    --bs-popover-border-color: var(--bd-black);
+    --bs-popover-header-bg: var(--bd-violet);
+    --bs-popover-header-color: var(--bs-black);
+    --bs-popover-body-padding-x: .5rem;
+    --bs-popover-body-padding-y: .5rem;
+    border: 1px solid black;
+}

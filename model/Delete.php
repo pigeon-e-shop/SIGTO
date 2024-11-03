@@ -19,7 +19,13 @@ class Delete {
 		$query = "DELETE FROM `$tabla` WHERE `$columna` = :id";
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $result = $stmt->execute();
-	
+            return $stmt->execute();
 	}
+
+    public function banVendedor($id) {
+        $sql = "DELETE FROM pertenece p WHERE p.id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_STR);
+        return $stmt->execute();
+    }
 }

@@ -173,7 +173,42 @@ switch ($_POST['mode']) {
             }
             break;
         
+            case 'getVendedores':
+                echo json_encode($read->getVendedoresByEmpresa($_COOKIE['idEmpresa']));
+                break;
 
+                case 'banVendedor':
+                    if ($delete->banVendedor($_POST['idVendedor'])) {
+                        echo json_encode(['status' => 'success', 'message' => 'Exito']);
+                    } else {
+                        echo json_encode(['status'=>'error']);
+                    }
+                    break;
+
+                    case 'agregarVendedor':
+                        try {
+                            if (!isset($_POST['email'])) {
+                                throw new Exception("Email not in POST", 1);
+                            }
+
+                            // leer si esta en la lista de vendedores
+                            $esVendedor = $read->isVendedor($_POST['email']);
+                            if (!$esVendedor) {
+                                throw new Exception("El vendedor no esta en la lista de vendedores", 1);
+                            }
+                            // leer si esta en una empresa
+                            $estaLibre = $read->isFree($_POST['email']);
+                            if ($estaLibre) {
+                                throw new Exception("El vendedor ya esta en otra empresa", 1);
+                            }
+                            $id = $read->getIdByEmail($_POST['email']);
+                            // agregar a la tabla pertenece
+                            $create->crearPertenece($id,$_COOKIE['idEmpresa']);
+                            echo json_encode(['status' => 'success', 'message' => 'Vendedor agregado']);
+                        } catch (Exception $e) {
+                            echo json_encode(['status'=>'error','message'=>$e->getMessage()]);
+                        }
+                        break;
 
     default:
         echo json_encode(['status' => 'error', 'message' => 'default']);

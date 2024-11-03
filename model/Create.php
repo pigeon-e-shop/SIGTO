@@ -194,4 +194,10 @@ class Create
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute([$id_articulo, $id_usuario, $puntuacion, $comentario]);
 	}
+
+	public function agregarVendedor($id,$idEmpresa) {
+		$sql = "INSERT INTO pertenece VALUES (?,?)";
+		$stmt = $this->conn->prepare($sql);
+		return $stmt->execute([$id,$idEmpresa]);
+	}
 }
