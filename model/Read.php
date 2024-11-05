@@ -177,7 +177,6 @@ class Read
                 return json_encode(['status' => 'error', 'message' => 'Credenciales incorrectas']);
             }
             return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
-            
         } catch (PDOException $e) {
             error_log("Error en la consulta: " . $e->getMessage());
             return json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
@@ -397,11 +396,10 @@ class Read
     
     public function getIdCarritoByUser($id_usuario) {
         try {
-            $sql = "SELECT IdCarrito FROM carrito WHERE id = ? ORDER BY fecha ASC";
+            $sql = "SELECT IdCarrito FROM `carrito` WHERE id = ? ORDER BY `carrito`.`fecha` DESC LIMIT 1; ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id_usuario]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         } catch (Exception $e) {
             return ['status'=>'error'];
         }

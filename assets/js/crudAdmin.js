@@ -26,7 +26,7 @@ $(document).ready(function () {
                             row += "<td>" + item[key] + "</td>";
                         }
                     }
-                    row += '<td><button class="editBtn btn btn-sm" data-id="' + item.idArticulo + '">Editar</button> <button class="deleteBtn btn btn-sm" data-id="' + item.idArticulo + '">Eliminar</button></td></tr>';
+                    row += '<td><button class="editBtn btn btn-sm" data-id="' + item.id + '">Editar</button> <button class="deleteBtn btn btn-sm" data-id="' + item.id + '">Eliminar</button></td></tr>';
                     rows += row;
                 });
                 // anade a la tabla los datos
@@ -187,7 +187,7 @@ $(document).ready(function () {
                 data: {
                     action: "deleteData",
                     table: $("#tableSelector").val(),
-                    id: id,
+                    id: id
                 },
                 success: function (response) {
                     alert("Datos eliminados");

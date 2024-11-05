@@ -6,7 +6,7 @@ $(document).ready(function () {
         url: "/controller/login.controller.php",
         data: {
             mode: "logIn",
-            username: user,
+            email: user,
             password: pass,
         },
         dataType: "JSON",

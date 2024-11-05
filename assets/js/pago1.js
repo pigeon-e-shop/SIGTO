@@ -2,7 +2,7 @@ $(document).ready(function () {
     async function cargarResumen() {
         let idUser = await obtenerIdUsuario();
         let infoDireccion = await getDireccion(idUser);
-        $("#direccion").html(`${infoDireccion[0].calle} ${infoDireccion[0].npuerta}`)
+        $("#direccion").html(`${infoDireccion[0].calle} ${infoDireccion[0].npuerta}`);
         getItems(idUser);
     }
 
@@ -45,29 +45,61 @@ $(document).ready(function () {
 
     let pagar = async () => {
         let idUser = await obtenerIdUsuario();
-        const metodoEnvio = $('input[name="envio"]:checked').data("tipo");
-        const calle = $("#direccion").text().split(" ")[0];
-        const npuerta = $("#direccion").text().split(" ")[1];
+
+        const envioSeleccionado = $('input[name="envio"]:checked');
+        const metodoEnvio = envioSeleccionado.val();
+        const tipoEnvio = envioSeleccionado.data("tipo");
+        const direccion = envioSeleccionado.data("direccion") || "";
+
+        let calle = $("#direccion").text().split(" ")[0];
+        let npuerta = $("#direccion").text().split(" ")[1];
+
+        if (tipoEnvio == "retiro") {
+            if (direccion == "centro") {
+                calle = "Ituzaingo";
+                npuerta = "1327";
+            } else {
+                if (direccion == "aeropuerto") {
+                    calle = "Ruta 101";
+                    npuerta = "19950";
+                }
+            }
+        } else {
+            if (tipoEnvio == 'express' || tipoEnvio == 'normal') {
+                calle = $("#direccion").text().split(" ")[0];
+                npuerta = $("#direccion").text().split(" ")[1];
+            }
+        }
+
+        console.log(
+            {
+                metodoEnvio: metodoEnvio, 
+                tipoEnvio: tipoEnvio.toUpperCase(), 
+                direccion: direccion, 
+                calle: calle, 
+                npuerta: npuerta
+            }
+        );
+
         $.ajax({
             type: "POST",
             url: "/controller/carrito.controller.php",
             data: {
-                mode: 'pagar',
+                mode: "pagar",
                 idUsuario: idUser,
-                metodoEnvio: '',
-                calle: '',
-                npuerta: '' 
+                metodoEnvio: tipoEnvio.toUpperCase(),
+                calle: calle,
+                nPuerta: npuerta
             },
             dataType: "JSON",
             success: function (response) {
-                alert('EXITO');
+                console.log(response);
             },
-            error: function (xhr,status,message) {
-                console.error(xhr,status,message);
-                
-            }
+            error: function (xhr, status, message) {
+                console.error(xhr, status, message);
+            },
         });
-    }
+    };
 
     function renderizarArticulos(data) {
         let precioTotal = 0;
@@ -119,7 +151,6 @@ $(document).ready(function () {
         $("#envioResumen").text(`$${precio.toFixed(2)}`);
         actualizarTotal(precio);
     });
-    
 
     function actualizarTotal(precioEnvio) {
         const subtotal = parseFloat($("#subtotalResumen").text().replace("US$", "")) || 0;
@@ -143,5 +174,8 @@ $(document).ready(function () {
             return null;
         }
     };
-    
+
+    $("#btnPay").on("click", function () {
+        pagar();
+    });
 });
