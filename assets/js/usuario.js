@@ -131,7 +131,7 @@ $(document).ready(function () {
                     npuerta: npuerta,
                 },
                 success: function (response) {
-                    alertas.success("HOLA");
+                    alertas.success("Direccion cambiada con exito");
                     getUserInfo(idUser);
                 },
                 error: function (xhr, status, error) {
@@ -168,8 +168,16 @@ $(document).ready(function () {
                             $(this).removeAttr("readonly");
                         });
                     } else {
-                        $("#calle").html(`<input type="text" name="direccion" class="form-control" value="${userInfo.calle}" placeholder="Calle">`);
-                        $("#numeroPuerta").html(`<input type="text" name="direccion" class="form-control" value="${userInfo.nPuerta}" placeholder="No de puerta">`);
+                        $("#calle").html(`
+                            <label for="calleInput">Calle</label>
+                            <input type="text" id="calleInput" name="calle" class="form-control" value="${userInfo.calle}" placeholder="Calle">
+                        `);
+                        
+                        $("#numeroPuerta").html(`
+                            <label for="numeroPuertaInput">Número de puerta</label>
+                            <input type="text" id="numeroPuertaInput" name="numeroPuerta" class="form-control" value="${userInfo.nPuerta}" placeholder="No de puerta">
+                        `);
+                        
                         $("#contrasena").html(`<button class="btn btn-primary" id="btnEditPassword">Editar contraseña</button>`);
                     }
                 } else {
