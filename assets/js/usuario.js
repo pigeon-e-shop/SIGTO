@@ -198,7 +198,7 @@ $(document).ready(function () {
             data: { mode: "getOrdenes", id: idUser },
             success: function (response) {
                 $("#tablaOrdenes tbody").empty();
-                $.each(response, function (index, compra) {
+                response.forEach(compra => {
                     const precio = parseFloat(compra.precio);
                     $("#tablaOrdenes tbody").append(`
                         <tr>

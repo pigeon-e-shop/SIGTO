@@ -7,6 +7,9 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
+CREATE DATABASE pigeon;
+USE pigeon;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -377,7 +380,7 @@ INSERT INTO `envios` (`idEnvios`, `metodoEnvio`, `fechaSalida`, `fechaLlegada`, 
 CREATE TABLE `factura` (
   `horaEmitida` datetime NOT NULL DEFAULT current_timestamp(),
   `idFactura` int(10) UNSIGNED NOT NULL,
-  `contenido` text NOT NULL DEFAULT '-'
+  `contenido` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

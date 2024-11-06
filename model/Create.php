@@ -102,6 +102,7 @@ class Create
 			$stmt->execute([$metodoEnvio,$idUsuario,$calle,$nPuerta]);
 			return true;
 		} catch (Exception $e) {
+			error_log($e);
 			return false;
 		}
 	}
@@ -226,9 +227,9 @@ class Create
 		try {
 			$sql = "INSERT INTO historial (idCompra,idUsuario,estado) VALUES (?,?,'no entregado')";
 			$stmt = $this->conn->prepare($sql);
-			$stmt->execute([$id_compra,$id_usuario]);
-			return true;
+			return $stmt->execute([$id_compra,$id_usuario]);
 		} catch (Exception $e) {
+			error_log($e->getMessage());
 			return false;
 		}
 	}
@@ -237,9 +238,9 @@ class Create
 		try {
 			$sql = "INSERT INTO crea (idEnvio,idCompra) VALUES (?,?)";
 			$stmt = $this->conn->prepare($sql);
-			$stmt->execute([$id_envio,$id_compra]);
-			return true;
+			return $stmt->execute([$id_envio,$id_compra]);
 		} catch (Exception $e) {
+			error_log($e->getMessage());
 			return false;
 		}
 	}

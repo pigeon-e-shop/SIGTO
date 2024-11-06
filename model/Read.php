@@ -343,7 +343,7 @@ class Read
     }
 
     public function readInfoUser($id) {
-        $sql = "SELECT * FROM infoUsuario WHERE id=?";
+        $sql = "SELECT * FROM infousuario WHERE id=?";
         $sql = $this->conn->prepare($sql);
         $sql->execute([$id]);
         $data = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -376,9 +376,10 @@ class Read
     public function getCarrito($id_usuario)
     {
         try {
-            $sql = "SELECT * FROM getarticuloscarrito WHERE UsuarioId = ?";
+            $idCarrito = $this->getIdCarritoByUser($id_usuario);
+            $sql = "SELECT * FROM getarticuloscarrito WHERE UsuarioId = ? AND CarritoId = ?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$id_usuario]);
+            $stmt->execute([$id_usuario,$idCarrito[0]['IdCarrito']]);
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -418,7 +419,7 @@ class Read
     
     public function getHistorialUser($id_usuario) {
         try {
-            $sql = "SELECT * FROM verhistorial WHERE idUsuario = ? ORDER BY fecha ASC";
+            $sql = "SELECT * FROM verhistorial WHERE id = ? ORDER BY fecha ASC";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id_usuario]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -451,7 +452,7 @@ class Read
     
     public function getIdEnvio($idUsuario) {
         try {
-            $sql = "SELECT idEnvios FROM envios WHERE idUsuario = ? ORDER BY fechaSalida ASC";
+            $sql = "SELECT idEnvios FROM envios WHERE idUsuario = ? ORDER BY fechaSalida DESC";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$idUsuario]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -135,10 +135,6 @@ try {
                     error_log("No se pudo obtener idCompra para idCarrito: " . $idCarrito);
                     throw new Exception("idCompra can't be null", 66);
                 }
-                
-                if (!$create->crearCarrito($_POST['idUsuario'])) {
-                    throw new Exception("Error en crearCarrito", 4);
-                }
                 $data = $read->getIdCarritoByUser($_POST['idUsuario']);
                 $idCarrito = $data[0]['IdCarrito'] ?? null;
                 if (is_null($idCarrito)) {
@@ -163,8 +159,14 @@ try {
                 if (!$create->crearEnvioCompra($idEnvio, $idCompra)) {
                     throw new Exception("Error en crearEnvioCompra", 10);
                 }
-                $conn->commit();
-                echo json_encode(value: ['status' => 'success', 'message' => 'exito']);
+                if (!$create->crearCarrito($_POST['idUsuario'])) {
+                    throw new Exception("Error en crearCarrito", 4);
+                }
+                if ($conn->commit()) {
+                    echo json_encode(value: ['status' => 'success', 'message' => 'exito']);
+                } else {
+                    throw new Exception("error en commit", 11);
+                }
             } catch (PDOException $e) {
                 $conn->rollBack();
                 echo json_encode(['status' => $e->getCode(), 'message' => $e->getMessage()]);

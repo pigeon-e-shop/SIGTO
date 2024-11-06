@@ -1,3 +1,5 @@
+import Alertas from './Alertas.js';
+const alertas = new Alertas("#alert-container");
 $(document).ready(function () {
     async function cargarResumen() {
         let idUser = await obtenerIdUsuario();
@@ -5,7 +7,6 @@ $(document).ready(function () {
         $("#direccion").html(`${infoDireccion[0].calle} ${infoDireccion[0].npuerta}`);
         getItems(idUser);
     }
-
     cargarResumen();
 
     async function obtenerIdUsuario() {
@@ -94,6 +95,41 @@ $(document).ready(function () {
             dataType: "JSON",
             success: function (response) {
                 console.log(response);
+                switch (response.message) {
+                    case 'Faltan variables POST':
+                        switch (response.code) {
+                            case 1:
+                                // falta idUsuario
+                                alertas.error("Falta idUsuario");
+                                break;
+
+                            case 2:
+                                // falta metodoEnvio
+                                alertas.error("Falta metodoEnvio");
+                                break;
+
+                            case 3:
+                                // falta calle
+                                alertas.error("falta calle");
+                                break;
+
+                            case 4:
+                                //falta nPuerta
+                                alertas.error("Falta nPuerta");
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                        break;
+
+                    case 'exito':
+                        window.location.href = "/";
+                        break;
+                
+                    default:
+                        break;
+                }
             },
             error: function (xhr, status, message) {
                 console.error(xhr, status, message);
