@@ -27,7 +27,6 @@ class Update
 
 	public function updateArticulo2($id, $nombre, $precio, $descripcion, $rutaImagen, $categoria, $descuento, $stock)
 	{
-		error_log("Actualizando artículo con ID: $id, Nombre: $nombre, Precio: $precio, Descripción: $descripcion, Ruta Imagen: $rutaImagen, Categoría: $categoria, Descuento: $descuento, Stock: $stock");
 		$stmt = $this->conn->prepare("UPDATE articulo SET nombre = :nombre, precio = :precio, descripcion = :descripcion, rutaImagen = :rutaImagen, categoria = :categoria, descuento = :descuento, stock = :stock WHERE id = :id");
 
 		$stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);

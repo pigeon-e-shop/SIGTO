@@ -8,9 +8,20 @@ require_once('../model/Delete.php');
 
 header('Content-Type: application/json');
 
-// Determina la acción a realizar
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
-$readAction = $_GET['readAction'] ?? $_POST['readAction'] ?? ''; // Usado para acciones específicas de lectura
+
+$readAction = $_GET['readAction'] ?? $_POST['readAction'] ?? '';
+
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
+
+if (!empty($data['action'])) {
+    $action = $data['action'];
+}
+
+if (!empty($data['readAction'])) {
+    $readAction = $data['readAction'];
+}
 
 // Crea instancias de las clases CRUD
 $create = new Create();
@@ -44,7 +55,8 @@ switch ($action) {
 /**
  * Maneja la creación de datos en una tabla
  */
-function handleCreateData($create) {
+function handleCreateData($create)
+{
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
@@ -60,18 +72,28 @@ function handleCreateData($create) {
     switch ($table) {
         case 'usuarios':
             $result = $create->crearUsuario(
-                $attributes['apellido'], $attributes['nombre'], $attributes['calle'],
-                $attributes['email'], $attributes['contrasena'], $attributes['Npuerta'], $attributes['telefono']
+                $attributes['apellido'],
+                $attributes['nombre'],
+                $attributes['calle'],
+                $attributes['email'],
+                $attributes['contrasena'],
+                $attributes['Npuerta'],
+                $attributes['telefono']
             );
             break;
         case 'articulo':
             $result = $create->crearArticulo(
-                $attributes['nombre'], $attributes['precio'], $attributes['descripcion'],
-                $attributes['rutaImagen'], $attributes['categoria'], $attributes['descuento'],
-                $attributes['empresa'], $attributes['stock']
+                $attributes['nombre'],
+                $attributes['precio'],
+                $attributes['descripcion'],
+                $attributes['rutaImagen'],
+                $attributes['categoria'],
+                $attributes['descuento'],
+                $attributes['empresa'],
+                $attributes['stock']
             );
             break;
-        // Agrega casos para otras tablas según sea necesario
+            // Agrega casos para otras tablas según sea necesario
         default:
             echo json_encode(["error" => "Table not supported"]);
             return;
@@ -83,7 +105,8 @@ function handleCreateData($create) {
 /**
  * Maneja la lectura de datos, tablas y columnas
  */
-function handleReadData($read, $readAction) {
+function handleReadData($read, $readAction)
+{
     $table = $_GET['table'] ?? $_POST['table'] ?? '';
     $filter = $_GET['filter'] ?? $_POST['filter'] ?? '';
 
@@ -115,7 +138,8 @@ function handleReadData($read, $readAction) {
 /**
  * Maneja la actualización de datos en una tabla
  */
-function handleUpdateData($update) {
+function handleUpdateData($update)
+{
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
@@ -132,18 +156,30 @@ function handleUpdateData($update) {
     switch ($table) {
         case 'usuarios':
             $result = $update->updateUsuario(
-                $id, $attributes['apellido'], $attributes['nombre'], $attributes['calle'],
-                $attributes['email'], $attributes['contrasena'], $attributes['Npuerta'], $attributes['telefono']
+                $id,
+                $attributes['apellido'],
+                $attributes['nombre'],
+                $attributes['calle'],
+                $attributes['email'],
+                $attributes['contrasena'],
+                $attributes['Npuerta'],
+                $attributes['telefono']
             );
             break;
         case 'articulo':
             $result = $update->updateArticulo(
-                $id, $attributes['nombre'], $attributes['precio'], $attributes['descripcion'],
-                $attributes['rutaImagen'], $attributes['categoria'], $attributes['descuento'],
-                $attributes['empresa'], $attributes['stock']
+                $id,
+                $attributes['nombre'],
+                $attributes['precio'],
+                $attributes['descripcion'],
+                $attributes['rutaImagen'],
+                $attributes['categoria'],
+                $attributes['descuento'],
+                $attributes['empresa'],
+                $attributes['stock']
             );
             break;
-        // Agrega casos para otras tablas según sea necesario
+            // Agrega casos para otras tablas según sea necesario
         default:
             echo json_encode(["error" => "Table not supported"]);
             return;
@@ -155,19 +191,63 @@ function handleUpdateData($update) {
 /**
  * Maneja la eliminación de datos en una tabla
  */
-function handleDeleteData($delete) {
+function handleDeleteData($delete)
+{
+    // Obtener los datos JSON de la solicitud
     $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
+    error_log("Datos recibidos: " . $json);  // Agregar un log para ver los datos recibidos
 
-    if (json_last_error() !== JSON_ERROR_NONE || empty($data['table']) || empty($data['id'])) {
-        echo json_encode(["error" => "Invalid input"]);
-        return;
-    }
+    // Decodificar el JSON a un array asociativo
+    $data = json_decode($json, true);
 
     $table = $data['table'];
     $id = $data['id'];
 
-    $result = $delete->delete($table, $id);
+    // Llamada a la función de eliminación
+    switch ($table) {
+        case 'consulta':
+            try {
+                $result = $delete->delete2($table, $id, "id");
 
-    echo json_encode($result ? ["success" => "Record deleted"] : ["error" => "Delete failed"]);
+                // Si la eliminación fue exitosa
+                if ($result) {
+                    echo json_encode(["success" => "Record deleted successfully"]);
+                } else {
+                    error_log("Fallo al eliminar el registro con ID: " . $id);
+                    http_response_code(500);
+                    echo json_encode(["error" => "Failed to delete the record"]);
+                }
+            } catch (Exception $e) {
+                // Capturar errores internos (como problemas con la base de datos)
+                error_log("Error interno: " . $e->getMessage());
+                http_response_code(500);
+                echo json_encode([
+                    "error" => "Internal server error",
+                    "details" => $e->getMessage()
+                ]);
+            }
+            break;
+        default:
+            try {
+                $result = $delete->delete($table, $id);
+
+                // Si la eliminación fue exitosa
+                if ($result) {
+                    echo json_encode(["success" => "Record deleted successfully"]);
+                } else {
+                    error_log("Fallo al eliminar el registro con ID: " . $id);
+                    http_response_code(500);
+                    echo json_encode(["error" => "Failed to delete the record"]);
+                }
+            } catch (Exception $e) {
+                // Capturar errores internos (como problemas con la base de datos)
+                error_log("Error interno: " . $e->getMessage());
+                http_response_code(500);
+                echo json_encode([
+                    "error" => "Internal server error",
+                    "details" => $e->getMessage()
+                ]);
+            }
+            break;
+    }
 }

@@ -123,16 +123,13 @@ try {
                     throw new Exception("idCarrito can't be null", 2);
                 }
                 if (!$create->crearCompra($idCarrito)) {
-                    error_log("Error en crearCompra para idCarrito: " . $idCarrito);
                     throw new Exception("Error en crearCompra", 3);
                 }
                 $data = $read->getIdCompra($idCarrito);
                 $idCompra = $data[0]['idCompra'] ?? null;
                 
-                error_log("Valor de idCompra para idCarrito $idCarrito: " . var_export($idCompra, true));
                 
                 if (is_null($idCompra)) {
-                    error_log("No se pudo obtener idCompra para idCarrito: " . $idCarrito);
                     throw new Exception("idCompra can't be null", 66);
                 }
                 $data = $read->getIdCarritoByUser($_POST['idUsuario']);

@@ -11,7 +11,8 @@ $(document).ready(function () {
             url: "../../controller/crud.controller.php",
             type: "POST",
             data: {
-                action: "getDataWithPagination",
+                action: 'readData',
+                readAction: "getDataWithPagination",
                 table: table,
                 page: page,
                 limit: limit
@@ -19,10 +20,10 @@ $(document).ready(function () {
             success: function (response) {
                 var data = response;
                 var rows = "";
-                data.articles.forEach(function (item) {
+                data.forEach(function (item) {
                     var row = "<tr>";
                     for (var key in item) {
-                        if (item.hasOwnProperty(key) && key !== "idArticulo") {
+                        if (item.hasOwnProperty(key)) {
                             row += "<td>" + item[key] + "</td>";
                         }
                     }
@@ -184,14 +185,19 @@ $(document).ready(function () {
     $("#dataTable").on("click", ".deleteBtn", function () {
         if (confirm("¿Seguro que quiere borrar esta fila?")) {
             var id = $(this).data("id");
+            var table = $("#tableSelector").val();  // Obtener la tabla seleccionada
+   
+            console.log("ID:", id, "Tabla:", table); // Agregar esto para verificar los valores
+   
             $.ajax({
                 url: "../../controller/crud.controller.php",
                 type: "POST",
-                data: {
-                    action: "deleteData",
-                    table: $("#tableSelector").val(),
+                contentType: "application/json",
+                data: JSON.stringify({
+                    action: 'deleteData',
+                    table: table,
                     id: id
-                },
+                }),
                 success: function (response) {
                     alert("Datos eliminados");
                     $("#tableSelector").trigger("change");
@@ -202,13 +208,35 @@ $(document).ready(function () {
             });
         }
     });
-
+   
     $("#tableSelector2").change(function () {
         var table = $(this).val();
-        $("#createFormSection").empty();
+        $("#createFormSection").empty(); // Limpiar el formulario previo
+    
         if (table) {
             if (table == 'articulo') {
-                let formHtml = `<!-- Formulario HTML omitido para brevedad -->`;
+                let formHtml = `
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="number" id="precio" name="precio" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoria" class="form-label">Categoría</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="number" id="stock" name="stock" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                `;
                 $("#createFormSection").html(formHtml);
             } else {
                 $.ajax({
@@ -216,14 +244,17 @@ $(document).ready(function () {
                     type: "POST",
                     data: { action: "getColumnsWithTypes", table: table },
                     success: function (data) {
-                        var formHtml = '<form id="createForm" >';
+                        var formHtml = '<form id="createForm">';
                         data.forEach(function (column) {
                             var fieldHtml = '<div class="mb-3">';
                             var columnName = column.field;
+    
+                            // Evitar campos auto_increment
                             if (column.extra && column.extra.includes("auto_increment")) {
                                 return;
                             }
-
+    
+                            // Manejo de diferentes tipos de columna
                             switch (true) {
                                 case column.type.startsWith("enum"):
                                     fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
@@ -235,20 +266,44 @@ $(document).ready(function () {
                                     }
                                     fieldHtml += "</select>";
                                     break;
+    
                                 case column.type.startsWith("int"):
                                 case column.type.startsWith("float"):
                                     fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
                                     fieldHtml += '<input type="number" id="' + columnName + '" name="' + columnName + '" class="form-control">';
                                     break;
+    
                                 case column.type.startsWith("varchar"):
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                    break;
+    
+                                case column.type.startsWith("date"):
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<input type="date" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                    break;
+    
+                                case column.type.startsWith("timestamp"):
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<input type="datetime-local" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                    break;
+    
+                                case column.type.startsWith("text"):
+                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                    fieldHtml += '<textarea id="' + columnName + '" name="' + columnName + '" class="form-control"></textarea>';
+                                    break;
+    
                                 default:
                                     fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
                                     fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
                                     break;
                             }
+    
                             fieldHtml += "</div>";
                             formHtml += fieldHtml;
                         });
+    
+                        // Agregar el botón de creación
                         formHtml += '<button type="submit" class="btn btn-primary">Crear</button></form>';
                         $("#createFormSection").html(formHtml);
                     },
@@ -259,6 +314,8 @@ $(document).ready(function () {
             }
         }
     });
+    
+    
 
     $("#createFormSection").on("submit", "#createForm", function (e) {
         e.preventDefault();
@@ -317,7 +374,11 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "../../controller/crud.controller.php",
-            data: { action: "getColumns", table: table },
+            data: { 
+                action: "readData",
+                readAction: 'readColumns',
+                table: table 
+            },
             success: function (response) {
                 callback(response);
             },
