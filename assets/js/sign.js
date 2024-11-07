@@ -98,7 +98,11 @@ $(document).ready(function () {
                 },
                 success: function (response) {
                     if (response.status === "error") {
-                        alertas.error(response.message);
+                        if (response.message.startsWith('SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry')) {
+                            alertas.error("Email ya registrado.");
+                        } else {
+                            alertas.error(response.message);
+                        }
                     } else {
                         alertas.success("Cuenta creada con éxito!");
                         setTimeout(() => {

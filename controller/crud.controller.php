@@ -11,18 +11,6 @@ header('Content-Type: application/json');
 // si get esta vacio toma los datos de post; si post esta vacio lo deja vacio.
 $action = isset($_GET['action']) ? $_GET['action'] : (isset($_POST['action']) ? $_POST['action'] : '');
 
-// Si no se encontró en GET o POST, buscar en el JSON
-if (empty($action)) {
-    $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-    
-    if (json_last_error() === JSON_ERROR_NONE) {
-        $action = isset($data['action']) ? $data['action'] : '';
-    } else {
-        echo json_encode(["error" => "Error al decodificar JSON: " . json_last_error_msg()]);
-        exit;
-    }
-} 
 // crear instancias de los modelos
 $read = new Read();
 $update = new Update();
@@ -56,7 +44,6 @@ switch ($action) {
         break;
 
     case 'getDataWithPagination':
-        header('Content-Type: application/json');
         $table = isset($_POST['table']) ? $_POST['table'] : '';
         $limit = isset($_POST['limit']) ? intval($_POST['limit']) : 5;
         $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
@@ -100,32 +87,35 @@ switch ($action) {
                 );
                 break;
 
-            case 'articulo':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateArticulo(
-                    $data['id'] ?? null,
-                    $data['nombre'] ?? null,
-                    $data['precio'] ?? null,
-                    $data['descripcion'] ?? null,
-                    $data['rutaImagen'] ?? null,
-                    $data['categoria'] ?? null,
-                    $data['descuento'] ?? null,
-                    $data['empresa'] ?? null,
-                    $data['stock'] ?? null,
-                );
-                break;
-
             case 'empresa':
                 $data = [];
                 parse_str($_POST['data'], $data);
                 $result = $update->updateEmpresa(
-                    $data['id'] ?? null,
+                    $data['idEmpresa'] ?? null,
                     $data['email'] ?? null,
                     $data['nombre'] ?? null,
                     $data['categoria'] ?? null,
                     $data['RUT'] ?? null,
                     $data['telefono'] ?? null
+                );
+                break;
+
+            case 'factura':
+                $data = [];
+                parse_str($_POST['data'], $data);
+                $result = $update->updateFactura(
+                    $data['idFactura'] ?? null,
+                    $data['horaEmitida'] ?? null,
+                    $data['contenido'] ?? null
+                );
+                break;
+
+            case 'vendedor':
+                $data = [];
+                parse_str($_POST['data'], $data);
+                $result = $update->updateVendedor(
+                    $data['id'] ?? null,
+                    $data['admin'] ?? null
                 );
                 break;
 
@@ -138,43 +128,25 @@ switch ($action) {
                 );
                 break;
 
-            case 'administrador':
+            case 'consulta':
                 $data = [];
                 parse_str($_POST['data'], $data);
-                $result = $update->updateAdministrador(
+                $result = $update->updateConsulta(
+                    $data['idArticulo'] ?? null,
                     $data['id'] ?? null,
-                    $data['cedula'] ?? null,
-                    $data['claveSecreta'] ?? null
+                    $data['fecha'] ?? null
                 );
                 break;
 
-            case 'vendedor':
+            case 'calificacion':
                 $data = [];
                 parse_str($_POST['data'], $data);
-                $result = $update->updateVendedor(
-                    $data['id'] ?? null,
-                    $data['cedula'] ?? null
-                );
-                break;
-
-            case 'carrito':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateCarrito(
-                    $data['id'] ?? null,
-                    $data['Estado'] ?? null,
-                    $data['fecha'] ?? null,
-                    $data['monto'] ?? null
-                );
-                break;
-
-            case 'compra':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateCompra(
-                    $data['id'] ?? null,
-                    $data['fechaCompra'] ?? null,
-                    $data['idCarrito'] ?? null
+                $result = $update->updateCalificacion(
+                    $data['id_articulo'] ?? null,
+                    $data['id_usuario'] ?? null,
+                    $data['puntuacion'] ?? null,
+                    $data['comentario'] ?? null,
+                    $data['fecha_calificacion'] ?? null
                 );
                 break;
 
@@ -182,47 +154,34 @@ switch ($action) {
                 $data = [];
                 parse_str($_POST['data'], $data);
                 $result = $update->updateEnvios(
-                    $data['id'] ?? null,
+                    $data['idEnvios'] ?? null,
                     $data['metodoEnvio'] ?? null,
                     $data['fechaSalida'] ?? null,
-                    $data['fechaLlegada'] ?? null
+                    $data['fechaLlegada'] ?? null,
+                    $data['idUsuario'] ?? null,
+                    $data['direccion'] ?? null,
+                    $data['npuerta'] ?? null
                 );
                 break;
 
-            case 'factura':
+            case 'compra':
                 $data = [];
                 parse_str($_POST['data'], $data);
-                $result = $update->updateFactura(
-                    $data['id'] ?? null,
-                    $data['horaEmitida'] ?? null
+                $result = $update->updateCompra(
+                    $data['idCompra'] ?? null,
+                    $data['idCarrito'] ?? null,
+                    $data['metodoPago'] ?? null,
+                    $data['fechaCompra'] ?? null
                 );
                 break;
 
-            case 'agregan':
+            case 'historial':
                 $data = [];
                 parse_str($_POST['data'], $data);
-                $result = $update->updateAgregan(
-                    $data['id'] ?? null,
-                    $data['idArticulo'] ?? null
-                );
-                break;
-
-            case 'compone':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateCompone(
-                    $data['idArticulo'] ?? null,
-                    $data['idCompra'] ?? null
-                );
-                break;
-
-            case 'consulta':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateConsulta(
-                    $data['id'] ?? null,
-                    $data['fecha'] ?? null,
-                    $data['idArticulo'] ?? null
+                $result = $update->updateHistorial(
+                    $data['idCompra'] ?? null,
+                    $data['idUsuario'] ?? null,
+                    $data['estado'] ?? null
                 );
                 break;
 
@@ -235,16 +194,6 @@ switch ($action) {
                 );
                 break;
 
-            case 'crea':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateCrea(
-                    $data['idEnvios'] ?? null,
-                    $data['idCompra'] ?? null,
-                    $data['idArticulo'] ?? null
-                );
-                break;
-
             case 'generan':
                 $data = [];
                 parse_str($_POST['data'], $data);
@@ -254,13 +203,10 @@ switch ($action) {
                 );
                 break;
 
-            case 'recibe':
-                $data = [];
-                parse_str($_POST['data'], $data);
-                $result = $update->updateRecibe(
-                    $data['idFactura'] ?? null,
-                    $data['id'] ?? null
-                );
+            // Agregar más casos según sea necesario para las demás tablas
+
+            default:
+                $data = ['error' => 'Tabla no encontrada'];
                 break;
         }
 
@@ -271,121 +217,226 @@ switch ($action) {
         }
         break;
 
-    case 'deleteData':
-        $table = isset($_POST['table']) ? $_POST['table'] : '';
-        $id = isset($_POST['id']) ? $_POST['id'] : '';
-        if ($table && $id) {
-            $delete->delete($table, $id);
-            $data = [];
-        } else {
-            $data = ['error' => 'Datos incompletos'];
-        }
-        break;
-
-    case 'getColumnsWithTypes':
-        $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
-        if ($table) {
-            $data = $read->getColumnsWithTypes($table);
-        } else {
-            $data = ['error' => 'Nombre de tabla no proporcionado'];
-        }
-        break;
-
-    case 'createData':
-        $table = isset($_GET['table']) ? $_GET['table'] : (isset($_POST['table']) ? $_POST['table'] : '');
-        if (empty($table)) {
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            $table = isset($data['table']) ? $data['table'] : '';
-        }        switch ($table) {
-            case 'articulo':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    // Obtener el cuerpo de la solicitud
-                    $json = file_get_contents('php://input');
-                
-                    // Decodificar el JSON
-                    $data = json_decode($json, true);
-                
-                    // Verificar si la decodificación fue exitosa
-                    if (json_last_error() !== JSON_ERROR_NONE) {
-                        echo json_encode(["error" => "Error al decodificar JSON: " . json_last_error_msg()]);
-                        exit;
-                    }
-                
-                    // Obtener datos del artículo
-                    $nombre = $data['data']['nombre'];
-                    $precio = $data['data']['precio'];
-                    $descripcion = $data['data']['descripcion'];
-                    $imagen = $data['data']['rutaImagen'];
-                    $categoria = $data['data']['categoria'];
-                    $descuento = $data['data']['descuento'];
-                    $empresa = $data['data']['empresa'];
-                    $stock = $data['data']['stock'];
-                
-                    // Validaciones
-                    $errores = [];
-                    if (trim($nombre) === '') {
-                        $errores[] = "El nombre es obligatorio.";
-                    }
-                    if (!is_numeric($precio) || $precio < 0) {
-                        $errores[] = "El precio debe ser un número mayor o igual a 0.";
-                    }
-                    if (trim($descripcion) === '') {
-                        $errores[] = "La descripción es obligatoria.";
-                    }
-                    if (trim($categoria) === '') {
-                        $errores[] = "La categoría es obligatoria.";
-                    }
-                    if (!is_numeric($descuento) || $descuento < 0) {
-                        $errores[] = "El descuento debe ser un número mayor o igual a 0.";
-                    }
-                    if (trim($empresa) === '') {
-                        $errores[] = "La empresa es obligatoria.";
-                    }
-                    if (!is_numeric($stock) || $stock < 0) {
-                        $errores[] = "El stock debe ser un número mayor o igual a 0.";
-                    }
-                    error_log("Categoría: $categoria");
-                    if (empty($errores)) {
-                        try {
-                            $create->crearArticulo($nombre, $precio, $descripcion,$imagen, $categoria, $descuento, $empresa, $stock);
-                            $response = ["success" => "Artículo creado con éxito."];
-                        } catch (Exception $e) {
-                            $response = ["error" => "Error: " . $e->getMessage()];
-                        }
-                    } else {
-                        $response = ["error" => implode(", ", $errores)];
-                    }
-                
-                    // Devolver respuesta en formato JSON
-                    echo json_encode($response);
-                }
-                
-                
+        case 'createData':
+            $dataPost = isset($_POST['data']) ? $_POST['data'] : [];
+            $table = isset($_POST['table']) ? $_POST['table'] : '';
+            if (empty($table) || empty($dataPost)) {
+                $data = ['error' => 'Datos incompletos'];
                 break;
-
-            case 'usuarios':
+            }
+    
+            switch ($table) {
+                case 'usuarios':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearUsuario(
+                        $data['apellido'] ?? null,
+                        $data['nombre'] ?? null,
+                        $data['calle'] ?? null,
+                        $data['email'] ?? null,
+                        $data['contrasena'] ?? null,
+                        $data['Npuerta'] ?? null,
+                        $data['telefono'] ?? null
+                    );
+                    break;
+    
+                case 'empresa':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearEmpresa(
+                        $data['email'] ?? null,
+                        $data['nombre'] ?? null,
+                        $data['categoria'] ?? null,
+                        $data['RUT'] ?? null,
+                        $data['telefono'] ?? null
+                    );
+                    break;
+    
+                case 'factura':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearFactura(
+                        $data['horaEmitida'] ?? null,
+                        $data['contenido'] ?? null
+                    );
+                    break;
+    
+                case 'vendedor':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearVendedor(
+                        $data['id'] ?? null,
+                        $data['admin'] ?? null
+                    );
+                    break;
+    
+                case 'cliente':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearCliente(
+                        $data['id'] ?? null
+                    );
+                    break;
+    
+                case 'consulta':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearConsulta(
+                        $data['idArticulo'] ?? null,
+                        $data['id'] ?? null,
+                        $data['fecha'] ?? null
+                    );
+                    break;
+    
+                case 'calificacion':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearCalificacion(
+                        $data['id_articulo'] ?? null,
+                        $data['id_usuario'] ?? null,
+                        $data['puntuacion'] ?? null,
+                        $data['comentario'] ?? null,
+                        $data['fecha_calificacion'] ?? null
+                    );
+                    break;
+    
+                case 'envios':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearEnvios(
+                        $data['metodoEnvio'] ?? null,
+                        $data['fechaSalida'] ?? null,
+                        $data['fechaLlegada'] ?? null,
+                        $data['idUsuario'] ?? null,
+                        $data['direccion'] ?? null,
+                        $data['npuerta'] ?? null
+                    );
+                    break;
+    
+                case 'compra':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearCompra(
+                        $data['idCarrito'] ?? null,
+                        $data['metodoPago'] ?? null,
+                        $data['fechaCompra'] ?? null
+                    );
+                    break;
+    
+                case 'historial':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearHistorial(
+                        $data['idCompra'] ?? null,
+                        $data['idUsuario'] ?? null,
+                        $data['estado'] ?? null
+                    );
+                    break;
+    
+                case 'pertenece':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearPertenece(
+                        $data['id'] ?? null,
+                        $data['idEmpresa'] ?? null
+                    );
+                    break;
+    
+                case 'generan':
+                    $data = [];
+                    parse_str($_POST['data'], $data);
+                    $result = $create->crearGeneran(
+                        $data['idFactura'] ?? null,
+                        $data['idArticulo'] ?? null
+                    );
+                    break;
+    
+                // Agregar más casos de creación según otras tablas
+    
+                default:
+                    $data = ['error' => 'Tabla no encontrada'];
+                    break;
+            }
+    
+            if (isset($result) && $result) {
                 $data = [];
-                $dataArray = $_POST['data'];
-                parse_str($dataArray, $data);
-                $create->crearUsuario(
-                    $data['apellido'],
-                    $data['nombre'],
-                    $data['calle'],
-                    $data['email'],
-                    $data['contrasena'],
-                    $data['Npuerta'],
-                    $data['telefono']
-                );
-            default:
-                $data = ['error' => 'Acción no válida'];
+            } else {
+                $data = ['error' => 'No se pudo crear el registro'];
+            }
+            break;
+    
+        case 'deleteData':
+            $table = isset($_POST['table']) ? $_POST['table'] : '';
+            $id = isset($_POST['id']) ? $_POST['id'] : '';
+            if (empty($table) || empty($id)) {
+                $data = ['error' => 'Datos incompletos'];
                 break;
-        }
-        break;
+            }
+    
+            switch ($table) {
+                case 'usuarios':
+                    $result = $delete->deleteUsuario($id);
+                    break;
+    
+                case 'empresa':
+                    $result = $delete->deleteEmpresa($id);
+                    break;
+    
+                case 'factura':
+                    $result = $delete->deleteFactura($id);
+                    break;
+    
+                case 'vendedor':
+                    $result = $delete->deleteVendedor($id);
+                    break;
+    
+                case 'cliente':
+                    $result = $delete->deleteCliente($id);
+                    break;
+    
+                case 'consulta':
+                    $result = $delete->deleteConsulta($id);
+                    break;
+    
+                case 'calificacion':
+                    $result = $delete->deleteCalificacion($id);
+                    break;
+    
+                case 'envios':
+                    $result = $delete->deleteEnvios($id);
+                    break;
+    
+                case 'compra':
+                    $result = $delete->deleteCompra($id);
+                    break;
+    
+                case 'historial':
+                    $result = $delete->deleteHistorial($id);
+                    break;
+    
+                case 'pertenece':
+                    $result = $delete->deletePertenece($id);
+                    break;
+    
+                case 'generan':
+                    $result = $delete->deleteGeneran($id);
+                    break;
+    
+                // Agregar más casos de eliminación según otras tablas
+    
+                default:
+                    $data = ['error' => 'Tabla no encontrada'];
+                    break;
+            }
+    
+            if (isset($result) && $result) {
+                $data = [];
+            } else {
+                $data = ['error' => 'No se pudo eliminar el registro'];
+            }
+            break;
 
-    default:
-        $data = ['error' => 'Acción no válida'];
-        break;
 }
 
 echo json_encode($data);
+

@@ -143,10 +143,8 @@ switch ($modo) {
         }
 
         try {
-            $result = $read->checkLogIn($_POST['email'], $_POST['password']);
+            $result = $read->checkLogInAdmin($_POST['email'], $_POST['password']);
             if ($result) {
-                session_start();
-                $_SESSION['user_id'] = $result;
                 echo json_encode(['status' => 'OK']);
             } else {
                 echo json_encode(['status' => 'Usuario o contraseña incorrectos']);

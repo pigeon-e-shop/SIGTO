@@ -139,7 +139,6 @@ class Create
 		try {
 			$data = $stmt->execute([$idArticulo, $id]);
 		} catch (PDOException $e) {
-			error_log("Error en crearConsulta: " . $e->getMessage());
 			return false;
 		} catch (Exception $e) {
 			return false;
@@ -226,8 +225,7 @@ class Create
 		try {
 			$sql = "INSERT INTO historial (idCompra,idUsuario,estado) VALUES (?,?,'no entregado')";
 			$stmt = $this->conn->prepare($sql);
-			$stmt->execute([$id_compra,$id_usuario]);
-			return true;
+			return $stmt->execute([$id_compra,$id_usuario]);
 		} catch (Exception $e) {
 			return false;
 		}
@@ -237,8 +235,7 @@ class Create
 		try {
 			$sql = "INSERT INTO crea (idEnvio,idCompra) VALUES (?,?)";
 			$stmt = $this->conn->prepare($sql);
-			$stmt->execute([$id_envio,$id_compra]);
-			return true;
+			return $stmt->execute([$id_envio,$id_compra]);
 		} catch (Exception $e) {
 			return false;
 		}
