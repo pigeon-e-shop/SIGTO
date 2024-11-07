@@ -239,4 +239,55 @@ class Update
 			return ['status' => 'error','message'=>$e];
 		}
 	}
+
+	public function updateCalificacion($idArticulo, $idUsuario, $puntuacion, $comentario, $fecha_calificacion) {
+		try {
+			$sql = "UPDATE calificacion 
+					SET puntuacion = :puntuacion, 
+						comentario = :comentario, 
+						fecha_calificacion = :fecha_calificacion 
+					WHERE id_articulo = :idArticulo AND id_usuario = :idUsuario;";
+			
+			$stmt = $this->conn->prepare($sql);
+			
+			$stmt->bindParam(':puntuacion', $puntuacion, PDO::PARAM_STR);
+			$stmt->bindParam(':comentario', $comentario, PDO::PARAM_STR);
+			$stmt->bindParam(':fecha_calificacion', $fecha_calificacion, PDO::PARAM_STR);
+			$stmt->bindParam(':idArticulo', $idArticulo, PDO::PARAM_INT);
+			$stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+			
+			$stmt->execute();
+			
+			return ['status' => 'success', 'message' => 'Calificación actualizada correctamente'];
+		} catch (Exception $e) {
+			return ['status' => 'error', 'message' => $e->getMessage()];
+		}
+	}
+	
+	public function updateHistorial($idCompra, $idUsuario, $estado) {
+		try {
+			// Consulta SQL para actualizar el estado en la tabla historial
+			$sql = "UPDATE historial 
+					SET estado = :estado 
+					WHERE idCompra = :idCompra AND idUsuario = :idUsuario;";
+			
+			// Preparar la consulta SQL
+			$stmt = $this->conn->prepare($sql);
+			
+			// Vincular los parámetros a la consulta
+			$stmt->bindParam(':estado', $estado, PDO::PARAM_STR);
+			$stmt->bindParam(':idCompra', $idCompra, PDO::PARAM_INT);
+			$stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+			
+			// Ejecutar la consulta
+			$stmt->execute();
+			
+			// Retornar respuesta de éxito
+			return ['status' => 'success', 'message' => 'Estado actualizado correctamente'];
+		} catch (Exception $e) {
+			// Capturar cualquier error
+			return ['status' => 'error', 'message' => $e->getMessage()];
+		}
+	}
+	
 }

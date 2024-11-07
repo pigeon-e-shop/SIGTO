@@ -11,8 +11,7 @@ $(document).ready(function () {
             url: "../../controller/crud.controller.php",
             type: "POST",
             data: {
-                action: 'readData',
-                readAction: "getDataWithPagination",
+                action: "getDataWithPagination",
                 table: table,
                 page: page,
                 limit: limit
@@ -20,7 +19,7 @@ $(document).ready(function () {
             success: function (response) {
                 var data = response;
                 var rows = "";
-                data.forEach(function (item) {
+                data.articles.forEach(function (item) {
                     var row = "<tr>";
                     for (var key in item) {
                         if (item.hasOwnProperty(key)) {
@@ -30,12 +29,15 @@ $(document).ready(function () {
                     row += '<td><button class="editBtn btn btn-sm" data-id="' + item.id + '">Editar</button> <button class="deleteBtn btn btn-sm" data-id="' + item.id + '">Eliminar</button></td></tr>';
                     rows += row;
                 });
+                // anade a la tabla los datos
                 $("#dataTable tbody").html(rows);
+                // muestra la paginacion.
+                // Lógica para mostrar/ocultar la paginación
                 if (data.totalPages > 1) {
-                    $("#pagination").show();
+                    $("#pagination").show(); // Muestra la paginación si hay más de una página
                     renderPagination(data.totalPages, page);
                 } else {
-                    $("#pagination").hide();
+                    $("#pagination").hide(); // Oculta la paginación si solo hay una página
                 }
             },
             error: function (xhr, status, error) {
@@ -45,9 +47,10 @@ $(document).ready(function () {
     }
 
     function renderPagination(totalPages, currentPage) {
-        $("#pagination").empty();
+        $("#pagination").empty(); // Limpia el contenido anterior
         const paginationNav = $('<nav aria-label="Page navigation example"><ul class="pagination justify-content-center"></ul></nav>');
-        
+
+        // Botón "Anterior"
         const prevDisabled = currentPage === 1 ? 'disabled' : '';
         paginationNav.find('ul').append(`
             <li class="page-item ${prevDisabled}">
@@ -57,6 +60,7 @@ $(document).ready(function () {
             </li>
         `);
 
+        // Botones de página
         for (let i = 1; i <= totalPages; i++) {
             const activeClass = i === currentPage ? 'active' : '';
             paginationNav.find('ul').append(`
@@ -66,6 +70,7 @@ $(document).ready(function () {
             `);
         }
 
+        // Botón "Siguiente"
         const nextDisabled = currentPage === totalPages ? 'disabled' : '';
         paginationNav.find('ul').append(`
             <li class="page-item ${nextDisabled}">
@@ -75,43 +80,34 @@ $(document).ready(function () {
             </li>
         `);
 
+        // Añade la navegación de paginación al contenedor
         $("#pagination").append(paginationNav);
     }
 
     $("#pagination").on("click", ".page-link", function (event) {
-        event.preventDefault();
-        const page = $(this).data('page');
-        const limit = $("#itemsPerPage").val();
-        loadArticles(page, limit);
+        event.preventDefault(); // Previene el comportamiento por defecto del enlace
+        const page = $(this).data('page'); // Obtiene el número de página
+        const limit = $("#itemsPerPage").val(); // Obtiene el límite de artículos por página
+        loadArticles(page, limit); // Carga los artículos de la página seleccionada
     });
+
 
     function loadTables() {
         $.ajax({
             url: "../../controller/crud.controller.php",
-            type: "POST",
-            data: { 
-                action: "readData",
-                readAction: 'readTables'
+            type: "GET",
+            data: { action: "getTables" },
+            success: function (data) {
+                data.forEach(function (table) {
+                    $(".tableSelector").append('<option value="' + table + '">' + table + "</option>");
+                });
             },
-            dataType: "json",
-            success: function(response) {
-                if (response && Array.isArray(response)) {
-                    $(".tableSelector").empty().append('<option value="">Selecciona una tabla</option>');
-                    response.forEach(function(table) {
-                        $(".tableSelector").append(`<option value="${table}">${table}</option>`);
-                    });
-                } else {
-                    console.error("Formato de respuesta inesperado:", response);
-                    alert("Error: La respuesta del servidor no es válida.");
-                }
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud:", status, error);
             },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                alert("No se pudieron cargar las tablas. Por favor, intente nuevamente.");
-            }
         });
     }
-    
+
     $("#tableSelector").change(function () {
         var table = $(this).val();
         $("#columnSelector").empty().append('<option value="">Selecciona una columna</option>');
@@ -185,19 +181,14 @@ $(document).ready(function () {
     $("#dataTable").on("click", ".deleteBtn", function () {
         if (confirm("¿Seguro que quiere borrar esta fila?")) {
             var id = $(this).data("id");
-            var table = $("#tableSelector").val();  // Obtener la tabla seleccionada
-   
-            console.log("ID:", id, "Tabla:", table); // Agregar esto para verificar los valores
-   
             $.ajax({
                 url: "../../controller/crud.controller.php",
                 type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    action: 'deleteData',
-                    table: table,
-                    id: id
-                }),
+                data: {
+                    action: "deleteData",
+                    table: $("#tableSelector").val(),
+                    id: id,
+                },
                 success: function (response) {
                     alert("Datos eliminados");
                     $("#tableSelector").trigger("change");
@@ -208,136 +199,70 @@ $(document).ready(function () {
             });
         }
     });
-   
+
     $("#tableSelector2").change(function () {
         var table = $(this).val();
-        $("#createFormSection").empty(); // Limpiar el formulario previo
-    
+        $("#createFormSection").empty();
         if (table) {
-            if (table == 'articulo') {
-                let formHtml = `
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="precio" class="form-label">Precio</label>
-                        <input type="number" id="precio" name="precio" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="categoria" class="form-label">Categoría</label>
-                    </div>
-                    <div class="mb-3">
-                        <label for="stock" class="form-label">Stock</label>
-                        <input type="number" id="stock" name="stock" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                `;
-                $("#createFormSection").html(formHtml);
-            } else {
-                $.ajax({
-                    url: "../../controller/crud.controller.php",
-                    type: "POST",
-                    data: { action: "getColumnsWithTypes", table: table },
-                    success: function (data) {
-                        var formHtml = '<form id="createForm">';
-                        data.forEach(function (column) {
-                            var fieldHtml = '<div class="mb-3">';
-                            var columnName = column.field;
-    
-                            // Evitar campos auto_increment
-                            if (column.extra && column.extra.includes("auto_increment")) {
-                                return;
-                            }
-    
-                            // Manejo de diferentes tipos de columna
-                            switch (true) {
-                                case column.type.startsWith("enum"):
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<select id="' + columnName + '" name="' + columnName + '" class="form-select">';
-                                    if (column.enum_values && column.enum_values.length > 0) {
-                                        column.enum_values.forEach(function (value) {
-                                            fieldHtml += '<option value="' + value + '">' + value + "</option>";
-                                        });
-                                    }
-                                    fieldHtml += "</select>";
-                                    break;
-    
-                                case column.type.startsWith("int"):
-                                case column.type.startsWith("float"):
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<input type="number" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                    break;
-    
-                                case column.type.startsWith("varchar"):
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                    break;
-    
-                                case column.type.startsWith("date"):
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<input type="date" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                    break;
-    
-                                case column.type.startsWith("timestamp"):
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<input type="datetime-local" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                    break;
-    
-                                case column.type.startsWith("text"):
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<textarea id="' + columnName + '" name="' + columnName + '" class="form-control"></textarea>';
-                                    break;
-    
-                                default:
-                                    fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
-                                    fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
-                                    break;
-                            }
-    
-                            fieldHtml += "</div>";
-                            formHtml += fieldHtml;
-                        });
-    
-                        // Agregar el botón de creación
-                        formHtml += '<button type="submit" class="btn btn-primary">Crear</button></form>';
-                        $("#createFormSection").html(formHtml);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Error en la solicitud:", status, error);
-                    },
-                });
-            }
+            $.ajax({
+                url: "../../controller/crud.controller.php",
+                type: "GET",
+                data: { action: "getColumnsWithTypes", table: table },
+                success: function (data) {
+                    var formHtml = '<form id="createForm">';
+                    data.forEach(function (column) {
+                        var fieldHtml = '<div class="mb-3">';
+                        var columnName = column.field;
+                        if (column.extra && column.extra.includes("auto_increment")) {
+                            return;
+                        }
+
+                        switch (true) {
+                            case column.type.startsWith("enum"):
+                                fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                fieldHtml += '<select id="' + columnName + '" name="' + columnName + '" class="form-select">';
+                                if (column.enum_values && column.enum_values.length > 0) {
+                                    column.enum_values.forEach(function (value) {
+                                        fieldHtml += '<option value="' + value + '">' + value + "</option>";
+                                    });
+                                }
+                                fieldHtml += "</select>";
+                                break;
+                            case column.type.startsWith("int"):
+                            case column.type.startsWith("float"):
+                                fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                fieldHtml += '<input type="number" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                break;
+                            case column.type.startsWith("varchar"):
+                            default:
+                                fieldHtml += '<label for="' + columnName + '" class="form-label">' + columnName + "</label>";
+                                fieldHtml += '<input type="text" id="' + columnName + '" name="' + columnName + '" class="form-control">';
+                                break;
+                        }
+                        fieldHtml += "</div>";
+                        formHtml += fieldHtml;
+                    });
+                    formHtml += '<button type="submit" class="btn btn-primary">Crear</button></form>';
+                    $("#createFormSection").html(formHtml);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la solicitud:", status, error);
+                },
+            });
         }
     });
-    
-    
 
     $("#createFormSection").on("submit", "#createForm", function (e) {
         e.preventDefault();
-        var formData = {
-            nombre: $('#nombre').val(),
-            precio: $('#precio').val(),
-            descripcion: $('#descripcion').val(),
-            categoria: $('#categoria').val().replace('+', ' '),
-            descuento: $('#descuento').val(),
-            empresa: $('#empresa').val(),
-            stock: $('#stock').val()
-        };
-
+        var formData = $(this).serialize();
         $.ajax({
             url: "../../controller/crud.controller.php",
             type: "POST",
-            contentType: 'application/json',
-            data: JSON.stringify({
-                action: 'createData',
-                table: 'articulo',
-                data: formData
-            }),
+            data: {
+                action: "createData",
+                table: $("#tableSelector2").val(),
+                data: formData,
+            },
             success: function (response) {
                 alert("Registro creado");
                 $("#tableSelector2").trigger("change");
@@ -362,6 +287,7 @@ $(document).ready(function () {
         $('#table-head').append(fila);
     }
 
+
     function wrapTrInForm(button) {
         var $tr = $(button).closest("tr");
         var $clonedTr = $tr.clone();
@@ -372,13 +298,9 @@ $(document).ready(function () {
 
     function getColumnas(table, callback) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "../../controller/crud.controller.php",
-            data: { 
-                action: "readData",
-                readAction: 'readColumns',
-                table: table 
-            },
+            data: { action: "getColumns", table: table },
             success: function (response) {
                 callback(response);
             },
@@ -403,15 +325,4 @@ $(document).ready(function () {
     function articulosXPaginaDefault() {
         $("#itemsPerPage").val("5");
     }
-
-    $('#rutaImagen').on('change', function () {
-        var file = $(this)[0].files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#preview').attr('src', e.target.result).show();
-            }
-            reader.readAsDataURL(file);
-        }
-    });
 });
