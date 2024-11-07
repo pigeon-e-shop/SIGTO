@@ -149,4 +149,22 @@ class Delete
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function banVendedor($id) {
+        $sql = "DELETE FROM pertenece p WHERE p.id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+    public function sacarDelCarrito($idArticulo, $idCarrito) {
+        $sql = "DELETE FROM compone WHERE idArticulo = ? AND idCarrito = ?;";
+        $stmt = $this->conn->prepare($sql);
+        
+        if ($stmt->execute([$idArticulo, $idCarrito])) {
+            return true;
+        } else {
+            throw new Exception("Error al eliminar el artículo del carrito.");
+        }
+    }
 }

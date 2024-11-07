@@ -43,6 +43,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 'success') {
                     alertas.success("Articulo creado");
+                    window.location.href = "/view/backoffice/articulos.html";
                 } else {
                     alertas.error(response.message);
                 }

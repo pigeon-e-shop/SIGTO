@@ -91,12 +91,25 @@ switch ($_POST['mode']) {
         }
         break;
 
+    case 'getVentasXMes':
+        try {
+            if (!(isset($_POST['idArticulo']))) {
+                throw new Exception("Error Processing Request: Article ID is required", 1);
+            } else {
+                echo json_encode($read->getVentasGrafica($_POST['idArticulo']));
+            }
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+        break;
+
     case 'getArticulo':
         echo json_encode($read->readArticuloById($_POST['id'])[0]);
         break;
 
     case 'updateArticulo':
-        $nombre = $_POST['nombre'] ?? '';
+        try {
+            $nombre = $_POST['nombre'] ?? '';
         $descripcion = $_POST['descripcion'] ?? '';
         $precio = $_POST['precio'] ?? '';
         $categorias = $_POST['categorias'] ?? '';
@@ -129,6 +142,9 @@ switch ($_POST['mode']) {
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'Error al mover el archivo.', 'php_error' => $lastError]);
             }
+        }
+        } catch (Exception $e) {
+            echo json_encode(['status'=>'error','message'=>$e->getMessage()]);
         }
         break;
 

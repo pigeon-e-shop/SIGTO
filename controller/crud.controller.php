@@ -87,6 +87,22 @@ switch ($action) {
                 );
                 break;
 
+            case 'articulos:':
+                $data = [];
+                parse_str($_POST['data'],$data);
+                $result = $update->updateArticulo(
+                    $data['id'] ?? null,
+                    $data['nombre'] ?? null,
+                    $data['precio'] ?? null,
+                    $data['descripcion'] ?? null,
+                    $data['rutaImagen'] ?? null,
+                    $data['categoria'] ?? null,
+                    $data['descuento'] ?? null,
+                    $data['empresa'] ?? null,
+                    $data['stock'] ?? null
+                );
+                break;
+
             case 'empresa':
                 $data = [];
                 parse_str($_POST['data'], $data);

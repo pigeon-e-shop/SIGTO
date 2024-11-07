@@ -488,7 +488,7 @@ class Read
 
     public function getvistasXMes($id_articulo)
     {
-        $sql = "SELECT * FROM vista_articulos_por_mes WHERE idArticulo = ? ORDER BY año, mes;";
+        $sql = "SELECT COUNT(consulta.id) AS 'vistasTotales', a.id AS 'idArticulo', DATE_FORMAT(consulta.fecha, '%Y-%m') AS 'mes' FROM consulta JOIN articulo a ON a.id = consulta.idArticulo WHERE a.id = ? AND consulta.fecha >= DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH), '%Y-%m-01') GROUP BY YEAR(consulta.fecha), MONTH(consulta.fecha) ORDER BY 'mes' DESC;";
         $sql = $this->conn->prepare($sql);
         $sql->execute([$id_articulo]);
         return $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -540,6 +540,13 @@ class Read
         $sql = "SELECT u.email FROM usuarios u JOIN pertenece p on p.id = u.id WHERE u.email = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$email]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getVentasGrafica($idArticulo) {
+        $sql = "SELECT a.id AS idArticulo, DATE_FORMAT(c2.fechaCompra, '%Y-%m') AS mes, COUNT(*) AS cantidadVentas FROM compone c JOIN articulo a ON c.idArticulo = a.id JOIN compra c2 ON c.idCarrito = c2.idCarrito WHERE c2.fechaCompra >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND a.id = ? GROUP BY a.id, YEAR(c2.fechaCompra), MONTH(c2.fechaCompra) ORDER BY mes DESC, cantidadVentas DESC; ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$idArticulo]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
