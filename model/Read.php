@@ -107,7 +107,7 @@ class Read
     }
 
     public function read_articulo_detalle_exclusivo($id)
-   
+
     {
         $query = "SELECT id, nombre, precio, descripcion, rutaImagen FROM articulo WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -130,7 +130,8 @@ class Read
     public function readAll($tabla = 'articulo')
     {
         $query = "SELECT * FROM $tabla";
-        $result = $this->conn->query($query);
+        $result = $this->conn->prepare($query);
+        $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -178,14 +179,14 @@ class Read
             }
             return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
         } catch (PDOException $e) {
-            error_log("Error en la consulta: " . $e->getMessage());
             return json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
         } catch (Exception $e) {
             return json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
         }
     }
 
-    public function checkLogInAdmin($username, $password) {
+    public function checkLogInAdmin($username, $password)
+    {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM loginadmin WHERE email = :username AND contraseña = :pass");
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -197,7 +198,6 @@ class Read
             }
             return json_encode($stmt->fetch(PDO::FETCH_ASSOC));
         } catch (PDOException $e) {
-            error_log("Error en la consulta: " . $e->getMessage());
             return false;
         }
     }
@@ -262,9 +262,10 @@ class Read
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['id'] : null;
     }
-    
 
-    public function getCookie($cookieName, $key) {
+
+    public function getCookie($cookieName, $key)
+    {
         if (isset($_COOKIE[$cookieName])) {
             $cookieData = json_decode($_COOKIE[$cookieName], true);
             if (array_key_exists($key, $cookieData)) {
@@ -342,7 +343,8 @@ class Read
         return array('articles' => $data, 'totalPages' => $totalPages);
     }
 
-    public function readInfoUser($id) {
+    public function readInfoUser($id)
+    {
         $sql = "SELECT * FROM infousuario WHERE id=?";
         $sql = $this->conn->prepare($sql);
         $sql->execute([$id]);
@@ -379,7 +381,7 @@ class Read
             $idCarrito = $this->getIdCarritoByUser($id_usuario);
             $sql = "SELECT * FROM getarticuloscarrito WHERE UsuarioId = ? AND CarritoId = ?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$id_usuario,$idCarrito[0]['IdCarrito']]);
+            $stmt->execute([$id_usuario, $idCarrito[0]['IdCarrito']]);
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -394,19 +396,21 @@ class Read
             throw new Exception("Error: " . $e->getMessage());
         }
     }
-    
-    public function getIdCarritoByUser($id_usuario) {
+
+    public function getIdCarritoByUser($id_usuario)
+    {
         try {
             $sql = "SELECT IdCarrito FROM `carrito` WHERE id = ? ORDER BY `carrito`.`fecha` DESC LIMIT 1; ";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$id_usuario]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            return ['status'=>'error'];
+            return ['status' => 'error'];
         }
     }
 
-    public function verificarArticuloEnCarrito($idCarrito, $idArticulo) {
+    public function verificarArticuloEnCarrito($idCarrito, $idArticulo)
+    {
         try {
             $sql = "SELECT cantidad FROM compone WHERE idCarrito = ? AND idArticulo = ?";
             $stmt = $this->conn->prepare($sql);
@@ -416,8 +420,9 @@ class Read
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
-    
-    public function getHistorialUser($id_usuario) {
+
+    public function getHistorialUser($id_usuario)
+    {
         try {
             $sql = "SELECT * FROM verhistorial WHERE id = ? ORDER BY fecha ASC";
             $stmt = $this->conn->prepare($sql);
@@ -427,8 +432,9 @@ class Read
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
-    
-    public function getDireccionByUser($id_usuario) {
+
+    public function getDireccionByUser($id_usuario)
+    {
         try {
             $sql = "SELECT calle, npuerta FROM usuarios WHERE id = ?";
             $stmt = $this->conn->prepare($sql);
@@ -438,8 +444,9 @@ class Read
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
-    
-    public function getIdCompra($id_carrito) {
+
+    public function getIdCompra($id_carrito)
+    {
         try {
             $sql = "SELECT idCompra FROM compra WHERE idCarrito = ?";
             $stmt = $this->conn->prepare($sql);
@@ -449,8 +456,9 @@ class Read
             return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
-    
-    public function getIdEnvio($idUsuario) {
+
+    public function getIdEnvio($idUsuario)
+    {
         try {
             $sql = "SELECT idEnvios FROM envios WHERE idUsuario = ? ORDER BY fechaSalida DESC";
             $stmt = $this->conn->prepare($sql);
@@ -527,7 +535,8 @@ class Read
         return $vendor ? (int) $vendor['id'] : false;
     }
 
-    public function isFree($email) {
+    public function isFree($email)
+    {
         $sql = "SELECT u.email FROM usuarios u JOIN pertenece p on p.id = u.id WHERE u.email = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$email]);

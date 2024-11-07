@@ -5,7 +5,7 @@ $(document).ready(function () {
         type: "POST",
         url: "/controller/login.controller.php",
         data: {
-            mode: "logIn",
+            mode: "logInAdmin",
             email: user,
             password: pass,
         },
@@ -21,5 +21,5 @@ $(document).ready(function () {
             console.error(xhr, status, error);
         }
     });
-    $("#title").html("Si no pudiste iniciar sesion refresca la pagina. Si tienes prblemas para iniciar sesion comunicate con el servicio al cliente o con tu empresa.");
+    $("#title").html("<p>Si no pudiste iniciar sesion refresca la pagina. Si tienes prblemas para iniciar sesion comunicate con el servicio al cliente o con tu empresa.</p>");
 });

@@ -110,7 +110,6 @@ switch ($_POST['mode']) {
             $file = $_FILES['imagen'];
             $uploadDir = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/assets/img/productos/';
             $uploadFile = $uploadDir . basename($file['name']);
-            error_log("Intentando mover a: " . $uploadFile);
 
             if (!is_dir($uploadDir)) {
                 echo json_encode(['status' => 'error', 'message' => 'El directorio de destino no existe.']);
@@ -119,7 +118,6 @@ switch ($_POST['mode']) {
 
             if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
                 $rutaImagen = '/assets/img/productos/' . basename($file['name']);
-                error_log($rutaImagen);
 
                 $updateResult = $update->updateArticulo2($id, $nombre, $precio, $descripcion, $rutaImagen, $categorias, $descuento, $stock);
 
@@ -154,7 +152,6 @@ switch ($_POST['mode']) {
         
                     if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
                         $rutaImagen = '/assets/img/productos/' . basename($file['name']);
-                        error_log($categorias);
                         $insertResult = $create->crearArticulo($nombre, $precio, $descripcion, $rutaImagen, $categorias, $descuento,$_COOKIE['idEmpresa'], $stock);
         
                         if ($insertResult) {

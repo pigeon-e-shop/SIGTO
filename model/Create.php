@@ -102,7 +102,6 @@ class Create
 			$stmt->execute([$metodoEnvio,$idUsuario,$calle,$nPuerta]);
 			return true;
 		} catch (Exception $e) {
-			error_log($e);
 			return false;
 		}
 	}
@@ -140,7 +139,6 @@ class Create
 		try {
 			$data = $stmt->execute([$idArticulo, $id]);
 		} catch (PDOException $e) {
-			error_log("Error en crearConsulta: " . $e->getMessage());
 			return false;
 		} catch (Exception $e) {
 			return false;
@@ -229,7 +227,6 @@ class Create
 			$stmt = $this->conn->prepare($sql);
 			return $stmt->execute([$id_compra,$id_usuario]);
 		} catch (Exception $e) {
-			error_log($e->getMessage());
 			return false;
 		}
 	}
@@ -240,7 +237,6 @@ class Create
 			$stmt = $this->conn->prepare($sql);
 			return $stmt->execute([$id_envio,$id_compra]);
 		} catch (Exception $e) {
-			error_log($e->getMessage());
 			return false;
 		}
 	}
