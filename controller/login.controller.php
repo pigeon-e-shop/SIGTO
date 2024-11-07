@@ -85,7 +85,7 @@ switch ($modo) {
                 $cookieName = 'usuario';
                 $cookieData = json_encode(['usuario' => $userId, 'email' => $_POST['username']]);
                 $expiryTime = time() + (30 * 24 * 60 * 60);
-                setcookie($cookieName, $cookieData, $expiryTime, '/', '', true, true);
+                setcookie($cookieName, $cookieData, $expiryTime, '/', '', false, false);
                 echo json_encode(['status' => 'Cookie establecida']);
             } else {
                 echo json_encode(['status' => 'Usuario no encontrado']);

@@ -340,10 +340,11 @@ $(document).ready(function () {
         case 3:
             title.text("Historial");
             let mainDiv = $("#content-main");
-            mainDiv.empty("");
-            // crear el contenedor del historial
+            mainDiv.empty(); // Limpiar el contenedor antes de agregar nuevo contenido
             mainDiv.html("<h1>Historial</h1>");
             mainDiv.append(`<ul class="row w-100" id="listaHistorial"></ul>`);
+
+            // Verifica que la cookie de sesión sea válida
             $.ajax({
                 type: "POST",
                 url: "/controller/login.controller.php",
@@ -352,9 +353,10 @@ $(document).ready(function () {
                 success: function (redcookies) {
                     console.log("Cookies read response:", redcookies);
                     if (redcookies.error === "Cookie no encontrada") {
-                        window.location.href = "/";
+                        window.location.href = "/"; // Redirige al login si no se encuentran las cookies
                     } else {
-                        idUser = redcookies.usuario;
+                        const idUser = redcookies.usuario; // Obtener el ID del usuario desde las cookies
+                        // Ahora solicitamos el historial de artículos vistos
                         $.ajax({
                             type: "POST",
                             url: "/controller/usuario.controller.php",
@@ -364,34 +366,38 @@ $(document).ready(function () {
                             },
                             dataType: 'json',
                             success: function (response) {
-                                response.forEach(element => {
-                                    let content = 
-                                    `
-                                    
-                                    <div class="col col-12 col-md-2 card m-5">
-                                      <img src="${element.rutaImagen}" class="card-img-top"  alt="${element.nombre}">
-                                        <div class="card-body">
-                                          <h5 class="card-title">${element.nombre}</h5>
-                                          <p class="card-text">${element.precio}</p>
-                                          <a href="/view/tienda/detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2" class="btn btn-primary">Ver pagina</a>
-                                        </div>
-                                        
-                                    </div>
-                                    
-                                    `
-                                    $("#listaHistorial").append(content);
-                                });
+                                console.log(response);
+                                if (response.length === 0) {
+                                    $("#listaHistorial").append("<li>No hay historial de artículos vistos.</li>");
+                                } else {
+                                    response.forEach(element => {
+                                        let content = `
+                                                <div class="col col-12 col-md-2 card m-5">
+                                                    <img src="${element.rutaImagen}" class="card-img-top" alt="${element.nombre}">
+                                                    <div class="card-body">
+                                                      <h5 class="card-title">${element.nombre}</h5>
+                                                      <p class="card-text">${element.precio}</p>
+                                                      <a href="/view/tienda/detalle_producto.html?id=${element.idArticulo}&modo=exclusivo2" class="btn btn-primary">Ver pagina</a>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        $("#listaHistorial").append(content);
+                                    });
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("Error al cargar historial:", error);
+                                $("#listaHistorial").append("<li>Error al cargar historial. Intenta nuevamente.</li>");
                             }
                         });
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error("Error al leer cookies:", error);
-                },
+                }
             });
-            
-
             break;
+
         case 0:
             title.text("Informacion de usuario");
             break;
