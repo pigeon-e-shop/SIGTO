@@ -21,7 +21,7 @@
     <body>
         <header>
             <div class="container-hero">
-                <div class="container wx-5 px-md-5 px-xs -0 container hero">
+                <div class="container wx-5 px-md-5 px-xs-0 p-3 container hero">
                     <div class="customer-support d-none d-sm-flex">
                         <i class="fa-solid fa-headset"></i>
                         <div class="content-customer-support">
@@ -31,32 +31,34 @@
                     </div>
 
                     <div class="container-logo">
-                        <h1 class="logo"><a href="/">Pigeon e-Shop</a></h1>
+                        <h1 class="logo"><img src="/assets/img/logo.png" class="d-none d-sm-inline" title="Logo Pigeon e-Shop" height="37" /><a href="/">Pigeon e-Shop</a></h1>
                     </div>
 
                     <div class="container-user">
-                        <div class="">
+                        <div id="contenedor-usuario-login" class="">
                             <div class="dropdown">
                                 <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
                                 <div class="dropdown-menu col-md-6">
-                                    <a class="dropdown-item" href="signIn.html">Inicia sesion ahora</a>
-                                    <a class="dropdown-item" href="signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                    <a class="dropdown-item" href="/view/tienda/signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="/view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
                                 </div>
                             </div>
                         </div>
                         <!-- DIVISOR VERTICAL -->
                         <div class="vr"></div>
-                        <div class="content-shopping-cart">
-                            <a href="carrito.html">
+                        <div class="content-shopping-cart d-inline">
+                            <a href="/view/tienda/carrito.html">
                                 <i class="fa-solid fa-basket-shopping"></i>
-                                <span class="text">Carrito</span>
+                                <span class="text d-none d-sm-inline d-xs-inline">Carrito</span>
                                 <span id="cantArticulos" class="number"> </span>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="alert-container" class=" w-100 p-5 align-items-center justify-content-center">
 
+            </div>
             <div class="container-navbar p-2">
                 <nav class="container navbar navbar-expand-md">
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -70,10 +72,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Electrónica</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Teléfonos móviles</a></li>
-                                            <li><a class="dropdown-item" href="#">Computadoras y Laptops</a></li>
-                                            <li><a class="dropdown-item" href="#">Televisores y Audio</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios tecnológicos</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Teléfonos_móviles">Teléfonos móviles</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Computadoras_y_Laptops">Computadoras y Laptops</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Televisores_y_Audio">Televisores y Audio</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Accesorios_tecnologicos">Accesorios tecnológicos</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -83,10 +85,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Ropa y Moda</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Ropa de Hombre</a></li>
-                                            <li><a class="dropdown-item" href="#">Ropa de Mujer</a></li>
-                                            <li><a class="dropdown-item" href="#">Zapatos y Accesorios</a></li>
-                                            <li><a class="dropdown-item" href="#">Ropa para Niños</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Ropa_de_Hombre">Ropa de Hombre</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Ropa_de_Mujer">Ropa de Mujer</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Zapatos_y_Accesorios">Zapatos y Accesorios</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Ropa_para_Niños">Ropa para Niños</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -96,10 +98,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Hogar y Jardín</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Muebles</a></li>
-                                            <li><a class="dropdown-item" href="#">Decoración</a></li>
-                                            <li><a class="dropdown-item" href="#">Herramientas y Mejoras para el Hogar</a></li>
-                                            <li><a class="dropdown-item" href="#">Jardinería</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Muebles">Muebles</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Decoración">Decoración</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Herramientas_y_Mejora">Herramientas y Mejoras para el Hogar</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Jardinería">Jardinería</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -109,10 +111,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Salud y Belleza</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Productos para el Cuidado de la Piel</a></li>
-                                            <li><a class="dropdown-item" href="#">Maquillaje</a></li>
-                                            <li><a class="dropdown-item" href="#">Productos para el Cuidado del Cabello</a></li>
-                                            <li><a class="dropdown-item" href="#">Suplementos y Vitaminas</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Productos_para_el_Cuidado_de_la_Piel">Productos para el Cuidado de la Piel</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Maquillaje">Maquillaje</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Productos_para_el_Cuidado_del_Cabello">Productos para el Cuidado del Cabello</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Suplementos_y_Vitaminas">Suplementos y Vitaminas</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -122,10 +124,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Deportes y Aire Libre</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Equipamiento Deportivo</a></li>
-                                            <li><a class="dropdown-item" href="#">Ropa Deportiva</a></li>
-                                            <li><a class="dropdown-item" href="#">Bicicletas y Patinetes</a></li>
-                                            <li><a class="dropdown-item" href="#">Camping y Senderismo</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Equipamiento_Deportivo">Equipamiento Deportivo</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Ropa_Deportiva">Ropa Deportiva</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Bicicletas_y_Patinetes">Bicicletas y Patinetes</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Camping_y_Senderismo">Camping y Senderismo</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -135,10 +137,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Juguetes y Juegos</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Juguetes para Niños</a></li>
-                                            <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
-                                            <li><a class="dropdown-item" href="#">Videojuegos y Consolas</a></li>
-                                            <li><a class="dropdown-item" href="#">Puzzles y Rompecabezas</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Juguetes_para_Niños">Juguetes para Niños</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Juegos_de_Mesa">Juegos de Mesa</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Videojuegos_y_Consolas">Videojuegos y Consolas</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Puzzles_y_Rompecabezas">Puzzles y Rompecabezas</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -148,10 +150,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Automóviles y Motocicletas</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Accesorios para Automóviles</a></li>
-                                            <li><a class="dropdown-item" href="#">Accesorios para Motocicletas</a></li>
-                                            <li><a class="dropdown-item" href="#">Herramientas y Equipos</a></li>
-                                            <li><a class="dropdown-item" href="#">Neumáticos y Llantas</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Accesorios_para_Automóviles">Accesorios para Automóviles</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Accesorios_para_Motocicletas">Accesorios para Motocicletas</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Herramientas_y_Equipos">Herramientas y Equipos</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Neumáticos_y_Llantas">Neumáticos y Llantas</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -161,10 +163,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Alimentos y Bebidas</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Comida Gourmet</a></li>
-                                            <li><a class="dropdown-item" href="#">Bebidas Alcohólicas</a></li>
-                                            <li><a class="dropdown-item" href="#">Alimentos Orgánicos</a></li>
-                                            <li><a class="dropdown-item" href="#">Snacks y Dulces</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Comida_Gourmet">Comida Gourmet</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Bebidas_Alcohólicas">Bebidas Alcohólicas</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Alimentos_Orgánicos">Alimentos Orgánicos</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Snacks_y_Dulces">Snacks y Dulces</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -174,10 +176,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Bebés y Niños</a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="#">Ropa de Bebé</a></li>
-                                            <li><a class="dropdown-item" href="#">Juguetes para Bebés</a></li>
-                                            <li><a class="dropdown-item" href="#">Productos para la Alimentación del Bebé</a></li>
-                                            <li><a class="dropdown-item" href="#">Mobiliario Infantil</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Ropa_de_Bebé">Ropa de Bebé</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Juguetes_para_Bebés">Juguetes para Bebés</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Productos_para_la_Alimentación_del_Bebé">Productos para la Alimentación del Bebé</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Mobiliario_Infantil">Mobiliario Infantil</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -187,10 +189,10 @@
                                     <li class="dropdown dropend dropdown-submenu">
                                         <a class="dropdown-item dropdown-toggle" href="#">Libros y Música</a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Libros Físicos y E-Books</a></li>
-                                            <li><a class="dropdown-item" href="#">Música y CD's</a></li>
-                                            <li><a class="dropdown-item" href="#">Instrumentos Musicales</a></li>
-                                            <li><a class="dropdown-item" href="#">Audiolibros y Podcasts</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Libros_Físicos_y_E-Books">Libros Físicos y E-Books</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Música_y_CDs">Música y CDs</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Instrumentos_Musicales">Instrumentos Musicales</a></li>
+                                            <li><a class="dropdown-item" href="view/tienda/articulos.html?filtro=Audiolibros_y_Podcasts">Audiolibros y Podcasts</a></li>
                                             <li>
                                                 <hr class="dropdown-divider" />
                                             </li>
@@ -200,26 +202,30 @@
                                     <li>
                                         <hr class="dropdown-divider" />
                                     </li>
-                                    <li><a href="" class="dropdown-item">Ver todos los articulos</a></li>
+                                    <li><a href="view/tienda/articulos.html" class="dropdown-item">Ver todos los artículos</a></li>
                                 </ul>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Ofertas del día</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cómo comprar</a>
+                                <a class="nav-link" href="view/tienda/comoComprar.html">Cómo comprar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="servicioCliente.html ">Servicio al cliente</a>
+                                <a class="nav-link" href="/view/tienda/servicioCliente.html">Servicio al cliente</a>
                             </li>
                         </ul>
                     </div>
-                    <form class="search-form">
-                        <input type="search" class="" onkeyup="mostrarResultados()" placeholder="Buscar..." />
-                        <button class="btn-search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
+                    <div class="navbar-item">
+                        <form action="/view/tienda/articulos.html?query=" method="GET" class="search-form">
+                            <input type="search" name="query" placeholder="Buscar..." autocomplete="off" required />
+                            <button class="btn-search" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                        <div id="resultados" class="flex-end"></div>
+                    </div>
                 </nav>
             </div>
         </header>

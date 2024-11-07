@@ -130,6 +130,7 @@ $(document).ready(function () {
         `);
         $("#resumen-lista").empty();
         $("#cartTotal").text("US$0.00");
+        $("#pagar").attr('disabled', true)
     }
     
 
