@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://localhost/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pigeon e-Shop</title>
+        <link rel="shortcut icon" href="./Pigeon e-Shop_files/logo.png" type="image/png">
+        <link href="./Pigeon e-Shop_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+            * {
+                font-family: "Core Rhino 85";
+                color: #417a93;
+            }
+        </style>
+        <link rel="stylesheet" href="./Pigeon e-Shop_files/styles.css">
+        <link rel="stylesheet" href="./Pigeon e-Shop_files/index.scss">
+        <link rel="stylesheet" href="./Pigeon e-Shop_files/header.css">
+        <link rel="stylesheet" href="./Pigeon e-Shop_files/footer.css">
+    <script charset="utf-8" src="chrome-extension://oakbcaafbicdddpdlhbchhpblmhefngh/dist/ruffle.js?id=80898197245"></script></head>
+
+    <body>
+        <header>
+            <div class="container-hero">
+                <div class="container wx-5 px-md-5 px-xs-0 p-3 container hero">
+                    <div class="customer-support d-none d-sm-flex">
+                        <i class="fa-solid fa-headset"></i>
+                        <div class="content-customer-support">
+                            <span class="text" user-select="false">Soporte al cliente</span>
+                            <span class="number">2204 3983</span>
+                        </div>
+                    </div>
+
+                    <div class="container-logo">
+                        <h1 class="logo"><img src="./Pigeon e-Shop_files/logo.png" class="d-none d-sm-inline" title="Logo Pigeon e-Shop" height="37"><a href="http://localhost/">Pigeon e-Shop</a></h1>
+                    </div>
+
+                    <div class="container-user">
+                        <div id="contenedor-usuario-login" class=""><div class="dropdown">
+                                <button type="button" class="fa-solid fa-user btn border-0" data-bs-toggle="dropdown" data-toggle="dropdown" data-bs-auto-close="outside"></button>
+                                <div class="dropdown-menu col-md-6">
+                                    <a class="dropdown-item" href="http://localhost/view/tienda/signIn.html">Inicia sesion ahora</a>
+                                    <a class="dropdown-item" href="http://localhost/view/tienda/signUp.html">Aun no tienes cuenta? Registrate ya!</a>
+                                </div>
+                            </div></div>
+                        <!-- DIVISOR VERTICAL -->
+                        <div class="vr"></div>
+                        <div class="content-shopping-cart d-inline">
+                            <a href="http://localhost/view/tienda/carrito.html">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                                <span class="text d-none d-sm-inline d-xs-inline">Carrito</span>
+                                <span id="cantArticulos" class="number"> </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="alert-container" class=" w-100 p-5 align-items-center justify-content-center">
+
+            </div>
+            <div class="container-navbar p-2">
+                <nav class="container navbar navbar-expand-md">
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <button class="nav-link dropdown-toggle d-none d-lg-block" id="dropdownCategorias" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorías</button>
+                                <button class="btn btn-search navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownCategorias">
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Electrónica</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Tel%C3%A9fonos_m%C3%B3viles">Teléfonos móviles</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Computadoras_y_Laptops">Computadoras y Laptops</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Televisores_y_Audio">Televisores y Audio</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Accesorios_tecnologicos">Accesorios tecnológicos</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Ropa y Moda</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Ropa_de_Hombre">Ropa de Hombre</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Ropa_de_Mujer">Ropa de Mujer</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Zapatos_y_Accesorios">Zapatos y Accesorios</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Ropa_para_Ni%C3%B1os">Ropa para Niños</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Hogar y Jardín</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Muebles">Muebles</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Decoraci%C3%B3n">Decoración</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Herramientas_y_Mejora">Herramientas y Mejoras para el Hogar</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Jardiner%C3%ADa">Jardinería</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Salud y Belleza</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Productos_para_el_Cuidado_de_la_Piel">Productos para el Cuidado de la Piel</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Maquillaje">Maquillaje</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Productos_para_el_Cuidado_del_Cabello">Productos para el Cuidado del Cabello</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Suplementos_y_Vitaminas">Suplementos y Vitaminas</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Deportes y Aire Libre</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Equipamiento_Deportivo">Equipamiento Deportivo</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Ropa_Deportiva">Ropa Deportiva</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Bicicletas_y_Patinetes">Bicicletas y Patinetes</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Camping_y_Senderismo">Camping y Senderismo</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Juguetes y Juegos</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Juguetes_para_Ni%C3%B1os">Juguetes para Niños</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Juegos_de_Mesa">Juegos de Mesa</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Videojuegos_y_Consolas">Videojuegos y Consolas</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Puzzles_y_Rompecabezas">Puzzles y Rompecabezas</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Automóviles y Motocicletas</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Accesorios_para_Autom%C3%B3viles">Accesorios para Automóviles</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Accesorios_para_Motocicletas">Accesorios para Motocicletas</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Herramientas_y_Equipos">Herramientas y Equipos</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Neum%C3%A1ticos_y_Llantas">Neumáticos y Llantas</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Alimentos y Bebidas</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Comida_Gourmet">Comida Gourmet</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Bebidas_Alcoh%C3%B3licas">Bebidas Alcohólicas</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Alimentos_Org%C3%A1nicos">Alimentos Orgánicos</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Snacks_y_Dulces">Snacks y Dulces</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Bebés y Niños</a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Ropa_de_Beb%C3%A9">Ropa de Bebé</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Juguetes_para_Beb%C3%A9s">Juguetes para Bebés</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Productos_para_la_Alimentaci%C3%B3n_del_Beb%C3%A9">Productos para la Alimentación del Bebé</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Mobiliario_Infantil">Mobiliario Infantil</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropend dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="http://localhost/#">Libros y Música</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Libros_F%C3%ADsicos_y_E-Books">Libros Físicos y E-Books</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=M%C3%BAsica_y_CDs">Música y CDs</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Instrumentos_Musicales">Instrumentos Musicales</a></li>
+                                            <li><a class="dropdown-item" href="http://localhost/view/tienda/articulos.html?filtro=Audiolibros_y_Podcasts">Audiolibros y Podcasts</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a href="http://localhost/" class="dropdown-item">Ver todo</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a href="http://localhost/view/tienda/articulos.html" class="dropdown-item">Ver todos los artículos</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost/#">Ofertas del día</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost/view/tienda/comoComprar.html">Cómo comprar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://localhost/view/tienda/servicioCliente.html">Servicio al cliente</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navbar-item">
+                        <form action="http://localhost/view/tienda/articulos.html?query=" method="GET" class="search-form">
+                            <input type="search" name="query" placeholder="Buscar..." autocomplete="off" required="">
+                            <button class="btn-search" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                        <div id="resultados" class="flex-end" style="display: none;"></div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <section class="banner-container-main">
+            <div class="container-flex m-4 banner">
+                <div class="carousel slide" id="carousel1" data-bs-ride="carousel" data-interval="500">
+                    <div class="carousel-inner">
+                        <div class="carousel-item">
+                            <img src="./Pigeon e-Shop_files/banner1.jpg" class="d-block w-100 h-100 banner-img" alt="Mas de 600 productos informaticos" draggable="false">
+                        </div>
+                        <div class="carousel-item active">
+                            <img src="./Pigeon e-Shop_files/banner3.jpg" class="d-block w-100 h-100 banner-img" alt="Miles de productos deportivos" draggable="false">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./Pigeon e-Shop_files/banner2.jpg" class="d-block w-100 h-100 banner-img" alt="Mas de 1000 productos de belleza" draggable="false">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./Pigeon e-Shop_files/banner4.jpg" class="d-block w-100 h-100 banner-img" alt="Todo para tu hogar en linea blanca" draggable="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container w-100 row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="card-feature col">
+                <i class="fa-solid fa-plane-up"></i>
+                <div class="feature-content">
+                    <span>Envío gratuito a nivel mundial</span>
+                    <p>En pedido superior a US$250</p>
+                </div>
+            </div>
+            <div class="card-feature col">
+                <i class="fa-solid fa-wallet"></i>
+                <div class="feature-content">
+                    <span>Reembolso en caso de fallas</span>
+                    <p>100% garantía de devolución de dinero</p>
+                </div>
+            </div>
+            <div class="card-feature col">
+                <i class="fa-solid fa-truck"></i>
+                <div class="feature-content">
+                    <span>Diferentes tipos de envios</span>
+                    <p>Elige el tipo de envio que desees</p>
+                </div>
+            </div>
+            <div class="card-feature col">
+                <i class="fa-solid fa-headset"></i>
+                <div class="feature-content">
+                    <span>Servicio al cliente 24/7</span>
+                    <p>LLámenos 24/7 al 22043983</p>
+                </div>
+            </div>
+        </section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <main id="articulos" class="container-flex">
+            <div id="articulosCarrusel" class="carousel slide" data-bs-ride="carousel">
+                <div class="container carousel-inner" id="itemsIndex">
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=1&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/laptop_hp.png" width="300" height="400" class="card-img-top" alt="Laptop HP">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=1&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Laptop HP</h5>
+                                                    <p class="card-text">Laptop HP de última generación con 16GB de RAM.</p>
+                                                    <p class="card-text">USD $799.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="1">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=2&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/sofa_moderno.png" width="300" height="400" class="card-img-top" alt="Sofá Moderno">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=2&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Sofá Moderno</h5>
+                                                    <p class="card-text">Sofá cómodo con diseño moderno, ideal para salas de estar.</p>
+                                                    <p class="card-text">USD $299.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="2">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=355&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/macbook-air.png" width="300" height="400" class="card-img-top" alt="MacBook Air">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=355&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">MacBook Air</h5>
+                                                    <p class="card-text">Laptop ligera y potente con procesador M2.</p>
+                                                    <p class="card-text">USD $999.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="355">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=356&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/samsung_qled.png" width="300" height="400" class="card-img-top" alt="Samsung QLED TV">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=356&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Samsung QLED TV</h5>
+                                                    <p class="card-text">Televisor 4K QLED con colores vibrantes y tecnología avanzada.</p>
+                                                    <p class="card-text">USD $1499.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="356">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=357&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/nike_air_max.png" width="300" height="400" class="card-img-top" alt="Nike Air Max">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=357&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nike Air Max</h5>
+                                                    <p class="card-text">Zapatillas deportivas con máxima amortiguación y estilo.</p>
+                                                    <p class="card-text">USD $199.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="357">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=358&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/toyota_mats.png" width="300" height="400" class="card-img-top" alt="Toyota Corolla Floor Mats">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=358&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Toyota Corolla Floor Mats</h5>
+                                                    <p class="card-text">Tapetes personalizados para Toyota Corolla.</p>
+                                                    <p class="card-text">USD $49.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="358">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=359&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/kitkat_chunky.png" width="300" height="400" class="card-img-top" alt="KitKat Chunky">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=359&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">KitKat Chunky</h5>
+                                                    <p class="card-text">Barra de chocolate con relleno crujiente.</p>
+                                                    <p class="card-text">USD $1.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="359">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=360&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/iphone15.png" width="300" height="400" class="card-img-top" alt="iPhone 15">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=360&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">iPhone 15</h5>
+                                                    <p class="card-text">El último iPhone con cámara mejorada y batería duradera.</p>
+                                                    <p class="card-text">USD $1099.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="360">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=361&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/galaxy_buds.png" width="300" height="400" class="card-img-top" alt="Samsung Galaxy Buds">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=361&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Samsung Galaxy Buds</h5>
+                                                    <p class="card-text">Auriculares inalámbricos con cancelación de ruido.</p>
+                                                    <p class="card-text">USD $129.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="361">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=362&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/nike_hoodie.png" width="300" height="400" class="card-img-top" alt="Nike Sportswear Hoodie">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=362&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nike Sportswear Hoodie</h5>
+                                                    <p class="card-text">Sudadera cómoda y versátil para actividades deportivas.</p>
+                                                    <p class="card-text">USD $59.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="362">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=363&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/toyota_keychain.png" width="300" height="400" class="card-img-top" alt="Toyota Keychain">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=363&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Toyota Keychain</h5>
+                                                    <p class="card-text">Llavero premium con diseño Toyota.</p>
+                                                    <p class="card-text">USD $19.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="363">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=364&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/nescafe_gold.png" width="300" height="400" class="card-img-top" alt="Nescafé Gold">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=364&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nescafé Gold</h5>
+                                                    <p class="card-text">Café instantáneo premium con sabor robusto.</p>
+                                                    <p class="card-text">USD $9.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="364">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=365&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/apple_watch9.png" width="300" height="400" class="card-img-top" alt="Apple Watch Series 9">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=365&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Apple Watch Series 9</h5>
+                                                    <p class="card-text">Reloj inteligente con seguimiento de salud avanzado.</p>
+                                                    <p class="card-text">USD $399.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="365">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=366&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/samsung_purifier.png" width="300" height="400" class="card-img-top" alt="Samsung Air Purifier">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=366&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Samsung Air Purifier</h5>
+                                                    <p class="card-text">Purificador de aire con filtro HEPA.</p>
+                                                    <p class="card-text">USD $299.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="366">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=367&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/nike_leggings.png" width="300" height="400" class="card-img-top" alt="Nike Pro Leggings">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=367&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nike Pro Leggings</h5>
+                                                    <p class="card-text">Leggings elásticos y transpirables para entrenar.</p>
+                                                    <p class="card-text">USD $49.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="367">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=368&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/toyota_kit.png" width="300" height="400" class="card-img-top" alt="Toyota Emergency Kit">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=368&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Toyota Emergency Kit</h5>
+                                                    <p class="card-text">Kit de emergencia para autos con logo Toyota.</p>
+                                                    <p class="card-text">USD $99.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="368">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=369&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/error.png" width="300" height="400" class="card-img-top" alt="Nestlé Pure Life Water">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=369&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nestlé Pure Life Water</h5>
+                                                    <p class="card-text">Agua embotellada pura y refrescante.</p>
+                                                    <p class="card-text">USD $0.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="369">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=370&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/magic_keyboard.png" width="300" height="400" class="card-img-top" alt="Magic Keyboard">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=370&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Magic Keyboard</h5>
+                                                    <p class="card-text">Teclado inalámbrico compatible con Mac.</p>
+                                                    <p class="card-text">USD $99.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="370">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                                    <div class="carousel-item ">
+                                        <div class="row">
+                                            
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=371&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/samsung_fridge.png" width="300" height="400" class="card-img-top" alt="Samsung Smart Fridge">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=371&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Samsung Smart Fridge</h5>
+                                                    <p class="card-text">Refrigerador inteligente con pantalla táctil.</p>
+                                                    <p class="card-text">USD $2599.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="371">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=372&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/nike_backpack.png" width="300" height="400" class="card-img-top" alt="Nike Running Backpack">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=372&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nike Running Backpack</h5>
+                                                    <p class="card-text">Mochila diseñada para corredores.</p>
+                                                    <p class="card-text">USD $79.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="372">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=373&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/toyota_roofrack.png" width="300" height="400" class="card-img-top" alt="Toyota Roof Rack">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=373&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Toyota Roof Rack</h5>
+                                                    <p class="card-text">Portaequipajes para autos Toyota.</p>
+                                                    <p class="card-text">USD $199.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="373">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                            <div class="carousel-item">
+                                <div class="row">
+                                    
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <a href="http://localhost/view/tienda/detalle_producto.html?id=374&amp;modo=exclusivo2">
+                                                <img src="./Pigeon e-Shop_files/nestle_cookies.png" width="300" height="400" class="card-img-top" alt="Nestlé Toll House Cookies">
+                                                </a><div class="card-body"><a href="http://localhost/view/tienda/detalle_producto.html?id=374&amp;modo=exclusivo2">
+                                                    <h5 class="card-title">Nestlé Toll House Cookies</h5>
+                                                    <p class="card-text">Galletas listas para hornear con chispas de chocolate.</p>
+                                                    <p class="card-text">USD $2.99</p>
+                                                    </a><a class="btn btn-primary agregarArt" data-id="374">Agregar carrito</a>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                <button class="carousel-controller carousel-control-prev" type="button" data-bs-target="#articulosCarrusel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button class="carousel-controller carousel-control-next" type="button" data-bs-target="#articulosCarrusel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </main>
+
+        <hr class="vr">
+
+        <footer class="footer">
+            <p>© 2024 Pigeon e-Shop. Todos los derechos reservados.</p>
+        </footer>
+        <script src="./Pigeon e-Shop_files/jquery-3.7.1.min.js.descarga"></script>
+        <!-- <script type="module" src="assets/js/tomarInfoArticulos.js"></script> -->
+        <script src="./Pigeon e-Shop_files/bootstrap.bundle.min.js.descarga" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="./Pigeon e-Shop_files/81581fb069.js.descarga" crossorigin="anonymous"></script>
+        <script type="module" src="./Pigeon e-Shop_files/Carrito.js.descarga"></script>
+        <script type="module" src="./Pigeon e-Shop_files/index.js.descarga"></script>
+        <script src="./Pigeon e-Shop_files/buscador.js.descarga"></script>
+    
+
+</body></html>
